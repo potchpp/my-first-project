@@ -3,98 +3,489 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stock Research Briefs</title>
+  <title>Research Briefs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* ── Reset & base ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0f0f0f;
+      --ink-2:     #3a3a3a;
+      --ink-3:     #6b6b6b;
+      --ink-4:     #a0a0a0;
+      --rule:      #e0dbd4;
+      --bg:        #faf9f7;
+      --accent:    #1a2e4a;
+      --accent-lt: #e8edf3;
+      --warn-bg:   #fffbeb;
+      --warn-fg:   #92620a;
+      --stale-bg:  #fef2f2;
+      --stale-fg:  #991b1b;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Inter', -apple-system, Helvetica, sans-serif;
+      --lh:        1.75;
+      --measure:   66ch;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      background: #fff;
-      color: #1a1a1a;
-      line-height: 1.65;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: var(--lh);
+      -webkit-font-smoothing: antialiased;
     }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
-    /* Header */
-    .site-header { margin-bottom: 2rem; }
-    .site-header h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.3px; }
-    .site-header p { color: #888; font-size: 0.875rem; margin-top: 0.25rem; }
+    /* ── Layout shell ─────────────────────────────────────────────────── */
+    .shell {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.75rem;
+    }
 
-    /* Gallery */
-    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    /* ── Masthead ─────────────────────────────────────────────────────── */
+    .masthead {
+      padding: 3.5rem 0 1.75rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .masthead-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 0.6rem;
+    }
+    .masthead-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .masthead-sub {
+      margin-top: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--ink-3);
+      font-weight: 300;
+    }
+    .masthead-sub strong {
+      color: var(--ink-2);
+      font-weight: 500;
+    }
 
-    /* Card */
-    .card {
-      border: 1px solid #e2e2e2;
-      border-radius: 10px;
-      padding: 1.2rem;
+    /* ── List view ────────────────────────────────────────────────────── */
+    #list-view {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    #list-view.hiding {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .list-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.1rem 0 0.6rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .list-header-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .list-count {
+      font-size: 0.75rem;
+      color: var(--ink-4);
+    }
+
+    /* Article row */
+    .row {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr auto;
+      align-items: start;
+      gap: 0 1.25rem;
+      padding: 1.4rem 0.75rem;
+      border-bottom: 1px solid var(--rule);
       cursor: pointer;
-      transition: border-color 0.12s, box-shadow 0.12s;
-      user-select: none;
+      transition: background 0.1s;
+      margin: 0 -0.75rem;
+      border-radius: 3px;
     }
-    .card:hover { border-color: #aaa; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
-    .card.active { border-color: #1a1a1a; background: #fafafa; }
-    .card-ticker { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; }
-    .card-name { font-size: 0.78rem; color: #777; margin-top: 0.1rem; }
-    .card-date { font-size: 0.72rem; color: #bbb; margin-top: 0.5rem; }
-    .card-preview { font-size: 0.82rem; color: #555; margin-top: 0.55rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .badges { display: flex; gap: 0.35rem; margin-top: 0.5rem; flex-wrap: wrap; }
-    .badge { font-size: 0.68rem; padding: 0.15rem 0.45rem; border-radius: 99px; font-weight: 600; }
-    .badge-no-source { background: #fff3cd; color: #856404; }
-    .badge-stale     { background: #fde8e8; color: #9b1c1c; }
-    .card-loading { opacity: 0.5; pointer-events: none; }
-
-    /* Detail */
-    #detail { display: none; margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid #1a1a1a; }
-    .detail-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
-    .detail-bar span { font-size: 0.78rem; color: #999; }
-    #btn-close {
-      background: none; border: 1px solid #d0d0d0; border-radius: 5px;
-      padding: 0.3rem 0.85rem; font-size: 0.82rem; color: #666; cursor: pointer;
+    .row:hover {
+      background: rgba(26, 46, 74, 0.04);
     }
-    #btn-close:hover { border-color: #999; color: #333; }
+    .row:hover .row-ticker { color: var(--accent); }
+    .row:hover .row-arrow  { transform: translateX(3px); color: var(--accent); }
 
-    /* Brief typography */
-    .brief h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.25rem; }
-    .brief h2 { font-size: 1rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid #ececec; }
-    .brief h3 { font-size: 0.95rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.4rem; }
-    .brief p { font-size: 0.93rem; margin-bottom: 0.65rem; }
-    .brief ul, .brief ol { padding-left: 1.4rem; margin-bottom: 0.65rem; }
-    .brief li { font-size: 0.93rem; margin-bottom: 0.4rem; }
-    .brief hr { border: none; border-top: 1px solid #ececec; margin: 1.2rem 0; }
-    .brief blockquote {
-      border-left: 3px solid #ddd; margin: 0.8rem 0;
-      padding: 0.5rem 1rem; background: #fafafa; border-radius: 0 5px 5px 0;
+    .row-ticker {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      line-height: 1;
+      padding-top: 0.15rem;
+      transition: color 0.1s;
+      word-break: break-all;
     }
-    .brief blockquote p { color: #666; font-size: 0.88rem; margin-bottom: 0.25rem; }
-    .brief blockquote p:last-child { margin-bottom: 0; }
-    .brief strong { font-weight: 700; }
-    .brief em { font-style: italic; color: #666; }
-    .brief code { font-family: 'SFMono-Regular', Consolas, monospace; background: #f4f4f4; padding: 0.1em 0.35em; border-radius: 3px; font-size: 0.88em; }
 
-    /* Loading / error states */
-    .state-msg { color: #999; font-size: 0.9rem; padding: 1rem 0; }
+    .row-body { min-width: 0; }
+    .row-name {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+    .row-preview {
+      font-size: 0.875rem;
+      color: var(--ink-3);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .row-badges {
+      display: flex;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .row-meta {
+      text-align: right;
+      white-space: nowrap;
+      padding-top: 0.15rem;
+    }
+    .row-date {
+      font-size: 0.6875rem;
+      color: var(--ink-4);
+      letter-spacing: 0.01em;
+    }
+    .row-arrow {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.75rem;
+      color: var(--ink-4);
+      transition: transform 0.14s, color 0.1s;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+    .badge-no-source { background: var(--warn-bg);  color: var(--warn-fg); }
+    .badge-stale     { background: var(--stale-bg); color: var(--stale-fg); }
+
+    /* ── Article view ─────────────────────────────────────────────────── */
+    #article-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    #article-view.shown {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Back nav */
+    .back-nav {
+      padding: 1.25rem 0 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 0.35rem 0.9rem 0.35rem 0.65rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.1s, color 0.1s, background 0.1s;
+    }
+    .btn-back:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-lt);
+    }
+    .back-breadcrumb {
+      font-size: 0.75rem;
+      color: var(--ink-4);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .back-breadcrumb strong {
+      color: var(--ink-3);
+      font-weight: 500;
+    }
+
+    /* Article header */
+    .article-header {
+      padding: 1.5rem 0 1.75rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.25rem;
+    }
+    .article-eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+    }
+    .article-ticker {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+    .article-name {
+      margin-top: 0.4rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-2);
+    }
+    .article-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .article-date {
+      font-size: 0.75rem;
+      color: var(--ink-4);
+    }
+
+    /* Article body — constrained reading width */
+    .article-body {
+      max-width: var(--measure);
+    }
+
+    .article-body h1 {
+      font-family: var(--serif);
+      font-size: 1.625rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .article-body h2 {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 2.5rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--accent-lt);
+    }
+    .article-body h3 {
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: 1.5rem;
+      margin-bottom: 0.45rem;
+    }
+    .article-body p {
+      font-size: 0.9375rem;
+      line-height: var(--lh);
+      color: var(--ink-2);
+      margin-bottom: 1rem;
+    }
+    .article-body ul,
+    .article-body ol {
+      padding-left: 1.35rem;
+      margin-bottom: 1rem;
+    }
+    .article-body li {
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: var(--ink-2);
+      margin-bottom: 0.5rem;
+    }
+    .article-body li::marker { color: var(--ink-4); }
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 2rem 0;
+    }
+    .article-body blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--accent);
+      background: var(--accent-lt);
+      border-radius: 0 4px 4px 0;
+    }
+    .article-body blockquote p {
+      font-size: 0.875rem;
+      color: var(--ink-2);
+      margin-bottom: 0.35rem;
+    }
+    .article-body blockquote p:last-child { margin-bottom: 0; }
+    .article-body strong { font-weight: 600; color: var(--ink); }
+    .article-body em     { font-style: italic; color: var(--ink-3); }
+    .article-body code {
+      font-family: 'SFMono-Regular', Consolas, 'Courier New', monospace;
+      font-size: 0.85em;
+      background: #f0ede8;
+      padding: 0.12em 0.38em;
+      border-radius: 3px;
+      color: var(--ink);
+    }
+
+    .article-footer {
+      margin-top: 3rem;
+      padding: 1.25rem 0 3.5rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.75rem;
+      color: var(--ink-4);
+    }
+
+    /* ── State messages ───────────────────────────────────────────────── */
+    .state-msg {
+      padding: 2rem 0;
+      color: var(--ink-4);
+      font-size: 0.875rem;
+    }
+
+    /* ── Loading skeleton ─────────────────────────────────────────────── */
+    .skel-row {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0 1.25rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .skel-ticker {
+      height: 2rem;
+      background: linear-gradient(90deg, #eae7e2 25%, #f4f1ed 50%, #eae7e2 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 3px;
+      width: 72%;
+    }
+    .skel-lines { display: flex; flex-direction: column; gap: 0.45rem; padding-top: 0.3rem; }
+    .skel-line {
+      height: 0.75rem;
+      background: linear-gradient(90deg, #eae7e2 25%, #f4f1ed 50%, #eae7e2 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 2px;
+    }
+    .skel-line:nth-child(1) { width: 52%; }
+    .skel-line:nth-child(2) { width: 85%; }
+    .skel-line:nth-child(3) { width: 62%; }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────────── */
+    @media (max-width: 520px) {
+      .shell { padding: 0 1.1rem; }
+      .masthead { padding: 2.25rem 0 1.25rem; }
+      .row {
+        grid-template-columns: 4.2rem 1fr auto;
+        gap: 0 0.75rem;
+        margin: 0 -0.4rem;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+      }
+      .row-ticker { font-size: 1.45rem; }
+      .article-ticker { font-size: 2.5rem; }
+      .back-breadcrumb { display: none; }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="site-header">
-    <h1>Stock Research Briefs</h1>
-    <p>คลิก card เพื่ออ่าน brief เต็ม</p>
+<div class="shell">
+
+  <!-- Masthead — always visible -->
+  <header class="masthead">
+    <div class="masthead-eyebrow">Personal Research</div>
+    <h1 class="masthead-title">Research Briefs</h1>
+    <p class="masthead-sub">Long-term equity notes &mdash; <strong id="brief-count">loading</strong></p>
   </header>
-  <div class="gallery" id="gallery">
-    <p class="state-msg">กำลังโหลด...</p>
-  </div>
-  <div id="detail">
-    <div class="detail-bar">
-      <span id="detail-label"></span>
-      <button id="btn-close" onclick="closeDetail()">✕ ปิด</button>
+
+  <!-- ── LIST VIEW ──────────────────────────────────────────────────────── -->
+  <div id="list-view">
+    <div class="list-header">
+      <span class="list-header-label">Coverage</span>
+      <span class="list-count" id="list-count-label"></span>
     </div>
-    <div class="brief" id="brief-output"></div>
+    <div id="rows-container">
+      <!-- skeleton -->
+      <div class="skel-row"><div class="skel-ticker"></div><div class="skel-lines"><div class="skel-line"></div><div class="skel-line"></div><div class="skel-line"></div></div></div>
+      <div class="skel-row"><div class="skel-ticker"></div><div class="skel-lines"><div class="skel-line"></div><div class="skel-line"></div><div class="skel-line"></div></div></div>
+      <div class="skel-row"><div class="skel-ticker"></div><div class="skel-lines"><div class="skel-line"></div><div class="skel-line"></div><div class="skel-line"></div></div></div>
+    </div>
   </div>
-</div>
+
+  <!-- ── ARTICLE VIEW ───────────────────────────────────────────────────── -->
+  <div id="article-view">
+    <nav class="back-nav">
+      <button class="btn-back" onclick="closeArticle()">&#8592; All briefs</button>
+      <span class="back-breadcrumb" id="back-breadcrumb"></span>
+    </nav>
+    <header class="article-header">
+      <div class="article-eyebrow">Research Brief</div>
+      <div class="article-ticker" id="article-ticker"></div>
+      <div class="article-name"   id="article-name"></div>
+      <div class="article-meta-row">
+        <span class="article-date" id="article-date"></span>
+        <span id="article-badges"></span>
+      </div>
+    </header>
+    <div class="article-body" id="article-body">
+      <p class="state-msg">กำลังโหลด...</p>
+    </div>
+    <footer class="article-footer">
+      ไม่ใช่คำแนะนำการลงทุน &mdash; research summary เพื่อการศึกษาส่วนตัว
+    </footer>
+  </div>
+
+</div><!-- /shell -->
 
 <script>
-  // ── Markdown → HTML ───────────────────────────────────────────────────────
+  // ── Markdown parser ──────────────────────────────────────────────────────
   function fmt(text) {
     text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     text = text.replace(/\*([^*]+?)\*/g,  '<em>$1</em>');
@@ -108,11 +499,10 @@
     const out = [];
     let i = 0;
     while (i < lines.length) {
-      const line = lines[i];
-      const t = line.trim();
-      if (t.startsWith('# '))  { out.push('<h1>' + fmt(t.slice(2)) + '</h1>'); i++; continue; }
-      if (t.startsWith('## ')) { out.push('<h2>' + fmt(t.slice(3)) + '</h2>'); i++; continue; }
-      if (t.startsWith('### ')) { out.push('<h3>' + fmt(t.slice(4)) + '</h3>'); i++; continue; }
+      const t = lines[i].trim();
+      if (t.startsWith('# '))   { out.push('<h1>' + fmt(t.slice(2))  + '</h1>'); i++; continue; }
+      if (t.startsWith('## '))  { out.push('<h2>' + fmt(t.slice(3))  + '</h2>'); i++; continue; }
+      if (t.startsWith('### ')) { out.push('<h3>' + fmt(t.slice(4))  + '</h3>'); i++; continue; }
       if (t === '---') { out.push('<hr>'); i++; continue; }
       if (t.startsWith('> ')) {
         const bq = [];
@@ -145,83 +535,125 @@
     return out.join('\n');
   }
 
-  // ── State ─────────────────────────────────────────────────────────────────
-  let briefs = [];          // loaded from briefs/index.json
+  // ── State ────────────────────────────────────────────────────────────────
+  let briefs = [];
   let activeTicker = null;
-  const mdCache = {};       // ticker → markdown text (fetched on demand)
+  const mdCache = {};
 
-  // ── Render gallery cards ──────────────────────────────────────────────────
-  function renderGallery() {
-    const gallery = document.getElementById('gallery');
+  // ── Render list ──────────────────────────────────────────────────────────
+  function renderList() {
+    const container = document.getElementById('rows-container');
+    document.getElementById('brief-count').textContent    = briefs.length + ' stocks';
+    document.getElementById('list-count-label').textContent = briefs.length + ' briefs';
+
     if (!briefs.length) {
-      gallery.innerHTML = '<p class="state-msg">ไม่พบ brief ใดๆ</p>';
+      container.innerHTML = '<p class="state-msg">ไม่พบ brief ใดๆ</p>';
       return;
     }
-    gallery.innerHTML = briefs.map(b => `
-      <div class="card" id="card-${b.ticker}" onclick="showBrief('${b.ticker}')">
-        <div class="card-ticker">${b.ticker}</div>
-        <div class="card-name">${b.name}</div>
-        <div class="card-date">${b.date}</div>
-        <div class="card-preview">${b.preview}</div>
-        <div class="badges">
-          ${!b.has_source ? '<span class="badge badge-no-source">⚠ no source</span>' : ''}
-          ${b.stale       ? '<span class="badge badge-stale">🕐 stale</span>'        : ''}
+
+    container.innerHTML = briefs.map(b => {
+      const badges = [
+        !b.has_source ? '<span class="badge badge-no-source">&#9888; no source</span>' : '',
+        b.stale       ? '<span class="badge badge-stale">&#128336; stale</span>'       : ''
+      ].filter(Boolean).join('');
+
+      const dateStr = b.date
+        ? new Date(b.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+        : '';
+
+      return `<div class="row" onclick="openArticle('${b.ticker}')" role="article" tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openArticle('${b.ticker}')}">
+        <div class="row-ticker">${b.ticker}</div>
+        <div class="row-body">
+          <div class="row-name">${b.name}</div>
+          <div class="row-preview">${b.preview}</div>
+          ${badges ? '<div class="row-badges">' + badges + '</div>' : ''}
         </div>
-      </div>
-    `).join('');
+        <div class="row-meta">
+          <div class="row-date">${dateStr}</div>
+          <span class="row-arrow">&#8594;</span>
+        </div>
+      </div>`;
+    }).join('');
   }
 
-  // ── Show full brief (fetch markdown on demand) ────────────────────────────
-  async function showBrief(ticker) {
-    // Highlight card
-    if (activeTicker) {
-      const prev = document.getElementById('card-' + activeTicker);
-      if (prev) prev.classList.remove('active');
-    }
+  // ── Open article ─────────────────────────────────────────────────────────
+  async function openArticle(ticker) {
     activeTicker = ticker;
-    const card = document.getElementById('card-' + ticker);
-    if (card) card.classList.add('active');
-
-    // Show detail panel with loading state
-    const detail = document.getElementById('detail');
     const b = briefs.find(x => x.ticker === ticker);
-    document.getElementById('detail-label').textContent = ticker + ' — ' + (b ? b.name : '');
-    document.getElementById('brief-output').innerHTML = '<p class="state-msg">กำลังโหลด brief...</p>';
-    detail.style.display = 'block';
-    setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
 
-    // Fetch markdown (use cache if available)
+    // Populate header right away
+    document.getElementById('article-ticker').textContent = ticker;
+    document.getElementById('article-name').textContent   = b ? b.name : '';
+    document.getElementById('article-date').textContent   = b && b.date
+      ? new Date(b.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      : '';
+    document.getElementById('back-breadcrumb').innerHTML  = b
+      ? '<strong>' + ticker + '</strong> &mdash; ' + b.name
+      : '<strong>' + ticker + '</strong>';
+    document.getElementById('article-badges').innerHTML = [
+      b && !b.has_source ? '<span class="badge badge-no-source">&#9888; no source</span>' : '',
+      b && b.stale       ? '<span class="badge badge-stale">&#128336; stale</span>'       : ''
+    ].filter(Boolean).join('');
+
+    document.getElementById('article-body').innerHTML =
+      '<p class="state-msg">กำลังโหลด brief...</p>';
+
+    // Transition
+    const listEl    = document.getElementById('list-view');
+    const articleEl = document.getElementById('article-view');
+
+    listEl.classList.add('hiding');
+
+    articleEl.style.display = 'block';
+    // Force reflow so CSS transition fires from opacity:0
+    articleEl.getBoundingClientRect();
+    articleEl.classList.add('shown');
+
+    setTimeout(() => {
+      listEl.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 230);
+
+    // Fetch markdown (cached after first load)
     if (!mdCache[ticker]) {
       try {
         const res = await fetch('briefs/' + ticker + '.md');
         if (!res.ok) throw new Error('HTTP ' + res.status);
         mdCache[ticker] = await res.text();
       } catch (e) {
-        document.getElementById('brief-output').innerHTML =
+        document.getElementById('article-body').innerHTML =
           '<p class="state-msg">โหลด brief ไม่ได้: ' + e.message + '</p>';
         return;
       }
     }
 
-    document.getElementById('brief-output').innerHTML = mdToHtml(mdCache[ticker]);
+    document.getElementById('article-body').innerHTML = mdToHtml(mdCache[ticker]);
   }
 
-  // ── Close detail ──────────────────────────────────────────────────────────
-  function closeDetail() {
-    document.getElementById('detail').style.display = 'none';
-    if (activeTicker) {
-      const card = document.getElementById('card-' + activeTicker);
-      if (card) card.classList.remove('active');
+  // ── Close / back to list ─────────────────────────────────────────────────
+  function closeArticle() {
+    const listEl    = document.getElementById('list-view');
+    const articleEl = document.getElementById('article-view');
+
+    articleEl.classList.remove('shown');
+
+    setTimeout(() => {
+      articleEl.style.display = 'none';
+      listEl.style.display    = '';
+      listEl.classList.remove('hiding');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       activeTicker = null;
-    }
+    }, 260);
   }
 
-  // ── Init: load index.json then render ────────────────────────────────────
+  // ── Init ─────────────────────────────────────────────────────────────────
   fetch('briefs/index.json')
     .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(data => { briefs = data; renderGallery(); })
+    .then(data => { briefs = data; renderList(); })
     .catch(e => {
-      document.getElementById('gallery').innerHTML =
+      document.getElementById('brief-count').textContent = 'error';
+      document.getElementById('rows-container').innerHTML =
         '<p class="state-msg">โหลด index.json ไม่ได้: ' + e.message + '</p>';
     });
 </script>
