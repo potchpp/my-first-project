@@ -3,36 +3,48 @@
     "ticker": "AAPL",
     "name": "Apple Inc.",
     "date": "2026-06-07",
-    "preview": "Apple ออกแบบและขายสมาร์ทโฟน (iPhone), คอมพิวเตอร์ (Mac), แท็บเล็ต (iPad), wearables และบริการดิจิทัลครบวงจร ตั้งแต่ App Store ไปจนถึง AppleCare และ Apple Pay บริษัทควบคุม hardware, software และ chip ของตัวเองตั้งแต่ต้น ร..."
+    "preview": "Apple ออกแบบและขายสมาร์ทโฟน (iPhone), คอมพิวเตอร์ (Mac), แท็บเล็ต (iPad), wearables และบริการดิจิทัลครบวงจร ตั้งแต่ App Store ไปจนถึง AppleCare และ Apple Pay บริษัทควบคุม hardware, software และ chip ของตัวเองตั้งแต่ต้น ร...",
+    "has_source": true,
+    "stale": false
   },
   {
     "ticker": "AVGO",
     "name": "Broadcom Inc.",
     "date": "2026-06-07",
-    "preview": "Broadcom ออกแบบและขาย semiconductor chip และ infrastructure software ให้กับ data center, networking และ broadband industries รายได้หลักมาจากสองก้อนใหญ่คือ Semiconductor Solutions (chip สำหรับ AI, networking, storage) และ..."
+    "preview": "Broadcom ออกแบบและขาย semiconductor chip และ infrastructure software ให้กับ data center, networking และ broadband industries รายได้หลักมาจากสองก้อนใหญ่คือ Semiconductor Solutions (chip สำหรับ AI, networking, storage) และ...",
+    "has_source": false,
+    "stale": false
   },
   {
     "ticker": "MU",
     "name": "Micron Technology, Inc.",
     "date": "2026-06-07",
-    "preview": "Micron เป็นหนึ่งในสามบริษัทที่ผลิต DRAM และ NAND flash memory ระดับโลก (ร่วมกับ Samsung และ SK Hynix) ผลิตภัณฑ์หลักคือ DRAM สำหรับ server และ AI workloads โดยเฉพาะ High-Bandwidth Memory (HBM) ที่ใช้ใน GPU ของ NVIDIA และ ..."
+    "preview": "Micron เป็นหนึ่งในสามบริษัทที่ผลิต DRAM และ NAND flash memory ระดับโลก (ร่วมกับ Samsung และ SK Hynix) ผลิตภัณฑ์หลักคือ DRAM สำหรับ server และ AI workloads โดยเฉพาะ High-Bandwidth Memory (HBM) ที่ใช้ใน GPU ของ NVIDIA และ ...",
+    "has_source": true,
+    "stale": false
   },
   {
     "ticker": "NVDA",
     "name": "NVIDIA Corporation",
     "date": "2026-06-07",
-    "preview": "NVIDIA ออกแบบ GPU และ AI computing platform ที่กลายเป็น infrastructure หลักของ AI revolution — ตั้งแต่ training โมเดลขนาดใหญ่ไปจนถึง inference ใน data center ทั่วโลก บริษัทมีสองส่วนหลักคือ Compute & Networking (Data Cent..."
+    "preview": "NVIDIA ออกแบบ GPU และ AI computing platform ที่กลายเป็น infrastructure หลักของ AI revolution — ตั้งแต่ training โมเดลขนาดใหญ่ไปจนถึง inference ใน data center ทั่วโลก บริษัทมีสองส่วนหลักคือ Compute & Networking (Data Cent...",
+    "has_source": true,
+    "stale": false
   },
   {
     "ticker": "RKLB",
     "name": "Rocket Lab USA",
     "date": "2026-06-07",
-    "preview": "Rocket Lab เป็นบริษัท space launch และ space systems ที่ให้บริการส่งดาวเทียมขึ้นสู่วงโคจรด้วยจรวด Electron (small launch vehicle) และกำลัง develop จรวด Neutron ขนาดกลางที่คาดว่าจะ launch ได้ในอีกไม่กี่ปี นอกจาก launch บร..."
+    "preview": "Rocket Lab เป็นบริษัท space launch และ space systems ที่ให้บริการส่งดาวเทียมขึ้นสู่วงโคจรด้วยจรวด Electron (small launch vehicle) และกำลัง develop จรวด Neutron ขนาดกลางที่คาดว่าจะ launch ได้ในอีกไม่กี่ปี นอกจาก launch บร...",
+    "has_source": false,
+    "stale": false
   },
   {
     "ticker": "TSLA",
     "name": "Tesla, Inc.",
     "date": "2026-06-07",
-    "preview": "Tesla ออกแบบและผลิตรถยนต์ไฟฟ้า ระบบกักเก็บพลังงาน และกำลังเปลี่ยนโครงสร้างธุรกิจให้เป็น AI platform — ผ่าน Full Self-Driving (FSD), Robotaxi ที่เพิ่งเปิดตัวในมิถุนายน 2025 และ Optimus (humanoid robot) ที่กำลังพัฒนา บริษั..."
+    "preview": "Tesla ออกแบบและผลิตรถยนต์ไฟฟ้า ระบบกักเก็บพลังงาน และกำลังเปลี่ยนโครงสร้างธุรกิจให้เป็น AI platform — ผ่าน Full Self-Driving (FSD), Robotaxi ที่เพิ่งเปิดตัวในมิถุนายน 2025 และ Optimus (humanoid robot) ที่กำลังพัฒนา บริษั...",
+    "has_source": true,
+    "stale": false
   }
 ]
