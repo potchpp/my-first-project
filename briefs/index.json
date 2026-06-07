@@ -16,6 +16,14 @@
     "stale": false
   },
   {
+    "ticker": "IREN",
+    "name": "IREN Ltd (formerly Iris Energy)",
+    "date": "2026-06-07",
+    "preview": "IREN เป็นเจ้าของและผู้ดำเนินงาน data center ที่ใช้พลังงานหมุนเวียน 100% ใน Texas (USA) และ British Columbia (Canada) รายได้หลักปัจจุบันมาจาก Bitcoin mining (ASICs) แต่บริษัทกำลัง pivot อย่างจริงจังสู่ AI/HPC cloud servic...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "MU",
     "name": "Micron Technology, Inc.",
     "date": "2026-06-07",
