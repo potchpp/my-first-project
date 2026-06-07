@@ -37,6 +37,10 @@
     .card-name { font-size: 0.78rem; color: #777; margin-top: 0.1rem; }
     .card-date { font-size: 0.72rem; color: #bbb; margin-top: 0.5rem; }
     .card-preview { font-size: 0.82rem; color: #555; margin-top: 0.55rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .badges { display: flex; gap: 0.35rem; margin-top: 0.5rem; flex-wrap: wrap; }
+    .badge { font-size: 0.68rem; padding: 0.15rem 0.45rem; border-radius: 99px; font-weight: 600; }
+    .badge-no-source { background: #fff3cd; color: #856404; }
+    .badge-stale     { background: #fde8e8; color: #9b1c1c; }
     .card-loading { opacity: 0.5; pointer-events: none; }
 
     /* Detail */
@@ -159,6 +163,10 @@
         <div class="card-name">${b.name}</div>
         <div class="card-date">${b.date}</div>
         <div class="card-preview">${b.preview}</div>
+        <div class="badges">
+          ${!b.has_source ? '<span class="badge badge-no-source">⚠ no source</span>' : ''}
+          ${b.stale       ? '<span class="badge badge-stale">🕐 stale</span>'        : ''}
+        </div>
       </div>
     `).join('');
   }
