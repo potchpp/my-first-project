@@ -12,6 +12,12 @@
     "preview": "Broadcom ออกแบบและขาย semiconductor chip และ infrastructure software ให้กับ data center, networking และ broadband industries รายได้หลักมาจากสองก้อนใหญ่คือ Semiconductor Solutions (chip สำหรับ AI, networking, storage) และ..."
   },
   {
+    "ticker": "MU",
+    "name": "Micron Technology, Inc.",
+    "date": "2026-06-07",
+    "preview": "Micron เป็นหนึ่งในสามบริษัทที่ผลิต DRAM และ NAND flash memory ระดับโลก (ร่วมกับ Samsung และ SK Hynix) ผลิตภัณฑ์หลักคือ DRAM สำหรับ server และ AI workloads โดยเฉพาะ High-Bandwidth Memory (HBM) ที่ใช้ใน GPU ของ NVIDIA และ ..."
+  },
+  {
     "ticker": "NVDA",
     "name": "NVIDIA Corporation",
     "date": "2026-06-07",
