@@ -10,3 +10,5 @@ __pycache__/
 
 # Claude Code internal (ไม่ต้อง track ใน git)
 .claude/
+.agents/
+skills-lock.json
