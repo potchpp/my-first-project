@@ -11,8 +11,8 @@
     "ticker": "AVGO",
     "name": "Broadcom Inc.",
     "date": "2026-06-07",
-    "preview": "Broadcom ออกแบบและขาย semiconductor chip และ infrastructure software ให้กับ data center, networking และ broadband industries รายได้หลักมาจากสองก้อนใหญ่คือ Semiconductor Solutions (chip สำหรับ AI, networking, storage) และ...",
-    "has_source": false,
+    "preview": "Broadcom เป็น semiconductor และ infrastructure software ที่ทำรายได้จากสองธุรกิจหลัก: Semiconductor Solutions (ออกแบบ custom AI accelerator/XPU สำหรับ hyperscaler, Ethernet switching, RF filter สำหรับ iPhone, storage cont...",
+    "has_source": true,
     "stale": false
   },
   {
@@ -33,10 +33,10 @@
   },
   {
     "ticker": "RKLB",
-    "name": "Rocket Lab USA",
+    "name": "Rocket Lab USA, Inc.",
     "date": "2026-06-07",
-    "preview": "Rocket Lab เป็นบริษัท space launch และ space systems ที่ให้บริการส่งดาวเทียมขึ้นสู่วงโคจรด้วยจรวด Electron (small launch vehicle) และกำลัง develop จรวด Neutron ขนาดกลางที่คาดว่าจะ launch ได้ในอีกไม่กี่ปี นอกจาก launch บร...",
-    "has_source": false,
+    "preview": "Rocket Lab เป็น end-to-end space company สองธุรกิจ: Launch Services (Electron small rocket, 21 missions ใน 2025, อันดับ 2 ของโลกใน launch frequency) และ Space Systems (ออกแบบและผลิต spacecraft, reaction wheels, star trac...",
+    "has_source": true,
     "stale": false
   },
   {
