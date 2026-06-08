@@ -16,10 +16,26 @@
     "stale": false
   },
   {
+    "ticker": "IREN",
+    "name": "Iris Energy",
+    "date": "unknown",
+    "preview": "",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "MU",
     "name": "Micron Technology, Inc.",
     "date": "2026-06-07",
     "preview": "Micron เป็นหนึ่งในสามบริษัทที่ผลิต DRAM และ NAND flash memory ระดับโลก (ร่วมกับ Samsung และ SK Hynix) ผลิตภัณฑ์หลักคือ DRAM สำหรับ server และ AI workloads โดยเฉพาะ High-Bandwidth Memory (HBM) ที่ใช้ใน GPU ของ NVIDIA และ ...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "NFLX",
+    "name": "Netflix",
+    "date": "unknown",
+    "preview": "",
     "has_source": true,
     "stale": false
   },
