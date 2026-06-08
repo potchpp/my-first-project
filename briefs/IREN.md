@@ -1,87 +1,85 @@
-# IREN — IREN Ltd (formerly Iris Energy)
-*Brief generated: 2026-06-07 | Sources: sources/IREN/10-k-fy2025.md (FY2025, period ending Jun 30, 2025)*
-*Note: ไม่มี earnings call transcript ใน sources/IREN/ — fetch_transcript.py ไม่พบ URL บน Motley Fool*
+# IREN (Iris Energy) — Stock Brief
+**Date:** 2026-06-08 | **Source:** 10-K FY2025 (ended June 30, 2025) | *No earnings transcript available — live sentiment data unavailable (WebSearch blocked)*
 
 ---
 
-## What the company does
+## Company Snapshot
 
-IREN เป็นเจ้าของและผู้ดำเนินงาน data center ที่ใช้พลังงานหมุนเวียน 100% ใน Texas (USA) และ British Columbia (Canada) รายได้หลักปัจจุบันมาจาก Bitcoin mining (ASICs) แต่บริษัทกำลัง pivot อย่างจริงจังสู่ AI/HPC cloud services โดยขาย GPU compute time ให้ลูกค้า AI training/inference จาก NVIDIA GPU fleet ที่กำลังขยาย จุดแข็งหลักคือการเป็นเจ้าของ data center และ electrical infrastructure รวมถึงที่ดิน ซึ่งให้ความยืดหยุ่นในการสลับระหว่าง Bitcoin mining และ AI services ตามที่ market economics บ่งชี้ *(source: sources/IREN/10-k-fy2025.md)*
-
----
-
-## Fundamentals signal
-
-> **หมายเหตุ:** ข้อมูลต่อไปนี้มาจาก 10-K FY2025 (fiscal year ending Jun 30, 2025) ไม่ใช่ quarterly transcript *(source: sources/IREN/10-k-fy2025.md)*
-
-**Revenue durability — Bitcoin price dependent แต่ AI กำลัง diversify**
-- Total revenue **$501.0M (+168% YoY)** จาก $187.2M — การเติบโตมาจากราคา Bitcoin สูงขึ้นและ hashrate capacity เพิ่มขึ้น *(source: sources/IREN/10-k-fy2025.md)*
-- Bitcoin Mining Revenue: ~**$484.6M** (97% ของ revenue) — BTC price-driven *(source: sources/IREN/10-k-fy2025.md)*
-- AI Cloud Services Revenue: ~**$16.4M** (3% ของ revenue) — เพิ่งเริ่มใน 2024; 1.9k H100/H200 GPUs ณ June 30, 2025 *(source: sources/IREN/10-k-fy2025.md)*
-- หลัง June 30, 2025: ซื้อ/lease **5.5k B200 + 2.3k B300 + 1.2k GB300 GPUs** → รวม ~10.9k NVIDIA GPUs *(source: sources/IREN/10-k-fy2025.md)*
-
-**Margin trend — ดีขึ้นมากในช่วง BTC bull**
-- Net income **$86.9M** (FY2025) vs. loss $28.9M (FY2024) vs. loss $171.8M (FY2023) *(source: sources/IREN/10-k-fy2025.md)*
-- EBITDA **$278.2M** (56% margin) — ขึ้นจาก $19.3M ปีก่อน *(source: sources/IREN/10-k-fy2025.md)*
-- Adjusted EBITDA **$269.7M** (54% margin) — business มี operating leverage สูงมาก; รายได้เพิ่ม 168% แต่ electricity cost เพิ่มเพียง 81% ($81.6M → $148.1M) *(source: sources/IREN/10-k-fy2025.md)*
-- Net electricity cost per Bitcoin mined: **$25,600** (FY2025) vs. $18,100 (FY2024) — ต้นทุนต่อ BTC ขึ้นจาก scale แต่ยังต่ำกว่า BTC price มาก *(source: sources/IREN/10-k-fy2025.md)*
-- Bitcoin mined: **5,499 BTC** (FY2025) vs. 4,191 BTC (FY2024) *(source: sources/IREN/10-k-fy2025.md)*
-
-**Infrastructure scale — asset ที่สำคัญกว่าตัวเลขปัจจุบัน**
-- Operating capacity: **810MW** (650MW Texas + 160MW British Columbia); 50 EH/s hashrate *(source: sources/IREN/10-k-fy2025.md)*
-- Under development: **Sweetwater 1 (1,400MW)** target Q2 2026 grid connection; **Sweetwater 2 (600MW)** target Q4 2027 *(source: sources/IREN/10-k-fy2025.md)*
-- Total addressable power footprint: **2,810MW** ถ้า all sites completed *(source: sources/IREN/10-k-fy2025.md)*
-- Cash: **$564.5M**; Convertible notes: **$990M** ($400M @ 3.5% + $500M @ 3.25% due 2029) *(source: sources/IREN/10-k-fy2025.md)*
-
-**Capital allocation — bet ใหญ่บน AI GPU expansion**
-- Horizon 1: 50MW liquid-cooled AI data center ที่ Childress (targeting end CY2025) *(source: sources/IREN/10-k-fy2025.md)*
-- Post-FY2025 GPU procurement ผ่าน purchases + leasing — leasing arrangements supported by IREN Limited guarantees *(source: sources/IREN/10-k-fy2025.md)*
-- Depreciation: **$181.1M** ใน FY2025 (เพิ่ม 258% YoY) — สะท้อน hardware investment หนัก *(source: sources/IREN/10-k-fy2025.md)*
+Iris Energy เป็นบริษัทที่สร้างและดำเนินงาน data center พลังงานหมุนเวียน 100% ใน Texas และ British Columbia ปัจจุบันทำเงินจาก Bitcoin mining เป็นหลัก (97% ของ revenue) แต่กำลัง pivot อย่างจริงจังสู่ HPC/AI cloud โดยใช้ land + grid connection ที่สะสมมาเป็นฐาน จุดเดือดของ thesis คือว่า IREN จะแปลง infrastructure นี้เป็น AI platform ได้จริงก่อนที่ mining margin จะถูก halving cycle กัดกร่อนในรอบต่อไป (April 2028)
 
 ---
 
-## Latest earnings — FY2025 Full Year (ending Jun 30, 2025)
+## Fundamentals Signal
 
-- **Revenue $501.0M (+168% YoY)** — Bitcoin price สูง + hashrate 50 EH/s; AI cloud เพิ่งเริ่มเป็น meaningful *(source: sources/IREN/10-k-fy2025.md)*
-- **Net income $86.9M** (ครั้งแรกที่ profitable ในประวัติบริษัท หลังขาดทุนสะสม); EBITDA margin 56% *(source: sources/IREN/10-k-fy2025.md)*
-- **5,499 BTC mined** — ต้นทุน electricity $25,600/BTC; ณ ราคา BTC ช่วง FY2025 margin ต่อ BTC สูง *(source: sources/IREN/10-k-fy2025.md)*
-- **10.9k NVIDIA GPUs** หลัง FY2025 — B200/B300/GB300 fleet; เปลี่ยนจาก 1.9k GPUs เป็น ~6x ใน ครึ่งปี *(source: sources/IREN/10-k-fy2025.md)*
-- **Tariff dispute** — US Customs ท้าทาย country of origin ของ Bitcoin miners มูลค่า up to $100M; IREN เชื่อว่า dispute ไม่มีมูล แต่ result ยังไม่ชัด *(source: sources/IREN/10-k-fy2025.md)*
-- **NYDIG settlement** — ปิดเรื่อง 2022 equipment financing defaults; จ่าย settlement เกินกว่าที่ accrued $18.2M *(source: sources/IREN/10-k-fy2025.md)*
+*Source: fundamentals agent — sources/IREN/10-k-fy2025.md*
+
+**Revenue durability — ต่ำมาก ณ ปัจจุบัน**
+97% ของรายได้ยังมาจาก Bitcoin mining ซึ่งเป็น commodity exposure บริสุทธิ์ — ไม่มี contract ไม่มี customer ราคา BTC ขึ้น/ลงคือรายได้ขึ้น/ลงตาม AI Cloud Services ทำ $16.4M (3.3%) มี contract บางส่วนยาวถึง 3 ปี แต่ยังไม่ใหญ่พอที่จะ anchor thesis ได้ และ filing ยังเตือนเรื่อง customer concentration ใน AI segment
+
+**Margin trend — สวยในกระดาษ ต้องระวัง D&A และ halving math**
+- Adjusted EBITDA margin: 54% (FY25) vs 29% (FY24) — operating leverage จาก hashrate ที่ scale จาก 6.6 → 25.7 EH/s avg
+- GAAP operating margin: 3.5% เท่านั้น เพราะ D&A กระโดดจาก $50M → $181M YoY
+- Net electricity cost/BTC: $25,642 FY25 vs $18,127 FY24 (+41%) — halving เมษายน 2024 กินไปแล้ว รอบหน้า (2028) จะกินอีก
+
+**Capital allocation — all-in build mode, ไม่มี return to shareholders**
+ไม่มี buyback ไม่มี dividend บริษัทออก convertible notes $990M รวม ($400M 3.5% due 2030 + $500M 3.25% due 2029) เพื่อ fund การขยาย hashrate พร้อมกับ Horizon 1 AI data center (50MW liquid-cooled, Childress) และซื้อ Blackwell GPU ~9k ตัว post-period cash on hand $564.5M แต่ debt load หนักบน business ที่ยังผูกกับ spot BTC
 
 ---
 
-## Bull case / Bear case
+## Latest Earnings
+
+*Source: earnings agent — sources/IREN/10-k-fy2025.md (ไม่มี earnings transcript)*
+
+**FY2025 รวม:**
+- Revenue: $501M (+168% YoY) — BTC mining $484.6M + AI Cloud $16.4M
+- Net income: $86.9M (กำไรปีแรก) แต่รวม unrealized gain $77.5M จาก financial instruments — strip ออกแล้วบางกว่าที่เห็น
+- Adjusted EBITDA: $269.7M (margin 54%)
+
+**Q4 FY2025 (เม.ย.–มิ.ย. 2025):**
+- Revenue: $187.3M (BTC mining $180.3M + AI Cloud $7.0M)
+- Underlying operating income: $20.6M — net income $176.9M แต่ $147.7M มาจาก unrealized gain บน Capped Call instruments ไม่ควรนับเป็น operating performance
+
+**Post-period (material แต่ไม่อยู่ใน FY25 revenue):**
+- ซื้อ Blackwell GPU ~9k ตัว (B200/B300/GB300) ผ่าน lease SPV ที่ IREN guarantee → fleet เพิ่มเป็น ~10.9k ตัวภายใน CY2025
+- Tariff risk: US Customs ตั้งคำถาม ASIC origin (SEA vs China) ความเสี่ยงสูงสุด ~$100M
+- NYDIG settlement: จ่าย ~$18.2M เหนือ prior accrual
+
+---
+
+## Bull / Bear
 
 **Bull**
-- **Cornered Resource จาก power access ที่หายาก** — grid connection agreements ใน Texas (ERCOT) สำหรับ 2,810MW รวม Sweetwater sites เป็น asset ที่สร้างได้ยากมาก — ในขณะที่ demand สำหรับ AI data center power กำลัง outpace supply globally IREN นั่งอยู่บน land + power footprint ขนาดนี้โดยไม่มีคู่แข่งหน้าใหม่เข้าถึงได้ง่าย *(source: sources/IREN/10-k-fy2025.md)*
-- **Optionality ระหว่าง Bitcoin mining และ AI GPU** — บริษัทสามารถ reallocate power ระหว่าง ASIC (BTC mining) และ GPU (AI services) ตาม market economics — เป็น hedge ที่ไม่มีในบริษัท data center อื่น; ถ้า BTC ราคาลง สามารถขาย GPU compute แทน *(source: sources/IREN/10-k-fy2025.md)*
-- **AI GPU expansion ที่ scale ขึ้นเร็ว** — จาก 1.9k → 10.9k NVIDIA GPUs ภายในปีเดียว; B200/B300 เป็น frontier GPU; ถ้า AI demand ยังแข็งแกร่ง utilization สูง → AI Cloud Revenue จะเป็น meaningful portion ในปีหน้า *(source: sources/IREN/10-k-fy2025.md)*
+- **Cornered resource ในทำเลกำลังไฟ:** ที่ดิน freehold + grid connection ใน Texas (Childress/Sweetwater 1 target 1,400MW) คือ asset หายากที่ hyperscaler สร้างทดแทนได้ยากในเวลาสั้น ถ้า AI power demand ยังตึงตัว IREN มี supply ที่คู่แข่งใหม่หน้าไหนก็ตามไม่ทัน
+- **Platform shift ที่ timing ดี:** Blackwell GPU fleet (10.9k ตัว) เข้ามาพอดีกับ inference demand cycle ถ้า IREN lock long-term AI contract ได้ก่อน mining margin compression รอบหน้ามาถึง revenue mix จะเปลี่ยนหน้าตา P&L ไปมาก
+- **Counter-positioning ต่อ hyperscaler:** 100% renewable + vertically integrated (own land, own grid) ตอบโจทย์ enterprise/hyperscaler ที่ต้องการ clean compute แบบที่ rack-and-stack ทั่วไปทำไม่ได้ — เป็น differentiation ที่แข่งด้วย capex อย่างเดียวไม่ได้
 
 **Bear**
-- **Revenue ขึ้นอยู่กับ BTC price เป็นหลัก** — 97% ของ revenue ยังมาจาก Bitcoin mining; ถ้า BTC price ลด 50% revenue จะลดตามเกือบเท่ากัน; operating leverage ทำงานทั้งสองทาง — ใน downcycle EBITDA จะหายเร็วมาก *(source: sources/IREN/10-k-fy2025.md)*
-- **Halving April 2028 จะตัด block reward เหลือ 1.5625 BTC** — ถ้า BTC price ไม่ขึ้นเพื่อชดเชย Bitcoin mining revenue จะลดลงครึ่งหนึ่งโดยอัตโนมัติ; AI cloud revenue ต้องเติบโตขึ้นมาก เพื่อ offset *(source: sources/IREN/10-k-fy2025.md)*
-- **GPU leasing liability + $990M convertible notes** — equipment leasing ใหม่ (B200/B300/GB300) รับประกันโดย IREN Limited; ถ้า AI utilization ต่ำ lease payments ยังต้องจ่าย; $990M debt due 2029 เป็น refinancing risk *(source: sources/IREN/10-k-fy2025.md)*
+- **Thesis ยังไม่เกิดในตัวเลข:** FY2025 AI Cloud = $16.4M (3.3%) Bitcoin mining = $484.6M (97%) — บริษัท "pivot to AI" แต่ financial reality ยังเป็น Bitcoin miner เต็มตัว และจะอยู่แบบนั้นอีก 2–3 ปีอย่างน้อย ถ้า BTC ร่วง thesis ทั้งหมดพัง
+- **Halving math สะสม:** Net electricity cost/BTC ขึ้น 41% ในปีเดียว Halving 2028 จะตัด block reward เหลือ 1.5625 BTC ถ้า BTC price ไม่ขึ้น proportionate IREN ต้องพึ่ง AI revenue มา replace gap ที่ยังสร้างไม่ทัน
+- **$990M debt บน commodity business:** Convertible notes due 2029–2030 ต้องการ execution สมบูรณ์แบบ — BTC price ต้องไม่พัง AI buildout ต้องไม่ล่าช้า และ tariff risk ~$100M บน ASIC import ยังเป็น unresolved wildcard
 
 ---
 
-## Kill conditions
+## Kill Conditions
 
-1. **BTC price ลดต่ำกว่า $50,000 ต่อเนื่องนาน** — ณ electricity cost $25,600/BTC margin จะแคบมาก; ถ้า BTC ลงพร้อม hashrate global สูง ธุรกิจ mining กลับขาดทุน
-2. **AI Cloud GPU utilization ต่ำหลัง 10.9k GPU fleet เต็มกำลัง** — ถ้า GPU oversupply ใน AI cloud market กดราคาให้ต่ำลงและ IREN ไม่ win customers เพียงพอ lease commitment จะกลายเป็น cash drain
-3. **Tariff dispute $100M สูญเสียทั้งหมด** — 10-K ระบุว่า IREN เชื่อว่า dispute ไม่มีมูล แต่ถ้าแพ้คดี impact ต่อ cash position ชัดเจน
-4. **Sweetwater 1/2 delays หรือ ERCOT policy เปลี่ยน** — Texas กำลังพิจารณา new regulations สำหรับ large electrical loads; ถ้า interconnection ล่าช้าหรือถูกบล็อก thesis เรื่อง power footprint หายไป
+Thesis หลักของ IREN: *บริษัทจะแปลง land + power infrastructure เป็น AI platform ได้สำเร็จก่อนที่ mining margin จะถูกทำลาย*
 
----
-
-## What to ask before owning it
-
-1. AI Cloud Services utilization ปัจจุบัน — หลังจาก 10.9k GPUs deployed ณ end CY2025 revenue per GPU per day เป็นเท่าไหร่? ถ้า utilization ต่ำกว่า 70% economics ไม่พอคุ้ม lease cost?
-2. Revenue mix เปลี่ยนไปยังไงใน H2 CY2025 — สัดส่วน AI Cloud vs BTC mining ณ ปัจจุบันเป็นเท่าไหร่? thesis เรื่อง diversification เกิดขึ้นจริงแล้วหรือยัง?
-3. Sweetwater 1 timeline — grid connection Q2 2026 ยังอยู่ตามแผนไหม? ERCOT interconnection process มี bottleneck อะไร? cost overrun risk เป็นอย่างไร?
-4. Halving 2028 plan — บริษัทวางแผนอย่างไรสำหรับ April 2028 (block reward ลดจาก 3.125 → 1.5625 BTC)? AI revenue ต้องโตถึงระดับไหนเพื่อ offset?
-5. $990M convertible notes due 2029 — refinancing plan เป็นอย่างไร? ณ BTC downcycle + AI market slowdown ความสามารถในการ service debt เป็นอย่างไร?
+Thesis แตกถ้า:
+- **AI Cloud Services ไม่ถึง 20% ของ revenue ภายใน FY2027** — แสดงว่า GPU buildout และ customer acquisition ไม่ on-track และ mining margin จะ deteriorate ก่อน AI revenue จะ support ได้
+- **IREN ไม่สามารถ disclose multi-year AI contract กับ named customer ขนาด hyperscaler ได้ภายใน 18 เดือน** — customer concentration ใน AI segment ยังไม่ถูก address revenue quality ยังเป็น spot-market
+- **US Customs tariff ruling ออกมา confirmed ~$100M+** และ IREN ต้องรับ cost เอง — กระทบ liquidity และ debt service capacity
+- **BTC ต่ำกว่า $40,000 ต่อเนื่องกว่า 2 quarters** ก่อนที่ AI revenue จะ material — operating cash flow พัง debt service เสี่ยง
 
 ---
 
-*ไม่ใช่คำแนะนำการลงทุน — research summary อิงจาก 10-K FY2025 (period ending Jun 30, 2025); ไม่มี earnings call transcript สำหรับ IREN*
+## What to Ask
+
+1. **AI contract pipeline ผูกมัดแค่ไหน?** IREN พูดถึง "white-label arrangements with US AI cloud providers" แต่ไม่เปิดเผย customer ชื่อหรือขนาด contract ก่อน add position ควรรู้ว่า Horizon 1 มี committed offtake ก่อน energize หรือ build-then-sell — ถ้าเป็นอย่างหลัง risk profile ต่างกันมาก
+
+2. **Blackwell GPU financing structure คืออะไรกันแน่?** ~9k GPU ซื้อผ่าน equipment leasing SPV ที่ IREN guarantee — ไม่ขึ้นงบโดยตรง แต่ IREN รับ liability ถ้า SPV default ต้องดูว่า effective leverage จริงๆ สูงกว่า $990M convertible notes เท่าไหร่ และ lease payment schedule เป็นอย่างไรใน AI demand downcycle
+
+3. **Sweetwater 1 จะ power Bitcoin mining หรือ AI?** ถ้าเปิดมาเป็น mining facility ในปี 2026 แล้วค่อย convert ทีหลัง economics ต่างกันมากกับการ build-for-AI ตั้งแต่ต้น และ capex ที่ผูกกับ mining hardware ก่อนจะ pivot ได้ยาก — capital allocation decision ตรงนี้จะบอกว่า management เชื่อใน thesis ของตัวเองจริงหรือเปล่า
+
+---
+
+*ไม่ใช่คำแนะนำการลงทุน — brief อิงจาก 10-K FY2025 เท่านั้น ไม่มี earnings transcript และ WebSearch ถูก block ทำให้ไม่มี live sentiment/analyst data หลัง June 2025*
