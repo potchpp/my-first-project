@@ -8,6 +8,14 @@
     "stale": false
   },
   {
+    "ticker": "AMZN",
+    "name": "Amazon",
+    "date": "2026-06-08",
+    "preview": "Amazon เป็น conglomerate ที่มีสองธุรกิจที่แทบไม่เหมือนกันอยู่ในบริษัทเดียว: retail marketplace ขนาด $588B ที่ margin บาง กับ AWS cloud infrastructure ขนาด $128.",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "AVGO",
     "name": "Broadcom Inc.",
     "date": "2026-06-07",
