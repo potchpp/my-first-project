@@ -16,6 +16,14 @@
     "stale": false
   },
   {
+    "ticker": "GOOG",
+    "name": "Alphabet",
+    "date": "2026-06-08",
+    "preview": "Alphabet คือ conglomerate ที่มี Search เป็น cash engine หลัก (73% ของ revenue มาจาก advertising) กำลัง pivot สู่ cloud+AI platform อย่างจริงจัง โดยใช้ Google Cloud (+36% FY2025, +63% Q1 2026) เป็น second engine ขณะเดียวก...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "IREN",
     "name": "Iris Energy",
     "date": "2026-06-08",
