@@ -18,8 +18,8 @@
   {
     "ticker": "IREN",
     "name": "Iris Energy",
-    "date": "unknown",
-    "preview": "",
+    "date": "2026-06-08",
+    "preview": "Iris Energy เป็นบริษัทที่สร้างและดำเนินงาน data center พลังงานหมุนเวียน 100% ใน Texas และ British Columbia ปัจจุบันทำเงินจาก Bitcoin mining เป็นหลัก (97% ของ revenue) แต่กำลัง pivot อย่างจริงจังสู่ HPC/AI cloud โดยใช้ la...",
     "has_source": true,
     "stale": false
   },
@@ -34,8 +34,8 @@
   {
     "ticker": "NFLX",
     "name": "Netflix",
-    "date": "unknown",
-    "preview": "",
+    "date": "2026-06-08",
+    "preview": "Netflix เป็น global streaming platform ที่มี subscriber base หลายร้อยล้านครัวเรือนทั่วโลก รายได้หลักมาจาก subscription fee รายเดือน กำลังเพิ่ม revenue layer ที่สองผ่าน advertising tier ซึ่งโตเร็ว ธุรกิจนี้มี Scale econom...",
     "has_source": true,
     "stale": false
   },
