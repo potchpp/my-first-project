@@ -40,6 +40,14 @@
     "stale": false
   },
   {
+    "ticker": "LITE",
+    "name": "Lumentum Holdings Inc.",
+    "date": "2026-06-14",
+    "preview": "Lumentum ออกแบบและผลิต optical และ photonic components — EML chips, transceivers, pump lasers — ที่ใช้ใน AI data center interconnects, telecom networks, และ 3D sensing (Apple iPhone Face ID) Cloud & Networking คือ 86% ขอ...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "MU",
     "name": "Micron Technology, Inc.",
     "date": "2026-06-07",
