@@ -72,6 +72,14 @@
     "stale": false
   },
   {
+    "ticker": "SPCX",
+    "name": "Space Exploration Technologies Corp.",
+    "date": "2026-06-14",
+    "preview": "SpaceX เป็น vertically integrated space company สองธุรกิจหลัก: Starlink (satellite broadband, 10M+ subscribers ใน 100 ประเทศ, ดาวเทียม 9,800+ ดวง) และ Launch Services (Falcon 9 rocket ที่ reuse ได้, ปัจจุบัน workhorse ขอ...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "TSLA",
     "name": "Tesla, Inc.",
     "date": "2026-06-07",
