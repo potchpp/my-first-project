@@ -96,10 +96,26 @@
     "stale": false
   },
   {
+    "ticker": "IONQ",
+    "name": "IonQ, Inc.",
+    "date": "2026-09-18",
+    "preview": "IonQ ทำ quantum computer hardware — ยังเป็นเทคโนโลยี \"early stages\" ตาม filing เอง ยังไม่มี broad quantum advantage ที่พิสูจน์แล้ว รายได้เพิ่งเริ่มมีนัยสำคัญ ($130M FY2025) จาก contract เฉพาะทาง + acquisition ที่เพิ่งเข้...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "IREN",
     "name": "Iris Energy",
     "date": "2026-06-08",
     "preview": "Iris Energy เป็นบริษัทที่สร้างและดำเนินงาน data center พลังงานหมุนเวียน 100% ใน Texas และ British Columbia ปัจจุบันทำเงินจาก Bitcoin mining เป็นหลัก (97% ของ revenue) แต่กำลัง pivot อย่างจริงจังสู่ HPC/AI cloud โดยใช้ la...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "KO",
+    "name": "The Coca-Cola Company",
+    "date": "2026-09-18",
+    "preview": "Coca-Cola มี 2 ธุรกิจ: concentrate operations (59% ของรายได้, 85% ของ volume — ขาย syrup ให้ bottler, margin สูง recurring) และ finished product (41% ของรายได้, 15% volume) 84% ของรายได้มาจากนอก US — geographic diversifi...",
     "has_source": true,
     "stale": false
   },
