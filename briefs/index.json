@@ -96,6 +96,14 @@
     "stale": false
   },
   {
+    "ticker": "ORCL",
+    "name": "Oracle Corporation",
+    "date": "2026-09-18",
+    "preview": "Oracle ขาย enterprise IT สามส่วน: Cloud and software (87% ของรายได้), Hardware (5%), Services (8%) FY26 revenue $67.357B (+17%) engine หลักคือ OCI (Oracle Cloud Infrastructure) ที่ตอนนี้คิดเป็น 53% ของ cloud revenue (จาก...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "PLTR",
     "name": "Palantir Technologies Inc.",
     "date": "2026-09-18",
