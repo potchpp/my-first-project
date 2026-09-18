@@ -136,6 +136,14 @@
     "stale": false
   },
   {
+    "ticker": "SNOW",
+    "name": "Snowflake Inc.",
+    "date": "2026-09-18",
+    "preview": "Snowflake คือ \"AI Data Cloud\" platform — consumption-based (จ่ายตาม compute/storage/data transfer ที่ใช้จริง ไม่ใช่ fixed subscription) FY2026 revenue $4.7B โตต่อเนื่องจาก $3.6B (FY2025) และ $2.",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "SPCX",
     "name": "Space Exploration Technologies Corp.",
     "date": "2026-06-14",
