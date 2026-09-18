@@ -128,6 +128,14 @@
     "stale": false
   },
   {
+    "ticker": "TEAM",
+    "name": "Atlassian Corporation",
+    "date": "2026-09-18",
+    "preview": "Atlassian ทำ team collaboration platform — Jira, Confluence, Jira Service Management, Bitbucket, Loom, Trello บวก AI layer ใหม่ \"Rovo\" (search/chat/agents บน Teamwork Graph) ลูกค้า >350,000 ราย >85% ของ Fortune 500 ใช้งา...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "TSLA",
     "name": "Tesla, Inc.",
     "date": "2026-06-07",
