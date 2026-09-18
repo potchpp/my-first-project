@@ -273,5 +273,54 @@ class ComputeTests(unittest.TestCase):
         self.assertIsNone(perf.avg_cost([], cal[0]))
 
 
+class PriceCacheTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._orig = perf.CACHE_DIR
+        perf.CACHE_DIR = Path(self._tmp.name)
+        self.addCleanup(self._tmp.cleanup)
+        self.addCleanup(setattr, perf, "CACHE_DIR", self._orig)
+
+    def test_cache_roundtrip_and_incremental_fetch(self):
+        cal = days(4)
+        calls = []
+
+        def fake(ysym, start, end):
+            calls.append((ysym, start, end))
+            return {x: 1.5 for x in cal if start <= x <= end}
+
+        p1 = perf.get_prices(["AAA"], cal[0], cal[1], fetch=True, downloader=fake)
+        self.assertEqual(sorted(p1["AAA"]), cal[:2])
+        self.assertEqual(perf.load_cache("AAA")[cal[0]], 1.5)
+        p2 = perf.get_prices(["AAA"], cal[0], cal[3], fetch=True, downloader=fake)
+        self.assertEqual(sorted(p2["AAA"]), cal[:4])
+        self.assertEqual(calls[1][1], cal[1] + timedelta(days=1))   # only the tail was fetched
+        p3 = perf.get_prices(["AAA", "NOPE"], cal[0], cal[3], fetch=False, downloader=fake)
+        self.assertIn("AAA", p3)
+        self.assertNotIn("NOPE", p3)
+        self.assertEqual(len(calls), 2)
+
+    def test_failed_or_empty_fetch_keeps_cache_and_excludes_unknown(self):
+        cal = days(2)
+        perf.save_cache("AAA", {cal[0]: 2.0})
+
+        def boom(ysym, start, end):
+            if ysym == "AAA":
+                raise RuntimeError("network down")
+            return {}
+
+        p = perf.get_prices(["AAA", "GONE"], cal[0], cal[1], fetch=True, downloader=boom)
+        self.assertEqual(p["AAA"], {cal[0]: 2.0})
+        self.assertNotIn("GONE", p)
+
+    def test_up_to_date_cache_is_not_refetched(self):
+        cal = days(2)
+        perf.save_cache("AAA", {cal[0]: 2.0, cal[1]: 2.5})
+        calls = []
+        perf.get_prices(["AAA"], cal[0], cal[1], fetch=True,
+                        downloader=lambda *a: calls.append(a) or {})
+        self.assertEqual(calls, [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -301,3 +301,55 @@ def compute(trades: List[Trade], prices: Prices, as_of: date, excluded=()) -> di
     result["positions"].sort(
         key=lambda p: (0, -p["windows"][rw]["contribution_pp"]) if p["windows"][rw] else (1, 0.0))
     return result
+
+
+# ---- prices ----
+
+def load_cache(ysym: str) -> Dict[date, float]:
+    p = CACHE_DIR / f"{ysym}.csv"
+    if not p.exists():
+        return {}
+    with open(p, newline="", encoding="utf-8") as f:
+        return {date.fromisoformat(r["date"]): float(r["close"]) for r in csv.DictReader(f)}
+
+
+def save_cache(ysym: str, closes: Dict[date, float]) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    with open(CACHE_DIR / f"{ysym}.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["date", "close"])
+        for d in sorted(closes):
+            w.writerow([d.isoformat(), f"{closes[d]:.6f}"])
+
+
+def yahoo_download(ysym: str, start: date, end: date) -> Dict[date, float]:
+    import yfinance as yf  # only import site; keeps tests and --no-fetch dependency-free
+    df = yf.download(ysym, start=start.isoformat(), end=(end + timedelta(days=1)).isoformat(),
+                     progress=False, auto_adjust=False)
+    if df is None or df.empty:
+        return {}
+    close = df["Close"]
+    if hasattr(close, "columns"):          # newer yfinance returns MultiIndex columns
+        close = close.iloc[:, 0]
+    return {idx.date(): float(v) for idx, v in close.dropna().items()}
+
+
+def get_prices(ysymbols, start: date, end: date, fetch: bool = True,
+               downloader=yahoo_download) -> Prices:
+    prices: Prices = {}
+    for ysym in ysymbols:
+        closes = load_cache(ysym)
+        if fetch:
+            since = max(closes) + timedelta(days=1) if closes else start
+            if since <= end:
+                try:
+                    new = downloader(ysym, since, end)
+                except Exception as exc:  # network / yfinance failure → keep what we have
+                    print(f"warning: fetch failed for {ysym}: {exc}", file=sys.stderr)
+                    new = {}
+                if new:
+                    closes.update(new)
+                    save_cache(ysym, closes)
+        if closes:
+            prices[ysym] = closes
+    return prices
