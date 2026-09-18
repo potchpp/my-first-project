@@ -176,6 +176,14 @@
     "stale": false
   },
   {
+    "ticker": "NBIS",
+    "name": "Nebius Group N.V.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ Nebius — file Form 20-F ไม่ใช่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge เท่านั้น Nebius (แยกตัวจาก Yandex international business) เป็น pure-play AI i...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "NFLX",
     "name": "Netflix",
     "date": "2026-06-08",
@@ -324,6 +332,14 @@
     "name": "USA Rare Earth, Inc.",
     "date": "2026-09-18",
     "preview": "> ⚠️ Data limitation: ไม่มี local 10-K ที่ใช้งานได้จริง ข้อมูลด้านล่างมาจาก general/public knowledge เท่านั้น — นี่คือ speculative early-stage miner ไม่ใช่ established business USA Rare Earth กำลังสร้าง rare earth proces...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "WKEY",
+    "name": "WISeKey International Holding Ltd.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ WISeKey — file Form 20-F ไม่ใช่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge เท่านั้น เป็น thinly-covered micro-cap ที่ analyst coverage น้อยมาก WISeKey ...",
     "has_source": true,
     "stale": false
   }
