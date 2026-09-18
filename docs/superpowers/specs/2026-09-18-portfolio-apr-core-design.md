@@ -28,12 +28,14 @@ Output is measurement and diagnostics only.
 | Cash flows | The trade rows themselves (buy = cash in, sell = cash out) | Matches how the account is funded (THB→USD auto-converts on purchase); avoids the messy currency rows |
 | Benchmark | `^SP500TR` (S&P 500 Total Return index) from Yahoo Finance | Literal match to the KPI wording; dividends reinvested |
 | Holding valuation | Unadjusted daily close | Dividends land as cash at Dime!, not reinvested; adjusted closes would overstate. Slightly understates return on dividend payers — conservative, documented |
-| Input source of truth | `portfolio/transactions.csv` in Yahoo Finance import format | Already exported from the owner's Google Sheet; normalised one-row-per-trade |
+| Input source of truth | The Google Sheet's Yahoo-Finance-format export, dropped into `portfolio/` under its own export name | Already exported from the owner's Google Sheet; normalised one-row-per-trade; no renaming step |
 | Methodology | APR vs. static index as the KPI; TWR as a single diagnostic column | Owner's definition. Shadow-portfolio / XIRR explicitly dropped |
 
-## 3. Input contract — `portfolio/transactions.csv`
+## 3. Input contract — the transactions file
 
-Yahoo Finance portfolio import format, exactly:
+Default path: `portfolio/My Asset Portfolio - Export - Yahoo Finance.csv` — the
+Google Sheet's own export name, kept verbatim so the owner never renames anything
+(override with `--transactions`). Yahoo Finance portfolio import format, exactly:
 
 ```
 Symbol,Trade Date,Quantity,Purchase Price,Commission
@@ -64,7 +66,7 @@ the holdings table (§7) exists so such gaps are visible against the Dime! app.
 
 | Path | Role | Git |
 |---|---|---|
-| `portfolio/transactions.csv` | source of truth, owner-maintained | ignored |
+| `portfolio/My Asset Portfolio - Export - Yahoo Finance.csv` | source of truth, owner-maintained (Sheet export, name kept verbatim) | ignored |
 | `portfolio/cache/<YAHOO_SYMBOL>.csv` | daily closes per symbol, `date,close`, refreshed incrementally | ignored |
 | `portfolio/report.md` | human report, regenerated every run | ignored |
 | `portfolio/portfolio.json` | machine-readable output for other tools | ignored |
