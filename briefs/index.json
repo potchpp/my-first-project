@@ -136,6 +136,14 @@
     "stale": false
   },
   {
+    "ticker": "LOW",
+    "name": "Lowe's Companies, Inc.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local 10-K ที่ใช้งานได้จริง — fetch script ดึงมาแค่ table of contents ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge เท่านั้น Lowe's เป็น home improvement retailer แข่งกับ Home Dep...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "META",
     "name": "Meta Platforms, Inc.",
     "date": "2026-09-18",
@@ -252,6 +260,14 @@
     "name": "Ralph Lauren Corporation",
     "date": "2026-09-18",
     "preview": "Ralph Lauren เป็น global luxury lifestyle company มี 5 brand tiers (Ralph Lauren Collection/Purple Label ถึง Chaps) กระจายทั้ง geography (NA 41%/Europe 31%/Asia 26%) และ channel (retail/wholesale/licensing) 59% ของรายได้...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "SNDK",
+    "name": "Sandisk Corporation",
+    "date": "2026-09-18",
+    "preview": "Sandisk เพิ่ง spin off จาก Western Digital (ก.พ. 2025) ทำ NAND flash memory — กำลังอยู่ในช่วง NAND supply shortage ที่รุนแรงมาก จาก AI datacenter demand ทำให้ตัวเลขการเงินดีขึ้นแบบก้าวกระโดด > ⚠️ ตัวเลข price target ($2,...",
     "has_source": true,
     "stale": false
   },
