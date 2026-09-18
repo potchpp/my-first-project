@@ -112,6 +112,14 @@
     "stale": false
   },
   {
+    "ticker": "RL",
+    "name": "Ralph Lauren Corporation",
+    "date": "2026-09-18",
+    "preview": "Ralph Lauren เป็น global luxury lifestyle company มี 5 brand tiers (Ralph Lauren Collection/Purple Label ถึง Chaps) กระจายทั้ง geography (NA 41%/Europe 31%/Asia 26%) และ channel (retail/wholesale/licensing) 59% ของรายได้...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "SPCX",
     "name": "Space Exploration Technologies Corp.",
     "date": "2026-06-14",
