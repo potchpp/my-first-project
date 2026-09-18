@@ -12,3 +12,6 @@ __pycache__/
 .claude/
 .agents/
 skills-lock.json
+
+# Private portfolio data — statements, transactions, performance. Never commit.
+portfolio/
