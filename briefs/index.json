@@ -216,10 +216,26 @@
     "stale": false
   },
   {
+    "ticker": "PTON",
+    "name": "Peloton Interactive, Inc.",
+    "date": "2026-09-18",
+    "preview": "Peloton กำลัง turnaround ภายใต้ CEO ใหม่ Peter Stern — FY2026 เป็นปีแรกที่มีกำไรเต็มปี ($63M net income) หลังจากขาดทุนมาหลายปี subscription revenue = 68.5% ของรายได้ ($1,675.",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "RDW",
     "name": "Redwire Corporation",
     "date": "2026-09-18",
     "preview": "Redwire เป็น space and defense technology company สองธุรกิจ: Space (spacecraft platform, solar arrays, docking systems) และ Defense Tech (UAS อย่าง Stalker/Penguin, ISR sensors — เพิ่มเข้ามาจากการซื้อ Edge Autonomy ปี 20...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "RGTI",
+    "name": "Rigetti Computing, Inc.",
+    "date": "2026-09-18",
+    "preview": "Rigetti ทำ superconducting quantum computer — revenue ยังเล็กและพึ่งพา government contract หนักมาก (48% ของรายได้จาก US government) commercial QPU sale (Novera) ยังแทบไม่มี จุดที่ต้องระวัง: gross margin ร่วงหนักจาก 53%→2...",
     "has_source": true,
     "stale": false
   },
