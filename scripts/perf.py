@@ -167,6 +167,18 @@ def daily_values(trades: List[Trade], prices: Prices, days: List[date]) -> Dict[
     return values
 
 
+def negative_holdings_symbols(trades: List[Trade]) -> List[str]:
+    """Symbols whose running signed quantity ever dips negative (data-quality bug,
+    e.g. a duplicated sell row or a missing buy in the export)."""
+    qty: Dict[str, float] = defaultdict(float)
+    bad = []
+    for t in sorted(trades, key=lambda t: t.date):
+        qty[t.symbol] += t.qty
+        if qty[t.symbol] < -1e-6 and t.symbol not in bad:
+            bad.append(t.symbol)
+    return sorted(bad)
+
+
 # ---- returns ----
 
 def apr(trades: List[Trade], v0: float, v1: float) -> Optional[dict]:
@@ -340,7 +352,7 @@ def get_prices(ysymbols, start: date, end: date, fetch: bool = True,
     for ysym in ysymbols:
         closes = load_cache(ysym)
         if fetch:
-            since = max(closes) + timedelta(days=1) if closes else start
+            since = max(closes) if closes else start
             if since <= end:
                 try:
                     new = downloader(ysym, since, end)
@@ -449,8 +461,15 @@ def main(argv=None) -> int:
         print("error: no symbol could be priced", file=sys.stderr)
         return 1
 
-    result = compute(trades, prices, args.as_of, excluded=excluded)
+    try:
+        result = compute(trades, prices, args.as_of, excluded=excluded)
+    except (ValueError, TypeError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
     report = render_report(result)
+    neg = negative_holdings_symbols(trades)
+    if neg:
+        report += f"Negative holdings detected (check the export): {', '.join(neg)}\n"
     print(report, end="")
     PORTFOLIO_DIR.mkdir(parents=True, exist_ok=True)
     (PORTFOLIO_DIR / "report.md").write_text(report, encoding="utf-8")

@@ -131,6 +131,13 @@ class ValuationTests(unittest.TestCase):
         v = perf.daily_values(trades, prices, cal)
         self.assertEqual(v["AAA"], [3.0, 0.0, 0.0])
 
+    def test_negative_holdings_symbols_flags_oversell(self):
+        cal = days(3)
+        trades = [Trade("AAA", cal[0], 1, 10, 0), Trade("AAA", cal[1], -3, 10, 0),
+                  Trade("BBB", cal[0], 1, 10, 0), Trade("BBB", cal[1], -1, 10, 0)]
+        self.assertEqual(perf.negative_holdings_symbols(trades), ["AAA"])
+        self.assertEqual(perf.negative_holdings_symbols([]), [])
+
 
 class AprTests(unittest.TestCase):
     def test_late_capital_is_charged_for_the_full_window(self):
@@ -294,7 +301,7 @@ class PriceCacheTests(unittest.TestCase):
         self.assertEqual(perf.load_cache("AAA")[cal[0]], 1.5)
         p2 = perf.get_prices(["AAA"], cal[0], cal[3], fetch=True, downloader=fake)
         self.assertEqual(sorted(p2["AAA"]), cal[:4])
-        self.assertEqual(calls[1][1], cal[1] + timedelta(days=1))   # only the tail was fetched
+        self.assertEqual(calls[1][1], cal[1])   # tail refetch includes the last cached day
         p3 = perf.get_prices(["AAA", "NOPE"], cal[0], cal[3], fetch=False, downloader=fake)
         self.assertIn("AAA", p3)
         self.assertNotIn("NOPE", p3)
@@ -313,13 +320,28 @@ class PriceCacheTests(unittest.TestCase):
         self.assertEqual(p["AAA"], {cal[0]: 2.0})
         self.assertNotIn("GONE", p)
 
-    def test_up_to_date_cache_is_not_refetched(self):
+    def test_up_to_date_cache_still_refetches_only_the_last_day(self):
+        # The last cached day is always re-verified (it may have been provisional),
+        # but nothing earlier is refetched.
         cal = days(2)
         perf.save_cache("AAA", {cal[0]: 2.0, cal[1]: 2.5})
         calls = []
         perf.get_prices(["AAA"], cal[0], cal[1], fetch=True,
                         downloader=lambda *a: calls.append(a) or {})
-        self.assertEqual(calls, [])
+        self.assertEqual(calls, [("AAA", cal[1], cal[1])])
+
+    def test_last_cached_day_is_refetched_to_correct_provisional_close(self):
+        cal = days(4)
+        perf.save_cache("AAA", {cal[0]: 1.0, cal[1]: 2.0})   # cal[1] may be provisional
+        calls = []
+
+        def fake(ysym, start, end):
+            calls.append(start)
+            return {cal[1]: 2.5, cal[2]: 3.0}   # corrected close for cal[1]
+
+        p = perf.get_prices(["AAA"], cal[0], cal[2], fetch=True, downloader=fake)
+        self.assertEqual(calls, [cal[1]])                 # refetch starts at last cached date, not +1
+        self.assertEqual(p["AAA"][cal[1]], 2.5)            # stale/provisional close corrected
 
 
 class OutputTests(unittest.TestCase):
@@ -357,6 +379,38 @@ class OutputTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             p = write_csv(d, HEADER + "AAPL,2025 01 15,0,10,0\n")
             self.assertEqual(perf.main(["--transactions", str(p), "--no-fetch"]), 1)
+
+    def test_main_reports_forward_dated_trade_cleanly(self):
+        # Trade dated after the last cached price (e.g. owner's clock is ahead of the
+        # market) must produce a clean error, not an uncaught ValueError traceback.
+        cal = days(5)
+        orig_cache_dir = perf.CACHE_DIR
+        with tempfile.TemporaryDirectory() as d:
+            perf.CACHE_DIR = Path(d) / "cache"
+            try:
+                perf.save_cache(perf.BENCH, {c: 100.0 for c in cal[:3]})
+                perf.save_cache("AAPL", {c: 10.0 for c in cal[:3]})
+                p = write_csv(d, HEADER + f"AAPL,{cal[-1].isoformat()},1,10,0\n")
+                rc = perf.main(["--transactions", str(p), "--as-of", cal[-1].isoformat(), "--no-fetch"])
+            finally:
+                perf.CACHE_DIR = orig_cache_dir
+        self.assertEqual(rc, 1)
+
+    def test_main_reports_as_of_before_any_price_cleanly(self):
+        # --as-of earlier than any cached price makes index_at_or_before return None,
+        # which must not surface as an uncaught TypeError.
+        cal = days(5)
+        orig_cache_dir = perf.CACHE_DIR
+        with tempfile.TemporaryDirectory() as d:
+            perf.CACHE_DIR = Path(d) / "cache"
+            try:
+                perf.save_cache(perf.BENCH, {c: 100.0 for c in cal[2:]})
+                perf.save_cache("AAPL", {c: 10.0 for c in cal[2:]})
+                p = write_csv(d, HEADER + f"AAPL,{cal[2].isoformat()},1,10,0\n")
+                rc = perf.main(["--transactions", str(p), "--as-of", cal[0].isoformat(), "--no-fetch"])
+            finally:
+                perf.CACHE_DIR = orig_cache_dir
+        self.assertEqual(rc, 1)
 
 
 if __name__ == "__main__":
