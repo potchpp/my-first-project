@@ -32,6 +32,14 @@
     "stale": false
   },
   {
+    "ticker": "FWONA",
+    "name": "Liberty Media Corporation (Formula One Group)",
+    "date": "2026-09-18",
+    "preview": "FWONA ถือ Formula 1 + MotoGP (ซื้อ ก.ค. 2025) + minority investments สำคัญ: หลัง Liberty Live split-off (ธ.ค. 2025) FWONA ไม่ใช่ tracking stock อีกต่อไป — กลายเป็นหุ้นสามัญตัวเดียวของ Liberty Media ทั้งบริษัท (โครงสร้างง...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "GOOG",
     "name": "Alphabet",
     "date": "2026-06-08",
