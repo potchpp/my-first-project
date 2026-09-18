@@ -172,5 +172,21 @@ class AprTests(unittest.TestCase):
         self.assertIsNone(perf.apr([], v0=0, v1=0))
 
 
+class TwrTests(unittest.TestCase):
+    def test_deposit_does_not_move_twr(self):
+        total = [100.0, 100.0, 200.0, 200.0, 200.0]
+        self.assertAlmostEqual(perf.twr(total, {2: 100.0}, 0, 4), 0.0)
+
+    def test_twr_tracks_price_growth(self):
+        self.assertAlmostEqual(perf.twr([100.0, 110.0, 121.0], {}, 0, 2), 0.21)
+
+    def test_twr_skips_days_with_no_prior_value(self):
+        total = [0.0, 100.0, 110.0]          # position opened on day 1 with a 100 deposit
+        self.assertAlmostEqual(perf.twr(total, {1: 100.0}, 0, 2), 0.10)
+
+    def test_twr_none_when_never_invested(self):
+        self.assertIsNone(perf.twr([0.0, 0.0, 0.0], {}, 0, 2))
+
+
 if __name__ == "__main__":
     unittest.main()

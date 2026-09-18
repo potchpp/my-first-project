@@ -184,3 +184,14 @@ def apr(trades: List[Trade], v0: float, v1: float) -> Optional[dict]:
         return None
     profit = v1 + cash - v0 - deposits
     return {"profit": profit, "capital": capital, "apr": profit / capital}
+
+
+def twr(total: List[float], flows: Dict[int, float], s: int, e: int) -> Optional[float]:
+    growth, any_day = 1.0, False
+    for i in range(s + 1, e + 1):
+        prev = total[i - 1]
+        if prev <= 1e-9:
+            continue
+        growth *= (total[i] - flows.get(i, 0.0)) / prev
+        any_day = True
+    return growth - 1 if any_day else None
