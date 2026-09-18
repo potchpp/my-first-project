@@ -190,5 +190,13 @@
     "preview": "Tesla ออกแบบและผลิตรถยนต์ไฟฟ้า ระบบกักเก็บพลังงาน และกำลังเปลี่ยนโครงสร้างธุรกิจให้เป็น AI platform — ผ่าน Full Self-Driving (FSD), Robotaxi ที่เพิ่งเปิดตัวในมิถุนายน 2025 และ Optimus (humanoid robot) ที่กำลังพัฒนา บริษั...",
     "has_source": true,
     "stale": false
+  },
+  {
+    "ticker": "TSM",
+    "name": "Taiwan Semiconductor Manufacturing Co.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ TSMC — เป็น Taiwanese company ที่ file Form 20-F fetch script ดึงได้แค่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge ไม่ใช่ filing-cited numbers TSMC เป็...",
+    "has_source": true,
+    "stale": false
   }
 ]
