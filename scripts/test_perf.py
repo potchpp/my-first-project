@@ -322,5 +322,42 @@ class PriceCacheTests(unittest.TestCase):
         self.assertEqual(calls, [])
 
 
+class OutputTests(unittest.TestCase):
+    def _result(self):
+        cal = days(300)
+        n = len(cal)
+        prices = {perf.BENCH: series(cal, [100 + i * 0.1 for i in range(n)]),
+                  "AAA": series(cal, [10 + i * 0.05 for i in range(n)]),
+                  "BBB": series(cal, [50 - i * 0.05 for i in range(n)])}
+        trades = [Trade("AAA", cal[1], 10, 10.05, 0), Trade("BBB", cal[1], 2, 49.95, 0)]
+        return perf.compute(trades, prices, cal[-1], excluded=["ZZZ"])
+
+    def test_report_contents(self):
+        rep = perf.render_report(self._result())
+        self.assertIn("Excluded (no price data): ZZZ", rep)
+        self.assertIn("insufficient history", rep)          # 5y
+        self.assertRegex(rep, r"inception .*(BEAT|BEHIND)")
+        self.assertIn("UNDERPERFORM", rep)                    # BBB
+        self.assertIn("no-brief", rep)                        # AAA/BBB have no briefs
+        self.assertIn("Holdings check", rep)
+        self.assertTrue(rep.endswith("\n"))
+
+    def test_json_is_written_atomically(self):
+        r = self._result()
+        with tempfile.TemporaryDirectory() as d:
+            out = Path(d) / "portfolio.json"
+            perf.write_json_atomic(out, r)
+            self.assertEqual(json.loads(out.read_text())["as_of"], r["as_of"])
+            self.assertEqual([p.name for p in Path(d).iterdir()], ["portfolio.json"])
+
+    def test_main_reports_missing_file(self):
+        self.assertEqual(perf.main(["--transactions", "/nonexistent/none.csv", "--no-fetch"]), 1)
+
+    def test_main_reports_bad_row(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = write_csv(d, HEADER + "AAPL,2025 01 15,0,10,0\n")
+            self.assertEqual(perf.main(["--transactions", str(p), "--no-fetch"]), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

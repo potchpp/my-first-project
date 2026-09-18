@@ -353,3 +353,110 @@ def get_prices(ysymbols, start: date, end: date, fetch: bool = True,
         if closes:
             prices[ysym] = closes
     return prices
+
+
+# ---- report ----
+
+def _pct(x: Optional[float]) -> str:
+    return "n/a" if x is None else f"{x * 100:+.1f}%"
+
+
+def _pp(x: Optional[float]) -> str:
+    return "n/a" if x is None else f"{x:+.1f}pp"
+
+
+def render_report(r: dict) -> str:
+    lines = [f"Portfolio APR vs S&P 500 TR — as of {r['as_of']}"]
+    if r["excluded_symbols"]:
+        lines.append("Excluded (no price data): " + ", ".join(r["excluded_symbols"]))
+    lines += ["", f"{'Window':<10}{'APR':>9}{'S&P TR':>9}{'Alpha':>9}{'TWR':>9}  Verdict"]
+    for name in WINDOWS:
+        w = r["windows"][name]
+        if w is None:
+            lines.append(f"{name:<10} insufficient history")
+            continue
+        verdict = "BEAT" if w["beat"] else "BEHIND"
+        lines.append(f"{name:<10}{_pct(w['apr']):>9}{_pct(w['bench']):>9}"
+                     f"{_pp(w['alpha_pp']):>9}{_pct(w['twr']):>9}  {verdict}")
+
+    rw = rank_window(r)
+    lines += ["", f"Positions ({rw} window, ranked by contribution)",
+              f"{'Symbol':<8}{'Qty':>11}{'Value':>10}{'Weight':>8}{'APR':>9}{'vs S&P':>9}{'Contrib':>9}  Flag"]
+    for p in r["positions"]:
+        w = p["windows"].get(rw)
+        flags = []
+        if w and w["underperformer"]:
+            flags.append("UNDERPERFORM")
+        if p["brief"] is None:
+            flags.append("no-brief")
+        base = f"{p['symbol']:<8}{p['qty']:>11.4f}{p['value_usd']:>10,.0f}{p['weight'] * 100:>7.1f}%"
+        if w is None:
+            lines.append(f"{base}{'n/a':>9}{'':>9}{'':>9}  {' '.join(flags)}".rstrip())
+        else:
+            lines.append(f"{base}{_pct(w['apr']):>9}{_pp((w['apr'] - w['bench']) * 100):>9}"
+                         f"{_pp(w['contribution_pp']):>9}  {' '.join(flags)}".rstrip())
+
+    lines += ["", "Holdings check (compare to the Dime! app)",
+              f"{'Symbol':<8}{'Qty':>11}{'Avg cost':>10}{'Last close':>11}"]
+    for p in r["positions"]:
+        if abs(p["qty"]) < 1e-9:
+            continue
+        lines.append(f"{p['symbol']:<8}{p['qty']:>11.4f}{(p['avg_cost'] or 0):>10.2f}"
+                     f"{(p['last_close'] or 0):>11.2f}")
+    return "\n".join(lines) + "\n"
+
+
+def write_json_atomic(path: Path, data: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=".tmp-", suffix=".json")
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    os.replace(tmp, path)
+
+
+# ---- main ----
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description="Portfolio APR vs S&P 500 TR")
+    ap.add_argument("--transactions", type=Path, default=DEFAULT_TRANSACTIONS)
+    ap.add_argument("--as-of", type=date.fromisoformat, default=date.today())
+    ap.add_argument("--no-fetch", action="store_true", help="use the price cache only")
+    args = ap.parse_args(argv)
+
+    try:
+        trades = load_trades(args.transactions)
+    except (OSError, ValueError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
+    if not trades:
+        print("error: no trades in file", file=sys.stderr)
+        return 1
+    if not args.no_fetch:
+        try:
+            import yfinance  # noqa: F401
+        except ImportError:
+            print("error: yfinance not installed. Run: python3 -m pip install yfinance", file=sys.stderr)
+            return 1
+
+    ysyms = sorted({yahoo_symbol(t.symbol) for t in trades}) + [BENCH]
+    prices = get_prices(ysyms, trades[0].date - timedelta(days=7), args.as_of, fetch=not args.no_fetch)
+    if BENCH not in prices:
+        print(f"error: no price data for {BENCH}; cannot compute the benchmark", file=sys.stderr)
+        return 1
+    excluded = sorted({t.symbol for t in trades if yahoo_symbol(t.symbol) not in prices})
+    trades = [t for t in trades if yahoo_symbol(t.symbol) in prices]
+    if not trades:
+        print("error: no symbol could be priced", file=sys.stderr)
+        return 1
+
+    result = compute(trades, prices, args.as_of, excluded=excluded)
+    report = render_report(result)
+    print(report, end="")
+    PORTFOLIO_DIR.mkdir(parents=True, exist_ok=True)
+    (PORTFOLIO_DIR / "report.md").write_text(report, encoding="utf-8")
+    write_json_atomic(PORTFOLIO_DIR / "portfolio.json", result)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
