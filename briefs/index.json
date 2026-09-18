@@ -288,6 +288,14 @@
     "stale": false
   },
   {
+    "ticker": "TCOM",
+    "name": "Trip.com Group Limited",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ Trip.com — file Form 20-F fetch script ดึงได้แค่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge เท่านั้น Trip.",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "TEAM",
     "name": "Atlassian Corporation",
     "date": "2026-09-18",
@@ -308,6 +316,14 @@
     "name": "Taiwan Semiconductor Manufacturing Co.",
     "date": "2026-09-18",
     "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ TSMC — เป็น Taiwanese company ที่ file Form 20-F fetch script ดึงได้แค่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge ไม่ใช่ filing-cited numbers TSMC เป็...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "USAR",
+    "name": "USA Rare Earth, Inc.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local 10-K ที่ใช้งานได้จริง ข้อมูลด้านล่างมาจาก general/public knowledge เท่านั้น — นี่คือ speculative early-stage miner ไม่ใช่ established business USA Rare Earth กำลังสร้าง rare earth proces...",
     "has_source": true,
     "stale": false
   }
