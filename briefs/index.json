@@ -16,6 +16,14 @@
     "stale": false
   },
   {
+    "ticker": "ASML",
+    "name": "ASML Holding N.V.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ ASML — เป็น Dutch company ที่ file Form 20-F (ไม่ใช่ 10-K) fetch script ปัจจุบันดึงได้แค่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge ไม่ใช่ filing-cite...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "AVGO",
     "name": "Broadcom Inc.",
     "date": "2026-06-07",
