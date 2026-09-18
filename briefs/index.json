@@ -176,6 +176,22 @@
     "stale": false
   },
   {
+    "ticker": "NOW",
+    "name": "ServiceNow, Inc.",
+    "date": "2026-09-18",
+    "preview": "ServiceNow เป็น enterprise workflow platform — subscription = 97% ของรายได้ ($12.9B/$13.3B) renewal rate สูงมาก 98% RPO $28.",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "NUE",
+    "name": "Nucor Corporation",
+    "date": "2026-09-18",
+    "preview": "Nucor เป็น North America's largest EAF-based steel recycler — steel mills (62% ของยอดขาย) + steel products (rebar/joist/deck) ราคาเชื่อม scrap steel cost เป็นหลัก มี cyclicality สูง จุดที่ต้องรู้: Section 232 tariff 50% ...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "NVDA",
     "name": "NVIDIA Corporation",
     "date": "2026-06-07",
