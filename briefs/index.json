@@ -40,6 +40,14 @@
     "stale": false
   },
   {
+    "ticker": "ASTS",
+    "name": "AST SpaceMobile, Inc.",
+    "date": "2026-09-18",
+    "preview": "AST SpaceMobile สร้าง satellite constellation เพื่อให้ smartphone ธรรมดาเชื่อมต่อ direct-to-cellular ได้โดยไม่ต้องเปลี่ยนเครื่อง ยังเป็น pre-revenue สำหรับ core SpaceMobile service — รายได้ปัจจุบันมาจาก gateway equipment...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "AVGO",
     "name": "Broadcom Inc.",
     "date": "2026-06-07",
@@ -53,6 +61,14 @@
     "date": "2026-09-18",
     "preview": "Berkshire Hathaway เป็น conglomerate ที่ประกอบด้วย insurance (GEICO, reinsurance), BNSF railroad, Berkshire Hathaway Energy, และธุรกิจ manufacturing/retail จำนวนมาก บวก equity portfolio ขนาดใหญ่ (Apple, Amex, Coca-Cola ฯ...",
     "has_source": false,
+    "stale": false
+  },
+  {
+    "ticker": "CUE",
+    "name": "Cue Biopharma, Inc.",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Going-concern risk flagged อย่างเป็นทางการใน filing — cash runway ถึงแค่ Q1 2027 ที่ burn rate ปัจจุบัน Cue Biopharma เป็น clinical-stage biotech ที่ยังไม่มีรายได้จาก product เลย รายได้ทั้งหมดมาจาก collaboration/mil...",
+    "has_source": true,
     "stale": false
   },
   {
