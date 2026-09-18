@@ -136,6 +136,22 @@
     "stale": false
   },
   {
+    "ticker": "META",
+    "name": "Meta Platforms, Inc.",
+    "date": "2026-09-18",
+    "preview": "Meta พึ่งพา advertising มหาศาล — Family of Apps (Facebook/Instagram) = 99% ของรายได้ ($198.8B จาก $201B) Reality Labs (metaverse/VR) มีรายได้แค่ $2.",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "MMM",
+    "name": "3M Company",
+    "date": "2026-09-18",
+    "preview": "3M มี 3 segment: Safety & Industrial (45.6%), Transportation & Electronics (33.2%), Consumer (19.7%) — diversified แต่ธุรกิจถูกกดดันหนักจาก litigation liability — Combat Arms Earplug settlement + PFAS settlement เป็น ove...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "MSFT",
     "name": "Microsoft Corporation",
     "date": "2026-09-18",
