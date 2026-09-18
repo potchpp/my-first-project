@@ -105,5 +105,32 @@ class WindowTests(unittest.TestCase):
         self.assertIsNone(perf.window_bounds(cal, cal[1], cal[-1], 24))
 
 
+class ValuationTests(unittest.TestCase):
+    def test_align_moves_weekend_trade_to_next_trading_day(self):
+        cal = days(10)                       # Mon 6 Jan .. Fri 17 Jan 2025
+        t = Trade("AAA", date(2025, 1, 11), 1, 1, 0)   # Saturday
+        self.assertEqual(perf.align_trades([t], cal)[0].date, date(2025, 1, 13))
+        late = Trade("AAA", date(2025, 1, 20), 1, 1, 0)  # after the calendar
+        with self.assertRaises(ValueError):
+            perf.align_trades([late], cal)
+
+    def test_sell_reduces_holdings_and_missing_close_carries_forward(self):
+        cal = days(5)
+        prices = {perf.BENCH: series(cal, [100.0] * 5),
+                  "AAA": {cal[0]: 10.0, cal[1]: 12.0, cal[3]: 20.0, cal[4]: 20.0}}  # cal[2] missing
+        trades = [Trade("AAA", cal[0], 3, 10, 0), Trade("AAA", cal[3], -1, 20, 0)]
+        v = perf.daily_values(trades, prices, cal)
+        self.assertEqual(v["AAA"], [30.0, 36.0, 36.0, 40.0, 40.0])
+        self.assertEqual(v["__total__"], v["AAA"])
+
+    def test_fully_sold_position_values_to_zero(self):
+        cal = days(3)
+        prices = {perf.BENCH: series(cal, [1.0] * 3), "AAA": series(cal, [10.0] * 3)}
+        trades = [Trade("AAA", cal[0], 0.3, 10, 0), Trade("AAA", cal[1], -0.1, 10, 0),
+                  Trade("AAA", cal[1], -0.2, 10, 0)]
+        v = perf.daily_values(trades, prices, cal)
+        self.assertEqual(v["AAA"], [3.0, 0.0, 0.0])
+
+
 if __name__ == "__main__":
     unittest.main()

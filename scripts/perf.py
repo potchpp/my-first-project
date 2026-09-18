@@ -128,3 +128,40 @@ def window_bounds(days: List[date], first_trade: date, as_of: date,
     if s is None or s < inception_s or s >= e:
         return None
     return (s, e)
+
+
+# ---- valuation ----
+
+def align_trades(trades: List[Trade], days: List[date]) -> List[Trade]:
+    out = []
+    for t in trades:
+        i = bisect.bisect_left(days, t.date)
+        if i >= len(days):
+            raise ValueError(f"trade on {t.date} is after the last price date {days[-1]}")
+        out.append(replace(t, date=days[i]))
+    out.sort(key=lambda t: t.date)
+    return out
+
+
+def daily_values(trades: List[Trade], prices: Prices, days: List[date]) -> Dict[str, List[float]]:
+    by_sym: Dict[str, List[Trade]] = defaultdict(list)
+    for t in trades:
+        by_sym[t.symbol].append(t)
+    values: Dict[str, List[float]] = {}
+    total = [0.0] * len(days)
+    for sym, ts in by_sym.items():
+        closes = prices[yahoo_symbol(sym)]
+        qty, last_close, ti = 0.0, None, 0
+        vals = []
+        for i, d in enumerate(days):
+            while ti < len(ts) and ts[ti].date == d:
+                qty += ts[ti].qty
+                ti += 1
+            if d in closes:
+                last_close = closes[d]
+            v = qty * last_close if abs(qty) > 1e-9 and last_close is not None else 0.0
+            vals.append(v)
+            total[i] += v
+        values[sym] = vals
+    values["__total__"] = total
+    return values
