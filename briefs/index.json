@@ -8,6 +8,22 @@
     "stale": false
   },
   {
+    "ticker": "ABBV",
+    "name": "AbbVie Inc.",
+    "date": "2026-09-18",
+    "preview": "AbbVie กำลังอยู่ในช่วง transition สำคัญ: Humira (เคยเป็น drug ใหญ่ที่สุด) หดตัวแรง -49% เหลือ $4.5B จาก biosimilar competition ขณะที่ Skyrizi + Rinvoq (IL-23/JAK inhibitor สำหรับ chronic immunology) กำลังเข้ามาแทนที่เร็ว...",
+    "has_source": true,
+    "stale": false
+  },
+  {
+    "ticker": "ADBE",
+    "name": "Adobe Inc.",
+    "date": "2026-09-18",
+    "preview": "Adobe คือ subscription software สาม Cloud: Creative (Photoshop/Illustrator), Document (Acrobat), Experience (marketing) 96% ของรายได้เป็น subscription — durable มาก จุดเปลี่ยนตอนนี้คือ Firefly AI ที่กำลังแข่งกับ Canva/Mi...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "AMZN",
     "name": "Amazon",
     "date": "2026-06-08",
