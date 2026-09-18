@@ -165,3 +165,22 @@ def daily_values(trades: List[Trade], prices: Prices, days: List[date]) -> Dict[
         values[sym] = vals
     values["__total__"] = total
     return values
+
+
+# ---- returns ----
+
+def apr(trades: List[Trade], v0: float, v1: float) -> Optional[dict]:
+    """Spec §5.4: sell proceeds fund later buys before new money does."""
+    cash, deposits = 0.0, 0.0
+    for t in sorted(trades, key=lambda t: t.date):
+        if t.is_sell:
+            cash += t.cash
+        else:
+            use = min(cash, t.cash)
+            cash -= use
+            deposits += t.cash - use
+    capital = v0 + deposits
+    if capital <= 1e-9:
+        return None
+    profit = v1 + cash - v0 - deposits
+    return {"profit": profit, "capital": capital, "apr": profit / capital}

@@ -132,5 +132,45 @@ class ValuationTests(unittest.TestCase):
         self.assertEqual(v["AAA"], [3.0, 0.0, 0.0])
 
 
+class AprTests(unittest.TestCase):
+    def test_late_capital_is_charged_for_the_full_window(self):
+        # $100 held all window, $100 added on the last day, prices flat
+        a = perf.apr([Trade("A", date(2025, 6, 30), 1, 100, 0)], v0=100, v1=200)
+        self.assertAlmostEqual(a["apr"], 0.0)
+        self.assertEqual(a["capital"], 200)
+
+    def test_reinvested_sell_is_not_new_capital(self):
+        t = [Trade("A", date(2025, 3, 1), -1, 100, 0), Trade("B", date(2025, 3, 2), 1, 100, 0)]
+        a = perf.apr(t, v0=100, v1=100)
+        self.assertEqual(a["capital"], 100)
+        self.assertAlmostEqual(a["apr"], 0.0)
+
+    def test_unreinvested_sell_is_returned_capital(self):
+        a = perf.apr([Trade("A", date(2025, 3, 1), -1, 120, 0)], v0=100, v1=0)
+        self.assertAlmostEqual(a["apr"], 0.20)
+
+    def test_round_trip_inside_window(self):
+        t = [Trade("A", date(2025, 3, 1), 5, 100, 0), Trade("A", date(2025, 4, 1), -5, 120, 0)]
+        a = perf.apr(t, v0=0, v1=0)
+        self.assertAlmostEqual(a["apr"], 0.20)
+        self.assertEqual(a["capital"], 500)
+
+    def test_partial_recycle_then_new_money(self):
+        # sell 100, buy 250 → 100 recycled, 150 new capital
+        t = [Trade("A", date(2025, 3, 1), -1, 100, 0), Trade("B", date(2025, 3, 2), 1, 250, 0)]
+        a = perf.apr(t, v0=100, v1=250)
+        self.assertEqual(a["capital"], 250)
+        self.assertAlmostEqual(a["profit"], 0.0)
+
+    def test_order_matters_buy_before_sell_is_not_recycled(self):
+        t = [Trade("B", date(2025, 3, 1), 1, 100, 0), Trade("A", date(2025, 3, 5), -1, 100, 0)]
+        a = perf.apr(t, v0=100, v1=100)
+        self.assertEqual(a["capital"], 200)   # the buy came first, so it is new money
+        self.assertAlmostEqual(a["profit"], 100 + 100 - 100 - 100)
+
+    def test_no_capital_returns_none(self):
+        self.assertIsNone(perf.apr([], v0=0, v1=0))
+
+
 if __name__ == "__main__":
     unittest.main()
