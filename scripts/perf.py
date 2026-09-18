@@ -195,3 +195,109 @@ def twr(total: List[float], flows: Dict[int, float], s: int, e: int) -> Optional
         growth *= (total[i] - flows.get(i, 0.0)) / prev
         any_day = True
     return growth - 1 if any_day else None
+
+
+# ---- compute ----
+
+def avg_cost(sym_trades: List[Trade], upto: date) -> Optional[float]:
+    buys = [t for t in sym_trades if not t.is_sell and t.date <= upto]
+    q = sum(t.qty for t in buys)
+    return sum(t.cash for t in buys) / q if q else None
+
+
+def last_close(closes: Dict[date, float], d: date) -> Optional[float]:
+    if d in closes:
+        return closes[d]
+    prior = [k for k in closes if k <= d]
+    return closes[max(prior)] if prior else None
+
+
+def rank_window(result: dict) -> str:
+    return "1y" if result["windows"].get("1y") else "inception"
+
+
+def compute(trades: List[Trade], prices: Prices, as_of: date, excluded=()) -> dict:
+    days = sorted(prices[BENCH])
+    trades = align_trades(trades, days)
+    first = trades[0].date
+    values = daily_values(trades, prices, days)
+    total = values["__total__"]
+    bench = prices[BENCH]
+    day_index = {d: i for i, d in enumerate(days)}
+    flows: Dict[int, float] = defaultdict(float)
+    for t in trades:
+        flows[day_index[t.date]] += -t.cash if t.is_sell else t.cash
+    e_idx = index_at_or_before(days, as_of)
+
+    result = {
+        "as_of": days[e_idx].isoformat(),
+        "benchmark": BENCH,
+        "excluded_symbols": list(excluded),
+        "total_value_usd": round(total[e_idx], 2),
+        "windows": {},
+        "positions": [],
+    }
+    bounds = {}
+    capital_total = {}
+    for name, months in WINDOWS.items():
+        b = window_bounds(days, first, as_of, months)
+        bounds[name] = b
+        if b is None:
+            result["windows"][name] = None
+            continue
+        s, e = b
+        in_win = [t for t in trades if days[s] < t.date <= days[e]]
+        a = apr(in_win, total[s], total[e])
+        if a is None:
+            result["windows"][name] = None
+            continue
+        br = bench[days[e]] / bench[days[s]] - 1
+        capital_total[name] = a["capital"]
+        result["windows"][name] = {
+            "start": days[s].isoformat(), "end": days[e].isoformat(),
+            "apr": a["apr"], "bench": br, "alpha_pp": (a["apr"] - br) * 100,
+            "twr": twr(total, flows, s, e), "beat": a["apr"] > br,
+        }
+
+    for sym in sorted({t.symbol for t in trades}):
+        sym_trades = [t for t in trades if t.symbol == sym]
+        vals = values[sym]
+        pos = {
+            "symbol": sym,
+            "yahoo_symbol": yahoo_symbol(sym),
+            "brief": brief_path(sym),
+            "qty": sum(t.qty for t in sym_trades if t.date <= days[e_idx]),
+            "avg_cost": avg_cost(sym_trades, days[e_idx]),
+            "last_close": last_close(prices[yahoo_symbol(sym)], days[e_idx]),
+            "value_usd": vals[e_idx],
+            "weight": vals[e_idx] / total[e_idx] if total[e_idx] else 0.0,
+            "windows": {},
+        }
+        active = False
+        for name, b in bounds.items():
+            w = result["windows"][name]
+            if b is None or w is None:
+                pos["windows"][name] = None
+                continue
+            s, e = b
+            in_win = [t for t in sym_trades if days[s] < t.date <= days[e]]
+            if not in_win and vals[s] == 0 and vals[e] == 0:
+                pos["windows"][name] = None
+                continue
+            a = apr(in_win, vals[s], vals[e])
+            if a is None:
+                pos["windows"][name] = None
+                continue
+            active = True
+            pos["windows"][name] = {
+                "apr": a["apr"], "bench": w["bench"],
+                "contribution_pp": a["profit"] / capital_total[name] * 100,
+                "underperformer": a["apr"] < w["bench"],
+            }
+        if active:
+            result["positions"].append(pos)
+
+    rw = rank_window(result)
+    result["positions"].sort(
+        key=lambda p: (0, -p["windows"][rw]["contribution_pp"]) if p["windows"][rw] else (1, 0.0))
+    return result

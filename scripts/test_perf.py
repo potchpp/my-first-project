@@ -188,5 +188,90 @@ class TwrTests(unittest.TestCase):
         self.assertIsNone(perf.twr([0.0, 0.0, 0.0], {}, 0, 2))
 
 
+class ComputeTests(unittest.TestCase):
+    def setUp(self):
+        self.cal = c = days(300)             # ~14 months of weekdays
+        n = len(c)
+        self.prices = {
+            perf.BENCH: series(c, [100 + i * 0.1 for i in range(n)]),   # +~30%
+            "AAA": series(c, [10 + i * 0.05 for i in range(n)]),          # strong winner
+            "BBB": series(c, [50 - i * 0.05 for i in range(n)]),          # loser
+            "CCC": series(c, [20.0] * n),                                  # flat
+            "DDD": series(c, [5.0] * n),                                   # round-tripped early
+        }
+        self.trades = [
+            Trade("AAA", c[1], 10, 10.05, 0),
+            Trade("BBB", c[1], 2, 49.95, 0),
+            Trade("DDD", c[10], 4, 5, 0),
+            Trade("DDD", c[20], -4, 5, 0),
+            Trade("CCC", c[100], 5, 20, 0),
+            Trade("BBB", c[150], -1, 50 - 150 * 0.05, 0),
+            Trade("AAA", c[200], 5, 10 + 200 * 0.05, 0),
+        ]
+
+    def test_windows_present_or_null_by_history(self):
+        r = perf.compute(self.trades, self.prices, self.cal[-1])
+        self.assertEqual(r["as_of"], self.cal[-1].isoformat())
+        self.assertEqual(r["benchmark"], perf.BENCH)
+        for name in ("inception", "6m", "1y"):
+            self.assertIsNotNone(r["windows"][name], name)
+        self.assertIsNone(r["windows"]["2y"])
+        self.assertIsNone(r["windows"]["5y"])
+        w = r["windows"]["inception"]
+        self.assertEqual(w["start"], self.cal[0].isoformat())
+        self.assertEqual(set(w), {"start", "end", "apr", "bench", "alpha_pp", "twr", "beat"})
+        self.assertAlmostEqual(w["alpha_pp"], (w["apr"] - w["bench"]) * 100)
+        self.assertEqual(w["beat"], w["apr"] > w["bench"])
+
+    def test_contributions_sum_to_total_apr(self):
+        r = perf.compute(self.trades, self.prices, self.cal[-1])
+        for name in ("inception", "6m", "1y"):
+            w = r["windows"][name]
+            total_pp = sum(p["windows"][name]["contribution_pp"]
+                           for p in r["positions"] if p["windows"][name])
+            self.assertAlmostEqual(total_pp, w["apr"] * 100, places=9, msg=name)
+
+    def test_underperformer_flags_and_inactive_windows(self):
+        r = perf.compute(self.trades, self.prices, self.cal[-1])
+        by = {p["symbol"]: p for p in r["positions"]}
+        self.assertTrue(by["BBB"]["windows"]["inception"]["underperformer"])
+        self.assertFalse(by["AAA"]["windows"]["inception"]["underperformer"])
+        self.assertIn("DDD", by)                                  # exited, but active at inception
+        self.assertIsNone(by["DDD"]["windows"]["6m"])             # no value, no trades in 6m
+        self.assertIsNone(by["DDD"]["brief"])
+        self.assertAlmostEqual(by["DDD"]["qty"], 0.0)
+        self.assertEqual(by["AAA"]["yahoo_symbol"], "AAA")
+        self.assertAlmostEqual(by["AAA"]["qty"], 15.0)
+        self.assertAlmostEqual(by["AAA"]["avg_cost"], (10 * 10.05 + 5 * 20.0) / 15)
+        self.assertAlmostEqual(sum(p["weight"] for p in r["positions"]), 1.0)
+        self.assertEqual(r["positions"][0]["symbol"], "AAA")      # ranked by 1y contribution
+
+    def test_late_capital_alpha_matches_spec_example(self):
+        cal = days(300)
+        n = len(cal)
+        prices = {perf.BENCH: series(cal, [100.0] * (n - 1) + [120.0]),
+                  "AAA": series(cal, [10.0] * n)}
+        trades = [Trade("AAA", cal[1], 10, 10, 0), Trade("AAA", cal[-1], 10, 10, 0)]
+        r = perf.compute(trades, prices, cal[-1], excluded=["ZZZ"])
+        w = r["windows"]["inception"]
+        self.assertAlmostEqual(w["apr"], 0.0)
+        self.assertAlmostEqual(w["bench"], 0.20)
+        self.assertAlmostEqual(w["alpha_pp"], -20.0)
+        self.assertFalse(w["beat"])
+        self.assertEqual(r["excluded_symbols"], ["ZZZ"])
+        self.assertEqual(perf.rank_window(r), "1y")
+
+    def test_helpers(self):
+        cal = days(3)
+        closes = {cal[0]: 1.0, cal[2]: 3.0}
+        self.assertEqual(perf.last_close(closes, cal[1]), 1.0)
+        self.assertEqual(perf.last_close(closes, cal[2]), 3.0)
+        self.assertIsNone(perf.last_close({}, cal[0]))
+        ts = [Trade("A", cal[0], 2, 10, 1), Trade("A", cal[1], -1, 50, 0), Trade("A", cal[2], 2, 20, 0)]
+        self.assertAlmostEqual(perf.avg_cost(ts, cal[1]), 21 / 2)        # sells don't change avg cost
+        self.assertAlmostEqual(perf.avg_cost(ts, cal[2]), (21 + 40) / 4)
+        self.assertIsNone(perf.avg_cost([], cal[0]))
+
+
 if __name__ == "__main__":
     unittest.main()
