@@ -100,3 +100,31 @@ def yahoo_symbol(symbol: str) -> str:
 def brief_path(symbol: str) -> Optional[str]:
     p = ROOT / "briefs" / f"{symbol.replace('.', '')}.md"
     return str(p.relative_to(ROOT)) if p.exists() else None
+
+
+# ---- calendar ----
+
+def shift_months(d: date, months: int) -> date:
+    m = d.month - 1 + months
+    y = d.year + m // 12
+    m = m % 12 + 1
+    return date(y, m, min(d.day, calendar.monthrange(y, m)[1]))
+
+
+def index_at_or_before(days: List[date], target: date) -> Optional[int]:
+    i = bisect.bisect_right(days, target) - 1
+    return i if i >= 0 else None
+
+
+def window_bounds(days: List[date], first_trade: date, as_of: date,
+                  months: Optional[int]) -> Optional[Tuple[int, int]]:
+    e = index_at_or_before(days, as_of)
+    inception_s = index_at_or_before(days, first_trade - timedelta(days=1))
+    if e is None or inception_s is None:
+        return None
+    if months is None:
+        return (inception_s, e)
+    s = index_at_or_before(days, shift_months(days[e], -months))
+    if s is None or s < inception_s or s >= e:
+        return None
+    return (s, e)

@@ -75,5 +75,35 @@ class LoadTests(unittest.TestCase):
         self.assertEqual(perf.brief_path("BRK.B"), "briefs/BRKB.md")  # dot stripped
 
 
+class WindowTests(unittest.TestCase):
+    def test_shift_months_clamps_to_month_end(self):
+        self.assertEqual(perf.shift_months(date(2026, 8, 31), -6), date(2026, 2, 28))
+        self.assertEqual(perf.shift_months(date(2026, 3, 31), -1), date(2026, 2, 28))
+        self.assertEqual(perf.shift_months(date(2026, 1, 15), -12), date(2025, 1, 15))
+
+    def test_index_at_or_before(self):
+        cal = days(5)                                     # Mon..Fri
+        self.assertEqual(perf.index_at_or_before(cal, cal[2]), 2)
+        self.assertEqual(perf.index_at_or_before(cal, cal[2] + timedelta(days=1)), 3)
+        self.assertEqual(perf.index_at_or_before(cal, cal[4] + timedelta(days=1)), 4)   # Saturday → Friday
+        self.assertIsNone(perf.index_at_or_before(cal, cal[0] - timedelta(days=1)))
+
+    def test_inception_window_starts_day_before_first_trade(self):
+        cal = days(70)
+        self.assertEqual(perf.window_bounds(cal, cal[1], cal[-1], None), (0, len(cal) - 1))
+        self.assertIsNone(perf.window_bounds(cal, cal[0], cal[-1], None))  # no trading day before first trade
+
+    def test_rolling_window_needs_enough_history(self):
+        cal = days(70)   # ~3 months of weekdays
+        self.assertIsNone(perf.window_bounds(cal, cal[1], cal[-1], 6))
+        cal = days(300)  # ~14 months
+        s, e = perf.window_bounds(cal, cal[1], cal[-1], 6)
+        self.assertEqual(e, len(cal) - 1)
+        target = perf.shift_months(cal[e], -6)
+        self.assertLessEqual(cal[s], target)
+        self.assertGreater(cal[s + 1], target)
+        self.assertIsNone(perf.window_bounds(cal, cal[1], cal[-1], 24))
+
+
 if __name__ == "__main__":
     unittest.main()
