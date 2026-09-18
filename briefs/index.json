@@ -48,6 +48,14 @@
     "stale": false
   },
   {
+    "ticker": "GMAB",
+    "name": "Genmab A/S",
+    "date": "2026-09-18",
+    "preview": "> ⚠️ Data limitation: ไม่มี local filing สำหรับ Genmab — เป็น Danish company ที่ file Form 20-F fetch script ดึงได้แค่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge ไม่ใช่ filing-cited numbers Genmab เป...",
+    "has_source": true,
+    "stale": false
+  },
+  {
     "ticker": "GOOG",
     "name": "Alphabet",
     "date": "2026-06-08",
