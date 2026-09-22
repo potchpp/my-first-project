@@ -1,12 +1,21 @@
+---
+ticker: MU
+company: Micron Technology
+updated: 2026-09-22
+type: stock-brief
+---
+
 # MU — Micron Technology, Inc.
 *Brief generated: 2026-06-07 | Sources: sources/MU/10-k-fy2025.md (FY2025, period ending Aug 28, 2025)*
 *Note: ไม่มี earnings call transcript ใน sources/MU/ — fetch_transcript.py ไม่พบ URL บน Motley Fool*
+
+**Source docs:** [[sources/MU/10-k-fy2025]]
 
 ---
 
 ## What the company does
 
-Micron เป็นหนึ่งในสามบริษัทที่ผลิต DRAM และ NAND flash memory ระดับโลก (ร่วมกับ Samsung และ SK Hynix) ผลิตภัณฑ์หลักคือ DRAM สำหรับ server และ AI workloads โดยเฉพาะ High-Bandwidth Memory (HBM) ที่ใช้ใน GPU ของ NVIDIA และ AMD, NAND flash สำหรับ SSD ทั้ง data center และ consumer, และ LPDDR สำหรับ mobile และ automotive รายได้ครึ่งหนึ่งมาจาก data center end market ซึ่งกำลัง accelerate จาก AI infrastructure buildout *(source: sources/MU/10-k-fy2025.md)*
+Micron เป็นหนึ่งในสามบริษัทที่ผลิต DRAM และ NAND flash memory ระดับโลก (ร่วมกับ Samsung และ SK Hynix) ผลิตภัณฑ์หลักคือ DRAM สำหรับ server และ AI workloads โดยเฉพาะ High-Bandwidth Memory (HBM) ที่ใช้ใน GPU ของ [[NVDA]] และ AMD, NAND flash สำหรับ SSD ทั้ง data center และ consumer, และ LPDDR สำหรับ mobile และ automotive รายได้ครึ่งหนึ่งมาจาก data center end market ซึ่งกำลัง accelerate จาก AI infrastructure buildout *(source: sources/MU/10-k-fy2025.md)*
 
 ---
 

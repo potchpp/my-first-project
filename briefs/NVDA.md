@@ -1,6 +1,15 @@
+---
+ticker: NVDA
+company: NVIDIA
+updated: 2026-09-22
+type: stock-brief
+---
+
 # NVDA — NVIDIA Corporation
 *Brief generated: 2026-06-07 | Sources: sources/NVDA/10-k-fy2026.md (FY2026, period ending Jan 25, 2026)*
 *Note: ไม่มี earnings call transcript ใน sources/NVDA/ — fetch_transcript.py ไม่พบ URL บน Motley Fool*
+
+**Source docs:** [[sources/NVDA/10-k-fy2026]]
 
 ---
 

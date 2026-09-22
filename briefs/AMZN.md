@@ -1,5 +1,14 @@
+---
+ticker: AMZN
+company: 
+updated: 2026-06-08
+type: stock-brief
+---
+
 # AMZN (Amazon) — Stock Brief
 **Date:** 2026-06-08 | **Sources:** 10-K FY2025 (ended Dec 31, 2025) + Q1 2026 live data (sentiment agent) | *No earnings transcript*
+
+**Source docs:** [[sources/AMZN/10-k-fy2025]]
 
 ---
 

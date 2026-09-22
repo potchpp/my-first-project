@@ -1,5 +1,14 @@
+---
+ticker: NUE
+company: Nucor
+updated: 2026-09-18
+type: stock-brief
+---
+
 # NUE — Nucor Corporation
 **Date:** 2026-09-18 | **Sources:** sources/NUE/10-k-fy2025.md + web research (sentiment agent) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+
+**Source docs:** [[sources/NUE/10-k-fy2025]]
 
 ---
 

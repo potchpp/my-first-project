@@ -1,5 +1,14 @@
+---
+ticker: PLTR
+company: Palantir Technologies
+updated: 2026-09-18
+type: stock-brief
+---
+
 # PLTR — Palantir Technologies Inc.
 **Date:** 2026-09-18 | **Sources:** sources/PLTR/10-k-fy2025.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/PLTR/10-k-fy2025]]
 
 ---
 

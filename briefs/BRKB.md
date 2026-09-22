@@ -1,3 +1,10 @@
+---
+ticker: BRKB
+company: Berkshire Hathaway
+updated: 2026-09-18
+type: stock-brief
+---
+
 # BRKB — Berkshire Hathaway Inc.
 **Date:** 2026-09-18 | **Sources:** sources/BRK-B/10-k-fy2025.md + web research (sentiment agent) | *No earnings call — Berkshire holds none. Ticker also seen as BRK.B / BRK-B.*
 
@@ -5,7 +12,7 @@
 
 ## Company Snapshot
 
-Berkshire Hathaway เป็น conglomerate ที่ประกอบด้วย insurance (GEICO, reinsurance), BNSF railroad, Berkshire Hathaway Energy, และธุรกิจ manufacturing/retail จำนวนมาก บวก equity portfolio ขนาดใหญ่ (Apple, Amex, Coca-Cola ฯลฯ) engine หลักคือ **insurance float** — เงินที่ policyholder จ่ายมาก่อนที่จะต้อง claim ซึ่ง Berkshire เอาไปลงทุนได้ฟรีตราบเท่าที่ underwriting ยัง profitable
+Berkshire Hathaway เป็น conglomerate ที่ประกอบด้วย insurance (GEICO, reinsurance), BNSF railroad, Berkshire Hathaway Energy, และธุรกิจ manufacturing/retail จำนวนมาก บวก equity portfolio ขนาดใหญ่ ([[AAPL]], Amex, Coca-Cola ฯลฯ) engine หลักคือ **insurance float** — เงินที่ policyholder จ่ายมาก่อนที่จะต้อง claim ซึ่ง Berkshire เอาไปลงทุนได้ฟรีตราบเท่าที่ underwriting ยัง profitable
 
 จุดเปลี่ยนสำคัญ: **Greg Abel รับตำแหน่ง CEO เต็มตัวตั้งแต่ ม.ค. 2026** (Buffett ยังเป็น chairman) และเริ่มพลิกจาก net seller (14 ไตรมาสติด) มาเป็น net buyer ใน Q2 2026 — เป็นครั้งแรกที่ cash pile ($364.7B) ลดลงในรอบ 3+ ปี
 
@@ -56,6 +63,6 @@ Berkshire ไม่มี quarterly earnings call ตามธรรมเนี
 
 ## What to Ask
 
-1. **Abel มี framework การ deploy cash ชัดเจนแค่ไหน?** การซื้อ Alphabet/Delta/Lennar ใน Q2 2026 สะท้อน discipline แบบ Buffett หรือเป็นแค่ reaction ต่อ market pullback?
+1. **Abel มี framework การ deploy cash ชัดเจนแค่ไหน?** การซื้อ [[GOOG]]/Delta/Lennar ใน Q2 2026 สะท้อน discipline แบบ Buffett หรือเป็นแค่ reaction ต่อ market pullback?
 2. **Insurance underwriting margin จะฟื้นเมื่อไหร่?** Geico ad spend เพิ่มเป็น strategic investment เพื่อ market share หรือเป็นสัญญาณว่า competitive pressure หนักขึ้น?
 3. **จะมี capital return policy (buyback/dividend) เกิดขึ้นไหมภายใต้ Abel?** การไม่มีทั้งคู่มา decades คือ Buffett-era choice — Abel จะเปลี่ยนหรือไม่ เป็นสัญญาณสำคัญของ philosophy ใหม่

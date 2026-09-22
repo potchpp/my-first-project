@@ -1,5 +1,14 @@
+---
+ticker: ASTS
+company: AST SpaceMobile
+updated: 2026-09-18
+type: stock-brief
+---
+
 # ASTS — AST SpaceMobile, Inc.
 **Date:** 2026-09-18 | **Sources:** sources/ASTS/10-k-fy2025.md + web research (sentiment agent) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+
+**Source docs:** [[sources/ASTS/10-k-fy2025]]
 
 ---
 

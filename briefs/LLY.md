@@ -1,5 +1,14 @@
+---
+ticker: LLY
+company: Eli Lilly and
+updated: 2026-09-18
+type: stock-brief
+---
+
 # LLY — Eli Lilly and Company
 **Date:** 2026-09-18 | **Sources:** sources/LLY/10-k-fy2025.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/LLY/10-k-fy2025]]
 
 ---
 

@@ -1,5 +1,14 @@
+---
+ticker: NFLX
+company: 
+updated: 2026-06-08
+type: stock-brief
+---
+
 # NFLX (Netflix) — Stock Brief
 **Date:** 2026-06-08 | **Sources:** 10-K FY2025 (ended Dec 31, 2025) + Q1 2026 earnings data (sentiment agent) | *No earnings transcript*
+
+**Source docs:** [[sources/NFLX/10-k-fy2025]]
 
 ---
 

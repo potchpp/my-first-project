@@ -1,5 +1,13 @@
+---
+ticker: GMAB
+company: Genmab A/S
+updated: 2026-09-18
+type: stock-brief
+---
+
 # GMAB — Genmab A/S
 **Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Danish foreign private issuer, our fetch script only pulls 10-K) | *No earnings transcript available*
+
 
 ---
 

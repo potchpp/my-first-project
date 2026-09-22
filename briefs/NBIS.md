@@ -1,5 +1,13 @@
+---
+ticker: NBIS
+company: Nebius
+updated: 2026-09-18
+type: stock-brief
+---
+
 # NBIS — Nebius Group N.V.
 **Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Dutch foreign private issuer) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+
 
 ---
 
@@ -19,7 +27,7 @@ Usage-based GPU cloud model — switching cost มีจริงสำหรั
 ## Latest Sentiment
 *Source: sentiment agent — no transcript*
 
-Q2 2026 revenue $582.3M (+454% YoY) beat EPS estimate เป้า ARR $7-9B สิ้นปี 2026 (จาก $1.2B สิ้นปี 2025) Contracted power guidance ปรับขึ้นเป็น 5 gigawatts สัญญาใหญ่: **Microsoft $17.4-19.4B**, **Meta ~$3B** — หุ้นขึ้น 51.3% ใน 30 วัน Analyst 16 คน Buy, avg target $286.69 (range $125-415) — DA Davidson ปรับเป้าขึ้น $75→$125 Risk: hyperscaler กำลังสร้าง proprietary AI chip กดดัน demand ระยะยาว, Meta ถูกรายงานว่ากำลัง explore competitive cloud capacity
+Q2 2026 revenue $582.3M (+454% YoY) beat EPS estimate เป้า ARR $7-9B สิ้นปี 2026 (จาก $1.2B สิ้นปี 2025) Contracted power guidance ปรับขึ้นเป็น 5 gigawatts สัญญาใหญ่: **[[MSFT]] $17.4-19.4B**, **Meta ~$3B** — หุ้นขึ้น 51.3% ใน 30 วัน Analyst 16 คน Buy, avg target $286.69 (range $125-415) — DA Davidson ปรับเป้าขึ้น $75→$125 Risk: hyperscaler กำลังสร้าง proprietary AI chip กดดัน demand ระยะยาว, Meta ถูกรายงานว่ากำลัง explore competitive cloud capacity
 
 ## Bull / Bear
 

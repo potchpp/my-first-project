@@ -1,5 +1,14 @@
+---
+ticker: AAPL
+company: Apple
+updated: 2026-09-22
+type: stock-brief
+---
+
 # AAPL — Apple Inc.
 *Brief generated: 2026-06-07 | Sources: sources/AAPL/10-k-fy2025.md, sources/AAPL/q2-2026-call.md*
+
+**Source docs:** [[sources/AAPL/10-k-fy2025]]
 
 ---
 

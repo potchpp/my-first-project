@@ -1,5 +1,14 @@
+---
+ticker: IREN
+company: 
+updated: 2026-06-08
+type: stock-brief
+---
+
 # IREN (Iris Energy) — Stock Brief
 **Date:** 2026-06-08 | **Source:** 10-K FY2025 (ended June 30, 2025) | *No earnings transcript available — live sentiment data unavailable (WebSearch blocked)*
+
+**Source docs:** [[sources/IREN/10-k-fy2025]]
 
 ---
 

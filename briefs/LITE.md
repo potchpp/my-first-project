@@ -1,13 +1,22 @@
+---
+ticker: LITE
+company: Lumentum
+updated: 2026-06-14
+type: stock-brief
+---
+
 # LITE — Lumentum Holdings Inc.
 **Date:** 2026-06-14 | **Sources:** sources/LITE/10-k-fy2025.md + web research (sentiment agent) | *No earnings transcript — paste จาก Motley Fool/Seeking Alpha เพื่อ update*
+
+**Source docs:** [[sources/LITE/10-k-fy2025]]
 
 ---
 
 ## Company Snapshot
 
-Lumentum ออกแบบและผลิต optical และ photonic components — EML chips, transceivers, pump lasers — ที่ใช้ใน AI data center interconnects, telecom networks, และ 3D sensing (Apple iPhone Face ID) Cloud & Networking คือ 86% ของ revenue ที่กำลัง ride คลื่น AI infrastructure buildout ส่วน Industrial Tech (14%) ขึ้นอยู่กับ Apple cycle
+Lumentum ออกแบบและผลิต optical และ photonic components — EML chips, transceivers, pump lasers — ที่ใช้ใน AI data center interconnects, telecom networks, และ 3D sensing ([[AAPL]] iPhone Face ID) Cloud & Networking คือ 86% ของ revenue ที่กำลัง ride คลื่น AI infrastructure buildout ส่วน Industrial Tech (14%) ขึ้นอยู่กับ Apple cycle
 
-จุดเปลี่ยนสำคัญที่สุดในรอบ 12 เดือน: **March 2026 NVIDIA ลงทุน $2B เชิงกลยุทธ์** พร้อม multi-year purchase commitment — demand signal ชั้นแรกที่ไม่เคยได้รับมาก่อน
+จุดเปลี่ยนสำคัญที่สุดในรอบ 12 เดือน: **March 2026 [[NVDA]] ลงทุน $2B เชิงกลยุทธ์** พร้อม multi-year purchase commitment — demand signal ชั้นแรกที่ไม่เคยได้รับมาก่อน
 
 ---
 

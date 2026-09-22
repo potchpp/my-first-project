@@ -1,5 +1,14 @@
+---
+ticker: RL
+company: Ralph Lauren
+updated: 2026-09-18
+type: stock-brief
+---
+
 # RL — Ralph Lauren Corporation
 **Date:** 2026-09-18 | **Sources:** sources/RL/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/RL/10-k-fy2026]]
 
 ---
 

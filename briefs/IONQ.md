@@ -1,5 +1,14 @@
+---
+ticker: IONQ
+company: IonQ
+updated: 2026-09-18
+type: stock-brief
+---
+
 # IONQ — IonQ, Inc.
 **Date:** 2026-09-18 | **Sources:** sources/IONQ/10-k-fy2025.md + web research (sentiment agent) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+
+**Source docs:** [[sources/IONQ/10-k-fy2025]]
 
 ---
 
@@ -19,13 +28,13 @@ FY2025 revenue $130.0M (+202% จาก $43.1M) — ยังพึ่ง pre-co
 ## Latest Sentiment
 *Source: sentiment agent — no transcript*
 
-Q1 2026 revenue $64.7M (+755% YoY) — เป็น pure quantum company รายแรกที่ทะลุ $100M annual revenue $39M contract จาก Space Development Agency (HALO Program) 99.99% two-qubit gate fidelity (world record) Analyst Strong Buy, avg target $67.68-69.25 (+76% upside) Cash burn รุนแรง: revenue $130M เทียบ loss ~$500M FCF ติดลบ $77.2M แข่งกับ Google/IBM/Microsoft/Amazon $1.8B SkyWater acquisition เพิ่ม integration risk
+Q1 2026 revenue $64.7M (+755% YoY) — เป็น pure quantum company รายแรกที่ทะลุ $100M annual revenue $39M contract จาก Space Development Agency (HALO Program) 99.99% two-qubit gate fidelity (world record) Analyst Strong Buy, avg target $67.68-69.25 (+76% upside) Cash burn รุนแรง: revenue $130M เทียบ loss ~$500M FCF ติดลบ $77.2M แข่งกับ Google/IBM/[[MSFT]]/[[AMZN]] $1.8B SkyWater acquisition เพิ่ม integration risk
 
 ## Bull / Bear
 
 **Bull:** revenue growth เร่งขึ้นมาก (+755% Q1 2026) government contract จริง ($39M SDA) technical milestone (world record fidelity) analyst bullish สุดขั้ว (+76% upside)
 
-**Bear:** loss ($510M) ใหญ่กว่า revenue ($130M) หลายเท่า cash burn รุนแรง ($77.2M negative FCF) แข่งกับบริษัทใหญ่ที่มี capital มากกว่ามหาศาล (Google, IBM, Microsoft, Amazon) $1.8B SkyWater acquisition ยังไม่พิสูจน์ integration success quantum computing commercialization timeline ยังไม่แน่นอน
+**Bear:** loss ($510M) ใหญ่กว่า revenue ($130M) หลายเท่า cash burn รุนแรง ($77.2M negative FCF) แข่งกับบริษัทใหญ่ที่มี capital มากกว่ามหาศาล ([[GOOG]], IBM, Microsoft, Amazon) $1.8B SkyWater acquisition ยังไม่พิสูจน์ integration success quantum computing commercialization timeline ยังไม่แน่นอน
 
 ## Kill Conditions
 - Cash burn ไม่ลดลงและต้อง raise ทุนเพิ่มด้วย dilution หนักมาก

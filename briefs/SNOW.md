@@ -1,5 +1,14 @@
+---
+ticker: SNOW
+company: Snowflake
+updated: 2026-09-18
+type: stock-brief
+---
+
 # SNOW — Snowflake Inc.
 **Date:** 2026-09-18 | **Sources:** sources/SNOW/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/SNOW/10-k-fy2026]]
 
 ---
 

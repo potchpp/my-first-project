@@ -1,6 +1,15 @@
+---
+ticker: TSLA
+company: Tesla
+updated: 2026-09-22
+type: stock-brief
+---
+
 # TSLA — Tesla, Inc.
 *Brief generated: 2026-06-07 | Sources: sources/TSLA/10-k-fy2025.md (FY2025, period ending Dec 31, 2025)*
 *Note: ไม่มี earnings call transcript ใน sources/TSLA/ — fetch_transcript.py ไม่พบ URL บน Motley Fool*
+
+**Source docs:** [[sources/TSLA/10-k-fy2025]]
 
 ---
 

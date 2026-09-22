@@ -1,5 +1,14 @@
+---
+ticker: TEAM
+company: Atlassian
+updated: 2026-09-18
+type: stock-brief
+---
+
 # TEAM — Atlassian Corporation
 **Date:** 2026-09-18 | **Sources:** sources/TEAM/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/TEAM/10-k-fy2026]]
 
 ---
 
@@ -43,9 +52,29 @@ Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เ�
 
 - **"Improving" ยังไม่ profitable จริง:** net loss $(53.8)M ยังอยู่ SBC $1.6B/ปี (~24% ของรายได้) — buyback แค่ offset dilution ไม่ใช่ real capital return ผู้ถือหุ้นไม่ได้ถูก pay จริง แค่ treading water FCF ลดลงทั้งที่เรื่องราว "กำลังดีขึ้น"
 - **Data Center growth เป็นสินค้าที่กำลังตาย:** Atlassian เองฆ่า product นี้ — บังคับลูกค้าจ่ายเงินจริงย้าย migration เสี่ยง churn ชัดเจน
-- **AI risk ต่อ core business model:** ถ้า AI coding agent ลด developer headcount ได้จริง per-seat pricing model ของ Jira มีความเสี่ยง structural แข่งกับ Microsoft/GitHub, ServiceNow, Monday.com, Notion หนักมาก analyst target spread กว้างมาก ($108-$480) — ไม่เห็นตรงกันว่า growth จะแปลงเป็น profit ได้จริงไหม
+- **AI risk ต่อ core business model:** ถ้า AI coding agent ลด developer headcount ได้จริง per-seat pricing model ของ Jira มีความเสี่ยง structural แข่งกับ [[MSFT]]/GitHub, ServiceNow, Monday.com, Notion หนักมาก analyst target spread กว้างมาก ($108-$480) — ไม่เห็นตรงกันว่า growth จะแปลงเป็น profit ได้จริงไหม
 
 ---
+
+## Valuation
+*Source: valuation agent (expectations method), 2026-09-22 @ $196.78*
+
+**Lens: EV/Sales + Rule of 40 + FCF after SBC.** P/E ใช้ไม่ได้กับ TEAM — ยัง net loss $(53.8)M ตัวเลข P/E จึงไม่มีความหมาย
+
+- Market cap ≈ $49.8B (253.14M shares) | net cash ≈ 0 → EV ≈ $49.8B
+- **EV/Sales (trailing) ≈ 7.6x** (FY2026 revenue $6.57B)
+- FY2026 FCF $1.319B (**ลดลง 6.8% YoY**) = FCF margin 20%
+- **Rule of 40 = 42** ถ้าไม่นับ SBC → ผ่าน รองรับ premium multiple
+- **Rule of 40 = 9** ถ้านับ SBC → ตกอย่างแรง เพราะ FCF − SBC = **−$0.28B (−4%)**
+- FY2027 guidance: total revenue **+13%** (ชะลอจาก 22-27%) โดย Cloud guided ~25.5% แต่ Data Center guided **−17%** จากการ sunset
+
+**ประเด็นชี้ขาดคือ SBC** ($1.6B ≈ 24% ของรายได้ = 122% ของ FCF ที่รายงาน) ราคาปัจจุบันตั้งอยู่บนสมมติฐานว่า SBC ไม่ใช่ต้นทุนจริงตลอดไป — ซึ่ง Atlassian **ไม่เคยทำ FCF เป็นบวกหลังหัก SBC เลยสักปี**
+
+**Verdict: Ahead of itself** — multiple ต้องการให้มองข้าม SBC ถาวร ในจังหวะที่ revenue รวมกำลังชะลอ
+
+> ⚠️ ข้อแย้งที่ต้องชั่ง: 13% เป็นตัวเลข blended ที่ถูกกดโดย Data Center sunset ซึ่งเป็นการตัดสินใจของบริษัทเอง ไม่ใช่ demand อ่อน — Cloud ยัง guide ~25.5% ตัวเลข headline จึงต่ำกว่าธุรกิจจริงที่เหลืออยู่
+
+**Falsifying number:** ถ้า FCF − SBC เป็นบวก (>0% ของรายได้) **สองไตรมาสติด** (Q1/Q2 FY2027 รายงานราว ต.ค. 2026 และ ม.ค. 2027) = verdict นี้ผิด และ premium multiple มีฐานเศรษฐกิจจริงรองรับ
 
 ## Kill Conditions
 

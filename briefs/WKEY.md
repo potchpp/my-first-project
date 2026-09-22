@@ -1,5 +1,13 @@
+---
+ticker: WKEY
+company: WISeKey International
+updated: 2026-09-18
+type: stock-brief
+---
+
 # WKEY — WISeKey International Holding Ltd.
 **Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Swiss foreign private issuer) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+
 
 ---
 

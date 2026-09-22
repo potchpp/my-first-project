@@ -1,5 +1,14 @@
+---
+ticker: FWONA
+company: Liberty Media Corporation (Formula One Group)
+updated: 2026-09-18
+type: stock-brief
+---
+
 # FWONA — Liberty Media Corporation (Formula One Group)
 **Date:** 2026-09-18 | **Sources:** sources/FWONA/10-k-fy2025.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/FWONA/10-k-fy2025]]
 
 ---
 
@@ -27,7 +36,7 @@ F1 มี **commercial rights ถึงปี 2110** (100-Year Agreement) แล
 
 Q1 2026: F1 revenue +53% เป็น $617M, Adjusted OIBDA +102% เป็น $172M cash เพิ่ม $277M ในไตรมาส buyback authorization เหลือ $1.1B (พ.ค. 2026)
 
-**Apple ได้ US streaming rights แบบ exclusive เริ่ม 2026** ($150-180M/ปี เกือบเท่าตัวจาก ESPN ที่ ~$90M) — แต่เปลี่ยนเป็น streaming-only 2026 Concorde Agreement เซ็นครบทุกทีม ทีมได้ share รายได้มากขึ้น แลกกับ Cadillac (ทีมใหม่) จ่าย anti-dilution fee $450M F1 2025 revenue $3.9B (+14%)
+**[[AAPL]] ได้ US streaming rights แบบ exclusive เริ่ม 2026** ($150-180M/ปี เกือบเท่าตัวจาก ESPN ที่ ~$90M) — แต่เปลี่ยนเป็น streaming-only 2026 Concorde Agreement เซ็นครบทุกทีม ทีมได้ share รายได้มากขึ้น แลกกับ Cadillac (ทีมใหม่) จ่าย anti-dilution fee $450M F1 2025 revenue $3.9B (+14%)
 
 ---
 

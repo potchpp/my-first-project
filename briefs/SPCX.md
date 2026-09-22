@@ -1,5 +1,13 @@
+---
+ticker: SPCX
+company: Space Exploration Technologies
+updated: 2026-06-14
+type: stock-brief
+---
+
 # SPCX — Space Exploration Technologies Corp.
 **Date:** 2026-06-14 | **Sources:** Pre-IPO press reports (Reuters, WSJ, Bloomberg) + web research (sentiment agent) | *No 10-K yet — IPO June 12, 2026. No earnings transcript (first call pending)*
+
 
 ---
 
@@ -46,7 +54,7 @@ SpaceX เป็น vertically integrated space company สองธุรกิ
 
 **Bull**
 
-- **Starlink = recurring platform ที่ Cornered Resource:** ดาวเทียม 9,800+ ดวง + spectrum rights (FCC/ITU) ใน LEO orbit คือ resource ที่ replication ใช้เวลาและเงินหลาย billion — ผู้แข่งอย่าง Amazon Kuiper ยังตามหลัง 5+ ปี และต้องสร้างจาก scratch
+- **Starlink = recurring platform ที่ Cornered Resource:** ดาวเทียม 9,800+ ดวง + spectrum rights (FCC/ITU) ใน LEO orbit คือ resource ที่ replication ใช้เวลาและเงินหลาย billion — ผู้แข่งอย่าง [[AMZN]] Kuiper ยังตามหลัง 5+ ปี และต้องสร้างจาก scratch
 - **Starship = Counter-positioning สมบูรณ์แบบ:** ถ้า commercial Starship ทำได้ cost per kg to orbit จะลดจาก ~$1,500 (Falcon 9) ไปอีก 10x ต่ำกว่า — เปลี่ยน economics ของ satellite deployment ทั้งอุตสาหกรรม รวม Starlink expansion ของตัวเอง
 - **Government Switching costs:** NASA crew transport (Commercial Crew), Starshield (DoD) เป็น multi-year fixed contract — รายได้ที่ไม่ขึ้นกับ consumer sentiment
 
@@ -54,7 +62,7 @@ SpaceX เป็น vertically integrated space company สองธุรกิ
 
 - **$1.75T bakes in Starship:** ที่ valuation นี้ Starlink-only business ยัง justify ไม่ได้ด้วย EV/Revenue multiples ปกติ — market price ใส่ Starship success ไปแล้วทั้งก้อน ถ้า Starship ล่าช้าแม้แต่ปีเดียว re-rate ลงหนัก
 - **ยังไม่รู้ตัวเลขจริง:** 10-K แรกจะออก Q3 2026 — ถ้า gross margin ต่ำกว่าที่ press report ผู้อ่านคาดไว้ หรือ cash burn สูงจาก Starship dev cost ภาพทั้งหมดเปลี่ยน
-- **Elon Musk key-person risk:** Tesla, xAI, Boring Company, X/Twitter ล้วนแข่งขันเวลาและ attention — SpaceX execution ขึ้นกับ Musk ในระดับที่ผิดปกติสำหรับบริษัท $1.75T
+- **Elon Musk key-person risk:** [[TSLA]], xAI, Boring Company, X/Twitter ล้วนแข่งขันเวลาและ attention — SpaceX execution ขึ้นกับ Musk ในระดับที่ผิดปกติสำหรับบริษัท $1.75T
 
 ---
 

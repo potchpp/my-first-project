@@ -1,5 +1,13 @@
+---
+ticker: TSM
+company: Taiwan Semiconductor Manufacturing
+updated: 2026-09-18
+type: stock-brief
+---
+
 # TSM — Taiwan Semiconductor Manufacturing Co.
 **Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Taiwanese foreign private issuer, our fetch script only pulls 10-K) | *No earnings transcript available*
+
 
 ---
 
@@ -7,7 +15,7 @@
 
 > ⚠️ **Data limitation:** ไม่มี local filing สำหรับ TSMC — เป็น Taiwanese company ที่ file Form 20-F fetch script ดึงได้แค่ 10-K ข้อมูล fundamentals ด้านล่างมาจาก general/public knowledge ไม่ใช่ filing-cited numbers
 
-TSMC เป็น **pure-play foundry** — ผลิตชิปที่บริษัทอื่นออกแบบ ไม่แข่งขันกับลูกค้าตัวเอง (ต่างจาก Samsung/Intel Foundry ที่ทำทั้งสองอย่าง) ลูกค้าหลักคือ Apple, Nvidia, AMD, Qualcomm, Broadcom
+TSMC เป็น **pure-play foundry** — ผลิตชิปที่บริษัทอื่นออกแบบ ไม่แข่งขันกับลูกค้าตัวเอง (ต่างจาก Samsung/Intel Foundry ที่ทำทั้งสองอย่าง) ลูกค้าหลักคือ [[AAPL]], Nvidia, AMD, Qualcomm, Broadcom
 
 จุดเปลี่ยนสำคัญ: **HPC/AI segment = 66% ของ wafer revenue** และ 2nm (N2) กำลัง ramp เร็วมาก (0%→3% ใน 1 ไตรมาส) — management เรียก N2 ว่าเป็น node ที่ใหญ่กว่าและอยู่นานกว่า N3
 

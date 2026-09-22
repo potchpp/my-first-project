@@ -1,5 +1,14 @@
+---
+ticker: ORCL
+company: Oracle
+updated: 2026-09-18
+type: stock-brief
+---
+
 # ORCL — Oracle Corporation
 **Date:** 2026-09-18 | **Sources:** sources/ORCL/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/ORCL/10-k-fy2026]]
 
 ---
 
@@ -43,7 +52,7 @@ OpenAI commit $300B/5 ปี (เริ่ม 2027 ~$60B/ปี — มากก
 
 - **Margin กำลังแตกจริง:** cloud/software margin % ลดลงเพราะ infra cost โตเร็วกว่า revenue — buildout ยังไม่จ่ายตัวเองคืนได้
 - **Financing มาจากหนี้เกือบทั้งหมด:** capex $55.7B fund ด้วย debt/preferred $47.7B ผู้ถือหุ้นได้ buyback แค่ $95M — capital discipline หายไป equity holder อยู่ท้ายแถว
-- **Concentration risk มหาศาล:** ~ครึ่งของ $638B backlog ผูกกับ OpenAI รายเดียว ที่ revenue ปัจจุบันแค่ ~$10B เทียบ obligation $60B/ปี debt-to-equity 427% (เทียบ Microsoft 32.7%) S&P ปรับ credit rating ลงเหลือ BBB- (ห่าง junk แค่ 1 notch) Q1 FCF ติดลบ $5.4B ยังต้องการเงินเพิ่มอีก ~$40B
+- **Concentration risk มหาศาล:** ~ครึ่งของ $638B backlog ผูกกับ OpenAI รายเดียว ที่ revenue ปัจจุบันแค่ ~$10B เทียบ obligation $60B/ปี debt-to-equity 427% (เทียบ [[MSFT]] 32.7%) S&P ปรับ credit rating ลงเหลือ BBB- (ห่าง junk แค่ 1 notch) Q1 FCF ติดลบ $5.4B ยังต้องการเงินเพิ่มอีก ~$40B
 
 ---
 

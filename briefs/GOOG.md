@@ -1,5 +1,14 @@
+---
+ticker: GOOG
+company: 
+updated: 2026-06-08
+type: stock-brief
+---
+
 # GOOG (Alphabet) — Stock Brief
 **Date:** 2026-06-08 | **Sources:** 10-K FY2025 (ended Dec 31, 2025) + Q1 2026 live data (sentiment agent) | *No earnings transcript*
+
+**Source docs:** [[sources/GOOG/10-k-fy2025]]
 
 ---
 
@@ -39,7 +48,7 @@ Alphabet คือ conglomerate ที่มี Search เป็น cash engine 
 - Buybacks: $45.4B FY2025; dividends: $10B — ยังคืน cash ให้ผู้ถือหุ้นไปด้วยกัน
 - Cash: $126.8B; debt: $48.5B — net cash position ยังแข็งแกร่ง
 - Pending acquisitions: Wiz (cloud security) $32B + Intersect (data center/energy) $4.8B *(10-k-fy2025.md)*
-- **$80B equity raise (มิถุนายน 2026)** — ใหญ่ที่สุดในประวัติศาสตร์บริษัท รวม $10B จาก Berkshire Hathaway + $30B compute deal กับ SpaceX สัญญาณว่า FCF อย่างเดียวไม่พอ fund AI buildout แล้ว *(sentiment agent)*
+- **$80B equity raise (มิถุนายน 2026)** — ใหญ่ที่สุดในประวัติศาสตร์บริษัท รวม $10B จาก [[BRKB]] + $30B compute deal กับ SpaceX สัญญาณว่า FCF อย่างเดียวไม่พอ fund AI buildout แล้ว *(sentiment agent)*
 
 ---
 
@@ -97,7 +106,7 @@ Thesis แตกถ้า:
 
 ## What to Ask
 
-1. **DOJ Search remedies จะ implement ระดับไหน และ timeline เป็นอย่างไร?** ศาลสั่งแชร์ Search index กับคู่แข่ง — แต่ "sharing" ในทางปฏิบัติหมายความว่าอะไร? real-time full index หรือ delayed subset? ถ้า Microsoft (Bing) หรือ AI startup เข้าถึง index เดียวกัน user experience จะต่างกันแค่ไหน? ต้องติดตาม appeal ruling และ technical remedy specification ก่อนตัดสินว่า cornered resource ยังอยู่หรือเปล่า
+1. **DOJ Search remedies จะ implement ระดับไหน และ timeline เป็นอย่างไร?** ศาลสั่งแชร์ Search index กับคู่แข่ง — แต่ "sharing" ในทางปฏิบัติหมายความว่าอะไร? real-time full index หรือ delayed subset? ถ้า [[MSFT]] (Bing) หรือ AI startup เข้าถึง index เดียวกัน user experience จะต่างกันแค่ไหน? ต้องติดตาม appeal ruling และ technical remedy specification ก่อนตัดสินว่า cornered resource ยังอยู่หรือเปล่า
 
 2. **$180B CapEx ในปี 2026 มี committed revenue backing เท่าไหร่?** Cloud backlog ณ ปัจจุบัน (remaining performance obligations) เป็น $X billion หรือเปล่า? ก่อน add position ควรรู้ว่า enterprise AI contract ที่ signed แล้วคิดเป็นกี่ปีของ CapEx ที่กำลัง deploy มิฉะนั้นไม่รู้ว่า build-then-sell หรือ build-with-demand
 

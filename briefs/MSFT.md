@@ -1,5 +1,14 @@
+---
+ticker: MSFT
+company: Microsoft
+updated: 2026-09-18
+type: stock-brief
+---
+
 # MSFT — Microsoft Corporation
 **Date:** 2026-09-18 | **Sources:** sources/MSFT/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+
+**Source docs:** [[sources/MSFT/10-k-fy2026]]
 
 ---
 

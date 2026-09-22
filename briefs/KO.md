@@ -1,5 +1,14 @@
+---
+ticker: KO
+company: The Coca-Cola
+updated: 2026-09-18
+type: stock-brief
+---
+
 # KO — The Coca-Cola Company
 **Date:** 2026-09-18 | **Sources:** sources/KO/10-k-fy2025.md + web research (sentiment agent) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+
+**Source docs:** [[sources/KO/10-k-fy2025]]
 
 ---
 

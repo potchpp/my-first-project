@@ -1,5 +1,13 @@
+---
+ticker: ASML
+company: ASML
+updated: 2026-09-18
+type: stock-brief
+---
+
 # ASML — ASML Holding N.V.
 **Date:** 2026-09-18 | **Sources:** Web research only — no 10-K available (ASML files Form 20-F as Dutch foreign private issuer, our fetch script only pulls 10-K) | *No earnings transcript available*
+
 
 ---
 

@@ -1,6 +1,15 @@
+---
+ticker: AVGO
+company: Broadcom
+updated: 2026-09-22
+type: stock-brief
+---
+
 # AVGO — Broadcom Inc.
 *Brief generated: 2026-06-07 | Sources: sources/AVGO/10-k-fy2025.md (FY2025, period ending Nov 2, 2025)*
 *Note: ไม่มี earnings call transcript ใน sources/AVGO/ — fetch_transcript.py ไม่พบ URL บน Motley Fool*
+
+**Source docs:** [[sources/AVGO/10-k-fy2025]]
 
 ---
 
@@ -38,7 +47,7 @@ Broadcom เป็น semiconductor และ infrastructure software ที่�
 
 - **Revenue $63.89B (+24% YoY)** — semiconductor AI demand + VMware subscription เป็น double engine *(source: sources/AVGO/10-k-fy2025.md)*
 - **Operating income $25.48B (+89%)** — VMware integration ลด headcount + restructuring ลดจาก $1.53B → $591M *(source: sources/AVGO/10-k-fy2025.md)*
-- **Custom AI XPU + AI Networking เป็น primary semiconductor growth driver** — ลูกค้า hyperscaler ไม่ถูกเปิดเผยชื่อในแฟ้ม แต่เป็นที่ทราบกันว่าคือ Google (TPU), Meta (MTIA), Apple (Neural Engine) *(source: sources/AVGO/10-k-fy2025.md)*
+- **Custom AI XPU + AI Networking เป็น primary semiconductor growth driver** — ลูกค้า hyperscaler ไม่ถูกเปิดเผยชื่อในแฟ้ม แต่เป็นที่ทราบกันว่าคือ [[GOOG]] (TPU), Meta (MTIA), [[AAPL]] (Neural Engine) *(source: sources/AVGO/10-k-fy2025.md)*
 - **VMware VCF upfront license $7.8B** — ลูกค้าที่ไม่มีสิทธิ์ terminate ทำให้ recognize revenue ก้อนใหญ่ใน FY2025; ธุรกิจ software เปลี่ยนจาก perpetual → subscription *(source: sources/AVGO/10-k-fy2025.md)*
 - **Debt paying down** — interest expense ลดจาก $3.95B → $3.21B; deleverage ต่อเนื่อง *(source: sources/AVGO/10-k-fy2025.md)*
 
@@ -47,7 +56,7 @@ Broadcom เป็น semiconductor และ infrastructure software ที่�
 ## Bull case / Bear case
 
 **Bull**
-- **Counter-Positioning ต่อ NVIDIA ในตลาด custom silicon** — hyperscaler ต้องการ XPU ที่ optimize สำหรับ workload เฉพาะตัว; NVIDIA ไม่สามารถให้ได้; Broadcom เป็น ASIC design partner ที่ทำ volume ระดับนี้ได้เพียงไม่กี่รายในโลก — ยิ่ง hyperscaler ลงทุนใน custom silicon มากขึ้น Broadcom ยิ่งได้ประโยชน์ *(source: sources/AVGO/10-k-fy2025.md)*
+- **Counter-Positioning ต่อ [[NVDA]] ในตลาด custom silicon** — hyperscaler ต้องการ XPU ที่ optimize สำหรับ workload เฉพาะตัว; NVIDIA ไม่สามารถให้ได้; Broadcom เป็น ASIC design partner ที่ทำ volume ระดับนี้ได้เพียงไม่กี่รายในโลก — ยิ่ง hyperscaler ลงทุนใน custom silicon มากขึ้น Broadcom ยิ่งได้ประโยชน์ *(source: sources/AVGO/10-k-fy2025.md)*
 - **Switching Cost ลึกสองชั้น** — VMware/VCF มี lock-in ระดับ enterprise IT infrastructure; custom ASIC มี lock-in จาก co-design relationship หลายปี + IP ที่ฝังอยู่; ลูกค้าไม่เปลี่ยน vendor ง่าย *(source: sources/AVGO/10-k-fy2025.md)*
 - **VMware integration เพิ่ง start producing** — software segment margin 77% ใน FY2025; ถ้า VCF adoption ขยายต่อ revenue durability สูงมากและ cost ไม่โตตาม *(source: sources/AVGO/10-k-fy2025.md)*
 
