@@ -3,10 +3,11 @@ ticker: TCOM
 company: Trip.com Group Limited
 updated: 2026-09-18
 type: stock-brief
+shared_driver: consumer-discretionary
 ---
 
 # TCOM — Trip.com Group Limited
-**Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Cayman/Chinese foreign private issuer) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+**Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Cayman/Chinese foreign private issuer) | *Lighter brief — no earnings transcript, no separate debate round*
 
 
 ---

@@ -3,10 +3,11 @@ ticker: WKEY
 company: WISeKey International
 updated: 2026-09-18
 type: stock-brief
+shared_driver: cybersecurity
 ---
 
 # WKEY — WISeKey International Holding Ltd.
-**Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Swiss foreign private issuer) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+**Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Swiss foreign private issuer) | *Lighter brief — no earnings transcript, no separate debate round*
 
 
 ---

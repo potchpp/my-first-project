@@ -3,10 +3,11 @@ ticker: IONQ
 company: IonQ
 updated: 2026-09-18
 type: stock-brief
+shared_driver: quantum
 ---
 
 # IONQ — IonQ, Inc.
-**Date:** 2026-09-18 | **Sources:** sources/IONQ/10-k-fy2025.md + web research (sentiment agent) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+**Date:** 2026-09-18 | **Sources:** sources/IONQ/10-k-fy2025.md + web research (sentiment agent) | *Lighter brief — no earnings transcript, no separate debate round*
 
 **Source docs:** [[sources/IONQ/10-k-fy2025]]
 

@@ -3,10 +3,11 @@ ticker: NBIS
 company: Nebius
 updated: 2026-09-18
 type: stock-brief
+shared_driver: ai-capex
 ---
 
 # NBIS — Nebius Group N.V.
-**Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Dutch foreign private issuer) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+**Date:** 2026-09-18 | **Sources:** Web research only — no 20-F available (Dutch foreign private issuer) | *Lighter brief — no earnings transcript, no separate debate round*
 
 
 ---

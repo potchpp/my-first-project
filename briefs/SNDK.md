@@ -3,10 +3,11 @@ ticker: SNDK
 company: Sandisk
 updated: 2026-09-18
 type: stock-brief
+shared_driver: ai-capex
 ---
 
 # SNDK — Sandisk Corporation
-**Date:** 2026-09-18 | **Sources:** sources/SNDK/10-k-fy2026.md + web research (sentiment agent) | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+**Date:** 2026-09-18 | **Sources:** sources/SNDK/10-k-fy2026.md + web research (sentiment agent) | *Lighter brief — no earnings transcript, no separate debate round*
 
 **Source docs:** [[sources/SNDK/10-k-fy2026]]
 

@@ -3,10 +3,11 @@ ticker: USAR
 company: USA Rare Earth
 updated: 2026-09-18
 type: stock-brief
+shared_driver: reshoring
 ---
 
 # USAR — USA Rare Earth, Inc.
-**Date:** 2026-09-18 | **Sources:** Web research only — 10-K extraction failed (table-of-contents captured, not real content) + sentiment agent | *Lighter brief — dust position (<1% allocation), no earnings transcript, no separate debate round*
+**Date:** 2026-09-18 | **Sources:** Web research only — 10-K extraction failed (table-of-contents captured, not real content) + sentiment agent | *Lighter brief — no earnings transcript, no separate debate round*
 
 
 ---

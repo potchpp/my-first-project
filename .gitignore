@@ -15,3 +15,6 @@ skills-lock.json
 
 # Private portfolio data — statements, transactions, performance. Never commit.
 portfolio/
+
+# Knowledge graph + Obsidian vault export — derived research, keep local
+graphify-out/
