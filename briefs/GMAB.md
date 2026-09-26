@@ -3,6 +3,7 @@ ticker: GMAB
 company: Genmab A/S
 updated: 2026-09-18
 type: stock-brief
+shared_driver: pharma-pipeline
 ---
 
 # GMAB — Genmab A/S

@@ -3,6 +3,7 @@ ticker: FWONA
 company: Liberty Media Corporation (Formula One Group)
 updated: 2026-09-18
 type: stock-brief
+shared_driver: consumer-discretionary
 ---
 
 # FWONA — Liberty Media Corporation (Formula One Group)

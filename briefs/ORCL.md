@@ -1,72 +1,93 @@
 ---
 ticker: ORCL
 company: Oracle
-updated: 2026-09-18
+updated: 2026-09-25
 type: stock-brief
+shared_driver: ai-capex
 ---
 
 # ORCL — Oracle Corporation
-**Date:** 2026-09-18 | **Sources:** sources/ORCL/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+**Date:** 2026-09-25 | *Refresh of the 2026-09-18 brief — adds Q1 FY2027 call, credit/FCF status, valuation, variant perception, damage-tagged kill conditions. **Kill condition #4 has fired — see status note.***
 
-**Source docs:** [[sources/ORCL/10-k-fy2026]]
+**Source docs:** [[sources/ORCL/10-k-fy2026]] · [[sources/ORCL/q1-2027-call]]
 
 ---
 
 ## Company Snapshot
 
-Oracle ขาย enterprise IT สามส่วน: Cloud and software (87% ของรายได้), Hardware (5%), Services (8%) FY26 revenue $67.357B (+17%) engine หลักคือ **OCI (Oracle Cloud Infrastructure)** ที่ตอนนี้คิดเป็น 53% ของ cloud revenue (จาก 35% เมื่อ 2 ปีก่อน) — shift ไป OCI เร็วมาก
-
-จุดเปลี่ยนที่ใหญ่ที่สุด: **OpenAI ผูกพัน $300B ตลอด 5 ปี** (เริ่ม 2027, ~$60B/ปี) ต้องการ power capacity 4.5GW — เป็นทั้ง demand validation ก้อนใหญ่ที่สุด และ concentration risk ที่ใหญ่ที่สุดพร้อมกัน (roughly ครึ่งหนึ่งของ contracted revenue ทั้งหมด $638B ผูกกับลูกค้ารายเดียว)
-
----
+Oracle ขาย enterprise software (database, apps, support) ที่ mature และกำไรสูง และกำลังใช้เงินกู้ + เงินเพิ่มทุนสร้าง **OCI (Oracle Cloud Infrastructure)** เป็น AI cloud ขนาดใหญ่ — cloud infrastructure โต **+121%** และ backlog (RPO) **$664B** แต่ ~45% ของ backlog ผูกกับ **OpenAI** รายเดียว *(third-party estimate)* และ **FCF ติดลบต่อเนื่อง** ขณะที่ credit rating อยู่ห่าง junk แค่ขั้นเดียว *(earnings + sentiment agents)*
 
 ## Fundamentals Signal
-*Source: sources/ORCL/10-k-fy2026.md (MD&A only — ไม่มี balance sheet/customer concentration disclosure ในไฟล์นี้)*
+*Source: sources/ORCL/10-k-fy2026.md (prior brief, fundamentals agent)*
 
-**Revenue durability — โตเร็ว แต่ concentration สูงมาก:** Cloud+software +19%, OCI ขับเคลื่อน 84% ของ cloud growth ทั้งหมด สัญญา cloud เป็น subscription 1-5 ปี (recurring base) — แต่ไฟล์นี้ไม่มีตัวเลข RPO หรือ customer concentration ให้อ้างอิงตรงๆ
+**Revenue durability — โตเร็ว, backlog ใหญ่, แต่กระจุก:** FY26 revenue $67.4B (+17%); cloud+software 87% ของรายได้ (+19%); OCI = 53% ของ cloud revenue (จาก 35% สองปีก่อน) ขับ 84% ของ cloud growth; สัญญา 1–5 ปี
 
-**Margin trend — กำลังโดนกดดันจาก OCI buildout:** margin % ของ cloud/software **ลดลง** (constant currency) เพราะ "infrastructure expenses เพิ่มขึ้นเพื่อรองรับการเติบโตของ cloud infrastructure" opex เพิ่ม $7.0B (ส่วนใหญ่ $6.0B มาจาก infra cost)
+**Margin trend — ถูกกดจาก buildout:** cloud/software margin % ลดลงเพราะ infra cost (opex +$7.0B, ในนั้น $6.0B เป็น infra) *(10-K)*; Q1 FY27 gross margin ลด "ตามคาด" แต่ non-GAAP op margin ทรงตัว 42% เพราะตัด opex *(q1-2027-call)*
 
-**Capital allocation — reinvest หนักมาก, ทุนมาจากหนี้:** Capex $55.7B ในปีเดียว fund ด้วย $42.7B senior notes + $5.0B mandatory convertible preferred stock — เกือบทั้งหมดมาจากหนี้/hybrid instrument Buyback แค่ $95M เทียบ dividend $5.8B — คืนทุนผู้ถือหุ้นน้อยมาก เงินเกือบทั้งหมดไปที่ infrastructure
+**Investment or decay? — Investment แต่ด้วยเงินคนอื่น:** revenue เร่ง (+17% → +30%), capex พุ่ง, margin ขั้นต้นลด = สร้าง S-curve ใหม่จริง — แต่ fund ด้วยหนี้และการเพิ่มทุน ไม่ใช่ cash ของตัวเอง
 
----
+**Capital allocation — capex treadmill + dilution**
+- FY26: capex $55.7B, fund ด้วย senior notes $42.7B + mandatory convertible preferred $5.0B; buyback $95M, ปันผล $5.8B *(10-K)*
+- Q1 FY27: **ขายหุ้นเพิ่มทุน $20B ผ่าน at-the-market (dilutive)** *(q1-2027-call, verified)*; FY27 capex $90–95B gross, ≤$70B net of customer prepayments
+- Net debt ~$88B + preferred $5B (+ lease $30.6B) *(valuation agent, Q1 FY27 10-Q)*; debt-to-equity ~427% vs [[MSFT]] ~33%
 
-## Latest Earnings
-*Source: sentiment agent — no transcript in sources/ORCL/*
+## Latest Earnings — Q1 FY2027 (quarter ended Aug 2026)
+*Source: sources/ORCL/q1-2027-call.md (earnings agent; key lines verified by PM)*
+- Revenue **$19.3B (+30%)**; cloud infrastructure **$7.4B (+121%, เร่งจาก +93%)**; cloud apps $4.2B (+10%); non-GAAP EPS $1.92 (+30%); non-GAAP op margin 42% (flat)
+- **RPO $664B** (+$209B YoY), ส่วนใหญ่ prepay หรือลูกค้านำ hardware มาเอง; $30B AI bookings ใน Q1 ไม่ต้องใช้ capex เพิ่ม; ~50% แปลงเป็นรายได้ใน 36 เดือน
+- GPU utilization 97.9%; renewal ราคาสูงขึ้น 20% แม้ hardware อายุ 4 ปี
+- OCF $23B (record) แต่ capex $28B gross / $18B net → **FCF −$5B**; **ไม่ให้ timeline ว่า FCF จะกลับเป็นบวกเมื่อไหร่** *(verified)*
+- **FY27 guide ขึ้น:** revenue ≥$90B (+34%), EPS $8.10; Q2 revenue +30–34%, cloud +65–71%
+- OpenAI: ความสัมพันธ์ขยาย (GPT-6 train ที่ Abilene); ไม่มีการพูดถึง renegotiation
+- **Direction vs last quarter:** ขึ้นในแง่ revenue/backlog; แย่ลงในแง่ cash และ balance sheet
+- *PM correction: earnings agent บอกว่า Q1 FY27 เป็น "ไตรมาสแรกที่ FCF ติดลบ" — ผิด (Q1 FY26 −$5.4B; FY26 ทั้งปี ~−$23.7B ตาม web, unverified)*
 
-Q1 FY26: Revenue +11% เป็น $14.9B, cloud +27% เป็น $7.2B, **OCI +54% เป็น $3.3B**, consumption +57% **RPO backlog พุ่ง 359% เป็น $455B** ต่อมารายงานใกล้ $664B
-
-OpenAI commit $300B/5 ปี (เริ่ม 2027 ~$60B/ปี — มากกว่า revenue ปัจจุบันของ OpenAI เองที่ ~$10B) ลูกค้า cloud รายอื่น: xAI, Meta, Nvidia, AMD
-
----
+## Why the Stock Fell ~57%
+*Source: sentiment agent (web)*
+- Peak $322.54 (ต.ค. 2025) → $139.54; −3.5% วันนี้
+- **S&P ลด rating เป็น BBB- (18 ก.ย. 2026)** ห่าง junk หนึ่งขั้น; Moody's outlook ลบ; CDS ~203bp สูงสุดในรอบ 18 ปี; หุ้นกู้ 10 ปี yield ~6.5% *(sentiment agent)*
+- ความกังวล OpenAI: commitment ~$300B/5 ปี เทียบรายได้ OpenAI ~$2B/เดือน — ต้องพึ่ง funding round ($122B) และ IPO ต้นปี 2027
+- *Unverified (แหล่งคุณภาพต่ำ):* force majeure ที่ Project Jupiter (NM, 4.5GW) และ layoff — สาเหตุที่อ้างของ −3.5% วันนี้
 
 ## Bull / Bear
 
-**Bull**
+**Bull:**
+- **Scale economies ใน OCI กำลังเร่ง ไม่ใช่หมดแรง:** cloud infra +93% → +121%, GPU ใช้งาน 97.9%, renewal ราคา +20% บน hardware เก่า — capacity ที่มีคนแย่งกันใช้ *(bull_researcher; earnings agent)*
+- **Backlog ที่ลูกค้ารับความเสี่ยงบางส่วนเอง:** RPO $664B ส่วนใหญ่ prepay/ลูกค้านำ hardware มา; $30B bookings ใน Q1 ไม่ต้องลงทุนเพิ่ม; ลูกค้ามี [[META]], [[NVDA]], [[AMD]], xAI, TikTok นอกจาก OpenAI *(bull_researcher; earnings + sentiment agents)*
+- **ราคาสะท้อนความเสี่ยงแล้ว:** ~12.7x EPS FY28; แม้ OpenAI ส่วนนั้นไม่แปลงเลย SOTP ยังให้ ~$110/หุ้น *(bull_researcher; valuation agent)* — *PM note: EPS เป็น non-GAAP ไม่รวม SBC และค่าเสื่อมที่กำลังพุ่ง P/E จริงสูงกว่านี้*
 
-- **Counter-positioning:** ขณะที่ AWS/Azure/GCP สร้าง general-purpose cloud ก่อนแล้วค่อยเพิ่ม AI capacity, Oracle ออกแบบ OCI เพื่อ AI workload โดยเฉพาะตั้งแต่แรก — OCI ขับเคลื่อน 84% ของ cloud growth และ share พุ่งจาก 35%→53% ใน 2 ปี
-- **Switching costs:** $58.53B (87% ของรายได้) อยู่บน subscription 1-5 ปี — ลูกค้าผูกสัญญา capacity หลายปี ไม่ใช่ pay-as-you-go
-- **Cornered resource:** RPO backlog $455-664B คือ demand ที่ Oracle **ถือสัญญาแล้ว** OpenAI deal ต้องการ power 4.5GW — พิสูจน์ว่า Oracle secure capacity (power, chip, buildout) ที่คู่แข่งตามไม่ทันเร็ว xAI/Meta/Nvidia/AMD ก็ใช้ OCI — ไม่ใช่แค่ favor ให้ OpenAI รายเดียว
+**Bear:**
+- **เผาเงินไม่มีวันสิ้นสุดที่ประกาศ:** FCF ติดลบหลายไตรมาสติด, FY27 capex $90–95B, ไม่มี timeline FCF บวก — และ fund ด้วยการเพิ่มทุน $20B + หุ้นกู้ ไม่ใช่แผนลดหนี้ *(bear_researcher; earnings agent + PM findings)*
+- **Credit ที่ขอบ junk:** BBB-, Moody's ลบ, CDS สูงสุด 18 ปี — ทั้ง capex plan ขึ้นกับการเข้าถึงตลาดทุน *(bear_researcher; sentiment agent)*
+- **RPO ไม่ใช่เงินสด และกระจุก:** ~45% ของ backlog คือ OpenAI ซึ่งเองก็ยังขาดทุนและพึ่ง IPO; margin ขั้นต้นกำลังลด — op margin ทรงได้เพราะตัด opex *(bear_researcher; sentiment + earnings agents)* — *PM note: bear ประเมิน OpenAI shrink ที่ ~40–45% ของมูลค่า — สูงเกิน SOTP ให้ ~20–25%*
 
-**Bear**
+## Valuation
+*Source: valuation agent (price $139.54 Yahoo 2026-09-25, 3.024B shares, market cap ~$422B, net debt ~$88B + $5B preferred → EV ~$515B, excl. $30.6B leases)*
 
-- **Margin กำลังแตกจริง:** cloud/software margin % ลดลงเพราะ infra cost โตเร็วกว่า revenue — buildout ยังไม่จ่ายตัวเองคืนได้
-- **Financing มาจากหนี้เกือบทั้งหมด:** capex $55.7B fund ด้วย debt/preferred $47.7B ผู้ถือหุ้นได้ buyback แค่ $95M — capital discipline หายไป equity holder อยู่ท้ายแถว
-- **Concentration risk มหาศาล:** ~ครึ่งของ $638B backlog ผูกกับ OpenAI รายเดียว ที่ revenue ปัจจุบันแค่ ~$10B เทียบ obligation $60B/ปี debt-to-equity 427% (เทียบ [[MSFT]] 32.7%) S&P ปรับ credit rating ลงเหลือ BBB- (ห่าง junk แค่ 1 notch) Q1 FCF ติดลบ $5.4B ยังต้องการเงินเพิ่มอีก ~$40B
+- **Lens: sum-of-parts บน EV** — P/E หลอกเพราะ non-GAAP ไม่รวม SBC/ค่าเสื่อม, FCF ติดลบ, และ capex ถูก fund บางส่วนด้วย prepayment ลูกค้า
+- (a) Mature software (apps + support + license + hardware/services ~$49B revenue, margin ~45% *(ประมาณ)*) × 18x ≈ **$330B**
+- (b) **OCI residual ≈ $185B** + capex สุทธิที่ยังต้องลงอีก ~$100B → จาก RPO ~$130B/ปี ที่ run-rate ต้องการ **OCI op margin ~26–30%** — ใกล้กับ incremental margin ที่ OCI แสดงอยู่ (~33%, inference)
+- ถ้า OpenAI (~45% ของ RPO) ไม่แปลงเลย → ~$110/หุ้น
+- **Implied expectation:** continuation — OCI แปลง backlog ที่ margin ปัจจุบัน ไม่ต้องเร่ง; ความเสี่ยงอยู่ที่ execution + funding
+- **Verdict: Deserved**
+- Consensus EPS FY27 $8.14, FY28 $11.00 (~12.7x FY28) *(Yahoo)*; 52-week $114.50–$322.54
+- **Falsifying number:** non-GAAP op margin **<40%** ใน Q3 FY27 (~กลาง มี.ค. 2027) → buildout ส่งมอบที่ margin ต่ำกว่าที่ราคาต้องการ → Ahead of itself
 
----
+## Variant Perception
+- *Thesis metric:* **FCF หลัง capex + net capex** (ตัววัดว่า buildout จ่ายตัวเองได้) คู่กับ **RPO conversion** และ non-GAAP op margin
+- *Where we differ from consensus:* **ไม่มี — เราถือ consensus view** ราคาสะท้อนทั้ง backlog และความเสี่ยงทางการเงินแล้ว
 
 ## Kill Conditions
+1. **OpenAI ผิดนัดชำระหรือ renegotiate สัญญาลงอย่างมีนัยสำคัญ** `[bounded ~20–25%]` — *Status 2026-09-25: ยังไม่ fire — ความสัมพันธ์ขยาย (GPT-6 ที่ Abilene); ขึ้นกับ OpenAI IPO ต้นปี 2027*
+2. **Credit rating ถูก downgrade เข้า junk** `[open-ended]` — capex $90–95B ต้องพึ่งตลาดทุน; ถ้า junk ต้นทุนเงินพุ่งและอาจต้องเพิ่มทุนต่อที่ราคาต่ำ ไม่มี floor ที่มองเห็น — *Status: ใกล้ — BBB- (ห่างหนึ่งขั้น), Moody's outlook ลบ*
+3. **Cloud/software margin ลดลงต่อเนื่อง 2+ ไตรมาสติด** โดยไม่เห็นสัญญาณว่า infra cost จะ stabilize `[bounded ~30%]` — *Status: gross margin ลด, op margin ทรง 42% ด้วยการตัด opex — เฝ้าดู*
+4. **Free cash flow ติดลบต่อเนื่องเกิน 3–4 ไตรมาส โดยไม่มี debt reduction plan ชัดเจน** `[open-ended]`
+   ***Status 2026-09-25: FIRED (very likely)*** — FCF ติดลบตั้งแต่อย่างน้อย Q1 FY26 (−$5.4B) ถึง Q1 FY27 (−$5B), FY26 ทั้งปี ~−$23.7B *(web, unverified)*; management ไม่ให้ timeline FCF บวก และ fund ด้วยการเพิ่มทุน $20B + หนี้ — ไม่ใช่แผนลดหนี้
+   *เงื่อนไขนี้ถูกเขียนไว้ตอนที่รู้อยู่แล้วว่าจะมี buildout — มันจึง fire ตามที่ออกแบบไว้ การแก้ถ้อยคำเงื่อนไขนี้ตอนนี้ (หลังมัน fire) คือ ego pattern การตัดสินใจเป็นของผู้ลงทุน: (a) ยอมรับว่า thesis เปลี่ยน หรือ (b) loosen พร้อมเขียนเหตุผลและหลักฐานใหม่ที่ไม่มีตอนเขียนเงื่อนไข*
 
-- **OpenAI ผิดนัดชำระหรือ renegotiate สัญญาลงอย่างมีนัยสำคัญ** — เพราะ concentration สูงมาก impact จะรุนแรงทันที
-- **Credit rating ถูก downgrade เข้า junk** — จะทำให้ cost of funding เพิ่มขึ้นอีกในช่วงที่ยังต้องกู้เพิ่ม
-- **Cloud/software margin ลดลงต่อเนื่อง 2+ ไตรมาสติด** โดยไม่เห็นสัญญาณว่า infra cost จะ stabilize
-- **Free cash flow ติดลบต่อเนื่องเกิน 3-4 ไตรมาส** โดยไม่มี debt reduction plan ชัดเจน
-
----
+*Kill conditions 1 และ 3 ต่ำกว่าเกณฑ์ ≥50% — ตามกฎควรย้ายไป Bear แต่การย้าย = loosening ต้องให้ผู้ลงทุนเขียนเหตุผลเอง*
 
 ## What to Ask
-
-1. **ถ้า OpenAI ประสบปัญหา solvency จริง Oracle มี contractual protection อะไรบ้าง?** (deposit, minimum commitment penalty, capacity ที่ resell ให้ลูกค้าอื่นได้ไหม)
-2. **แผน deleverage หลัง buildout รอบนี้เป็นยังไง?** debt-to-equity 427% ต้องมี exit plan ไม่งั้นความเสี่ยง credit downgrade จะคงอยู่นาน
-3. **ลูกค้า cloud รายอื่น (xAI, Meta, Nvidia, AMD) มีขนาด commitment เทียบกับ OpenAI แค่ไหน?** จะบอกได้ว่า diversification จริงมีมากแค่ไหนนอกเหนือจาก headline
+1. **ถ้า OpenAI ประสบปัญหา Oracle มี contractual protection อะไร?** (prepayment, minimum commitment, capacity ที่ขายต่อได้) — และ OpenAI IPO ต้นปี 2027 เลื่อนได้ไหม?
+2. **FCF จะบวกเมื่อไหร่?** management บอกว่าแต่ละโปรเจกต์ให้เงินสดดีหลัง ramp แต่ไม่ให้วันที่ — ถ้าต้องเพิ่มทุนอีกในปี 2027 เจ้าของหุ้นเดิมถูก dilute เท่าไหร่?
+3. **ถือ ORCL = เพิ่ม ai-capex exposure เดียวกับ [[NVDA]], [[AMD]], [[TSM]] ฯลฯ** — driver นี้ใกล้ cap 10% แล้ว; ORCL เป็นตัวที่มี balance sheet เสี่ยงที่สุดในกลุ่ม

@@ -3,6 +3,7 @@ ticker: BRKB
 company: Berkshire Hathaway
 updated: 2026-09-18
 type: stock-brief
+shared_driver: diversified-us
 ---
 
 # BRKB — Berkshire Hathaway Inc.

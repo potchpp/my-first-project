@@ -3,6 +3,7 @@ ticker: AVGO
 company: Broadcom
 updated: 2026-09-22
 type: stock-brief
+shared_driver: ai-capex
 ---
 
 # AVGO — Broadcom Inc.

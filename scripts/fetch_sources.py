@@ -5,8 +5,7 @@ fetch_sources.py — Fetch 10-K + earnings transcript for one or more tickers.
 Sources:
   10-K:        SEC EDGAR (always free)
   Transcript:  1. SEC EDGAR 8-K exhibit (companies that file transcript via EDGAR)
-               2. Motley Fool search
-               3. DuckDuckGo → Motley Fool fallback
+               2. Motley Fool quote page → DuckDuckGo fallback (via fetch_transcript.py)
                4. Placeholder with manual-paste instructions (if all fail)
 
 Usage:
@@ -27,9 +26,11 @@ import time
 import gzip
 import ssl
 from pathlib import Path
+from typing import Optional
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
-from urllib.parse import quote_plus
+
+import fetch_transcript as ft   # scripts/ is on sys.path when run as a script
 
 _SSL        = ssl._create_unverified_context()
 SCRIPT_DIR  = Path(__file__).parent
@@ -103,7 +104,7 @@ class _StripHTML(HTMLParser):
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
-        self.parts: list[str] = []
+        self.parts = []
         self._d = 0
 
     def handle_starttag(self, tag, _):
@@ -133,7 +134,7 @@ def html_to_text(html: str) -> str:
 # EDGAR — CIK + filing lookup
 # ══════════════════════════════════════════════════════
 
-def get_cik(ticker: str) -> tuple[str, str]:
+def get_cik(ticker: str):
     """Return (cik_padded, company_name)."""
     _log("Looking up CIK...")
     data = json.loads(edgar_get("https://www.sec.gov/files/company_tickers.json"))
@@ -167,10 +168,10 @@ _10K_PATTERNS = {
     "signatures": r"\n[ \t]*signatures\b",
 }
 
-def _find_all(text: str, pattern: str) -> list[int]:
+def _find_all(text: str, pattern: str) -> list:
     return [m.start() for m in re.finditer(pattern, text, re.IGNORECASE)]
 
-def _last(positions: list[int]) -> int | None:
+def _last(positions: list) -> Optional[int]:
     return positions[-1] if positions else None
 
 def extract_10k_items(text: str) -> dict[str, str]:
@@ -192,7 +193,13 @@ def extract_10k_items(text: str) -> dict[str, str]:
         s = s.strip()
         return s if len(s) <= MAX_ITEM_CHARS else s[:MAX_ITEM_CHARS] + f"\n\n[truncated at {MAX_ITEM_CHARS:,} chars]"
 
-    return {"item1": clip(text[s1:e1]), "item1a": clip(text[s1a:e1a]), "item7": clip(text[s7:e7])}
+    result = {"item1": clip(text[s1:e1]), "item1a": clip(text[s1a:e1a]), "item7": clip(text[s7:e7])}
+    # A real section body is always >300 chars; anything shorter means the regex
+    # only found a table-of-contents line (e.g. "Item 1A. Risk Factors ... 8").
+    thin = [k for k, v in result.items() if len(v) < 300]
+    if thin:
+        raise RuntimeError(f"Extracted sections too short (likely matched table of contents, not body): {', '.join(thin)}")
+    return result
 
 def fetch_10k(ticker: str, subs: dict) -> Path:
     company = subs.get("name","Unknown")
@@ -259,7 +266,7 @@ def fetch_10k(ticker: str, subs: dict) -> Path:
 # Transcript — Strategy 1: EDGAR 8-K exhibit
 # ══════════════════════════════════════════════════════
 
-def _find_transcript_in_8k(subs: dict, ticker: str) -> str | None:
+def _find_transcript_in_8k(subs: dict, ticker: str) -> Optional[str]:
     """
     Look for a recent 8-K that has a transcript exhibit.
     Companies that file transcripts via EDGAR use Item 7.01 +
@@ -315,96 +322,6 @@ def _fetch_edgar_transcript(doc_url: str) -> str:
     if "<html" in raw.lower() or "<!doctype" in raw.lower():
         return html_to_text(raw)
     return raw  # plain text
-
-
-# ══════════════════════════════════════════════════════
-# Transcript — Strategy 2 & 3: Motley Fool
-# ══════════════════════════════════════════════════════
-
-_FOOL_RE = re.compile(
-    r"https://www\.fool\.com/earnings/call-transcripts/"
-    r"(\d{4})/(\d{2})/(\d{2})/([\w-]+earnings-call[\w-]*)/"
-)
-
-def _find_fool_urls(html: str, ticker: str) -> list[str]:
-    matches = _FOOL_RE.findall(html)
-    seen: set[str] = set()
-    results = []
-    for y, mo, d, slug in matches:
-        url = f"https://www.fool.com/earnings/call-transcripts/{y}/{mo}/{d}/{slug}/"
-        if url not in seen:
-            seen.add(url); results.append((y, mo, d, url))
-    results.sort(key=lambda x: x[:3], reverse=True)
-    tl = ticker.lower()
-    urls = [r[3] for r in results]
-    relevant = [u for u in urls if tl in u.lower()]
-    return relevant or urls[:3]
-
-def _search_fool(ticker: str) -> str | None:
-    q   = quote_plus(f"{ticker} earnings call transcript")
-    url = f"https://www.fool.com/search/?q={q}&source=eustranscripts"
-    _log(f"Searching Motley Fool...")
-    try:
-        html = web_get(url, referer="https://www.fool.com/")
-        time.sleep(WEB_DELAY)
-        urls = _find_fool_urls(html, ticker)
-        if urls: _log(f"Found: {urls[0]}"); return urls[0]
-    except Exception as e:
-        _log(f"Fool search error: {e}")
-    return None
-
-def _search_ddg(ticker: str) -> str | None:
-    q   = quote_plus(f"site:fool.com/earnings/call-transcripts {ticker} earnings call transcript")
-    url = f"https://html.duckduckgo.com/html/?q={q}"
-    _log(f"DuckDuckGo fallback...")
-    try:
-        html = web_get(url, referer="https://duckduckgo.com/")
-        time.sleep(WEB_DELAY)
-        urls = _find_fool_urls(html, ticker)
-        if urls: _log(f"Found: {urls[0]}"); return urls[0]
-    except Exception as e:
-        _log(f"DDG search error: {e}")
-    return None
-
-def _parse_fool_slug(slug: str) -> tuple[str,str]:
-    m = re.search(r"-q(\d)-(\d{4})-earnings", slug, re.IGNORECASE)
-    if m: return m.group(1), m.group(2)
-    q = re.search(r"q(\d)", slug, re.IGNORECASE)
-    y = re.search(r"(\d{4})", slug)
-    return (q.group(1) if q else "?"), (y.group(1) if y else "????")
-
-def _extract_fool_body(html: str) -> str:
-    text  = html_to_text(html)
-    lines = text.split("\n")
-    start = 0
-    for i, line in enumerate(lines):
-        s = line.strip()
-        if len(s) > 80 and any(k in s.lower() for k in ["quarter","revenue","earnings","fiscal","thank you","thanks"]):
-            start = i; break
-    end = len(lines)
-    for i in range(len(lines)-1, start, -1):
-        s = lines[i].strip().lower()
-        if any(k in s for k in ["related articles","fool.com premium","motley fool","sign up","subscribe","disclosures"]):
-            end = i; break
-    body = "\n".join(lines[start:end]).strip()
-    return re.sub(r"\n{3,}", "\n\n", body)
-
-def _fetch_fool_transcript(url: str) -> tuple[str,str,str,str]:
-    """Returns (title, body, quarter, year)."""
-    _log(f"Downloading transcript: {url}")
-    html = web_get(url, referer="https://www.fool.com/")
-    time.sleep(WEB_DELAY)
-
-    title_m = re.search(r"<title>([^<]+)</title>", html, re.IGNORECASE)
-    title   = re.sub(r"\s*\|.*$","", title_m.group(1).strip() if title_m else "Earnings Call Transcript")
-
-    body = _extract_fool_body(html)
-    if len(body) < 200:
-        raise RuntimeError(f"Transcript body too short ({len(body)} chars) — page may require login.")
-
-    slug    = url.rstrip("/").split("/")[-1]
-    q, year = _parse_fool_slug(slug)
-    return title, body, q, year
 
 
 # ══════════════════════════════════════════════════════
@@ -510,24 +427,28 @@ def fetch_transcript(ticker: str, subs: dict) -> Path:
         except Exception as e:
             _log(f"EDGAR transcript failed: {e}")
 
-    # Strategy 2: Motley Fool direct search
-    _log("Strategy 2: Motley Fool search...")
-    fool_url = _search_fool(ticker)
-
-    # Strategy 3: DuckDuckGo fallback
-    if not fool_url:
-        fool_url = _search_ddg(ticker)
-
-    if fool_url:
-        try:
-            title, body, q, year = _fetch_fool_transcript(fool_url)
-            out = _save_transcript(ticker, q, year, title, fool_url, body)
-            _log(f"Saved → {out.relative_to(SCRIPT_DIR.parent)}  ({out.stat().st_size:,} bytes)")
+    # Strategy 2 & 3: Motley Fool quote page → DuckDuckGo, shared with fetch_transcript.py
+    _log("Strategy 2: Motley Fool...")
+    ft._current = ticker
+    try:
+        fool_url = ft.find_transcript_url(ticker)
+        q, year  = ft._parse_slug(fool_url.rstrip("/").split("/")[-1])
+        out      = OUTPUT_DIR / ticker / f"q{q}-{year}-call.md"
+        if out.exists():
+            _log(f"Already have {out.relative_to(SCRIPT_DIR.parent)} — skipping.")
             return out
-        except Exception as e:
-            _log(f"Motley Fool fetch failed: {e}")
+        title, body = ft.fetch_transcript(fool_url)
+        out = _save_transcript(ticker, q, year, title, fool_url, body)
+        _log(f"Saved → {out.relative_to(SCRIPT_DIR.parent)}  ({out.stat().st_size:,} bytes)")
+        return out
+    except Exception as e:
+        _log(f"Motley Fool failed: {e}")
 
-    # Strategy 4: Placeholder
+    # Strategy 4: Placeholder — only if no real transcript is on disk yet
+    existing = sorted((OUTPUT_DIR / ticker).glob("q*-call.md"))
+    if existing:
+        _log(f"No new transcript; keeping existing {existing[-1].name} (no placeholder).")
+        return existing[-1]
     _log("All strategies failed — creating placeholder with manual instructions.")
     out = _save_placeholder(ticker)
     _log(f"Placeholder → {out.relative_to(SCRIPT_DIR.parent)}")
@@ -539,7 +460,7 @@ def fetch_transcript(ticker: str, subs: dict) -> Path:
 # Per-ticker orchestration
 # ══════════════════════════════════════════════════════
 
-def run_ticker(ticker: str, do_10k: bool, do_transcript: bool) -> list[str]:
+def run_ticker(ticker: str, do_10k: bool, do_transcript: bool) -> list:
     global _current_ticker
     _current_ticker = ticker
 
@@ -593,7 +514,7 @@ def main():
     mode = "10-K only" if not do_transcript else ("transcript only" if not do_10k else "10-K + transcript")
     print(f"\nfetch_sources.py  ·  {mode}  ·  tickers: {', '.join(tickers)}")
 
-    all_errors: list[str] = []
+    all_errors: list = []
     for ticker in tickers:
         errs = run_ticker(ticker, do_10k, do_transcript)
         all_errors.extend(errs)

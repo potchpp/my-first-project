@@ -1,113 +1,83 @@
 ---
 ticker: AMZN
-company: 
-updated: 2026-06-08
+company: Amazon
+updated: 2026-09-26
 type: stock-brief
+shared_driver: cloud-hyperscale
 ---
 
-# AMZN (Amazon) — Stock Brief
-**Date:** 2026-06-08 | **Sources:** 10-K FY2025 (ended Dec 31, 2025) + Q1 2026 live data (sentiment agent) | *No earnings transcript*
+# AMZN — Amazon.com, Inc.
+**Date:** 2026-09-26 | *Refresh of the 2026-06-08 brief via /deep — adds Q2 2026 call, debate round, valuation verdict, variant perception, damage-tagged kill conditions. Price $249.67 (Yahoo, 2026-09-26)*
 
-**Source docs:** [[sources/AMZN/10-k-fy2025]]
+**Source docs:** [[sources/AMZN/10-k-fy2025]] · [[sources/AMZN/q2-2026-call]]
 
 ---
 
 ## Company Snapshot
 
-Amazon เป็น conglomerate ที่มีสองธุรกิจที่แทบไม่เหมือนกันอยู่ในบริษัทเดียว: retail marketplace ขนาด $588B ที่ margin บาง กับ AWS cloud infrastructure ขนาด $128.7B ที่ margin 35%+ AWS คือ engine ของกำไรและเป็น platform ที่ AI economy กำลัง build อยู่บน tension หลักของ thesis ตอนนี้คือ **Amazon กำลัง spend $200B/ปี ใน CapEx เพื่อ win AI infrastructure race — ถ้า win FCF จะ explode ในอีก 3-5 ปี แต่ระหว่างนี้ FCF แทบไม่มี**
-
----
+Amazon คือสองธุรกิจในบริษัทเดียว: retail + ads + Prime (North America และ International = ~82% ของรายได้ แต่ margin บาง) และ AWS (18% ของรายได้ แต่ทำกำไรจากการดำเนินงานมากกว่าครึ่ง) ตอนนี้ AWS กำลังเร่งตัวจาก AI — ทั้งขาย compute และทำ chip เอง (Trainium, Graviton) — และ Amazon เป็นหนึ่งใน hyperscaler ที่จ่าย capex ให้ [[NVDA]], [[TSM]], [[MU]] และเป็นคู่ค้าด้านพลังงานของ [[GEV]] *(fundamentals agent, 10-K l.604-610; earnings agent; GEV sentiment agent)*
 
 ## Fundamentals Signal
 
-*Source: fundamentals agent — sources/AMZN/10-k-fy2025.md*
+- **Revenue durability: สูง** — AWS เป็นสัญญาหลายปี, Prime และ ads เป็นรายได้ซ้ำ, seller fees โตตาม marketplace *(fundamentals agent)*
+- **Margin trend: ดีขึ้น** — gross margin 48.9% → 50.3%; AWS operating margin 35.4% ทั้งปี FY2025 (op income $45.6B บนรายได้ $128.7B, 10-K l.608, 770, verified); North America 6.9%, International 2.9% *(fundamentals agent)*
+- **Capital allocation: ลงทุนทั้งหมด** — capex $128.3B (+65%) ทำให้ free cash flow เหลือ $11.2B จาก $38.2B (10-K l.816-824, verified); ไม่มี buyback *(fundamentals agent)*
 
-**Revenue segment breakdown:**
+## Latest Earnings — Q2 2026
 
-| Segment | FY2025 | สัดส่วน | YoY | Op margin |
-|---|---|---|---|---|
-| North America | $426.3B | 59% | +10% | ~6.9% |
-| International | $161.9B | 23% | +13% | ~2.9% |
-| **AWS** | **$128.7B** | **18%** | **+20%** | **~35%** |
-| **รวม** | **$716.9B** | | **+12%** | ~11.2% |
-
-AWS = 18% ของ revenue แต่ $45.6B op income = ~57% ของกำไรรวม *(10-k-fy2025.md)*
-
-**Revenue durability — สองชั้น ต่างกันมาก**
-- **Durable (~40%):** AWS (switching costs สูง, enterprise multi-year contracts), advertising (structural — seller ต้องซื้อเพื่อ visibility), Prime subscriptions
-- **Transactional (~60%):** 1P retail + 3P marketplace — cyclical, price-competitive, tariff-exposed; China-based sellers คือ "significant portion" ของ 3P revenue *(10-k-fy2025.md)*
-
-**Margin trend — ขยาย แต่ CapEx กิน FCF หมด**
-- Consolidated op margin: ~9.4% (FY2023 est.) → ~10.7% (FY2024) → ~11.2% (FY2025)
-- FY2025 มี one-time charges $5.2B ($2.5B FTC settlement + $2.7B severance) — underlying ~12.9%
-- AWS margin ลดเล็กน้อย: 37.0% (FY2024) → 35.4% (FY2025) — infrastructure spend เร่งตัว
-- Op cash flow: $139.5B (แข็งแกร่ง) แต่ CapEx $128.3B → **FCF $11.2B เท่านั้น** (ลดจาก $38.2B ปีก่อน) *(10-k-fy2025.md)*
-
-**Capital allocation — all-in reinvestment ไม่มี return to shareholders**
-- CapEx: $77.7B (FY2024) → $128.3B (FY2025, +65%) → ~$200B guided FY2026
-- Debt เพิ่ม: $52.6B → $65.6B — ออกหุ้นกู้ $25B ใน FY2025 เพื่อ fund buildout
-- ไม่มี dividend ไม่มี buyback — full reinvestment mode
-- Anthropic: invested $2.7B, recorded $15.2B unrealized gain *(10-k-fy2025.md)*
-
----
-
-## Latest Earnings
-
-*Source: earnings agent (10-K) + sentiment agent (Q1 2026) — ไม่มี transcript*
-
-**FY2025 รวม:**
-- Revenue: $716.9B (+12%), Op income: $80.0B (+17%), FCF: $11.2B (ลดจาก $38.2B)
-- AWS: $128.7B (+20%), op income $45.6B (+14%)
-- หักปัจจัย one-time: $2.5B FTC settlement + $2.7B severance + $15.2B Anthropic unrealized gain *(10-k-fy2025.md)*
-
-**Q1 2026:**
-- Revenue: $181.5B (+17% YoY) — beat guidance
-- Net income: $30.3B (nearly 2x YoY) — **แต่ $16.8B มาจาก mark-to-market Anthropic stake ไม่ใช่ operating performance**
-- **AWS: $37.6B (+28% YoY)** — fastest growth in 15 quarters
-- Bedrock AI: $15B annualized run rate, 170% QoQ customer spend growth, 80% of Fortune 100 *(sentiment agent)*
-
-**Q2 2026 guidance:**
-- Revenue $194–199B; Op income $20–24B
-- Explicitly conditioned on "current tariff conditions holding" — tariff risk อยู่ใน guidance โดยตรง *(sentiment agent)*
-
-**CapEx 2026:** ~$200B guided — FCF near zero ทั้งปี *(sentiment agent)*
-
----
+- Revenue **$200.6B (+20%)**; operating income $27.5B (+43%) แต่รวม tariff refund และ energy gain $1.2B *(q2-2026-call l.10-12)*
+- **AWS $42.2B (+36.7%)** เร็วที่สุดใน 18 ไตรมาส, run-rate $169B; operating margin 39.4%; **backlog $496B** โตระดับสามหลัก *(l.16-20, verified)*
+- Chip ของตัวเอง (Trainium/Graviton) run-rate เกิน $25B โตสามหลัก; OpenAI และ Anthropic ผูก Trainium หลาย GW *(l.24, 130)*
+- **Capex 2026 ~$220B** (ขึ้นจาก $200B) เพราะ memory แพงและต้องการ capacity เพิ่ม — ผู้บริหารบอกว่าแม้ใช้เท่านี้ก็ยังไม่พอ demand *(l.26, 62, verified)*
+- Q3 guide revenue $197-202B, operating income $22.5-26.5B; Kuiper ~400 ดวงบนวงโคจร *(earnings agent)*
 
 ## Bull / Bear
 
-**Bull**
-- **Switching costs + Process power ใน AWS คือ platform ของ AI economy:** Enterprise ที่ build บน AWS เปลี่ยน provider ไม่ได้ง่ายๆ Bedrock +170% QoQ, 80% Fortune 100 ใช้งานอยู่แล้ว และ Trainium/Graviton chips ที่ Amazon build เองทำให้ inference cost ต่ำกว่าคู่แข่ง — เป็น process power ที่สร้างได้ยาก
-- **AWS growth กำลัง re-accelerate:** จาก +20% FY2025 เป็น +28% Q1 2026 — เร่งตัวขึ้น ไม่ใช่ชะลอ ถ้า trajectory นี้ต่อด้วย margin ที่ scale ขึ้น FCF จะกลับมาระเบิดหลัง CapEx cycle จบ
-- **Advertising คือ hidden compounding engine:** ไม่ได้ break out แยก แต่ grow เร็วและ structural — ทุก seller บน marketplace ต้องซื้อ ad เพื่อ visibility เป็น toll road ที่ scale ตาม GMV โดยอัตโนมัติ
+**Bull** *(bull_researcher)*
+- **Process power + counter-positioning ใน chip:** AWS เร่ง 5 ไตรมาสติดพร้อม margin 39.4% และ AI lab ใหญ่ทั้งสองผูก Trainium — ทางเลือกนอก NVIDIA ที่ Google และ Microsoft ยังไม่มีในขนาดนี้ *(earnings agent l.16-24, 130)*
+- **Backlog คือ demand ที่จองแล้ว:** capex $220B ถูกใช้กับ demand ที่เกิน supply ไม่ใช่สร้างเผื่อ *(earnings agent l.26, 62)*
+- **Scale economies ยังทำงาน:** gross margin ขึ้นทั้งที่ค่า infrastructure โต 23% *(fundamentals agent)*
 
-**Bear**
-- **FCF = zero ขณะที่ debt เพิ่มและไม่มี buyback:** $200B CapEx ใน FY2026 = op cash flow ทั้งปีหมดไปกับ infrastructure ไม่มีอะไรเหลือ ถ้า AI demand ชะลอหรือ model cost deflation เกิดขึ้นเร็ว Amazon จะถือ overbuilt infrastructure พร้อม $65.6B+ debt ที่ต้อง service
-- **Net income หลอก ต้อง strip Anthropic ออก:** Q1 2026 net income $30.3B แต่ $16.8B มาจาก Anthropic mark-to-market — operating income จริงๆ ต่ำกว่ามาก เป็น pattern ที่ซ่อน execution gap ไว้
-- **FTC antitrust trial (Feb 2027) คือ wildcard ใหญ่:** ครอบคลุม Buy Box, anti-discounting clauses, และ "Project Nessie" ที่ถูกกล่าวหาว่าใช้ inflate ราคาทั่วตลาด $1B+ ถ้า DOJ/FTC win และ remedy รวม structural change ต่อ marketplace model กระทบ 3P revenue โดยตรง
+**Bear** *(bear_researcher)*
+- **Cash flow หายไปโดยไม่มีเพดาน:** FCF $38.2B → $11.2B (FY2025, verified) แล้ว capex ยังถูกปรับขึ้นกลางปี; web ประเมิน FCF ปีนี้ติดลบ $17-28B *(fundamentals l.816-824; sentiment, UNVERIFIED)* — **bear point ที่ไม่มี bull counter:** ไม่มีตัวเลขไหนตอบได้ว่าการเผาเงินหยุดเมื่อไหร่
+- **Backlog กระจุกที่ AI lab ที่ยังขาดทุน:** OpenAI และ Anthropic — และ Amazon ถือหุ้น Anthropic เกิน 20% ทำให้เป็น demand ที่วนกลับมาหาตัวเอง *(earnings l.130; sentiment, UNVERIFIED)*
+- **คุณภาพกำไร:** operating income รวมรายการครั้งเดียว $1.2B และ net income พองจากการตีมูลค่าหุ้น Anthropic *(earnings l.12; sentiment, UNVERIFIED)*
 
----
+## Valuation
+
+*Lens: sum-of-parts — AWS เป็น infrastructure โตเร็ว margin สูง, retail + ads เป็นธุรกิจ mature margin บาง; FCF ใช้ไม่ได้ตอนนี้เพราะ capex (valuation agent)*
+
+ราคา $249.67 ≈ market cap ~$2.65T (จำนวนหุ้นประมาณจาก 10-K) SOTP คร่าวๆ: AWS ~10x ยอดขาย run-rate ≈ $1.7T + retail/ads ≈ $0.55-0.59T = $2.2-2.3T ส่วนต่างแปลว่าราคาต้องการให้ AWS โตกลาง 30% ต่อเนื่องหลายปี — ซึ่งเป็นสิ่งที่ทำอยู่และมี backlog $496B รองรับ
+
+**Verdict: Deserved**
+
+**Falsifying number:** AWS revenue growth ในรายงาน Q3 2026 (~ปลาย ต.ค. 2026) ต่ำกว่า 30% YoY
+
+*Integrator note:* bear ชี้ถูกว่า SOTP ไม่ได้คิดต้นทุนเงินทุนของ capex $220B — "Deserved" ขึ้นกับว่า AWS margin 39% อยู่ได้หลังค่าเสื่อมจาก capex ก้อนนี้เริ่มเข้างบ
+
+## Variant Perception
+
+- *Thesis metric:* **AWS growth YoY คู่กับ backlog growth** — growth บอกว่า capacity ใหม่ขายได้, backlog บอกว่ายังมีคนจองต่อ
+- *Where we differ from consensus:* nothing — we hold the consensus view (Strong Buy, PT เฉลี่ย ~$328, web) สิ่งที่เราเฝ้าเพิ่มคือ **สัดส่วน backlog ที่มาจาก AI lab** ซึ่งบริษัทไม่เปิดเผย
 
 ## Kill Conditions
 
-Thesis หลักของ AMZN: *AWS + AI infrastructure investment ที่ทำตอนนี้จะสร้าง switching costs และ process power ที่จะ compound เป็น FCF explosion ใน 3–5 ปี*
+Thesis: *AWS + AI infrastructure investment ที่ทำตอนนี้จะสร้าง switching costs และ process power ที่ compound เป็น FCF ใน 3–5 ปี*
 
-Thesis แตกถ้า:
-- **AWS growth rate ชะลอต่ำกว่า 15% ต่อเนื่อง 2 ไตรมาส** ขณะที่ CapEx ยังอยู่ที่ $150B+ — ROI ของ infrastructure cycle ไม่ justify และ FCF หดนานกว่าที่ thesis คิด
-- **Bedrock/AI revenue plateau หลังจาก hyperscaler ต่างๆ commodity AI API ลงมา** — ถ้า model API cost ลดลงเร็วมาก competitive differentiation ของ AWS ใน AI layer ลดลง และ CapEx $200B สำหรับ compute ที่ถูก commodity ไม่ให้ return
-- **FTC antitrust trial Feb 2027 ลงเอยด้วย structural remedy ต่อ marketplace** — ถ้าต้องเปลี่ยน Buy Box algorithm หรือหยุด anti-discounting clauses 3P seller volume และ advertising revenue จะได้รับผลกระทบโดยตรงตลาด seller ต้องปรับตัวใหม่
-- **Tariff escalation ใหม่ระหว่างปี** กระทบ China-based 3P sellers ที่เป็น "significant portion" ของ marketplace — ถ้า Q2 2026 guidance ที่ explicit conditioned on "current tariff conditions" ถูก violated retail margin จะ compress ทันที
+- **AWS growth ชะลอต่ำกว่า 20% ต่อเนื่อง 2 ไตรมาส ขณะที่ capex ยังอยู่ที่ $150B+** — ROI ของ infrastructure cycle ไม่ justify `[bounded ~40%]`
+- **AI lab รายใหญ่ (OpenAI หรือ Anthropic) ลดหรือยกเลิก Trainium/AWS commitment** — backlog ส่วนที่กระจุกหายไป `[bounded ~30%]`
+- **Bedrock/AI revenue plateau หลัง AI API กลายเป็น commodity** — capex $220B สำหรับ compute ที่ถูก commodity ไม่ให้ return `[bounded ~35%]`
+- **FTC antitrust trial (ก.พ. 2027) ลงเอยด้วย structural remedy ต่อ marketplace** — Buy Box หรือ anti-discounting clause ถูกบังคับเปลี่ยน กระทบ 3P และ ads `[open-ended]`
+- **Tariff escalation ใหม่กระทบ China-based 3P sellers** — retail margin บางอยู่แล้ว `[bounded ~15%]`
 
----
+*Tightened 2026-09-26: AWS threshold 15% → 20%, and a new AI-lab concentration condition from the bear round. The tariff and AI-plateau conditions are below 50% damage on their own and belong in Bear, but are kept as written — not loosened.*
 
 ## What to Ask
 
-1. **AWS growth re-acceleration เกิดจาก workload ชนิดไหน?** +28% Q1 2026 vs +20% FY2025 — เป็น AI inference workload ใหม่ หรือ migration of existing on-prem workloads หรือ re-sign ของ existing customers ที่ขยาย commitment? ถ้าเป็น AI-new ต้องรู้ว่า retention rate หลังจาก proof-of-concept เป็นอย่างไร ถ้า churn สูงหลัง trial phase growth จะไม่ compound
-
-2. **$200B CapEx มี committed demand backing อะไรบ้าง?** AWS backlog (remaining performance obligations) บอกว่า enterprise ที่ committed spend เป็น X เดือนข้างหน้าเป็นเท่าไหร่ — ก่อนลงทุนในช่วง FCF near-zero ควรรู้ว่า infrastructure ที่ build ถูก pre-sold แล้วกี่ % vs build-and-hope
-
-3. **Anthropic stake คือ strategic asset หรือ financial bet?** $15.2B unrealized gain ใน FY2025 + $16.8B ใน Q1 2026 alone ทำให้ reported net income สูงเกินจริงมาก และ Anthropic ยังขาดทุนอยู่ ถ้า AI market re-rates downward unrealized gain จะกลายเป็น loss — ต้องการ kill condition ที่ชัดสำหรับ Anthropic thesis ก่อนนับรวมเป็นส่วนหนึ่งของ AMZN value
+1. **Backlog $496B มาจาก OpenAI + Anthropic กี่ %?** และสัญญามีค่าปรับถ้ายกเลิกไหม — ถ้าไม่มี backlog ส่วนนี้เป็น option ของลูกค้าเหมือนที่เจอใน [[AMD]]
+2. **Capex $220B จะเริ่มเป็นค่าเสื่อมเท่าไหร่ต่อปีในปี 2027-2028?** ใช้ประเมินว่า AWS margin 39% ลงไปเหลือเท่าไหร่เมื่อ capacity ใหม่เข้างบ
+3. **AWS โตช้ากว่า Google Cloud และ Azure (web: +28% vs +63%/+40% ใน Q1) เพราะ capacity หรือเพราะเสีย share?** ถ้า Q2 +36.7% คือการตามทันหลัง capacity เพิ่ม ช่องว่างกับ [[GOOG]] และ [[MSFT]] ควรแคบลงอีกใน Q3
 
 ---
 
-*ไม่ใช่คำแนะนำการลงทุน — 10-K FY2025 (ปิด Dec 31, 2025) + Q1 2026 live data ไม่มี earnings transcript*
+*ไม่ใช่คำแนะนำการลงทุน — research summary จาก 10-K FY2025, Q2 2026 call และ agent analysis*

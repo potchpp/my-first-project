@@ -24,25 +24,31 @@ INDEX_JSON   = BRIEFS_DIR / "index.json"
 def parse_brief(md_path: Path) -> dict:
     content = md_path.read_text(encoding="utf-8")
 
-    # # AAPL — Apple Inc.
+    # Format A (old): # AAPL — Apple Inc.
+    # Format B (skill): # IREN (Iris Energy) — Stock Brief
     m = re.match(r"^# ([A-Z0-9]+)\s*[—–\-]+\s*(.+)$", content, re.MULTILINE)
-    if not m:
-        raise ValueError(f"Cannot parse heading in {md_path}")
-    ticker       = m.group(1).strip()
-    company_name = m.group(2).strip()
+    if m:
+        ticker       = m.group(1).strip()
+        company_name = re.sub(r"\s*[—–\-]+\s*Stock Brief\s*$", "", m.group(2)).strip()
+    else:
+        m2 = re.match(r"^# ([A-Z0-9]+)\s+\(([^)]+)\)", content, re.MULTILINE)
+        if not m2:
+            raise ValueError(f"Cannot parse heading in {md_path}")
+        ticker       = m2.group(1).strip()
+        company_name = m2.group(2).strip()
 
-    # *Brief generated: 2026-06-07 | ...*
-    dm   = re.search(r"Brief generated:\s*(\d{4}-\d{2}-\d{2})", content)
+    # Date: old "*Brief generated: YYYY-MM-DD*" or new "**Date:** YYYY-MM-DD"
+    dm   = re.search(r"(?:Brief generated:|Date:)\s*\*{0,2}\s*(\d{4}-\d{2}-\d{2})", content)
     date = dm.group(1) if dm else "unknown"
 
-    # First paragraph after snapshot heading
+    # First paragraph after snapshot heading (case-insensitive)
     preview = ""
     for pat in [
         r"## What the company does\s*\n+([\s\S]+?)(?=\n---|\n##)",
         r"## 1\. Company snapshot[^\n]*\n+([\s\S]+?)(?=\n---|\n##)",
         r"## Company snapshot[^\n]*\n+([\s\S]+?)(?=\n---|\n##)",
     ]:
-        pm = re.search(pat, content)
+        pm = re.search(pat, content, re.IGNORECASE)
         if pm:
             text = pm.group(1).strip()
             text = re.sub(r"\*+", "", text)
@@ -107,19 +113,17 @@ def rebuild_index() -> list[str]:
 
 # ─── Git ─────────────────────────────────────────────────────────────────────
 
-def git_push(changed_tickers: list[str]):
+def git_commit_index(changed_tickers: list[str]):
+    # Commit index.json only, never push: the repo is public, so briefs go out only
+    # after the investor reviews them and pushes by hand.
     os.chdir(PROJECT_ROOT)
-    subprocess.run(["git", "add", "briefs/"], check=True)
     label = ", ".join(changed_tickers) if changed_tickers else "briefs"
     result = subprocess.run(
-        ["git", "commit", "-m", f"Auto-update: {label} → index.json"],
+        ["git", "commit", "-m", f"Auto-update: {label} → index.json", "--", str(INDEX_JSON)],
         capture_output=True, text=True
     )
-    if result.returncode != 0:
-        if "nothing to commit" in result.stdout + result.stderr:
-            return
+    if result.returncode != 0 and "nothing to commit" not in result.stdout + result.stderr:
         raise RuntimeError(result.stderr)
-    subprocess.run(["git", "push", "origin", "main"], check=True)
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
@@ -128,10 +132,10 @@ def main():
     try:
         changed = rebuild_index()
         if changed:
-            git_push(changed)
+            git_commit_index(changed)
             label = ", ".join(changed)
             print(json.dumps({
-                "systemMessage": f"✓ {label} → index.json updated → pushed to Vercel"
+                "systemMessage": f"✓ {label} → index.json committed (not pushed — review, then git push)"
             }))
         # no change = silent exit
     except Exception as e:

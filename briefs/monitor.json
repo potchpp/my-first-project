@@ -1,0 +1,361 @@
+{
+ "AAPL": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2027 EPS growth",
+   "breaks": "above",
+   "threshold": 15,
+   "unit": "%",
+   "current": null,
+   "current_label": "",
+   "deadline": "2027-10-31",
+   "note": "brief has no FY2027 EPS growth figure yet"
+  },
+  "kills": []
+ },
+ "AMD": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Data Center revenue growth YoY",
+   "breaks": "below",
+   "threshold": 70,
+   "unit": "%",
+   "current": 107,
+   "current_label": "Q2 2026 actual",
+   "deadline": "2027-12-31"
+  },
+  "kills": []
+ },
+ "AMZN": {
+  "falsifier": {
+   "type": "number",
+   "metric": "AWS revenue growth YoY",
+   "breaks": "below",
+   "threshold": 30,
+   "unit": "%",
+   "current": 36.7,
+   "current_label": "Q2 2026 actual",
+   "deadline": "2026-10-31"
+  },
+  "kills": []
+ },
+ "ASTS": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2027 revenue",
+   "breaks": "above",
+   "threshold": 1000,
+   "unit": "$M",
+   "current": 175,
+   "current_label": "FY2026 guide midpoint",
+   "deadline": "2028-02-28",
+   "judged": "at deadline",
+   "note": "below $500M would confirm the verdict instead"
+  },
+  "kills": []
+ },
+ "CRCL": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2026 adj. EBITDA",
+   "breaks": "above",
+   "threshold": 900,
+   "unit": "$M",
+   "current": 570,
+   "current_label": "H1 2026 annualized run-rate",
+   "deadline": "2027-02-28",
+   "note": "needs ~$180M of Arc presale recognition to get close"
+  },
+  "kills": []
+ },
+ "GEV": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2027 adj. EBITDA margin",
+   "breaks": "below",
+   "threshold": 15,
+   "unit": "%",
+   "current": 13,
+   "current_label": "FY2026 guide midpoint (web)",
+   "deadline": "2028-02-28",
+   "judged": "at deadline",
+   "note": "FY2025 was 8.4% (10-K); the 2028 target is 20%"
+  },
+  "kills": []
+ },
+ "GOOG": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Google Cloud revenue growth YoY",
+   "breaks": "below",
+   "threshold": 40,
+   "unit": "%",
+   "current": 63,
+   "current_label": "Q1 2026 actual",
+   "deadline": "2027-07-31",
+   "note": "Q2 2026 +82% is unverified (web); deadline covers the next 4 quarters"
+  },
+  "kills": []
+ },
+ "GRMN": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Fitness revenue growth YoY",
+   "breaks": "below",
+   "threshold": 15,
+   "unit": "%",
+   "current": 25,
+   "current_label": "Q2 2026 actual",
+   "deadline": "2027-02-28",
+   "note": "also breaks if Fitness op margin <33% (now 37%)"
+  },
+  "kills": []
+ },
+ "HNGE": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2026 revenue",
+   "breaks": "below",
+   "threshold": 856,
+   "unit": "$M",
+   "current": 858,
+   "current_label": "FY2026 guide midpoint",
+   "deadline": "2027-02-28",
+   "note": "also breaks if non-GAAP op margin <28% (guide is 28%)"
+  },
+  "kills": []
+ },
+ "INTC": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Foundry external revenue in one quarter",
+   "breaks": "below",
+   "threshold": 1.5,
+   "unit": "$B",
+   "current": 0.293,
+   "current_label": "Q2 2026 actual",
+   "deadline": "2027-12-31",
+   "judged": "at deadline",
+   "note": "brief gives $1.5–2B; lower bound used"
+  },
+  "kills": []
+ },
+ "IREN": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Contracted ARR",
+   "breaks": "below",
+   "threshold": 3.6,
+   "unit": "$B",
+   "current": 1,
+   "current_label": "ARR as of Aug 2026",
+   "deadline": "2027-02-28",
+   "judged": "at deadline",
+   "note": "guide is >$4B by Dec 2026; the falsifier is missing it by >10%"
+  },
+  "kills": []
+ },
+ "LITE": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Non-GAAP gross margin",
+   "breaks": "below",
+   "threshold": 48,
+   "unit": "%",
+   "current": null,
+   "current_label": "",
+   "deadline": "2027-02-28",
+   "note": "also breaks if revenue growth <50%; brief states no current gross margin"
+  },
+  "kills": []
+ },
+ "LLY": {
+  "falsifier": {
+   "type": "number",
+   "metric": "US net price of Mounjaro+Zepbound YoY",
+   "breaks": "below",
+   "threshold": -15,
+   "unit": "%",
+   "current": -9,
+   "current_label": "Q2 2026 underlying",
+   "deadline": "2027-02-28"
+  },
+  "kills": []
+ },
+ "LOW": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Adj. operating margin",
+   "breaks": "below",
+   "threshold": 11.6,
+   "unit": "%",
+   "current": 11.6,
+   "current_label": "FY2026 guide (already lowered)",
+   "deadline": "2026-11-30",
+   "note": "also needs comps worse than flat in the same quarter"
+  },
+  "kills": []
+ },
+ "META": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2026 free cash flow",
+   "breaks": "above",
+   "threshold": 25,
+   "unit": "$B",
+   "current": null,
+   "current_label": "",
+   "deadline": "2027-02-28",
+   "note": "Q2 2026 quarterly FCF was $0.78B; no full-year figure yet. FCF ~0 plus 2027 capex >$145B would confirm the verdict"
+  },
+  "kills": []
+ },
+ "MSFT": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Azure growth YoY",
+   "breaks": "below",
+   "threshold": 35,
+   "unit": "%",
+   "current": 43,
+   "current_label": "Q4 FY2026 actual",
+   "deadline": "2026-10-31",
+   "note": "only counts while capex/revenue stays >45%"
+  },
+  "kills": []
+ },
+ "NFLX": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Revenue growth YoY",
+   "breaks": "below",
+   "threshold": 9,
+   "unit": "%",
+   "current": 11.7,
+   "current_label": "Q3 2026 guide",
+   "deadline": "2027-01-31",
+   "note": "also breaks if FY2027 op-margin guide <30% (FY2026 guide 31.5%)"
+  },
+  "kills": []
+ },
+ "NVDA": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY28 revenue growth",
+   "breaks": "below",
+   "threshold": 60,
+   "unit": "%",
+   "current": 70,
+   "current_label": "FY28 guide",
+   "deadline": "2028-02-28"
+  },
+  "kills": []
+ },
+ "OMDA": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2026 adj. EBITDA",
+   "breaks": "below",
+   "threshold": 21,
+   "unit": "$M",
+   "current": 24,
+   "current_label": "FY2026 guide midpoint",
+   "deadline": "2027-02-28",
+   "note": "also breaks if revenue <~$325M (guide $334–340M)"
+  },
+  "kills": []
+ },
+ "ORCL": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Non-GAAP operating margin",
+   "breaks": "below",
+   "threshold": 40,
+   "unit": "%",
+   "current": 42,
+   "current_label": "Q1 FY2027 actual",
+   "deadline": "2027-03-15"
+  },
+  "kills": []
+ },
+ "PLTR": {
+  "falsifier": {
+   "type": "number",
+   "metric": "US commercial revenue growth YoY",
+   "breaks": "below",
+   "threshold": 100,
+   "unit": "%",
+   "current": 149,
+   "current_label": "Q2 2026 actual",
+   "deadline": "2027-08-31"
+  },
+  "kills": []
+ },
+ "RKLB": {
+  "falsifier": {
+   "type": "event",
+   "metric": "Neutron's first successful orbital launch",
+   "deadline": "2027-06-30",
+   "note": "a successful launch by then would prove 'Ahead of itself' wrong; no launch confirms it"
+  },
+  "kills": []
+ },
+ "SPCX": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Total ARR",
+   "breaks": "above",
+   "threshold": 85,
+   "unit": "$B",
+   "current": 31,
+   "current_label": "Q2 2026 run-rate (derived from quarterly revenue)",
+   "deadline": "2027-02-28",
+   "judged": "at deadline",
+   "note": "also needs Starship orbital catch-and-reuse by end of 2026"
+  },
+  "kills": []
+ },
+ "TEAM": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FCF minus SBC, % of revenue",
+   "breaks": "above",
+   "threshold": 0,
+   "unit": "%",
+   "current": -4,
+   "current_label": "FY2026 actual",
+   "deadline": "2027-01-31",
+   "note": "needs two consecutive positive quarters (Q1 and Q2 FY27)"
+  },
+  "kills": []
+ },
+ "TSLA": {
+  "falsifier": {
+   "type": "number",
+   "metric": "Cumulative unsupervised robotaxi miles",
+   "breaks": "above",
+   "threshold": 50,
+   "unit": "M",
+   "current": 0.38,
+   "current_label": "Q2 2026 actual",
+   "deadline": "2027-10-31",
+   "judged": "at deadline",
+   "note": "also needs auto GM ex-credits back above 19% (now ~16%)"
+  },
+  "kills": []
+ },
+ "TSM": {
+  "falsifier": {
+   "type": "number",
+   "metric": "FY2026 revenue growth YoY (USD)",
+   "breaks": "below",
+   "threshold": 35,
+   "unit": "%",
+   "current": 41,
+   "current_label": "FY2026 guide",
+   "deadline": "2027-01-31",
+   "note": "Q2 2026 alone was +33.7%"
+  },
+  "kills": []
+ }
+}

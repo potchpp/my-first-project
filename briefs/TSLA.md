@@ -1,93 +1,86 @@
 ---
 ticker: TSLA
 company: Tesla
-updated: 2026-09-22
+updated: 2026-09-23
 type: stock-brief
+shared_driver: ev-autonomy
 ---
 
 # TSLA — Tesla, Inc.
-*Brief generated: 2026-06-07 | Sources: sources/TSLA/10-k-fy2025.md (FY2025, period ending Dec 31, 2025)*
-*Note: ไม่มี earnings call transcript ใน sources/TSLA/ — fetch_transcript.py ไม่พบ URL บน Motley Fool*
+**Date:** 2026-09-23 | *Refresh of the 2026-06-07 brief — now includes Q2 2026 call, valuation, variant perception, damage-sized kill conditions*
 
-**Source docs:** [[sources/TSLA/10-k-fy2025]]
-
----
-
-## What the company does
-
-Tesla ออกแบบและผลิตรถยนต์ไฟฟ้า ระบบกักเก็บพลังงาน และกำลังเปลี่ยนโครงสร้างธุรกิจให้เป็น AI platform — ผ่าน Full Self-Driving (FSD), Robotaxi ที่เพิ่งเปิดตัวในมิถุนายน 2025 และ Optimus (humanoid robot) ที่กำลังพัฒนา บริษัทมีสองเซกเมนต์หลัก: Automotive (Model 3, Y, S, X, Cybertruck, Semi) และ Energy Generation & Storage (Megapack, Powerwall, Solar) รายได้ส่วนใหญ่ยังมาจากการขายรถ แต่บริษัทเดิมพันว่า software/AI/fleet เป็น revenue layer ถัดไปที่จะทำให้ margin สูงกว่ารถแบบดั้งเดิม *(source: sources/TSLA/10-k-fy2025.md)*
+**Source docs:** [[sources/TSLA/10-k-fy2025]] · [[sources/TSLA/q2-2026-call]]
 
 ---
 
-## Fundamentals signal
+## Company Snapshot
 
-> **หมายเหตุ:** ข้อมูลต่อไปนี้มาจาก 10-K FY2025 (full year ending Dec 31, 2025) ไม่ใช่ quarterly transcript *(source: sources/TSLA/10-k-fy2025.md)*
+Tesla ขายรถ EV + ระบบกักเก็บพลังงาน และกำลังเปลี่ยนตัวเองเป็น autonomy/robotics platform (Robotaxi, FSD, Optimus, Terafab) — ตรงกับจุดตัดเทคโนโลยี × วิธีที่มนุษย์เดินทาง **แต่ราคาวันนี้เกือบทั้งหมด (~87%) คือเดิมพันบนส่วนที่ยังไม่มีรายได้จริง** ส่วนธุรกิจรถ+พลังงานคือแหล่งเงินทุนของเดิมพันนั้น *(valuation agent)*
 
-**Revenue durability — ซับซ้อน**
-- Total revenue **$94.83B (-3% YoY)** — ลดลงจาก $97.69B ปี 2024 *(source: sources/TSLA/10-k-fy2025.md)*
-- Automotive sales **$65.82B (-9% YoY)** — deliveries ลดประมาณ 8% และ average selling price ต่ำลงจาก customer incentives *(source: sources/TSLA/10-k-fy2025.md)*
-- Energy generation & storage **$12.77B (+27% YoY)** — Megapack และ Powerwall deployments โต แม้ average selling price Megapack ลดลง *(source: sources/TSLA/10-k-fy2025.md)*
-- Services & other **$12.53B (+19% YoY)** — Supercharging, insurance, used vehicle sales *(source: sources/TSLA/10-k-fy2025.md)*
-- Automotive regulatory credits **$1.99B (-28% YoY)** — OBBBA ที่ผ่านเมื่อ 4 กรกฎาคม 2025 ตัด credit programs บางส่วน *(source: sources/TSLA/10-k-fy2025.md)*
+## Fundamentals Signal
+*Source: sources/TSLA/10-k-fy2025.md (FY2025) + sources/TSLA/q2-2026-call.md*
 
-**Margin trend — สัญญาณเตือน**
-- Total gross margin **18.0%** (flat จาก 17.9% ปี 2024) แต่ automotive GM **17.8%** ลดจาก 18.4% *(source: sources/TSLA/10-k-fy2025.md)*
-- Energy storage GM **29.8%** (ดีขึ้นจาก 26.2%) — segment นี้ scale ได้ดีกว่า *(source: sources/TSLA/10-k-fy2025.md)*
-- R&D พุ่ง **$6.41B (+41% YoY)** = 7% of revenue (จาก 5% ปีก่อน) — ลงทุน AI programs หนักขึ้นมาก *(source: sources/TSLA/10-k-fy2025.md)*
-- Net income **$3.79B (ลดจากประมาณ $7.09B ปีก่อน หรือ ~-46% YoY)** — effective tax rate ขึ้นจาก 20% เป็น 27% จาก OBBBA *(source: sources/TSLA/10-k-fy2025.md)*
+**Revenue durability — ภาพกลับทิศใน 2026**
+- FY2025: revenue $94.8B (-3%), automotive segment $69.5B (-10%), energy $12.8B (+27%) *(fundamentals agent)*
+- Q2 2026: revenue $28.2B (**+26% YoY**), deliveries 480,126 (+25%, record Q2, beat consensus 402k), services margin 14.1% สูงสุดตลอดกาล *(earnings agent)*
+- แต่ Q3 เริ่มแผ่ว: Goldman หั่น Q3 deliveries เหลือ 435k (consensus 456k); China BEV share เหลือ 6.6% จาก 15%+ ในปี 2020 *(sentiment agent)*
 
-**Capital allocation — กำลัง reinvest หนัก**
-- CapEx **$8.53B ในปี 2025** (ลดจาก $11.34B ปี 2024) — ลงทุน AI infrastructure, factory expansion *(source: sources/TSLA/10-k-fy2025.md)*
-- Guide CapEx **>$20B ในปี 2026** — AI compute, Cortex 2, production lines ใหม่ 6 สาย *(source: sources/TSLA/10-k-fy2025.md)*
-- Cash position แข็งแกร่ง: **$44.06B** (cash + investments) *(source: sources/TSLA/10-k-fy2025.md)*
-- มีข้อน่ากังวล: มีการ invest ใน xAI (Musk's AI startup) เป็น minority equity ในมกราคม 2026 — conflict of interest ระหว่าง TSLA กับ Musk's other ventures *(source: sources/TSLA/10-k-fy2025.md)*
+**Margin trend — แย่ลงต่อเนื่อง**
+- Total automotive GM 18.4% → 17.8% (FY2025) ส่วนใหญ่เพราะ regulatory credits หาย *(10-k-fy2025.md, line 774)*
+- Q2 2026 auto GM ex-credits **16.3%** จาก 19.2% ไตรมาสก่อน — แต่ Q1 มี one-off benefit $230M (warranty true-down + tariff relief) **ถ้าตัดออก margin แกนกลาง ~flat** *(q2-2026-call.md, line 138)* ระดับ ~16% ยังต่ำกว่า FY2025 (17.8%) และแรงกดดันจาก Chinese EV ยังอยู่ (BYD GM ~20% vs Tesla ~18%, China Model 3 price cut); automotive operating margin ~1.4% *(sentiment agent)*
+- Energy GM 29.8% (FY2025) → 20.4% ใน Q2 (warranty charge $240M one-off) guide กลับ mid-low 20s *(earnings agent)*
 
----
+**Investment or decay? — ผสมกัน:** top line ดูเป็น *investment* (revenue เร่ง +26% ขณะ capex เพิ่มเท่าตัว) แต่ unit economics ของรถดูเป็น *decay* (margin ลดเพราะสงครามราคา ไม่ใช่เพราะลงทุน) — FY2025 อย่างเดียว fundamentals agent อ่านว่า decay; Q2 แก้ภาพ revenue แต่ไม่แก้ภาพ margin
 
-## Latest earnings — FY2025 Full Year
+**Capital allocation — เปลี่ยนจากใช้เงินสดเป็นกู้**
+- CapEx 2026 guide **>$25B** (เพิ่มจาก >$20B ใน 10-K) และจะโตต่อ 2-3 ปี; FCF Q2 **-$1.1B** และจะแย่ลงใน H2; เปิด debt capacity $30B *(earnings agent)*
+- Cash $44B (FY2025) *(10-k-fy2025.md)*
+- Tesla ลงทุน $2B ใน xAI (ม.ค. 2026) → ถูกแปลงเป็น equity ใน [[SPCX]] หลัง SpaceX ซื้อ xAI (มี.ค. 2026); related-party transactions $573M ข้ามบริษัทของ Musk; มี shareholder litigation *(sentiment agent)*
 
-- **Revenue $94.83B (-3% YoY)** — ครั้งแรกที่ revenue ลดติดต่อกันสองปี; pricing pressure จาก Chinese EV competitors บีบ ASP *(source: sources/TSLA/10-k-fy2025.md)*
-- **1.66M vehicles produced / 1.64M delivered** — ลดจากปีก่อน; average selling price ต่ำลงจาก incentives และ sales mix *(source: sources/TSLA/10-k-fy2025.md)*
-- **Robotaxi launched June 2025** — เริ่มด้วย Model Y ใน Austin; Cybercab (purpose-built) ยังไม่ได้ mass produce; regulatory patchwork ทั่ว US และ Europe เป็น bottleneck การขยาย *(source: sources/TSLA/10-k-fy2025.md)*
-- **46.7 GWh energy storage deployed** — Megapack demand แข็งแกร่ง; กำลังสร้าง Megafactory ใหม่ใกล้ Houston; AI infrastructure load growth เป็น secular tailwind *(source: sources/TSLA/10-k-fy2025.md)*
-- **Q3 2025 restructuring $390M** — ตัด AI chip design บางส่วน (converge Dojo direction), charges รวม supercomputer assets และ contract terminations *(source: sources/TSLA/10-k-fy2025.md)*
-- **OBBBA impact** — ตัด consumer EV tax credits และ residential energy credits; higher effective tax rate 27% กดดัน net income *(source: sources/TSLA/10-k-fy2025.md)*
+## Latest Earnings — Q2 2026
+*Source: sources/TSLA/q2-2026-call.md (earnings agent)*
+- Revenue $28.2B (+26%) beat; non-GAAP EPS $0.33 vs $0.40 ปีก่อน — **โตแต่กำไรต่อหุ้นลด**
+- FSD: ~1.5M paid customers (55% upfront, 45% subscription) — ถอด option ซื้อขาดในเกือบทุกตลาด ดันไปทาง subscription = รายได้ซ้ำ *(q2-2026-call.md, line 138)*
+- Robotaxi: 380k unsupervised miles ใน 6-7 เมือง ไม่มี incident สำคัญ โตแบบ double-digit ต่อสัปดาห์; ขยายไป Florida, Texas, Bay Area
+- Optimus: สายการผลิตกำลังติดตั้งที่ Fremont ผู้บริหารบอกเองว่า ramp จะ "ยาวและแบน"; Terafab (dev fab ใน Austin) ยังไม่ประกาศเต็ม
+- **Direction vs last quarter:** รายได้ขึ้น แต่ margin ลด, FCF ติดลบ, capex guide ขึ้น — ผู้บริหารเลือกเสียผลตอบแทนระยะสั้นแลก optionality ชัดเจน
 
----
+## Bull / Bear
 
-## Bull case / Bear case
+**Bull:**
+- **Q2 หักล้างเรื่อง "decay" ฝั่งรายได้:** deliveries +25%, revenue +26%, Model Y ขายดีสุดในโลก, services margin ทำ high — mix กำลังเลื่อนไปทางรายได้ซ้ำที่ margin สูงกว่า *(earnings agent; fundamentals agent)*
+- **Robotaxi ผ่านกำแพง regulation แล้วจริง:** Nevada อนุมัติสูงสุด 5,000 คัน (ส.ค. 2026), Texas AV law เปิด commercial driverless (พ.ค. 2026), ~700k paid miles — fleet data สะสมคือ Cornered Resource candidate และ full-stack integration (chip, software, battery, charging, direct sales) คือ Counter-Positioning ที่ OEM เดิมลอกไม่ได้โดยไม่ทำลาย dealer model ตัวเอง *(sentiment + earnings agents)*
+- **Energy storage คือธุรกิจที่ scale ได้เองไม่ขึ้นกับรถ** — +27% YoY, GM เกือบ 30% ปี 2025 *(fundamentals agent)*
 
-**Bull**
-- **Cornered Resource จาก fleet data สะสม** — Tesla มีรถบนถนนมากกว่า 7 ล้านคัน ทุกคันส่ง real-world driving data กลับมา train FSD neural network — data advantage นี้สะสมได้เร็วกว่าคู่แข่งที่เพิ่งเริ่ม deploy EV *(source: sources/TSLA/10-k-fy2025.md)*
-- **Counter-Positioning ผ่าน full-stack vertical integration** — Tesla ออกแบบ AI chip เอง, เขียน FSD software เอง, ผลิต battery cell เอง, บริหาร Supercharger network เอง, ขายตรงไม่ผ่าน dealer — traditional automaker ที่ต้องพึ่ง dealer network ไม่สามารถ copy model นี้โดยไม่ทำลาย core business ตัวเอง *(source: sources/TSLA/10-k-fy2025.md)*
-- **Energy storage ที่ scale ได้ independently** — Megapack GM 29.8% โต 27% YoY; AI data center boom = structural demand สำหรับ grid-scale storage; business นี้ไม่ขึ้นกับ EV market cycle *(source: sources/TSLA/10-k-fy2025.md)*
+**Bear:**
+- **ธุรกิจรถกำลังเสีย margin และ share ให้คู่แข่งต้นทุนต่ำ:** auto GM ex-credits แกนกลางทรงตัวที่ ~16% (ต่ำกว่า 17.8% ของ FY2025; ตัวเลข -290bp QoQ ส่วนใหญ่มาจาก one-off Q1), operating margin รถ ~1.4%, China share 6.6%, BYD margin สูงกว่า — Q2 revenue +26% มาจากการขายถูกลง ไม่ใช่ pricing power *(sentiment + earnings agents)*
+- **เงินที่ใช้ลงทุนเปลี่ยนจากกำไรเป็นหนี้:** FCF -$1.1B และแย่ลง, capex >$25B โตต่อ 2-3 ปี, พึ่ง debt $30B — แหล่งทุน (รถ) อ่อนลงพร้อมกับที่เดิมพัน (autonomy) ใหญ่ขึ้น *(earnings agent)*
+- **Governance คือความเสี่ยงของเดิมพันที่ต้องใช้ความเชื่อใจ:** 87% ของ market cap คือเดิมพันที่ต้องเชื่อผู้บริหาร แต่เงินบริษัทไหลไป xAI/SpaceX, related-party $573M, มีคดีผู้ถือหุ้น *(sentiment + valuation agents)*
 
-**Bear**
-- **Core automotive declining ขณะ reinvest หนักมาก** — Revenue ลด -3%, automotive ลด -9%, net income ลด ~46% แต่ CapEx guide เพิ่มเป็น $20B+ ในปี 2026 — กำลัง burn cash สำหรับ bets ที่ยังไม่ commercialize *(source: sources/TSLA/10-k-fy2025.md)*
-- **CEO distraction และ brand erosion ที่วัดได้** — 10-K ระบุชัดว่า protests และ vandalism targeting Tesla operations เพิ่มขึ้น; Musk ดำรงตำแหน่งที่ SpaceX, xAI, Neuralink, The Boring Company พร้อมกัน; xAI investment จาก TSLA balance sheet สร้าง conflict of interest *(source: sources/TSLA/10-k-fy2025.md)*
-- **OBBBA + regulatory headwind ต่อเนื่อง** — consumer EV tax credit หาย, regulatory credits ลด 28%, autonomous vehicle regulation ยังเป็น patchwork ทั่ว US — Robotaxi expansion ต้องได้ permit รัฐต่อรัฐ ซึ่งชะลอ scale *(source: sources/TSLA/10-k-fy2025.md)*
+## Valuation
+*Source: valuation agent (price $378, market cap ~$1.49T, 2026-09-22)*
 
----
+- **Lens: split valuation** — รถ+พลังงาน = ธุรกิจ capital-intensive ใช้ normalized P/E; autonomy/robotics = pre-revenue ใช้ ratio ไม่ได้ ต้องคิดเป็น "ต้องเกิดอะไรบ้าง"
+- **Core รถ+พลังงาน ≈ $180-220B** (normalized net margin 7-9% × 20-25x บน run-rate revenue ~$105-115B)
+- **Residual ≈ $1.29T (~87% ของราคา)** = เดิมพัน robotaxi+Optimus ต้องสร้าง FCF ~$65-85B/ปี เมื่อโตเต็มที่ (revenue ~$150-250B) — ใหญ่กว่าทั้ง Uber วันนี้หลายเท่า
+- **Implied expectation:** 380k unsupervised miles ต้องโตเป็นระดับหลายพันล้าน miles/ปี โดยไม่มี safety incident ไม่โดน regulation ตีกลับ และ Optimus ต้องหลุดจาก ramp ที่ "ยาวและแบน"
+- **Verdict: Ahead of itself** — ราคาต้องการให้ autonomy สำเร็จเร็วและแน่นอนกว่าที่จำนวน miles, เมือง และ margin วันนี้รองรับ; consensus PT เฉลี่ย ~$397-423 ห่างราคาแค่ 5-12% *(sentiment agent)*
+- **Falsifying number:** cumulative unsupervised miles **>50M** และ auto GM ex-credits กลับ **>19%** ภายใน 4 ไตรมาส (ถึง Q3 2027 earnings) → ต้องทบทวน verdict นี้
 
-## Kill conditions
+## Variant Perception
+- *Thesis metric:* **cumulative unsupervised Robotaxi miles** (ตัวพิสูจน์ 87% ของราคา) — คู่กับ auto GM ex-credits ซึ่งเป็นแหล่งเงินทุนของเดิมพัน
+- *Where we differ from consensus:* **ไม่มี — เราถือมุมมองเดียวกับ consensus** (Buy 71%, PT ใกล้ราคาปัจจุบัน) ว่า Tesla คือเดิมพัน autonomy ไม่มีหลักฐานใน brief ที่ชี้ว่าเราเห็นอะไรที่ราคายังไม่สะท้อน → ไม่มี expectation gap ให้เก็บ ผลตอบแทนจากนี้ขึ้นกับว่า autonomy สำเร็จ *เร็วกว่า* ที่ราคาคาดไว้แล้วหรือไม่
 
-ถ้าเกิดสิ่งใดต่อไปนี้ควรทบทวน thesis ทันที:
+## Kill Conditions
+1. **Auto GM ex-credits ต่ำกว่า 15%** — ธุรกิจรถหยุดเป็นแหล่งทุนของเดิมพัน autonomy ต้องพึ่งหนี้/หุ้นเพิ่มทุนทั้งหมด `[bounded ~50%]` *(ตอนนี้ 16.3% — ห่าง 130bp; แกนกลางทรงตัว ไม่ได้ดิ่งลง)*
+2. **Safety incident สำคัญใน camera-only Robotaxi fleet ที่ทำให้ Nevada/Texas ถอน/จำกัดใบอนุญาต** — กระทบโดยตรงกับ 87% ของราคา ไม่รู้ว่า floor อยู่ตรงไหน `[open-ended]`
+3. **CapEx >$25B ไม่สร้าง revenue จาก robotaxi/Optimus/energy ที่เห็นได้ภายใน FY2027 หรือต้อง fund ด้วยการเพิ่มทุน (dilution)** `[bounded ~50%]`
+4. **Musk ขายหุ้น TSLA อย่างมีนัยสำคัญ หรือทรัพยากร/เงินของ Tesla ถูกโยกไปบริษัทอื่นของ Musk (SpaceX/xAI) เพิ่มขึ้นอย่างชัดเจน** `[open-ended]`
 
-1. **Automotive GM ลดต่ำกว่า 15%** — แสดงว่า pricing power หายจาก Chinese EV และ incentive war; ธุรกิจรถไม่สามารถ subsidize AI investment ต่อไปได้
-2. **Robotaxi ไม่ได้ expand นอก Austin ภายใน 18 เดือน** — หาก regulatory คือ bottleneck จริง timeline ทั้งหมดจะเลื่อน; addressable market ของ AI/fleet play จะเล็กกว่าที่ thesis assume
-3. **CapEx $20B+ ไม่ produce revenue ramp ที่ชัดเจนภายใน FY2027** — หมายความว่า บริษัทกำลัง invest ใน capacity โดยไม่มี demand รองรับ; cash burn กลายเป็น risk
-4. **Musk sell significant TSLA stake หรือ redirect resources ไป xAI อย่างชัดเจน** — alignment ระหว่าง CEO กับ TSLA shareholders หาย
+*Resolved 2026-09-23: "Robotaxi ไม่ได้ expand นอก Austin ภายใน 18 เดือน" — ผ่านแล้ว (6-7 เมือง, ใบอนุญาต Nevada/Texas) ไม่ได้ loosen แต่เงื่อนไขเกิดในทางบวก จึงแทนด้วยข้อ 2 ซึ่งเป็นความเสี่ยงถัดไปของ Robotaxi*
+*Tightened 2026-09-23: ข้อ 3 ปรับ capex จาก $20B → $25B และเพิ่มเงื่อนไข dilution; ข้อ 4 เพิ่มการโยกทรัพยากรไป SpaceX หลัง xAI ถูกรวม*
 
----
-
-## What to ask before owning it
-
-1. Robotaxi launch เดือนมิถุนายน 2025 — หลังจาก 6+ เดือน unit economics เป็นอย่างไร? revenue per mile เทียบกับ Waymo อยู่ที่เท่าไหร่ — ถ้า Tesla ไม่เปิดเผยตัวเลขนี้จะรู้ได้อย่างไรว่า business case จริง?
-2. Automotive revenue ลดสองปีติด ในขณะที่ EV market รวมโตขึ้น — Tesla กำลัง lose market share หรือแค่ pause ก่อน next product cycle? deliveries ที่ฟื้นต้องมาจากอะไร — Cybercab หรือ next-gen platform?
-3. CapEx guide $20B+ ในปี 2026 ขณะที่ operating cash flow อยู่ที่ $14.75B — gap นี้จะ fund ด้วยอะไร? debt? equity dilution? ถ้า AI bets ไม่ produce revenue ตามที่คาด buffer มีแค่ไหน?
-4. xAI equity investment ของ Tesla — ลงทุนเท่าไหร่ terms เป็นอย่างไร governance ป้องกัน conflict of interest อย่างไรเมื่อ Musk อยู่ทั้งสองบริษัท?
-5. OBBBA ตัด EV tax credit ไปแล้ว — demand elasticity ของ Tesla จาก credit removal นี้ใน H1 2026 เป็นอย่างไร? pricing ต้อง hold โดยไม่มี government subsidy หนุน margin จะไปทางไหน?
-
----
-
-*ไม่ใช่คำแนะนำการลงทุน — research summary อิงจาก 10-K FY2025 (period ending Dec 31, 2025); ไม่มี earnings call transcript สำหรับ TSLA*
+## What to Ask
+1. Robotaxi **revenue per mile และ cost per mile** เป็นเท่าไหร่ — Tesla ยังไม่เปิดเผย ถ้าไม่มี unit economics จะรู้ได้อย่างไรว่า 87% ของราคามีฐานจริง?
+2. Tesla ถือ equity ใน SpaceX เท่าไหร่หลังการแปลง xAI stake และ governance กันไม่ให้เงินไหลไปทาง Musk entities อย่างไร — ถือ TSLA = ถือ SpaceX ทางอ้อมผ่าน stake นี้ ([[SPCX]] เป็น watchlist ไม่ได้ถือตรง)
+3. Auto GM ex-credits Q3 2026 จะหลุด 16% หรือไม่ ขณะ China price war ยังดำเนินอยู่ — ตัวเลขนี้คือระยะห่างจาก kill condition ข้อ 1

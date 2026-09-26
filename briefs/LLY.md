@@ -1,72 +1,89 @@
 ---
 ticker: LLY
-company: Eli Lilly and
-updated: 2026-09-18
+company: Eli Lilly and Company
+updated: 2026-09-26
 type: stock-brief
+shared_driver: glp1
 ---
 
 # LLY — Eli Lilly and Company
-**Date:** 2026-09-18 | **Sources:** sources/LLY/10-k-fy2025.md + web research (sentiment agent) | *No earnings transcript available*
+**Date:** 2026-09-26 | *Refresh of the 2026-09-18 brief via /deep — adds Q2 2026 call, debate round, valuation, variant perception, damage-tagged kill conditions*
 
-**Source docs:** [[sources/LLY/10-k-fy2025]]
+**Source docs:** [[sources/LLY/10-k-fy2025]] · [[sources/LLY/q2-2026-call]]
 
 ---
 
 ## Company Snapshot
 
-Eli Lilly เป็น single-segment pharmaceutical company ขายยาใน ~90 ประเทศ FY2025 revenue $65.2B โต 45% ขับเคลื่อนแทบทั้งหมดโดย GLP-1 franchise (Mounjaro + Zepbound) ที่ตอนนี้คิดเป็น **56% ของรายได้ทั้งหมด** เพิ่มขึ้นจาก 37% เมื่อปีก่อน — thesis กำลังกลายเป็น two-drug concentration story มากกว่า diversified pharma
-
-จุดเปลี่ยน: oral GLP-1 ตัวใหม่ **orforglipron (Foundayo)** อนุมัติแล้วพร้อม Phase 3 data ที่ดีกว่า oral semaglutide ของ Novo Nordisk โดยตรง
-
----
+Eli Lilly เป็น pharma รายเดียวที่มีทั้ง injectable (Mounjaro/Zepbound), oral (Foundayo/orforglipron) และ next-gen (retatrutide) ใน GLP-1 — tirzepatide คิดเป็น **56% ของรายได้ FY2025** ธุรกิจโตจาก volume ขณะที่ราคาลดลงทุกปี; ช่องทางใหม่คือ Medicare และขายตรง (LillyDirect) Omada ([[OMDA]]) เป็นผู้ดูแลโปรแกรม GLP-1 ใน Employer Connect ของ Lilly *(fundamentals + earnings agents; OMDA brief)*
 
 ## Fundamentals Signal
-*Source: sources/LLY/10-k-fy2025.md*
+*Source: sources/LLY/10-k-fy2025.md (fundamentals agent; key lines verified)*
 
-**Revenue durability — โตจริงจาก volume ไม่ใช่ price:** Growth 50% มาจาก volume, ราคาจริงลด -6% (drag) — คือ demand จริง ไม่ใช่ pricing power ที่กำลังจะหมด "Other products" (ธุรกิจเดิมที่ไม่ใช่ GLP-1) **-1%** — ธุรกิจฐานกำลังหด
+**Revenue durability — โตจาก volume, ราคาลดทุกปี:** revenue $65.2B (+45%); Mounjaro $23.0B (+99%), Zepbound $13.5B (+175%); Verzenio $5.7B (+8%); other $22.9B (−1%) — **volume +50%, price −6% (US −10%)** *(line 988 verified)*
 
-**Margin trend — ดีขึ้น:** Gross margin 83.0% (จาก 81.3%) แม้ราคาลด Net income +95% เป็น $20.64B R&D +21%, SG&A +29% — cost โตเร็วกว่าปกติ effective tax rate ขึ้นจาก 16.5% → 19.8%
+**Margin trend — ขยายแม้ราคาลด:** GM 81.3% → 83.0% จาก mix + ต้นทุนผลิต; R&D +21% ($13.3B), marketing +29%
 
-**Capital allocation — reinvestment หนัก:** Capex $7.8B (จาก $5.1B) สำหรับขยาย manufacturing capacity โดยเฉพาะ Dividend $6.00 → indicated $6.92/share Buyback เพียง $4.1B (เทียบกับ $15B authorization) — ลำดับความสำคัญคือ manufacturing → R&D → dividend → buyback
+**Investment or decay? — ลงทุนหนัก:** capex $5.1B → $7.8B สำหรับ manufacturing; OCF $16.8B; หนี้ +$8.9B เป็น $42.5B
 
-**Patent risk ที่ต้องรู้:** Mounjaro/Zepbound compound patent ถึง 2036 (US) แต่ **data protection หมดอายุเร็วกว่ามาก — 2027 (US)**
+**Capital allocation:** dividend $6.00 → $6.92; buyback $4.1B (เหลือ authorization $10.9B); ลำดับ: manufacturing → R&D → dividend → buyback
 
----
+**IP (verified lines 229–237):** tirzepatide **compound patent US 2036** (EU 2037, Japan 2040); **US data protection 2027**; Trulicity US patent 2027
 
-## Latest Earnings
-*Source: sentiment agent — no transcript in sources/LLY/*
+## Latest Earnings — Q2 2026
+*Source: sources/LLY/q2-2026-call.md (earnings agent)*
+- Revenue **$23.0B (+48%)**; Mounjaro $9.9B (+91%), Zepbound $4.9B (+44%); GM 86.3%; non-GAAP EPS $8.38
+- US $14.4B (+33%) — **ราคา US −3% ตามรายงาน / −9% underlying** (ไม่รวม rebate adjustment ครั้งเดียว); international $8.6B (+80%), China +93% หลังเข้า NRDL
+- Foundayo (oral) $98M, ผู้สั่งจ่าย 8K → 36K; retatrutide Phase 3 TRIUMPH-1/2/3 ผ่าน, **ยื่น BLA Q1 2027**
+- Medicare GLP-1 Bridge (1 ก.ค.) $50/เดือน, coverage +35%; LillyDirect $299–449; ลงทุน Indiana เพิ่ม $4.5B
+- **FY26 guide ขึ้น:** revenue $85–87B (จาก $82–85B), performance margin 49–50.5%, EPS $35.50–36.50
+- **Direction:** ขึ้น — guide ขึ้นอีกรอบ; volume ชดเชยราคาที่ลดได้มากกว่า
 
-Q2 2026: Mounjaro +91% เป็น $9.9B, Zepbound +44% เป็น $4.9B guidance FY2026 ถูกปรับขึ้น **2 ครั้ง** เป็น $85-87B orforglipron (Foundayo) ได้รับอนุมัติพร้อม Phase 3 data เหนือกว่า oral semaglutide (Lancet, ก.พ. 2026) คดี antitrust (Strive Specialties) ถูกยกฟ้อง ส.ค. 2026
-
----
+## Recent News
+*Source: sentiment agent (web) — ส่วนหนึ่งยังไม่ยืนยัน*
+- Foundayo อนุมัติ เม.ย. 2026 — ลดน้ำหนัก ~15% vs ~22% ของ Zepbound
+- Retatrutide TRIUMPH-1: ลดน้ำหนัก 28.3% ที่ 80 สัปดาห์
+- **Novo CagriSema ไม่ผ่าน non-inferiority เทียบ Zepbound** (23% vs 25.5%, พ.ค. 2026)
+- Compounded tirzepatide ยังขายได้ผ่าน 503A; Medicare เริ่มครอบคลุม obesity
+- ราคา ~$1,165, market cap ~**$1.1T** (941M หุ้น — *บางแหล่งเขียน $1.02T*); consensus Buy, PT ~$1,315
 
 ## Bull / Bear
 
-**Bull**
+**Bull:**
+- **Cornered resource + pipeline ต่อเนื่อง:** compound patent ถึง 2036; ไม่ใช่ยาตัวเดียว — oral (Foundayo, ผู้สั่งจ่าย ×4.5 ในไตรมาส) และ retatrutide (28.3%) ต่อคิว; CagriSema แพ้ Zepbound คือหลักฐานว่าช่องว่าง execution กับ Novo มีจริง *(bull_researcher; fundamentals + sentiment agents)*
+- **Scale economies ใน manufacturing + ช่องทางตรง:** capex $7.8B + Indiana $4.5B สร้าง capacity ที่ compounder และ oral รายใหม่ทำตามเร็วไม่ได้; GM ขึ้นทั้งที่ราคาลด; LillyDirect + Medicare Bridge สร้างช่องทางที่คู่แข่งต้องอ้อม *(bull_researcher; earnings agent)*
+- **โตนอก US จาก volume:** international +80%, China +93% — ไม่ได้พึ่งราคาใน US อย่างเดียว *(bull_researcher; earnings agent)*
 
-- **Cornered resource:** compound patent ถึง 2036 — decade of exclusivity บนโมเลกุลที่ขับเคลื่อน 56% ของรายได้ growth เป็น volume-driven จริง (price เป็น drag) ทำให้ "bubble" narrative อ่อนลง
-- **Scale economies + Process power:** capex $7.8B สำหรับ manufacturing แต่ gross margin ยังขยายเป็น 83.0% ทั้งที่ราคาลด — production learning curve กำลังทำงานจริง
-- **Counter-positioning:** orforglipron ชนะ oral semaglutide ของ Novo โดยตรงใน Phase 3 — Lilly มี oral asset ที่ Novo ตามไม่ทันโดยไม่ทำลาย franchise ตัวเอง
+**Bear:**
+- **ธุรกิจยากลุ่มเดียวในราคาของ diversified pharma:** tirzepatide 56% ของรายได้; ราคา US ลด −6% → −10% (FY25) → −9% underlying (Q2) — ทิศเดียว `[bounded ~40–50% ถ้าราคาลดเร็วกว่า volume]` *(bear_researcher; fundamentals + earnings agents)* — *PM correction: bear เขียนว่านอก GLP-1 "ไม่โตเลย" — Verzenio +8%*
+- **แรงกดราคาจากรัฐ/payer เป็นโครงสร้าง:** Medicare $50/เดือน, DTC ถูกลง, 503A compounder — ไม่ใช่ macro แต่เป็นแนวโน้มราคาเฉพาะ GLP-1 ที่จะทบทุกปีจนถึง 2036 `[open-ended ด้านทิศทางราคา]` *(bear_researcher)*
+- **ขนาด $1.1T:** ต้องเพิ่มรายได้ GLP-1 หลายหมื่นล้านต่อปี; หนี้ +$8.9B เพื่อ capex ในตลาดที่ราคาต่อหน่วยลดลง `[bounded ~20–30%]` *(bear_researcher; fundamentals agent)*
 
-**Bear**
+*ทั้งสองฝั่งตอบไม่ได้: ราคา underlying −9% จะหยุดก่อน −15% หรือไม่ — และ retatrutide/Foundayo จะรักษาราคาได้ดีกว่า tirzepatide ไหม*
 
-- **Concentration แต่งเป็น diversification:** GLP-1 พุ่งจาก 37%→56% ของรายได้ ขณะที่ "other products" หด -1% — ไม่ใช่ growing broadly แต่กลายเป็น two-drug company
-- **วันที่ที่ต้องจับตาคือ 2027 ไม่ใช่ 2036:** data protection (ไม่ใช่ compound patent) หมดอายุ 2027 — exclusivity จริงสั้นกว่าที่ headline บอกมาก
-- **Pricing power กำลังแตก:** Lilly ต้องออก DTC Zepbound vials ราคาถูกเอง (~50% ของ script ใหม่) แข่งกับสินค้าตัวเอง — สัญญาณว่า compounding pharmacy competition กดดันจริง ไม่ใช่แค่ threat theoretical
+## Valuation
+*Source: valuation agent (price $1,165, 941M shares → ~$1.10T, stockanalysis/Fool 2026-09-24; net debt modest — inferred)*
+- **Lens: forward P/E + reverse DCF** — กำไรจริง FCF จริง; trailing P/E บิดจาก IPR&D $2.8B ใน Q2
+- **~24x FY27 consensus EPS ($47.32)**, ~32x FY26 guide midpoint; Novo ~11–14x (guide ลด)
+- **Implied expectation:** EPS โต high-teens–20%+ ถึง 2030 → รายได้ GLP-1 ~$55–65B ภายใน 2030 ที่ GM 85%+ โดย volume ต้องชดเชยราคาที่ลด — **continuation ไม่ใช่ acceleration** (H1 2026 โต 48%)
+- **Verdict: Deserved**
+- **Falsifying number:** ราคา net ของ Mounjaro+Zepbound ใน US ลด **แย่กว่า −15% YoY** (ไม่รวม one-time rebate) ในงบ Q4 2026 หรือ Q1 2027 — ตอนนี้ −9%
 
----
+## Variant Perception
+- *Thesis metric:* **ราคา net ของ tirzepatide ใน US (underlying) + volume growth** — ส่วนต่างสองตัวนี้คือ revenue growth ทั้งหมด
+- *Where we differ from consensus:* **ไม่มี — เราถือ consensus view** (Buy, PT สูงกว่าราคา ~13%)
 
 ## Kill Conditions
-
-- **Data protection หมดอายุ 2027 (US) โดยไม่มี follow-on IP protection ใหม่** ที่แข็งแรงพอ
-- **Orforglipron ไม่ translate เป็น market share gain จริง** ภายใน 12-18 เดือนหลัง approval
-- **Compounding pharmacy หรือ Novo price war บีบ margin ลงต่อเนื่อง** จนกระทบ gross margin trend ที่กำลังฟื้น
-- **"Other products" segment หดต่อเนื่องเกิน -5%/ปี** — สัญญาณว่าธุรกิจฐานพังเร็วกว่าที่ GLP-1 จะมา offset ได้
-
----
+1. **Data protection หมดอายุ 2027 (US) โดยไม่มี follow-on IP protection ใหม่** `[bounded ~15–25%]` — *Status 2026-09-26: compound patent ยังคุ้มถึง 2036 (verified) ความเสี่ยงหลังปี 2027 คือ challenger ที่อ้างข้อมูลทางคลินิก + litigation ไม่ใช่ patent cliff; ต่ำกว่าเกณฑ์ ≥50% — ควรย้ายไป Bear แต่นั่นคือ loosening ที่ต้องให้ผู้ลงทุนเขียนเหตุผลเอง*
+2. **Orforglipron ไม่ translate เป็น market share gain จริง** ภายใน 12–18 เดือนหลัง approval (เม.ย. 2026 → ต.ค. 2027) `[bounded ~10–15%]` — *Status: เริ่มต้นดี (ผู้สั่งจ่าย 36K, $98M); ต่ำกว่าเกณฑ์ — เหมือนข้อ 1 รอผู้ลงทุนตัดสินใจ*
+3. **Compounding pharmacy หรือ Novo price war บีบ margin ลงต่อเนื่อง** — *tightened 2026-09-26 เพิ่มตัววัด:* ราคา US underlying ลด **แย่กว่า −15% YoY** หรือ GM ต่ำกว่า **80% สองไตรมาสติด** `[bounded ~40–50%]` *(Status: ยังไม่ fire — −9%, GM 86.3%)*
+4. **"Other products" segment หดต่อเนื่องเกิน −5%/ปี** `[bounded ~10%]` — *Status: −1% ใน FY25; ต่ำกว่าเกณฑ์ — รอผู้ลงทุนตัดสินใจ*
+5. **รายได้ tirzepatide (Mounjaro+Zepbound) ลดลง YoY สองไตรมาสติด** `[bounded ~50%]` — *added 2026-09-26 (tightening)*; จุดที่ volume ชดเชยราคาไม่ได้แล้ว — ตัวที่ bull ตอบไม่ได้
 
 ## What to Ask
+1. **ราคา net ของ tirzepatide ใน US จะหยุดลดที่ไหน?** — Medicare Bridge $50/เดือน, LillyDirect $299–449 และ 503A compounder ดันไปทางเดียวกัน
+2. **Retatrutide จะตั้งราคาสูงกว่า tirzepatide ได้ไหม** — ถ้าได้ คือทางออกจากวงจรราคาลด; ถ้าไม่ แค่ย้ายผู้ป่วยจากยาหนึ่งไปอีกยา
+3. **GLP-1 exposure ในพอร์ตมีกี่ชั้น?** — LLY ตรง + [[OMDA]] (ถ้าจะถือ) ผ่าน GLP-1 companion — employer ตัดความครอบคลุม GLP-1 กระทบทั้งคู่
 
-1. **หลัง 2027 data-protection cliff จะมี IP protection layer ใหม่อะไรมาต่อ?** (formulation patents, new indication patents ฯลฯ) — นี่คือคำถามที่กำหนด real exclusivity runway
-2. **DTC Zepbound vials ราคาถูกกำลังกิน margin ของ branded product เท่าไหร่?** นี่คือสัญญาณ pricing power จริงหรือ defensive move
-3. **Orforglipron adoption curve หลัง approval เป็นยังไง** เทียบกับที่ Zepbound เคยทำตอนเปิดตัว — จะบอกได้ว่า oral GLP-1 จะ replicate success ของ injectable ได้จริงไหม
+---
+*ไม่ใช่คำแนะนำการลงทุน — research summary อิงจาก sources ที่ระบุ*

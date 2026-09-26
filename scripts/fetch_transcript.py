@@ -95,22 +95,34 @@ def _find_fool_urls_in_html(html: str) -> list[str]:
 
 
 def find_transcript_url_fool(ticker: str) -> str | None:
-    """Search Motley Fool for the ticker's latest transcript."""
-    query = quote_plus(f"{ticker} earnings call transcript")
-    url   = f"https://www.fool.com/search/?q={query}&source=eustranscripts"
-    _log(f"Searching Motley Fool: {url}")
-    try:
-        html = web_get(url, extra_headers={"Referer": "https://www.fool.com/"})
-        time.sleep(REQUEST_DELAY)
-        urls = _find_fool_urls_in_html(html)
-        # Filter to only URLs containing the ticker (case-insensitive)
-        ticker_lower = ticker.lower()
-        relevant = [u for u in urls if ticker_lower in u.lower()]
-        if relevant:
-            _log(f"Found via Fool search: {relevant[0]}")
-            return relevant[0]
-    except Exception as e:
-        _log(f"Fool search failed: {e}")
+    """Find the ticker's newest transcript from its Motley Fool quote page.
+
+    fool.com/search/ was retired and now returns 404, so discovery goes through
+    /quote/<exchange>/<ticker>/ instead, which lists that company's transcripts.
+    The exchange isn't known up front, so each is tried until one responds.
+    """
+    # Fool's markup contains TRUNCATED hrefs (".../foo-earnings-call-transc"),
+    # which 404 when followed. Require the complete slug suffix.
+    slug_re = re.compile(
+        r"/earnings/call-transcripts/(\d{4})/(\d{2})/(\d{2})/"
+        r"([a-z0-9-]*?earnings-call-transcript)(?![a-z0-9-])")
+    for exchange in ("nasdaq", "nyse", "amex"):
+        url = f"https://www.fool.com/quote/{exchange}/{ticker.lower()}/"
+        _log(f"Checking Fool quote page: {url}")
+        try:
+            html = web_get(url, extra_headers={"Referer": "https://www.fool.com/"})
+            time.sleep(REQUEST_DELAY)
+        except Exception as e:
+            _log(f"  {exchange} quote page failed: {e}")
+            continue
+        hits = slug_re.findall(html)
+        if not hits:
+            continue
+        # Pick the most recent by publication date in the URL path.
+        y, m, d, slug = max(hits, key=lambda h: (h[0], h[1], h[2]))
+        found = f"https://www.fool.com/earnings/call-transcripts/{y}/{m}/{d}/{slug}/"
+        _log(f"Found via Fool quote page: {found}")
+        return found
     return None
 
 

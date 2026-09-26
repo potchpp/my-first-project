@@ -1,0 +1,312 @@
+<title>Holdings Map</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Caveat:wght@600&display=swap">
+<style>
+:root{
+  --bg:#F5F5F3;--panel:#FFFFFF;--tile:rgba(255,255,255,.72);--ink:#2B313B;--strong:#131922;--on-strong:#FFFFFF;
+  --muted:#6E747D;--line:#E4E4DF;--edge:#C9CBC6;--hover:#F0F0EC;
+  --ahead:#D9534A;--deserved:#2E9A62;--under:#3576D6;--none:#A9ADB3;--focus:#131922;--warn:#B87208;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131619;--panel:#1C2024;--tile:rgba(255,255,255,.05);--ink:#E7E8E6;--strong:#F3F3F0;--on-strong:#131922;
+  --muted:#999EA5;--line:#2C3136;--edge:#474D54;--hover:#252A2F;
+  --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131619;--panel:#1C2024;--tile:rgba(255,255,255,.05);--ink:#E7E8E6;--strong:#F3F3F0;--on-strong:#131922;
+  --muted:#999EA5;--line:#2C3136;--edge:#474D54;--hover:#252A2F;
+  --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,-apple-system,"Segoe UI",Roboto,sans-serif;padding-inline:16px;padding-block:48px 56px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:28px}
+header{text-align:center;display:grid;gap:14px;justify-items:center}
+h1{font-weight:500;font-size:clamp(32px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance}
+h1 em{font:600 1.18em/1 Caveat,"Bradley Hand",cursive;font-style:normal;letter-spacing:0;padding-inline:.06em}
+.lede{margin:0;color:var(--muted);max-width:58ch;font-size:17px;text-wrap:pretty}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:720px;width:100%;margin:6px auto 0}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--tile);border-radius:20px;padding:16px 10px 12px;text-align:center;display:grid;gap:2px}
+.stat b{font-weight:400;font-size:34px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat span{font-size:13px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);background:var(--tile);border-radius:999px;padding:5px 12px}
+.legend .plain{background:none;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}
+@media (max-width:860px){.main{grid-template-columns:1fr}}
+.stage{background:var(--panel);border-radius:28px;overflow:hidden}
+svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.e{stroke:var(--edge);stroke-width:1.2;fill:none;transition:opacity .2s,stroke .2s}
+.n{transition:opacity .2s}
+.n circle{stroke:var(--panel);stroke-width:2.5;cursor:pointer}
+.n text{font:500 11.5px Figtree,sans-serif;fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--panel);stroke-width:4px}
+.n:focus{outline:none}.n:focus-visible circle{stroke:var(--focus);stroke-width:3}
+.tl{font:500 11px Figtree,sans-serif;fill:var(--muted);letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.dim .e{opacity:.14}.dim .n{opacity:.22}.dim .tl{opacity:.3}
+.dim .e.on{opacity:1;stroke:var(--strong);stroke-width:1.8}.dim .n.on{opacity:1}
+.side{background:var(--panel);border-radius:28px;padding:22px;display:grid;gap:14px}
+.side h2{font-weight:500;font-size:30px;line-height:1;letter-spacing:-.01em;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
+.pill{background:var(--hover);border-radius:999px;padding:3px 11px;color:var(--ink)}
+.pill.v{color:#fff}
+.lab{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+li button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:baseline;padding:8px 10px;border-radius:12px;cursor:pointer;font-size:13.5px}
+li button:hover,li button:focus-visible{background:var(--hover)}
+li b{font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:6px}
+li small{color:var(--muted);font-size:13px}
+.note{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin:0}
+.iso-wrap{display:grid;gap:10px;justify-items:center;text-align:center}
+.iso{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.iso button{all:unset;cursor:pointer;font-weight:500;font-size:13px;background:var(--tile);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:7px}
+.iso button:hover{background:var(--panel)}
+.iso button.new{outline:1.5px dashed var(--edge);outline-offset:-1.5px;color:var(--muted)}
+.iso button:focus-visible{outline:2px solid var(--focus)}
+.clr{all:unset;cursor:pointer;justify-self:start;font-weight:500;font-size:14px;background:var(--strong);color:var(--on-strong);border-radius:999px;padding:9px 18px}
+.clr:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.attn{display:grid;gap:10px;justify-items:center;text-align:center}
+.attn .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.attn button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border-radius:999px;padding:6px 13px 6px 7px;font-size:13px}
+.attn button:hover{background:var(--hover)}.attn button:focus-visible{outline:2px solid var(--focus)}
+.attn button b{font-weight:700}
+.st{font-size:11px;font-weight:500;border-radius:999px;padding:2px 8px;white-space:nowrap;background:var(--hover);color:var(--muted)}
+.st.ok{color:var(--deserved)}.st.warn{background:var(--warn);color:#fff}.st.bad{background:var(--ahead);color:#fff}
+ul.pts li .st{margin-right:6px}
+ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.meter{position:relative;height:8px;border-radius:999px;background:var(--hover);margin:10px 8px 6px}
+.meter .zone{position:absolute;top:0;bottom:0;border-radius:999px;background:var(--ahead);opacity:.35}
+.meter .line{position:absolute;top:-5px;bottom:-5px;width:2px;margin-left:-1px;background:var(--ahead)}
+.meter .now{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--strong);box-shadow:0 0 0 3px var(--hover)}
+.frow{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.book{display:grid;gap:14px;background:var(--panel);border-radius:28px;padding:20px 22px}
+.book .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px 28px}
+.book h3{margin:0;font-size:15px;font-weight:500}.book h3 b{font-size:22px;font-weight:500;margin-left:6px}
+.crow{display:grid;grid-template-columns:58px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+.crow .bar{height:8px;border-radius:999px;background:var(--hover);position:relative}
+.crow .bar i{position:absolute;top:0;bottom:0;border-radius:999px}
+.crow .num{text-align:right}
+.rng{display:grid;gap:8px}
+.rtrack{position:relative;height:8px;border-radius:999px;background:var(--hover);margin-inline:8px}
+.rfill{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--edge)}
+.rdot{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--strong);box-shadow:0 0 0 3px var(--panel)}
+.rlab{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
+.rlab b{color:var(--ink);font-weight:500;text-align:center}
+.private{background:var(--warn);color:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;margin:0}
+.drivers{display:grid;gap:12px;background:var(--panel);border-radius:28px;padding:20px 22px}
+.drv{display:grid;grid-template-columns:minmax(110px,170px) 1fr 52px;gap:14px;align-items:center;font-size:13.5px;text-transform:capitalize}
+.drv .num{text-align:right}
+.track{position:relative;height:10px;border-radius:999px;background:var(--hover)}
+.fill{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--under)}
+.fill.near{background:var(--warn)}.fill.over{background:var(--ahead)}
+.capline{position:absolute;top:-4px;bottom:-4px;width:2px;margin-left:-1px;background:var(--ink);border-radius:2px}
+.chain{display:grid;gap:14px;background:var(--panel);border-radius:28px;padding:20px 22px}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.mode{background:var(--hover);border-radius:18px;padding:12px 14px;display:grid;gap:6px;font-size:13.5px}
+.mode b{font-size:24px;font-weight:500}
+.roles{display:grid;gap:10px}
+.role{display:grid;grid-template-columns:minmax(150px,210px) 1fr 58px;gap:14px;align-items:start;font-size:13.5px;border-top:1px solid var(--line);padding-top:10px}
+.role small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.role .tk{display:flex;flex-wrap:wrap;gap:6px}
+.role .tk button{all:unset;cursor:pointer;border-radius:999px;padding:2px 9px;background:var(--hover);font-size:12.5px}
+.role .tk button.w{background:none;outline:1.5px dashed var(--edge);outline-offset:-1.5px;color:var(--muted)}
+.role .tk button:focus-visible{outline:2px solid var(--focus)}
+.role .num{text-align:right;font-weight:500}
+@media (max-width:560px){.role{grid-template-columns:1fr auto}.role .tk{grid-column:1/-1}}
+.n circle.watch{fill:var(--panel);stroke-width:2.5}
+@media (max-width:560px){.drv{grid-template-columns:1fr auto}.drv .track{grid-column:1/-1;order:3}}
+.hd{display:flex;gap:14px;align-items:center}
+.hd small{display:block;color:var(--muted);font-size:13px;margin-top:5px}
+.logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none;box-shadow:inset 0 0 0 1px var(--line);font-weight:700;font-size:15px;letter-spacing:.02em}
+.logo svg{width:26px;height:26px;display:block}
+.logo.mono{background:var(--hover);color:var(--ink)}
+.snap{margin:0;font-size:14.5px;line-height:1.6;text-wrap:pretty}
+.fals{background:var(--hover);border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.5}
+.fals b{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:3px}
+.bb{display:grid;gap:6px}
+ul.pts{list-style:disc;padding-left:18px;gap:7px;font-size:13.5px;line-height:1.5}
+ul.pts li::marker{color:var(--edge)}
+.tag{font-size:11px;font-weight:500;border-radius:999px;padding:1px 8px;margin-left:4px;white-space:nowrap;background:var(--hover);color:var(--muted)}
+.tag.open{background:var(--ahead);color:#fff}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>See how your holdings <em>connect</em></h1>
+    <div class="stats" id="stats"></div>
+    <p class="private" id="private" hidden>Local only. This page shows your allocation, so don't upload or share it.</p>
+  </header>
+  <div class="legend" aria-label="Valuation verdict">
+    <span><i class="dot" style="background:var(--ahead)"></i>Ahead of itself</span>
+    <span><i class="dot" style="background:var(--deserved)"></i>Deserved</span>
+    <span><i class="dot" style="background:var(--under)"></i>Still underrated</span>
+    <span><i class="dot" style="background:var(--none)"></i>No verdict yet</span>
+    <span class="plain">Lines show each ticker's 4 strongest links</span>
+  </div>
+  <section class="attn" id="attn" hidden><p class="lab">Needs a look</p><div class="chips"></div></section>
+  <section class="book" id="book" hidden></section>
+  <section class="drivers" id="drivers" hidden></section>
+  <section class="chain" id="chain" hidden></section>
+  <div class="main">
+    <div class="stage"><svg id="g" role="img" aria-label="Network of holdings linked by shared business relationships"></svg></div>
+    <aside class="side" id="side" aria-live="polite"></aside>
+  </div>
+  <section class="iso-wrap">
+    <p class="lab">No links to other holdings</p>
+    <div class="iso" id="iso"></div>
+    <p class="note" id="nobrief" hidden style="border:0;padding:0"></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const DATA=__DATA__;
+const VC={"Ahead of itself":"var(--ahead)","Deserved":"var(--deserved)","Still underrated":"var(--under)","":"var(--none)"};
+{const hub=[...DATA.nodes].sort((x,y)=>y.k-x.k)[0],nw=DATA.nodes.filter(n=>n.new).length;
+document.getElementById("stats").innerHTML=[[DATA.nodes.length,"tickers"],[DATA.edges.length,"links shown"],[hub.t,"biggest hub"],[nw,"not in graph yet"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");}
+const byT=Object.fromEntries(DATA.nodes.map(n=>[n.t,n]));
+const adj={};DATA.nodes.forEach(n=>adj[n.t]=[]);
+DATA.edges.forEach(e=>{adj[e.s].push({o:e.d,l:e.l});adj[e.d].push({o:e.s,l:e.l})});
+const linked=DATA.nodes.filter(n=>adj[n.t].length);
+const iso=DATA.nodes.filter(n=>!adj[n.t].length);
+const PF=DATA.portfolio||null,HELD=PF?PF.held:{};
+const isHeld=t=>!PF||t in HELD;
+// private page: circle area = weight in the book, watch-list names are small rings; public page: area = links
+const r=n=>PF?(HELD[n.t]?5+Math.sqrt(HELD[n.t].w*100)*5.5:7):6+Math.sqrt(n.k)*4.2;
+const pct=x=>(x>=0?"+":"")+(x*100).toFixed(1)+"%";
+const nice=l=>l==="direct"?"Direct business relationship":l;
+const th=g=>g.replace(/-/g," ");
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=x=>esc(x).replace(/\[(open-ended[^\]]*|bounded[^\]]*)\]/g,(m,g)=>`<span class="tag${g.startsWith("open")?" open":""}">${g}</span>`);
+const lum=h=>{const[a,b,c]=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16)/255);return .2126*a+.7152*b+.0722*c};
+const LOGOS=DATA.logos||{},BRIEFS=DATA.briefs||{};
+function logo(t){const L=LOGOS[t];if(!L)return `<span class="logo mono" aria-hidden="true">${esc(t.slice(0,2))}</span>`;
+  return `<span class="logo" style="background:#${L.hex}" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="${lum(L.hex)>.6?"#131922":"#fff"}" d="${L.d}"/></svg></span>`}
+const MON=DATA.monitor||{},RNG=DATA.ranges||{},SPIKE=2;
+const KILL={intact:["ok","Intact"],review:["warn","Needs review"],watch:["warn","Watch"],triggered:["bad","Triggered"]};
+const FST={clear:["ok","Clear"],close:["warn","Close to line"],crossed:["bad","Line crossed"],pending:["","Pending"],due:["warn","Due, check result"],"no data":["","No current value"]};
+const chip=([c,l])=>`<span class="st ${c}">${l}</span>`;
+const unusual=t=>RNG[t]&&Math.abs(RNG[t].z5||0)>=SPIKE;
+// one reason per ticker, most serious first: a broken line or kill beats a stale check or a big move
+function attention(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[];
+  if(k.some(x=>x.status==="triggered"))return["bad","Kill condition triggered"];
+  if(f&&f.state==="crossed")return["bad","Falsifier crossed"];
+  if(f&&f.state==="due")return["warn","Falsifier result due"];
+  if(k.some(x=>x.status==="watch"))return["warn","Kill condition on watch"];
+  if(f&&f.state==="close")return["warn","Near its falsifier"];
+  if(unusual(t))return["warn",`Unusual 5-day move ${pct(RNG[t].r5)}`];
+  if(k.some(x=>x.status==="review"))return["","Kill conditions need review"];
+  if(f&&f.days!=null&&f.days>=0&&f.days<=21)return["",`Falsifier report in ${f.days} days`];
+  return null}
+function falsifier(t,b){const f=(MON[t]||{}).falsifier;if(!f)return b.fals?`<div class="fals"><b>What would prove the verdict wrong</b>${fmt(b.fals)}</div>`:"";
+  const when=f.deadline?` · ${f.days<0?`${-f.days} days ago`:`in ${f.days} days`} (${esc(f.deadline)})`:"";
+  let body="";
+  if(f.type==="number"&&f.current!=null){const lo=Math.min(f.current,f.threshold),hi=Math.max(f.current,f.threshold),span=(hi-lo)||Math.abs(f.threshold)||1,a=lo-span*.6,z=hi+span*.6,x=v=>(v-a)/(z-a)*100;
+    const zone=f.breaks==="below"?`left:0;width:${x(f.threshold)}%`:`left:${x(f.threshold)}%;right:0`;
+    body=`<div class="meter" role="img" aria-label="${esc(f.metric)} ${f.current} vs line ${f.threshold}"><span class="zone" style="${zone}"></span><span class="line" style="left:${x(f.threshold)}%"></span><span class="now" style="left:${x(f.current)}%"></span></div>
+    <div class="frow num"><span>Now ${f.current}${esc(f.unit)} (${esc(f.current_label||"")})</span><span>Line ${f.breaks} ${f.threshold}${esc(f.unit)}${f.room!=null?` · ${Math.round(f.room*100)}% room`:""}</span></div>`}
+  return `<div class="fals"><b>What would prove the verdict wrong</b>${chip(FST[f.state]||["",f.state])} ${esc(f.metric)}${when}${body}${f.note?`<small style="display:block;margin-top:6px;color:var(--muted)">Also: ${esc(f.note)}</small>`:""}${b.fals?`<small style="display:block;margin-top:6px;color:var(--muted)">${fmt(b.fals)}</small>`:""}</div>`}
+function kills(t,b){const k=(MON[t]||{}).kills||[];if(!k.length)return list("Kill conditions",b.kill);
+  return `<div class="bb"><p class="lab">Kill conditions</p><ul class="pts">${k.map(x=>`<li>${chip(KILL[x.status]||["",x.status])}${fmt(x.text)}<small>${x.status==="intact"||x.status==="review"?"Checked "+esc(x.checked||"never"):esc(x.note||"")}${x.status==="review"?" · re-check with /deep":""}</small></li>`).join("")}</ul></div>`}
+function range52(t){const R=(DATA.ranges||{})[t];if(!R)return "";
+  const pos=R.hi>R.lo?Math.max(0,Math.min(100,(R.last-R.lo)/(R.hi-R.lo)*100)):100;
+  const off=R.last>=R.hi?"at 52-week high":`${((1-R.last/R.hi)*100).toFixed(0)}% below high`;
+  return `<div class="rng"><p class="lab">52-week range · closes to ${esc(R.asof)}</p>
+  <div class="rtrack" role="img" aria-label="${R.last} within ${R.lo} to ${R.hi}"><span class="rfill" style="width:${pos}%"></span><span class="rdot" style="left:${pos}%"></span></div>
+  <div class="rlab num"><span>$${R.lo}</span><b>$${R.last} · ${off}</b><span>$${R.hi}</span></div></div>`}
+const list=(h,a)=>a&&a.length?`<div class="bb"><p class="lab">${h}</p><ul class="pts">${a.map(x=>`<li>${fmt(x)}</li>`).join("")}</ul></div>`:"";
+
+// Pull each theme toward its own anchor so clusters read as themes. Seeded for a stable layout.
+let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const themes=[...new Set(linked.map(n=>n.g))];
+const W=900,H=640,anchor={};
+themes.forEach((t,i)=>{const a=i/themes.length*Math.PI*2;const rad=i===0?0:300;anchor[t]=[W/2+Math.cos(a)*rad*1.2,H/2+Math.sin(a)*rad*.8]});
+const nodes=linked.map(n=>({...n,x:anchor[n.g][0]+rnd()*30,y:anchor[n.g][1]+rnd()*30}));
+const links=DATA.edges.map(e=>({source:e.s,target:e.d,l:e.l}));
+d3.forceSimulation(nodes).randomSource(rnd)
+  .force("link",d3.forceLink(links).id(d=>d.t).distance(70).strength(.2))
+  .force("charge",d3.forceManyBody().strength(-280))
+  .force("x",d3.forceX(d=>anchor[d.g][0]).strength(.14))
+  .force("y",d3.forceY(d=>anchor[d.g][1]).strength(.14))
+  .force("collide",d3.forceCollide(d=>r(d)+16))
+  .stop().tick(400);
+const pad=46,xs=nodes.map(n=>n.x),ys=nodes.map(n=>n.y);
+const x0=Math.min(...xs)-pad,y0=Math.min(...ys)-pad,x1=Math.max(...xs)+pad,y1=Math.max(...ys)+pad;
+const svg=d3.select("#g").attr("viewBox",[x0,y0,x1-x0,y1-y0]);
+const root=svg.append("g");
+const E=root.append("g").selectAll("line").data(links).join("line").attr("class","e")
+  .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+const tl=root.append("g");
+themes.forEach(t=>{const m=nodes.filter(n=>n.g===t);if(m.length<2)return;const cx=d3.mean(m,n=>n.x),top=d3.min(m,n=>n.y-r(n));tl.append("text").attr("class","tl").attr("x",cx).attr("y",top-12).attr("text-anchor","middle").text(th(t))});
+const N=root.append("g").selectAll("g").data(nodes).join("g").attr("class","n")
+  .attr("transform",d=>`translate(${d.x},${d.y})`).attr("tabindex",0).attr("role","button").attr("aria-label",d=>`${d.t}, ${d.k} links`)
+  .on("click",(e,d)=>select(d.t)).on("keydown",(e,d)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(d.t)}});
+N.append("circle").attr("r",r).attr("fill",d=>VC[d.v])
+  .attr("class",d=>isHeld(d.t)?null:"watch").style("stroke",d=>isHeld(d.t)?null:VC[d.v]);
+N.filter(d=>LOGOS[d.t]&&isHeld(d.t)&&r(d)>=11).append("path").attr("d",d=>LOGOS[d.t].d).attr("fill","#fff").attr("pointer-events","none")
+  .attr("transform",d=>{const z=r(d)*1.05;return `translate(${-z/2},${-z/2}) scale(${z/24})`});
+N.append("text").attr("y",d=>r(d)+13).attr("text-anchor","middle").text(d=>d.t);
+svg.on("click",e=>{if(e.target.tagName==="svg")select(null)});
+
+document.getElementById("iso").innerHTML=iso.map(n=>`<button data-t="${n.t}"${n.new?' class="new" title="Not in the graph yet"':""}><i class="dot" style="background:${VC[n.v]}"></i>${n.t}</button>`).join("");
+if(PF){
+  document.title="Holdings Map (private)";
+  document.getElementById("private").hidden=false;
+  document.querySelector(".legend .plain").textContent="Solid = held, sized by weight · ring = watch list";
+  const top=PF.drivers[0]||["none",0],cap=PF.cap||10,scale=Math.max(cap*1.25,...PF.drivers.map(d=>d[1]));
+  document.getElementById("stats").innerHTML=[[Object.keys(HELD).length,"held"],[DATA.nodes.filter(n=>!HELD[n.t]).length,"watch list"],[top[1].toFixed(1)+"%",th(top[0])+" of assets"],[esc(PF.as_of),"portfolio as of"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
+  const el=document.getElementById("drivers");el.hidden=false;
+  el.innerHTML=`<p class="lab">Shared-driver exposure · % of total assets · cap ${cap}%</p>`+PF.drivers.map(([g,v])=>`<div class="drv"><span>${esc(th(g))}</span><span class="track"><span class="fill${v>=cap?" over":v>=cap*.8?" near":""}" style="width:${Math.min(v/scale*100,100)}%"></span><span class="capline" style="left:${cap/scale*100}%"></span></span><span class="num">${v.toFixed(1)}%</span></div>`).join("");
+  const ch=(PF.chains||{})["hyperscaler-capex"];
+  if(ch){const el=document.getElementById("chain");el.hidden=false;
+    const tickers=ch.roles.flatMap(x=>[...x.held.map(h=>h[0]),...x.watch]);
+    const next=tickers.map(t=>[t,(MON[t]||{}).falsifier]).filter(([,f])=>f&&f.days!=null&&f.days>=0).sort((a,b)=>a[1].days-b[1].days)[0];
+    const lvl=v=>v>=cap?"var(--ahead)":v>=cap*.8?"var(--warn)":"var(--ink)";
+    el.innerHTML=`<p class="lab">Hyperscaler capex chain · one economic bet across four driver tags</p>
+    <div class="modes"><div class="mode"><span>If AI demand disappoints, the whole chain loses</span><b class="num" style="color:${lvl(ch.demand)}">${ch.demand.toFixed(1)}% of assets</b><span class="note" style="border:0;padding:0">Your cap for one driver is ${cap}%</span></div>
+    <div class="mode"><span>If hyperscalers cut capex for discipline, spenders gain and the rest lose</span><b class="num" style="color:${lvl(ch.cut)}">${ch.cut.toFixed(1)}% at risk</b><span class="note" style="border:0;padding:0">${ch.roles[0].pct.toFixed(1)}% in spenders partly offsets it</span></div>
+    ${next?`<div class="mode"><span>Next report that tests the chain</span><b>${next[0]} · ${next[1].days} days</b><span class="note" style="border:0;padding:0">${esc(next[1].metric)}: now ${next[1].current??"?"}${esc(next[1].unit||"")}, line ${next[1].breaks||""} ${next[1].threshold??""}${esc(next[1].unit||"")}</span></div>`:""}</div>
+    <div class="roles">${ch.roles.map(x=>`<div class="role"><div>${esc(x.name)}<small>${esc(x.hit)}</small></div><div class="tk">${x.held.map(([t,w])=>`<button data-t="${t}">${t} ${w.toFixed(1)}%</button>`).join("")}${x.watch.map(t=>`<button class="w" data-t="${t}" title="Watch list, not held">${t}</button>`).join("")}</div><span class="num">${x.pct.toFixed(1)}%</span></div>`).join("")}</div>
+    <p class="note" style="border:0;padding:0">Weights are % of your stock book; totals are % of total assets. Dashed = watch list. Roles are judged from the briefs.</p>`;
+    el.onclick=e=>{const b=e.target.closest("button[data-t]");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:"smooth",block:"start"})}}}
+  if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
+}
+{const flagged=DATA.nodes.map(n=>[n.t,attention(n.t)]).filter(([,a])=>a).sort((x,y)=>{const o={bad:0,warn:1,"":2};return o[x[1][0]]-o[y[1][0]]});
+  if(flagged.length){const el=document.getElementById("attn");el.hidden=false;
+    el.querySelector(".chips").innerHTML=flagged.map(([t,a])=>`<button data-t="${t}"><span class="st ${a[0]}">${t}</span>${esc(a[1])}</button>`).join("");
+    el.onclick=e=>{const b=e.target.closest("button");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:"smooth",block:"start"})}}}}
+if(PF&&PF.moves){const col=(title,m)=>{if(!m||!m.by.length)return "";const top=m.by.slice(0,5),low=m.by.slice(-3).reverse().filter(x=>x[1]<0&&!top.includes(x)),rows=[...top,...low],mx=Math.max(...rows.map(x=>Math.abs(x[1])),.01);
+    return `<div><h3>${title}<b class="num">${pct(m.book/100)}</b></h3><p class="note" style="border:0;padding:0;margin:4px 0 10px">Percentage points of your stock book, biggest movers</p>${rows.map(([t,v])=>`<div class="crow"><b>${t}</b><span class="bar"><i style="${v>=0?`left:50%;width:${v/mx*50}%;background:var(--deserved)`:`right:50%;width:${-v/mx*50}%;background:var(--ahead)`}"></i></span><span class="num">${v>=0?"+":""}${v.toFixed(2)}</span></div>`).join("")}</div>`};
+  const el=document.getElementById("book");el.hidden=false;
+  el.innerHTML=`<p class="lab">What moved your book</p><div class="cols">${col("Last day",PF.moves.r1)}${col("Last 5 days",PF.moves.r5)}</div>`}
+document.getElementById("iso").onclick=e=>{const b=e.target.closest("button");if(b)select(b.dataset.t)};
+
+const side=document.getElementById("side");
+const hubs=[...DATA.nodes].sort((a,b)=>b.k-a.k).slice(0,6);
+function row(t,sub){const n=byT[t];return `<li><button data-t="${t}"><b><i class="dot" style="background:${VC[n.v]}"></i> ${t}</b><small>${sub}</small></button></li>`}
+function select(t){
+  const s=svg.node();
+  if(!t){s.classList.remove("dim");E.classed("on",false);N.classed("on",false);
+    side.innerHTML=`<p class="lab">Biggest hubs</p><ul>${hubs.map(n=>row(n.t,`<span class="num">${n.k}</span> links · ${th(n.g)}`)).join("")}</ul>
+    <p class="note">Tap any ticker to see what connects it to the rest of your book.</p>`;return}
+  const n=byT[t],nb=new Set(adj[t].map(a=>a.o).concat(t));
+  s.classList.add("dim");
+  E.classed("on",d=>d.source.t===t||d.target.t===t);N.classed("on",d=>nb.has(d.t));
+  const vp=n.v?`<span class="pill v" style="background:${VC[n.v]}">${n.v}</span>`:`<span class="pill">No verdict yet</span>`;
+  const b=BRIEFS[t]||{},h=HELD[t];
+  const R=RNG[t],mv=R&&R.r5!=null?`<span class="pill num"${unusual(t)?' style="background:var(--warn);color:#fff"':""}>5d ${pct(R.r5)}${unusual(t)?` · unusual (${Math.abs(R.z5).toFixed(1)}σ)`:""}</span>`:"";
+  const pp=!PF?mv:h?mv+`<span class="pill num">${(h.w*100).toFixed(1)}% of book</span>${h.gain!=null?`<span class="pill num">${pct(h.gain)} vs your cost</span>`:""}${h.apr!=null?`<span class="pill num">1y ${pct(h.apr)} vs S&amp;P ${pct(h.bench)}</span>`:""}${h.under?`<span class="pill v" style="background:var(--warn)">1y underperformer</span>`:""}`:`<span class="pill">Watch list · not held</span>`;
+  side.innerHTML=`<div class="hd">${logo(t)}<div><h2>${t}</h2><small>${esc(b.name||"")}${b.date?` · brief updated ${esc(b.date)}`:""}</small></div></div>
+  <div class="meta">${vp}<span class="pill">${th(n.g)}</span><span class="pill num">${n.k} links</span>${pp}</div>
+  ${range52(t)}
+  ${b.snap?`<p class="snap">${fmt(b.snap)}</p>`:""}
+  ${falsifier(t,b)}
+  ${kills(t,b)}${list("Bull",b.bull)}${list("Bear",b.bear)}${list("What to ask",b.ask)}
+  ${adj[t].length?`<p class="lab">Shown connections</p><ul>${adj[t].map(a=>row(a.o,nice(a.l))).join("")}</ul>`:n.new?`<p class="note" style="border:0;padding:0">New brief, not in the knowledge graph yet. Run /graphify --update to find its links.</p>`:`<p class="note" style="border:0;padding:0">No links to your other holdings. A shock elsewhere in the book is unlikely to reach this thesis.</p>`}
+  <p class="note">${n.k>=8?"This is a hub. Before adding more, check how many other theses rest on the same driver.":"Full thesis: briefs/"+t+".md"}</p>
+  <button id="clr" class="clr">Show biggest hubs</button>`;
+  document.getElementById("clr").onclick=()=>select(null);
+  side.scrollTop=0;
+}
+side.onclick=e=>{const b=e.target.closest("li button");if(b)select(b.dataset.t)};
+select("NVDA");
+</script>

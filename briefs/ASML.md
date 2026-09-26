@@ -3,6 +3,7 @@ ticker: ASML
 company: ASML
 updated: 2026-09-18
 type: stock-brief
+shared_driver: ai-capex
 ---
 
 # ASML — ASML Holding N.V.

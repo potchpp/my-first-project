@@ -3,6 +3,7 @@ ticker: RL
 company: Ralph Lauren
 updated: 2026-09-18
 type: stock-brief
+shared_driver: consumer-discretionary
 ---
 
 # RL — Ralph Lauren Corporation

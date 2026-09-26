@@ -3,6 +3,7 @@ ticker: SNOW
 company: Snowflake
 updated: 2026-09-18
 type: stock-brief
+shared_driver: enterprise-software
 ---
 
 # SNOW — Snowflake Inc.

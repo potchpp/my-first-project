@@ -3,6 +3,7 @@ ticker: MU
 company: Micron Technology
 updated: 2026-09-22
 type: stock-brief
+shared_driver: ai-capex
 ---
 
 # MU — Micron Technology, Inc.

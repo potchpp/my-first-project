@@ -3,6 +3,7 @@ ticker: RDW
 company: Redwire
 updated: 2026-09-18
 type: stock-brief
+shared_driver: space-economy
 ---
 
 # RDW — Redwire Corporation
