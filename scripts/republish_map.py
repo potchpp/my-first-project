@@ -1,4 +1,6 @@
-"""Stop hook: keep the published Holdings Map artifact in step with briefs/.
+"""Stop hook: keep both Holdings Map pages in step with briefs/ and your portfolio.
+About once a day it also runs perf.py, so the private page's weights and returns refresh
+from the same price cache the public page uses.
 
 When a brief (or the graph) is newer than graphify-out/holdings-map.html, rebuild it with
 holdings_map.py. If the page differs from what was last published, block the stop once and
@@ -43,6 +45,10 @@ def main():
     warnings = ''
     newest_price = max((p.stat().st_mtime for p in PRICE_CACHE.glob('*.csv')), default=0)
     prices_stale = time.time() - newest_price > PRICE_REFRESH_HOURS * 3600
+    if prices_stale:
+        # One refresh feeds both pages: perf.py updates the shared price cache and portfolio.json
+        # (private page); the map below then only fetches the watch-list names perf.py doesn't hold.
+        subprocess.run([sys.executable, str(ROOT / 'scripts' / 'perf.py')], capture_output=True, text=True)
     if prices_stale or any(p.exists() and p.stat().st_mtime > built for p in inputs):
         flags = ['--prices'] if prices_stale else []
         run = subprocess.run([sys.executable, str(ROOT / 'scripts' / 'holdings_map.py'), *flags],
