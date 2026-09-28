@@ -24,6 +24,16 @@ PRICE_REFRESH_HOURS = 20  # 52-week bars refresh about once a day (~10s for 50 t
 URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # the one published copy; share edit access with any other account that runs this hook
 
 
+def commit_site():
+    """Commit index.html (the Vercel home page) when the map changed it. Never pushes:
+    the repo is public, so the site goes live only when you run git push."""
+    site = 'index.html'
+    if subprocess.run(['git', 'diff', '--quiet', '--', site], cwd=ROOT).returncode == 0:
+        return  # unchanged
+    subprocess.run(['git', 'commit', '-q', '-m', 'Update Holdings Map (index.html)', '--', site],
+                   cwd=ROOT, capture_output=True, text=True)
+
+
 def digest():
     return hashlib.sha256(PAGE.read_bytes()).hexdigest() if PAGE.exists() else ''
 
@@ -57,6 +67,7 @@ def main():
         run = subprocess.run([sys.executable, str(ROOT / 'scripts' / 'holdings_map.py'), *flags],
                              check=True, capture_output=True, text=True)
         warnings = '; '.join(l.strip() for l in run.stderr.splitlines() if 'skip summary' in l)  # not yfinance noise
+    commit_site()
     if digest() == (MARK.read_text() if MARK.exists() else ''):
         return
     print(json.dumps({'decision': 'block', 'reason': (
