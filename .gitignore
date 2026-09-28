@@ -18,3 +18,6 @@ portfolio/
 
 # Knowledge graph + Obsidian vault export — derived research, keep local
 graphify-out/
+
+# Obsidian window layout — changes every session
+.obsidian/workspace.json

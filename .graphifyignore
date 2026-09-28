@@ -1,1 +1,18 @@
 portfolio/
+# Scout-only sources (no brief yet) — keep out of the holdings graph so undercover/holdings map
+# don't treat them as holdings. Remove a line when that ticker gets a brief.
+sources/BE/
+sources/CCJ/
+sources/CEG/
+sources/OKLO/
+sources/PWR/
+sources/VRT/
+sources/VST/
+sources/AXTI/
+sources/CRDO/
+sources/SMR/
+sources/IRDM/
+sources/OMDA/
+
+# Local-only map page with your allocation (built from portfolio/) — never ingest
+graphify-out/holdings-map-private.html

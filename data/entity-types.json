@@ -1,0 +1,2582 @@
+[
+ {
+  "label": "AI Infrastructure Capex",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Family of Apps",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Meta Platforms, Inc.",
+  "kind": "company",
+  "ticker": "META",
+  "private": false
+ },
+ {
+  "label": "Reality Labs",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Azure",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Copilot",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Microsoft 365",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Microsoft Corporation",
+  "kind": "company",
+  "ticker": "MSFT",
+  "private": false
+ },
+ {
+  "label": "Microsoft-OpenAI Partnership",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Nebius-Meta Contract",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Nebius-Microsoft Contract",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Nebius Group N.V.",
+  "kind": "company",
+  "ticker": "NBIS",
+  "private": false
+ },
+ {
+  "label": "Yandex",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Oracle Cloud Infrastructure (OCI)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Oracle-OpenAI $300B Deal",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Oracle Corporation",
+  "kind": "company",
+  "ticker": "ORCL",
+  "private": false
+ },
+ {
+  "label": "RPO Backlog",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AIP",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apollo",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Foundry",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Gotham",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Palantir Technologies Inc.",
+  "kind": "company",
+  "ticker": "PLTR",
+  "private": false
+ },
+ {
+  "label": "Palantir Artificial Intelligence Platform (AIP)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Palantir Apollo",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Palantir Foundry",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Palantir Gotham",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Palantir Ontology",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AI Data Cloud",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Observe, Inc. (acquisition)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Snowflake Cortex AI",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Snowflake Inc.",
+  "kind": "company",
+  "ticker": "SNOW",
+  "private": false
+ },
+ {
+  "label": "Snowflake Intelligence",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Snowflake Postgres",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Snowpark",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Atlassian Cloud Platform",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Atlassian Corporation",
+  "kind": "company",
+  "ticker": "TEAM",
+  "private": false
+ },
+ {
+  "label": "Atlassian Marketplace",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Confluence",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Jira",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rovo",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Teamwork Graph",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "System of Work (philosophy)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Consumer segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Safety and Industrial segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Transportation and Electronics segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Electric Arc Furnace (EAF) Steelmaking",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Raw Materials segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Section 232 Steel Tariffs",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Steel Mills segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Steel Products segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "PFAS Manufacturing Exit (2022 PFAS Announcement)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Grow the Core, Expand Beyond, Live Our Culture Strategy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "IREN Vertical Integration Strategy (Owned Data Centers)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rocket Lab Deep Vertical Integration Strategy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Supply Chain Localization / Vertical Integration (In-House Lithium Refinery)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Ankaa-3 Quantum Computer",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Cepheus-1-36Q Quantum Computer",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Fab-1 (wafer fabrication facility)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Google (competitor)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "IBM (competitor)",
+  "kind": "company",
+  "ticker": "IBM",
+  "private": false
+ },
+ {
+  "label": "IonQ (competitor)",
+  "kind": "company",
+  "ticker": "IONQ",
+  "private": false
+ },
+ {
+  "label": "Novera QPU",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Quanta Collaboration Agreement",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rigetti Computing, Inc.",
+  "kind": "company",
+  "ticker": "RGTI",
+  "private": false
+ },
+ {
+  "label": "Rigetti Quantum Cloud Services (QCS)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Datacenter End Market",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Flash Ventures (Kioxia joint venture)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Kioxia Corporation",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "NAND Flash Technology",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Sandisk Corp",
+  "kind": "company",
+  "ticker": "SNDK",
+  "private": false
+ },
+ {
+  "label": "Separation from Western Digital Corporation",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Multi-Chip Modular Quantum Processor Architecture",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Redwire Defense Tech Segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Edge Autonomy Acquisition",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Redwire Corporation",
+  "kind": "company",
+  "ticker": "RDW",
+  "private": false
+ },
+ {
+  "label": "Redwire Space Segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AST SpaceMobile, Inc.",
+  "kind": "company",
+  "ticker": "ASTS",
+  "private": false
+ },
+ {
+  "label": "AT&T Commercial Agreement",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "BlueBird (BB) Satellites",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "SpaceMobile Service",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "SpaceX Starlink (competitor)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Verizon Commercial Agreement",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Vodafone Agreement / SatCo",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Commercial Business Unit (CBU)",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Connected Fitness Products",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Peloton Cross Training Series",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Peloton Interactive, Inc.",
+  "kind": "company",
+  "ticker": "PTON",
+  "private": false
+ },
+ {
+  "label": "Peloton IQ",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Precor",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Restructuring Plans (2022/2024/2025)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Ask Ralph (conversational AI shopping experience)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Pink Pony (cancer-fight campaign)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Polo Ralph Lauren (brand platform)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Ralph Lauren Corporation",
+  "kind": "company",
+  "ticker": "RL",
+  "private": false
+ },
+ {
+  "label": "Ralph Lauren Luxury (brand platform)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Next Generation Transformation (NGT) Project",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Electronic Qubit Control (EQC)",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Quantum Error Correction",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Trapped Ion Quantum Computing Approach",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "California Proposition 65",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Bottler's Agreement / Incidence-Based Concentrate Pricing",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AWS AI/ML Infrastructure Investment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "$600B American Manufacturing Commitment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Data Loss / Security Incident Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Fulfillment Network & Data Center Optimization Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Semiconductor Cyclicality Amplified by AI Demand Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Customer Concentration Risk (Top 5 = ~40% Revenue)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "TSMC Wafer Manufacturing Dependency (~95% of CM wafers)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Bitcoin Price Volatility Dependency Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Customer Concentration Risk (Customer A/B >10% Revenue)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Tariff & Global Trade Environment Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "China CAC Purchase Ban Impact (May 2023)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "DRAM/NAND Competitor Concentration (Samsung, SK hynix, Kioxia, CXMT, YMTC)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "U.S. Export Controls on China Risk (H20/H200 Licensing)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "TSMC/Samsung Fabless Manufacturing Dependency",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Anduril Industries (competitor)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Edge Autonomy (acquisition)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "International Berthing and Docking Mechanism (IBDM)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Northrop Grumman (competitor)",
+  "kind": "company",
+  "ticker": "NOC",
+  "private": false
+ },
+ {
+  "label": "Pharmaceutical In-space Laboratory - Bio-crystal Optimization eXperiment (PIL-BOX)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rocket Lab USA, Inc. (competitor)",
+  "kind": "company",
+  "ticker": "RKLB",
+  "private": false
+ },
+ {
+  "label": "Roll-Out Solar Array (ROSA)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Stalker UAS",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Single/Limited-Source Supply Chain Concentration Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "U.S. Tariffs and Trade Restriction Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Search & Brand Advertising Revenue Model",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AI/Antitrust Regulatory Scrutiny Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Biologics Price Competition and Innovation Act (BPCIA)",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Hatch-Waxman Act",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "LillyDirect",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ASML Holding N.V.",
+  "kind": "company",
+  "ticker": "ASML",
+  "private": false
+ },
+ {
+  "label": "High-NA EUV",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Intel",
+  "kind": "company",
+  "ticker": "INTC",
+  "private": false
+ },
+ {
+  "label": "MATCH Act",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Samsung",
+  "kind": "company",
+  "ticker": "005930.KS",
+  "private": false
+ },
+ {
+  "label": "TSMC",
+  "kind": "company",
+  "ticker": "TSM",
+  "private": false
+ },
+ {
+  "label": "Nucor Corporation",
+  "kind": "company",
+  "ticker": "NUE",
+  "private": false
+ },
+ {
+  "label": "Section 232 Tariff",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "West Virginia Sheet Mill",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Boehringer Ingelheim International GmbH",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "CUE-101 (HPV+ cancers)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE-102 (WT1-expressing cancers)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE-401 (autoimmune, Treg induction)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE-501 (targeted B-cell depletion)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Cue Biopharma, Inc.",
+  "kind": "company",
+  "ticker": "CUE",
+  "private": false
+ },
+ {
+  "label": "Immuno-STAT Platform",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ImmunoScape Pte. Ltd.",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Lauren Family (~85% voting power)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple (customer, ~25% revenue)",
+  "kind": "company",
+  "ticker": "AAPL",
+  "private": false
+ },
+ {
+  "label": "Arizona Fab (overseas expansion)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "N2 (2nm) Process Node",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Nvidia (customer)",
+  "kind": "company",
+  "ticker": "NVDA",
+  "private": false
+ },
+ {
+  "label": "Taiwan Semiconductor Manufacturing Co.",
+  "kind": "company",
+  "ticker": "TSM",
+  "private": false
+ },
+ {
+  "label": "Brand Elevation Strategy (AUR-driven)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AbbVie Inc.",
+  "kind": "company",
+  "ticker": "ABBV",
+  "private": false
+ },
+ {
+  "label": "Botox (onabotulinumtoxinA)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Humira (adalimumab)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Imbruvica (ibrutinib)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rinvoq (upadacitinib)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Skyrizi (risankizumab)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Venclexta (venetoclax)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Vraylar (cariprazine)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Darzalex (daratumumab)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Epkinly (epcoritamab)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Faspro",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Genmab A/S",
+  "kind": "company",
+  "ticker": "GMAB",
+  "private": false
+ },
+ {
+  "label": "Johnson & Johnson",
+  "kind": "company",
+  "ticker": "JNJ",
+  "private": false
+ },
+ {
+  "label": "Tivdak",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Berkshire Hathaway Energy (BHE)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Berkshire Hathaway Inc.",
+  "kind": "company",
+  "ticker": "BRK-B",
+  "private": false
+ },
+ {
+  "label": "BNSF Railway",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "GEICO",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "General Re Group",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "HomeServices of America, Inc.",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Precision Castparts Corp.",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "FIA (Fédération Internationale de l'Automobile)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Formula 1 (Delta Topco)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Liberty Live Split-Off (Dec 2025)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Liberty Media Corporation",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "MotoGP",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Quantum Computing as a Service (QCaaS)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Family of Apps (FoA) segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GDPR / DMA / DSA regulatory framework",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Reality Labs (RL) segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Intelligent Cloud segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "More Personal Computing segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Productivity and Business Processes segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ServiceNow AI Platform",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Oracle Cloud (OCA + OCI)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple iOS ATT / Targeting Signal Loss",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Superintelligence Vision",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Cloud Economies of Scale (datacenter model)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Oracle Multicloud / Interoperable Deployment Strategy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Cortex AI",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Crunchy Data Acquisition",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Databricks (competitor)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Observe Acquisition",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Lyra 100+ Qubit System",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Quanta Computing Collaboration",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Less Common Metals Acquisition",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Round Top Texas Mine",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Stillwater Magnet Facility",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "USA Rare Earth, Inc.",
+  "kind": "company",
+  "ticker": "USAR",
+  "private": false
+ },
+ {
+  "label": "Entertainment Video Competitive Landscape",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Original + Licensed Content Strategy (\"Winning Moments of Truth\")",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "International Cultural/Content Quota Regulation Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AT&T",
+  "kind": "company",
+  "ticker": "T",
+  "private": false
+ },
+ {
+  "label": "Starlink",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Verizon",
+  "kind": "company",
+  "ticker": "VZ",
+  "private": false
+ },
+ {
+  "label": "IonQ, Inc.",
+  "kind": "company",
+  "ticker": "IONQ",
+  "private": false
+ },
+ {
+  "label": "Oxford Ionics",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Space Development Agency HALO Contract",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "SkyWater",
+  "kind": "company",
+  "ticker": "SKYT",
+  "private": false
+ },
+ {
+  "label": "Connected Fitness Subscription",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Peter Stern (CEO)",
+  "kind": "person",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "China Anti-Monopoly Probe (Jan 2026)",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Meituan (competitor)",
+  "kind": "company",
+  "ticker": "3690.HK",
+  "private": false
+ },
+ {
+  "label": "Trip.com Group Limited",
+  "kind": "company",
+  "ticker": "TCOM",
+  "private": false
+ },
+ {
+  "label": "VIE Structure Governance Overhang",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Humira",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rinvoq",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Skyrizi",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe Inc.",
+  "kind": "company",
+  "ticker": "ADBE",
+  "private": false
+ },
+ {
+  "label": "Now Assist (AI)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ServiceNow, Inc.",
+  "kind": "company",
+  "ticker": "NOW",
+  "private": false
+ },
+ {
+  "label": "Canva",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Firefly AI",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Midjourney",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Home Depot",
+  "kind": "company",
+  "ticker": "HD",
+  "private": false
+ },
+ {
+  "label": "Lowe's Companies, Inc.",
+  "kind": "company",
+  "ticker": "LOW",
+  "private": false
+ },
+ {
+  "label": "Pro Segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "3M Company",
+  "kind": "company",
+  "ticker": "MMM",
+  "private": false
+ },
+ {
+  "label": "Combat Arms Earplug Settlement",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "PFAS Settlement",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "NAND Supply Shortage / Supercycle",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Sandisk Corporation",
+  "kind": "company",
+  "ticker": "SNDK",
+  "private": false
+ },
+ {
+  "label": "Western Digital (spin-off parent)",
+  "kind": "company",
+  "ticker": "WDC",
+  "private": false
+ },
+ {
+  "label": "SEALSQ (quantum subsidiary)",
+  "kind": "company",
+  "ticker": "LAES",
+  "private": false
+ },
+ {
+  "label": "WISeKey International Holding Ltd.",
+  "kind": "company",
+  "ticker": "WKEY",
+  "private": false
+ },
+ {
+  "label": "WISeSat (satellite subsidiary)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "PRC/India Foreign Ownership Regulatory Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "International Operations Risk (Tariffs, FX, Regulation)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Digital Experience Segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Digital Media Segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "EUV Lithography",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple IP Protection Strategy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Boehringer Ingelheim (BI)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "CUE-100 Program",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE-221 Program",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE-401 Program",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE-501 Program",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ImmunoScape",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Ono Pharmaceutical",
+  "kind": "company",
+  "ticker": "4528.T",
+  "private": false
+ },
+ {
+  "label": "Data Center Product (Sunsetting)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rovo (AI Layer)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe Acrobat / Acrobat Studio",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe Creative Cloud Pro",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe Experience Platform",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe Express",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe Firefly (generative AI models)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Adobe GenStudio",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CUE Kill Conditions",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Ligelizumab Phase 3 Failure Precedent",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "TEAM Kill Conditions",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple (Berkshire equity holding)",
+  "kind": "company",
+  "ticker": "AAPL",
+  "private": false
+ },
+ {
+  "label": "BNSF Railroad",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Coca-Cola (Berkshire equity holding)",
+  "kind": "company",
+  "ticker": "KO",
+  "private": false
+ },
+ {
+  "label": "Greg Abel",
+  "kind": "person",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Insurance Float",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Warren Buffett",
+  "kind": "person",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "100-Year Agreement",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple Streaming Rights Deal",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "2026 Concorde Agreement",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Formula 1",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Liberty Media Corporation (Formula One Group)",
+  "kind": "company",
+  "ticker": "FWONA",
+  "private": false
+ },
+ {
+  "label": "The Coca-Cola Company",
+  "kind": "company",
+  "ticker": "KO",
+  "private": false
+ },
+ {
+  "label": "Fairlife",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "GLP-1 Demand Risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Coca-Cola Zero Sugar",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Eli Lilly and Company",
+  "kind": "company",
+  "ticker": "LLY",
+  "private": false
+ },
+ {
+  "label": "Mounjaro",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Novo Nordisk",
+  "kind": "company",
+  "ticker": "NVO",
+  "private": false
+ },
+ {
+  "label": "Orforglipron (Foundayo)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Zepbound",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple Inc.",
+  "kind": "company",
+  "ticker": "AAPL",
+  "private": false
+ },
+ {
+  "label": "Amazon",
+  "kind": "company",
+  "ticker": "AMZN",
+  "private": false
+ },
+ {
+  "label": "Anthropic",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Broadcom Inc.",
+  "kind": "company",
+  "ticker": "AVGO",
+  "private": false
+ },
+ {
+  "label": "Meta MTIA (custom AI chip)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Alphabet",
+  "kind": "company",
+  "ticker": "GOOGL",
+  "private": false
+ },
+ {
+  "label": "Iris Energy (IREN)",
+  "kind": "company",
+  "ticker": "IREN",
+  "private": false
+ },
+ {
+  "label": "Lumentum Holdings Inc.",
+  "kind": "company",
+  "ticker": "LITE",
+  "private": false
+ },
+ {
+  "label": "AMD",
+  "kind": "company",
+  "ticker": "AMD",
+  "private": false
+ },
+ {
+  "label": "Micron Technology, Inc.",
+  "kind": "company",
+  "ticker": "MU",
+  "private": false
+ },
+ {
+  "label": "SK Hynix",
+  "kind": "company",
+  "ticker": "000660.KS",
+  "private": false
+ },
+ {
+  "label": "Netflix",
+  "kind": "company",
+  "ticker": "NFLX",
+  "private": false
+ },
+ {
+  "label": "Warner Bros. Discovery",
+  "kind": "company",
+  "ticker": "WBD",
+  "private": false
+ },
+ {
+  "label": "NVIDIA Corporation",
+  "kind": "company",
+  "ticker": "NVDA",
+  "private": false
+ },
+ {
+  "label": "Rocket Lab USA, Inc.",
+  "kind": "company",
+  "ticker": "RKLB",
+  "private": false
+ },
+ {
+  "label": "SpaceX",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Elon Musk",
+  "kind": "person",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Tesla, Inc.",
+  "kind": "company",
+  "ticker": "TSLA",
+  "private": false
+ },
+ {
+  "label": "xAI",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Cloud Light Technology Acquisition (Nov 2023)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Lumentum Cloud & Networking Segment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "NeoPhotonics Acquisition (Aug 2022)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Oclaro Acquisition (Dec 2018)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "High-Speed Optical Transceivers",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Lumentum Industrial Tech Segment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AXT Inc",
+  "kind": "company",
+  "ticker": "AXTI",
+  "private": false
+ },
+ {
+  "label": "Lumentum",
+  "kind": "company",
+  "ticker": "LITE",
+  "private": false
+ },
+ {
+  "label": "External Light Source (ELS)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Optical Circuit Switching (OCS)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Co-packaged Optics (CPO)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CW Laser",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "EML (Electro-absorption Modulated Laser)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Near-packaged Optics (NPO)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Slot Reservation Agreement (SRA)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Solid-state transformer program (hyperscaler customer)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Hyperscaler / data-center electrification orders",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "US offshore wind stop-work order (Dec 22 2025)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ABB",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Electrification Software product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Envision",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Framatome",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Gas Power product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GE Aerospace (GE)",
+  "kind": "company",
+  "ticker": "GE",
+  "private": false
+ },
+ {
+  "label": "Goldwind",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Grid Solutions product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Hitachi Energy",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Hitachi, Ltd. (SMR joint venture partner)",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Hydro Power product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "LM Wind Power",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Mitsubishi Electric",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Mitsubishi Power",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Nordex",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Nuclear Power product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Offshore Wind product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Onshore Wind product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Power Conversion & Storage product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Prolec GE",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Rolls-Royce",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Schneider Electric",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Siemens",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Siemens Energy",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Siemens-Gamesa",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Steam Power product line",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Vestas",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Westinghouse",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Xignux (Prolec GE joint venture partner)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Capacity expansion / demand mismatch risk",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "China manufacturer competition risk",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Joint venture / consortium partner risk",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Supply chain / critical materials concentration risk",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GEV — GE Vernova Inc.",
+  "kind": "company",
+  "ticker": "GEV",
+  "private": false
+ },
+ {
+  "label": "Agent 365 (governance control plane, ~40M agents registered)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AMD (silicon partner, Helios rack-scale)",
+  "kind": "company",
+  "ticker": "AMD",
+  "private": false
+ },
+ {
+  "label": "Anthropic (model catalog partner; $3.2B investment gain)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "AI infrastructure capex ($41B/quarter; FY27 outlook $175B)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Dynamics 365 (agent-first biz apps, +13%)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Fabric (analytics platform, 40K paid customers)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Foundry (AI app/agent stack, 100K customers)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GitHub Copilot (usage-based pricing, 50M users)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "LinkedIn (+12% revenue, double-digit member growth)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Microsoft 365 Copilot (30M+ paid seats)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Mistral (Sovereign Cloud model partnership)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "NVIDIA (silicon partner, Vera Rubin rack-scale)",
+  "kind": "company",
+  "ticker": "NVDA",
+  "private": false
+ },
+ {
+  "label": "PostgreSQL / Cosmos DB (AI-optimized databases, +55% revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Project Perception (multimodal agentic security system)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Windows OEM/Devices demand risk (component cost + PC market)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Xbox content and services (declining, reset planned)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Electrification segment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Gas turbine (heavy-duty)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Power segment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Wind segment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Coherent Corp. (competitor)",
+  "kind": "company",
+  "ticker": "COHR",
+  "private": false
+ },
+ {
+  "label": "Customer concentration risk (top 4 = 58.9% of revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Convertible dilution (~15% share increase)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Industrial Tech segment (incl. 3D sensing)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Innolight / Eoptolink (Chinese optics competitors)",
+  "kind": "company",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Kill condition: Apple cuts VCSEL/3D sensing orders",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Kill condition: Dec 2026 convertible refinance fails or dilutes heavily",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Kill condition: supply gap closes, non-GAAP gross margin <45% two quarters straight",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Kill condition: NVIDIA/hyperscaler shifts optical supply away from Lumentum",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Cyclical component supplier priced as compounder (boom-bust multiple compression)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "LITE — Lumentum Holdings Inc.",
+  "kind": "company",
+  "ticker": "LITE",
+  "private": false
+ },
+ {
+  "label": "Arc Blockchain",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Binance",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "CCTP (Cross-Chain Transfer Protocol)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Centre Consortium",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Circle Contracts",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Circle Mint",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Circle National Trust (First National Digital Currency Bank)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Circle Reserve Fund",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Circle Wallets",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Coinbase",
+  "kind": "company",
+  "ticker": "COIN",
+  "private": false
+ },
+ {
+  "label": "Circle Payments Network (CPN)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "EURC",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Gateway",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GENIUS Act",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Hashnote (acquisition)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Office of the Comptroller of the Currency (OCC)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "StableFX",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Silicon Valley Bank (SVB) 2023 event",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Tether",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "USDC",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "USYC (tokenized money market fund)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "xReserve",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Arc Mainnet Launch (Sept 16, 2026)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CLARITY Act",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "DTCC",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Hyperliquid",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "OUSD (consortium stablecoin proposal)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Polymarket",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "RLDC margin (Revenue Less Distribution Costs)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Visa",
+  "kind": "company",
+  "ticker": "V",
+  "private": false
+ },
+ {
+  "label": "x402 protocol",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CRCL — Circle Internet Group",
+  "kind": "company",
+  "ticker": "CRCL",
+  "private": false
+ },
+ {
+  "label": "Agentic Economy / Agentic Corporation strategy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Cloud & Networking segment (~86% of revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "EML chips",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Optical circuit switch (OCS)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Pump lasers",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "800G/1.6T transceivers",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Azure (cloud platform, +43% YoY)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Maia 200 (custom AI accelerator silicon)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "OpenAI (model partner / Azure customer / investment)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Kill condition: AI data center capex stalls before 1.6T matures",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Shared driver: energy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Shared driver: stablecoin-adoption",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ }
+]
