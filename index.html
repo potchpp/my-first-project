@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Holdings Map</title>
@@ -6,18 +7,18 @@
 <style>
 :root{
   --bg:#F5F5F3;--panel:#FFFFFF;--tile:rgba(255,255,255,.72);--ink:#2B313B;--strong:#131922;--on-strong:#FFFFFF;
-  --muted:#6E747D;--line:#E4E4DF;--edge:#C9CBC6;--hover:#F0F0EC;
-  --ahead:#D9534A;--deserved:#2E9A62;--under:#3576D6;--none:#A9ADB3;--focus:#131922;--warn:#B87208;
+  --muted:#5F656E;--line:#E4E4DF;--edge:#C9CBC6;--hover:#F0F0EC;
+  --ahead:#C8443B;--deserved:#1F7A4B;--under:#2F6BC4;--none:#8A8F96;--focus:#131922;--warn:#94600A;--on-color:#FFFFFF;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#131619;--panel:#1C2024;--tile:rgba(255,255,255,.05);--ink:#E7E8E6;--strong:#F3F3F0;--on-strong:#131922;
   --muted:#999EA5;--line:#2C3136;--edge:#474D54;--hover:#252A2F;
-  --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;color-scheme:dark}}
+  --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;--on-color:#131922;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#131619;--panel:#1C2024;--tile:rgba(255,255,255,.05);--ink:#E7E8E6;--strong:#F3F3F0;--on-strong:#131922;
   --muted:#999EA5;--line:#2C3136;--edge:#474D54;--hover:#252A2F;
-  --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;color-scheme:dark}
+  --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;--on-color:#131922;color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,-apple-system,"Segoe UI",Roboto,sans-serif;padding-inline:16px;padding-block:48px 56px}
 .wrap{max-width:1180px;margin:0 auto;display:grid;gap:28px}
 header{text-align:center;display:grid;gap:14px;justify-items:center}
@@ -27,7 +28,8 @@ h1 em{font:600 1.18em/1 Caveat,"Bradley Hand",cursive;font-style:normal;letter-s
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:720px;width:100%;margin:6px auto 0}
 @media (max-width:560px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .stat{background:var(--tile);border-radius:20px;padding:16px 10px 12px;text-align:center;display:grid;gap:2px;border:0;font:inherit;color:inherit;cursor:help}
-.stat:hover,.stat[aria-expanded=true]{background:var(--hover)}
+button.stat:hover,.stat[aria-expanded=true]{background:var(--hover)}
+div.stat{cursor:default}
 .statnote{max-width:720px;margin:10px auto 0;font-size:13.5px;line-height:1.5;color:var(--muted);text-align:center}
 .stat b{font-weight:400;font-size:34px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .stat span{font-size:13px;color:var(--muted)}
@@ -41,6 +43,8 @@ h1 em{font:600 1.18em/1 Caveat,"Bradley Hand",cursive;font-style:normal;letter-s
 @media (max-width:860px){.main{grid-template-columns:1fr}}
 .stage{background:var(--panel);border-radius:28px;overflow:hidden}
 svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.pan{display:none;margin:0;padding:10px 16px 0;font-size:13px;color:var(--muted);text-align:center}
+@media (max-width:700px){.stage{overflow-x:auto;overscroll-behavior-x:contain}.stage svg{width:760px;max-width:none}.pan{display:block}}
 .e{stroke:var(--edge);stroke-width:1.2;fill:none;transition:opacity .2s,stroke .2s}
 .n{transition:opacity .2s}
 .n circle{stroke:var(--panel);stroke-width:2.5;cursor:pointer}
@@ -50,14 +54,15 @@ svg{display:block;width:100%;height:auto;touch-action:manipulation}
 .dim .e{opacity:.14}.dim .n{opacity:.22}.dim .tl{opacity:.3}
 .dim .e.on{opacity:1;stroke:var(--strong);stroke-width:1.8}.dim .n.on{opacity:1}
 .side{background:var(--panel);border-radius:28px;padding:22px;display:grid;gap:14px}
-.side h2{font-weight:500;font-size:30px;line-height:1;letter-spacing:-.01em;margin:0}
+.side h2:focus{outline:none}.side h2{font-weight:500;font-size:30px;line-height:1;letter-spacing:-.01em;margin:0}
 .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
 .pill{background:var(--hover);border-radius:999px;padding:3px 11px;color:var(--ink)}
-.pill.v{color:#fff}
+.pill.v{color:var(--on-color)}
 .lab{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
 ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 li button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:baseline;padding:8px 10px;border-radius:12px;cursor:pointer;font-size:13.5px}
 li button:hover,li button:focus-visible{background:var(--hover)}
+li button:focus-visible,.stat:focus-visible,.legend button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 li b{font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:6px}
 li small{color:var(--muted);font-size:13px}
 .note{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin:0}
@@ -76,7 +81,7 @@ li small{color:var(--muted);font-size:13px}
 .attn button:hover{background:var(--hover)}.attn button:focus-visible{outline:2px solid var(--focus)}
 .attn button b{font-weight:700}
 .st{font-size:11px;font-weight:500;border-radius:999px;padding:2px 8px;white-space:nowrap;background:var(--hover);color:var(--muted)}
-.st.ok{color:var(--deserved)}.st.warn{background:var(--warn);color:#fff}.st.bad{background:var(--ahead);color:#fff}
+.st.ok{color:var(--deserved)}.st.warn{background:var(--warn);color:var(--on-color)}.st.bad{background:var(--ahead);color:var(--on-color)}
 ul.pts li .st{margin-right:6px}
 ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 .meter{position:relative;height:8px;border-radius:999px;background:var(--hover);margin:10px 8px 6px}
@@ -97,7 +102,7 @@ ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 .rdot{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--strong);box-shadow:0 0 0 3px var(--panel)}
 .rlab{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
 .rlab b{color:var(--ink);font-weight:500;text-align:center}
-.private{background:var(--warn);color:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;margin:0}
+.private{background:var(--warn);color:var(--on-color);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;margin:0}
 .drivers{display:grid;gap:12px;background:var(--panel);border-radius:28px;padding:20px 22px}
 .drv{display:grid;grid-template-columns:minmax(110px,170px) 1fr 52px;gap:14px;align-items:center;font-size:13.5px;text-transform:capitalize}
 .drv .num{text-align:right}
@@ -132,12 +137,12 @@ ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 ul.pts{list-style:disc;padding-left:18px;gap:7px;font-size:13.5px;line-height:1.5}
 ul.pts li::marker{color:var(--edge)}
 .tag{font-size:11px;font-weight:500;border-radius:999px;padding:1px 8px;margin-left:4px;white-space:nowrap;background:var(--hover);color:var(--muted)}
-.tag.open{background:var(--ahead);color:#fff}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.tag.open{background:var(--ahead);color:var(--on-color)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 [hidden]{display:none!important}
 </style>
 
-<div class="wrap">
+<main class="wrap">
   <header>
     <h1>See how your holdings <em>connect</em></h1>
     <div class="stats" id="stats"></div>
@@ -157,15 +162,15 @@ ul.pts li::marker{color:var(--edge)}
   <section class="drivers" id="drivers" hidden></section>
   <section class="chain" id="chain" hidden></section>
   <div class="main">
-    <div class="stage"><svg id="g" role="img" aria-label="Network of holdings linked by shared business relationships"></svg></div>
-    <aside class="side" id="side" aria-live="polite"></aside>
+    <div class="stage"><p class="pan">Swipe sideways to see the whole map</p><svg id="g" role="group" aria-label="Network of holdings linked by shared business relationships. Each ticker is a button."></svg></div>
+    <aside class="side" id="side" aria-label="Selected ticker"></aside>
   </div>
   <section class="iso-wrap">
     <p class="lab">No links to other holdings</p>
     <div class="iso" id="iso"></div>
     <p class="note" id="nobrief" hidden style="border:0;padding:0"></p>
   </section>
-</div>
+</main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
@@ -178,7 +183,7 @@ const S=[[DATA.nodes.length,"tickers","Every company with a brief. Each circle o
  [nw,"not in graph yet","Briefs written since the last /graphify run. Until the graph is updated, their links come only from [[TICKER]] mentions in the brief."]];
 const st=document.getElementById("stats"),sn=document.getElementById("statnote");
 st.innerHTML=S.map(([v,l,d],i)=>`<button class="stat" data-i="${i}" aria-expanded="false" aria-controls="statnote"><b>${v}</b><span>${l}</span></button>`).join("");
-explain(st,".stat",sn,b=>S[b.dataset.i][2]);}
+explain(st,".stat[data-i]",sn,b=>S[b.dataset.i][2]);}
 // hover or tap an item to put its description in the note line; leaving restores the hint
 function explain(box,sel,note,text){
   const hint=note.textContent,show=b=>{box.querySelectorAll(sel).forEach(x=>x.setAttribute("aria-expanded",String(x===b)));note.textContent=b?text(b):hint;};
@@ -263,7 +268,7 @@ const tl=root.append("g");
 themes.forEach(t=>{const m=nodes.filter(n=>n.g===t);if(m.length<2)return;const cx=d3.mean(m,n=>n.x),top=d3.min(m,n=>n.y-r(n));tl.append("text").attr("class","tl").attr("x",cx).attr("y",top-12).attr("text-anchor","middle").text(th(t))});
 const N=root.append("g").selectAll("g").data(nodes).join("g").attr("class","n")
   .attr("transform",d=>`translate(${d.x},${d.y})`).attr("tabindex",0).attr("role","button").attr("aria-label",d=>`${d.t}, ${d.k} links`)
-  .on("click",(e,d)=>select(d.t)).on("keydown",(e,d)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(d.t)}});
+  .on("click",(e,d)=>select(d.t)).on("keydown",(e,d)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(d.t,true)}});
 N.append("circle").attr("r",r).attr("fill",d=>VC[d.v])
   .attr("class",d=>isHeld(d.t)?null:"watch").style("stroke",d=>isHeld(d.t)?null:VC[d.v]);
 N.filter(d=>LOGOS[d.t]&&LOGOS[d.t].d&&isHeld(d.t)&&r(d)>=10).append("path").attr("d",d=>LOGOS[d.t].d).attr("fill","#fff").attr("pointer-events","none")
@@ -276,11 +281,13 @@ IM.append("image").attr("href",d=>LOGOS[d.t].img).attr("preserveAspectRatio","xM
   .attr("x",d=>-r(d)*.62).attr("y",d=>-r(d)*.62).attr("width",d=>r(d)*1.24).attr("height",d=>r(d)*1.24);
 N.append("text").attr("y",d=>r(d)+13).attr("text-anchor","middle").text(d=>d.t);
 svg.on("click",e=>{if(e.target.tagName==="svg")select(null)});
+{const st=document.querySelector(".stage");st.scrollLeft=(st.scrollWidth-st.clientWidth)/2}  // phones pan the map; open it centred on the hubs
 
 document.getElementById("iso").innerHTML=iso.map(n=>`<button data-t="${n.t}"${n.new?' class="new" title="Not in the graph yet"':""}><i class="dot" style="background:${VC[n.v]}"></i>${n.t}</button>`).join("");
 if(PF){
   document.title="Holdings Map (private)";
   document.getElementById("private").hidden=false;
+  document.getElementById("statnote").hidden=true;  // private tiles are plain numbers, nothing to hover
   document.querySelector(".legend .plain").textContent="Solid = held, sized by weight · dashed ring = not held";
   const top=PF.drivers[0]||["none",0],cap=PF.cap||10,scale=Math.max(cap*1.25,...PF.drivers.map(d=>d[1]));
   document.getElementById("stats").innerHTML=[[Object.keys(HELD).length,"held"],[DATA.nodes.filter(n=>!HELD[n.t]).length,"watch list"],[top[1].toFixed(1)+"%",th(top[0])+" of assets"],[esc(PF.as_of),"portfolio as of"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
@@ -297,13 +304,13 @@ if(PF){
     ${next?`<div class="mode"><span>Next report that tests the chain</span><b>${next[0]} · ${next[1].days} days</b><span class="note" style="border:0;padding:0">${esc(next[1].metric)}: now ${next[1].current??"?"}${esc(next[1].unit||"")}, line ${next[1].breaks||""} ${next[1].threshold??""}${esc(next[1].unit||"")}</span></div>`:""}</div>
     <div class="roles">${ch.roles.map(x=>`<div class="role"><div>${esc(x.name)}<small>${esc(x.hit)}</small></div><div class="tk">${x.held.map(([t,w])=>`<button data-t="${t}">${t} ${w.toFixed(1)}%</button>`).join("")}${x.watch.map(t=>`<button class="w" data-t="${t}" title="Watch list, not held">${t}</button>`).join("")}</div><span class="num">${x.pct.toFixed(1)}%</span></div>`).join("")}</div>
     <p class="note" style="border:0;padding:0">Weights are % of your stock book; totals are % of total assets. Dashed = watch list. Roles are judged from the briefs.</p>`;
-    el.onclick=e=>{const b=e.target.closest("button[data-t]");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:"smooth",block:"start"})}}}
+    el.onclick=e=>{const b=e.target.closest("button[data-t]");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}}}
   if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
 }
 {const flagged=DATA.nodes.map(n=>[n.t,attention(n.t)]).filter(([,a])=>a).sort((x,y)=>{const o={bad:0,warn:1,"":2};return o[x[1][0]]-o[y[1][0]]});
   if(flagged.length){const el=document.getElementById("attn");el.hidden=false;
     el.querySelector(".chips").innerHTML=flagged.map(([t,a])=>`<button data-t="${t}"><span class="st ${a[0]}">${t}</span>${esc(a[1])}</button>`).join("");
-    el.onclick=e=>{const b=e.target.closest("button");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:"smooth",block:"start"})}}}}
+    el.onclick=e=>{const b=e.target.closest("button");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}}}}
 if(PF&&PF.moves){const col=(title,m)=>{if(!m||!m.by.length)return "";const top=m.by.slice(0,5),low=m.by.slice(-3).reverse().filter(x=>x[1]<0&&!top.includes(x)),rows=[...top,...low],mx=Math.max(...rows.map(x=>Math.abs(x[1])),.01);
     return `<div><h3>${title}<b class="num">${pct(m.book/100)}</b></h3><p class="note" style="border:0;padding:0;margin:4px 0 10px">Percentage points of your stock book, biggest movers</p>${rows.map(([t,v])=>`<div class="crow"><b>${t}</b><span class="bar"><i style="${v>=0?`left:50%;width:${v/mx*50}%;background:var(--deserved)`:`right:50%;width:${-v/mx*50}%;background:var(--ahead)`}"></i></span><span class="num">${v>=0?"+":""}${v.toFixed(2)}</span></div>`).join("")}</div>`};
   const el=document.getElementById("book");el.hidden=false;
@@ -313,7 +320,7 @@ document.getElementById("iso").onclick=e=>{const b=e.target.closest("button");if
 const side=document.getElementById("side");
 const hubs=[...DATA.nodes].sort((a,b)=>b.k-a.k).slice(0,6);
 function row(t,sub){const n=byT[t];return `<li><button data-t="${t}"><b><i class="dot" style="background:${VC[n.v]}"></i> ${t}</b><small>${sub}</small></button></li>`}
-function select(t){
+function select(t,focus){
   const s=svg.node();
   if(!t){s.classList.remove("dim");E.classed("on",false);N.classed("on",false);
     side.innerHTML=`<p class="lab">Biggest hubs</p><ul>${hubs.map(n=>row(n.t,`<span class="num">${n.k}</span> links · ${th(n.g)}`)).join("")}</ul>
@@ -323,9 +330,9 @@ function select(t){
   E.classed("on",d=>d.source.t===t||d.target.t===t);N.classed("on",d=>nb.has(d.t));
   const vp=n.v?`<span class="pill v" style="background:${VC[n.v]}">${n.v}</span>`:`<span class="pill">No verdict yet</span>`;
   const b=BRIEFS[t]||{},h=HELD[t];
-  const R=RNG[t],mv=R&&R.r5!=null?`<span class="pill num"${unusual(t)?' style="background:var(--warn);color:#fff"':""}>5d ${pct(R.r5)}${unusual(t)?` · unusual (${Math.abs(R.z5).toFixed(1)}σ)`:""}</span>`:"";
+  const R=RNG[t],mv=R&&R.r5!=null?`<span class="pill num"${unusual(t)?' style="background:var(--warn);color:var(--on-color)"':""}>5d ${pct(R.r5)}${unusual(t)?` · unusual (${Math.abs(R.z5).toFixed(1)}σ)`:""}</span>`:"";
   const pp=!PF?mv:h?mv+`<span class="pill num">${(h.w*100).toFixed(1)}% of book</span>${h.gain!=null?`<span class="pill num">${pct(h.gain)} vs your cost</span>`:""}${h.apr!=null?`<span class="pill num">1y ${pct(h.apr)} vs S&amp;P ${pct(h.bench)}</span>`:""}${h.under?`<span class="pill v" style="background:var(--warn)">1y underperformer</span>`:""}`:`<span class="pill">Watch list · not held</span>`;
-  side.innerHTML=`<div class="hd">${logo(t)}<div><h2>${t}</h2><small>${esc(b.name||"")}${b.date?` · brief updated ${esc(b.date)}`:""}</small></div></div>
+  side.innerHTML=`<div class="hd">${logo(t)}<div><h2 tabindex="-1">${t}</h2><small>${esc(b.name||"")}${b.date?` · brief updated ${esc(b.date)}`:""}</small></div></div>
   <div class="meta">${vp}<span class="pill">${th(n.g)}</span><span class="pill num">${n.k} links</span>${pp}</div>
   ${range52(t)}
   ${b.snap?`<p class="snap">${fmt(b.snap)}</p>`:""}
@@ -336,7 +343,8 @@ function select(t){
   <button id="clr" class="clr">Show biggest hubs</button>`;
   document.getElementById("clr").onclick=()=>select(null);
   side.scrollTop=0;
+  if(focus)side.querySelector("h2").focus({preventScroll:true});
 }
-side.onclick=e=>{const b=e.target.closest("li button");if(b)select(b.dataset.t)};
+side.onclick=e=>{const b=e.target.closest("li button");if(b)select(b.dataset.t,e.detail===0)};
 select("NVDA");
 </script>
