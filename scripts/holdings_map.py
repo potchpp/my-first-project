@@ -30,7 +30,7 @@ OUT = ROOT / 'graphify-out' / 'Holdings Map.canvas'  # local only (gitignored)
 PAGE = ROOT / 'graphify-out' / 'holdings-map.html'
 # local only: carries your allocation — republish_map.py publishes PAGE, never this one
 PRIVATE_PAGE = ROOT / 'graphify-out' / 'holdings-map-private.html'
-SITE_PAGE = ROOT / 'map.html'  # public page, committed so the Vercel site can serve it (no portfolio data)
+SITE_PAGE = ROOT / 'index.html'  # the Vercel site's home page: the public map, committed (no portfolio data)
 PORTFOLIO = ROOT / 'portfolio' / 'portfolio.json'
 POLICY = ROOT / 'portfolio' / 'policy.json'
 # falsifier thresholds and kill-condition reviews, per ticker; about the stock, not your holdings, so tracked in git
@@ -511,7 +511,7 @@ if __name__ == '__main__':
     OUT.write_text(json.dumps(canvas, indent=1, ensure_ascii=False), encoding='utf-8')
     assert 'portfolio' not in page, 'the published page must never carry portfolio data'
     PAGE.write_text(render(page), encoding='utf-8')
-    SITE_PAGE.write_text(render(page, standalone=True), encoding='utf-8')  # tracked copy Vercel serves at /map
+    SITE_PAGE.write_text(render(page, standalone=True), encoding='utf-8')  # tracked copy Vercel serves as the home page
     if PORTFOLIO.exists():
         policy = json.loads(POLICY.read_text(encoding='utf-8')) if POLICY.exists() else {}
         portfolio = json.loads(PORTFOLIO.read_text(encoding='utf-8'))
