@@ -1,5 +1,5 @@
 """Stop hook: keep both Holdings Map pages in step with briefs/ and your portfolio.
-About once a day it also runs perf.py, so the private page's weights and returns refresh
+About once a day, and whenever the holdings CSV is saved, it also runs perf.py, so the private page's weights and returns refresh
 from the same price cache the public page uses.
 
 When a brief (or the graph) is newer than graphify-out/holdings-map.html, rebuild it with
@@ -21,7 +21,7 @@ PAGE = ROOT / 'graphify-out' / 'holdings-map.html'
 MARK = ROOT / 'graphify-out' / '.holdings-map.published'
 PRICE_CACHE = ROOT / 'portfolio' / 'cache'
 PRICE_REFRESH_HOURS = 20  # 52-week bars refresh about once a day (~10s for 50 tickers)
-URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # owned by potchpurana@gmail.com
+URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # the one published copy; share edit access with any other account that runs this hook
 
 
 def digest():
@@ -45,7 +45,10 @@ def main():
     warnings = ''
     newest_price = max((p.stat().st_mtime for p in PRICE_CACHE.glob('*.csv')), default=0)
     prices_stale = time.time() - newest_price > PRICE_REFRESH_HOURS * 3600
-    if prices_stale:
+    portfolio = ROOT / 'portfolio' / 'portfolio.json'
+    holdings_edited = any(c.stat().st_mtime > (portfolio.stat().st_mtime if portfolio.exists() else 0)
+                          for c in (ROOT / 'portfolio').glob('*.csv'))  # the Yahoo-format export you edit
+    if prices_stale or holdings_edited:
         # One refresh feeds both pages: perf.py updates the shared price cache and portfolio.json
         # (private page); the map below then only fetches the watch-list names perf.py doesn't hold.
         subprocess.run([sys.executable, str(ROOT / 'scripts' / 'perf.py')], capture_output=True, text=True)
