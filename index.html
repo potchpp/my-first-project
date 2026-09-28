@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Holdings Map</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;700&family=Caveat:wght@600&display=swap">
 <style>
 :root{
   --bg:#F5F5F3;--panel:#FFFFFF;--tile:rgba(255,255,255,.72);--ink:#2B313B;--strong:#131922;--on-strong:#FFFFFF;
@@ -19,7 +19,7 @@
   --bg:#131619;--panel:#1C2024;--tile:rgba(255,255,255,.05);--ink:#E7E8E6;--strong:#F3F3F0;--on-strong:#131922;
   --muted:#999EA5;--line:#2C3136;--edge:#474D54;--hover:#252A2F;
   --ahead:#EA6B62;--deserved:#4FBF84;--under:#6AA2EC;--none:#646A72;--focus:#F3F3F0;--warn:#E3A13B;--on-color:#131922;color-scheme:dark}
-body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,-apple-system,"Segoe UI",Roboto,sans-serif;padding-inline:16px;padding-block:48px 56px}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums;padding-inline:16px;padding-block:48px 56px}
 .wrap{max-width:1180px;margin:0 auto;display:grid;gap:28px}
 header{text-align:center;display:grid;gap:14px;justify-items:center}
 h1{font-weight:500;font-size:clamp(32px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance}
@@ -31,7 +31,7 @@ h1 em{font:600 1.18em/1 Caveat,"Bradley Hand",cursive;font-style:normal;letter-s
 button.stat:hover,.stat[aria-expanded=true]{background:var(--hover)}
 div.stat{cursor:default}
 .statnote{max-width:720px;margin:10px auto 0;font-size:13.5px;line-height:1.5;color:var(--muted);text-align:center}
-.stat b{font-weight:400;font-size:34px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat b{font-weight:300;font-size:36px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .stat span{font-size:13px;color:var(--muted)}
 .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .legend span,.legend button{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:13px;color:var(--ink);background:var(--tile);border:0;border-radius:999px;padding:5px 12px}
@@ -50,7 +50,7 @@ svg{display:block;width:100%;height:auto;touch-action:manipulation}
 .n circle{stroke:var(--panel);stroke-width:2.5;cursor:pointer}
 .n text{font:500 11.5px Figtree,sans-serif;fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--panel);stroke-width:4px}
 .n:focus{outline:none}.n:focus-visible circle{stroke:var(--focus);stroke-width:3}
-.tl{font:500 11px Figtree,sans-serif;fill:var(--muted);letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.tl{font:500 12px Figtree,sans-serif;fill:var(--muted);pointer-events:none}
 .dim .e{opacity:.14}.dim .n{opacity:.22}.dim .tl{opacity:.3}
 .dim .e.on{opacity:1;stroke:var(--strong);stroke-width:1.8}.dim .n.on{opacity:1}
 .side{background:var(--panel);border-radius:28px;padding:22px;display:grid;gap:14px}
@@ -58,7 +58,7 @@ svg{display:block;width:100%;height:auto;touch-action:manipulation}
 .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
 .pill{background:var(--hover);border-radius:999px;padding:3px 11px;color:var(--ink)}
 .pill.v{color:var(--on-color)}
-.lab{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lab{font-size:14px;font-weight:600;color:var(--ink);margin:0}
 ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 li button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:baseline;padding:8px 10px;border-radius:12px;cursor:pointer;font-size:13.5px}
 li button:hover,li button:focus-visible{background:var(--hover)}
@@ -74,7 +74,7 @@ li small{color:var(--muted);font-size:13px}
 .iso button:focus-visible{outline:2px solid var(--focus)}
 .clr{all:unset;cursor:pointer;justify-self:start;font-weight:500;font-size:14px;background:var(--strong);color:var(--on-strong);border-radius:999px;padding:9px 18px}
 .clr:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.num{font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .attn{display:grid;gap:10px;justify-items:center;text-align:center}
 .attn .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .attn button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border-radius:999px;padding:6px 13px 6px 7px;font-size:13px}
@@ -132,13 +132,14 @@ ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 .logo.mono{background:var(--hover);color:var(--ink)}
 .snap{margin:0;font-size:14.5px;line-height:1.6;text-wrap:pretty}
 .fals{background:var(--hover);border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.5}
-.fals b{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:3px}
+.fals b{display:block;font-size:13.5px;color:var(--ink);font-weight:600;margin-bottom:3px}
 .bb{display:grid;gap:6px}
 ul.pts{list-style:disc;padding-left:18px;gap:7px;font-size:13.5px;line-height:1.5}
 ul.pts li::marker{color:var(--edge)}
 .tag{font-size:11px;font-weight:500;border-radius:999px;padding:1px 8px;margin-left:4px;white-space:nowrap;background:var(--hover);color:var(--muted)}
 .tag.open{background:var(--ahead);color:var(--on-color)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+.stage,.side,.book,.drivers,.chain{box-shadow:inset 0 0 0 1px var(--line)}
 [hidden]{display:none!important}
 </style>
 
@@ -265,7 +266,7 @@ const root=svg.append("g");
 const E=root.append("g").selectAll("line").data(links).join("line").attr("class","e")
   .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
 const tl=root.append("g");
-themes.forEach(t=>{const m=nodes.filter(n=>n.g===t);if(m.length<2)return;const cx=d3.mean(m,n=>n.x),top=d3.min(m,n=>n.y-r(n));tl.append("text").attr("class","tl").attr("x",cx).attr("y",top-12).attr("text-anchor","middle").text(th(t))});
+themes.forEach(t=>{const m=nodes.filter(n=>n.g===t);if(m.length<2)return;const cx=d3.mean(m,n=>n.x),top=d3.min(m,n=>n.y-r(n));tl.append("text").attr("class","tl").attr("x",cx).attr("y",top-12).attr("text-anchor","middle").text(th(t).replace(/^./,c=>c.toUpperCase()))});
 const N=root.append("g").selectAll("g").data(nodes).join("g").attr("class","n")
   .attr("transform",d=>`translate(${d.x},${d.y})`).attr("tabindex",0).attr("role","button").attr("aria-label",d=>`${d.t}, ${d.k} links`)
   .on("click",(e,d)=>select(d.t)).on("keydown",(e,d)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(d.t,true)}});

@@ -463,7 +463,7 @@ def portfolio_view(page, portfolio, policy, moves=None):
 
 # the Artifact host wraps the published page in its own <head>; the local page opens straight from disk
 # and needs its own, or Safari decodes the UTF-8 (Thai, ·, —) as Latin-1
-STANDALONE_HEAD = '<!doctype html>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+STANDALONE_HEAD = '<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
 
 
 def render(page, standalone=False):
