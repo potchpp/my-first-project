@@ -627,5 +627,47 @@
       "judged": "at deadline"
     },
     "kills": []
+  },
+  "NBIS": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Exit-2026 ARR",
+      "breaks": "below",
+      "threshold": 7,
+      "unit": "$B",
+      "current": 3.0,
+      "current_label": "ARR end of June 2026",
+      "deadline": "2027-02-28",
+      "note": "guidance $7-9B; below $7B flips Deserved to Ahead of itself"
+    },
+    "kills": []
+  },
+  "SNDK": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Non-GAAP gross margin",
+      "breaks": "below",
+      "threshold": 70,
+      "unit": "%",
+      "current": 84.6,
+      "current_label": "Q4 FY2026",
+      "deadline": "2028-06-30",
+      "note": "any quarter below 70% through FY2028 breaks the durability thesis"
+    },
+    "kills": []
+  },
+  "USAR": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Stillwater run-rate capacity",
+      "breaks": "above",
+      "threshold": 1200,
+      "unit": "MTPA",
+      "current": null,
+      "current_label": "",
+      "deadline": "2027-06-30",
+      "note": "reaching 1,200 MTPA by Q2 2027 weakens Ahead of itself; Phase 1a target 600 MTPA Q4 2026"
+    },
+    "kills": []
   }
 }

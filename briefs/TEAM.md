@@ -1,7 +1,7 @@
 ---
 ticker: TEAM
 company: Atlassian
-updated: 2026-09-18
+updated: 2026-09-28
 type: stock-brief
 shared_driver: enterprise-software
 ---
@@ -35,7 +35,7 @@ Atlassian ทำ team collaboration platform — Jira, Confluence, Jira Service 
 ## Latest Earnings
 *Source: sentiment agent — no transcript in sources/TEAM/*
 
-Q4 FY2026 (ส.ค. 2026): Revenue $1.77B (+28%) beat estimate, EPS $1.87 beat Cloud +31%, ARR $6.61B (+23%), **RPO +44% เป็น $4.82B** (bookings โตเร็วกว่า revenue) หุ้นพุ่ง ~31% วันประกาศ FY2027 guidance implied ~13% growth
+Q4 FY2026 (ส.ค. 2026): Revenue $1.77B (+28%) beat estimate, non-GAAP EPS $1.87 (GAAP FY2026: −$0.21/sh, 10-K) beat Cloud +31%, ARR $6.61B (+23%), **RPO +44% เป็น $4.82B** (bookings โตเร็วกว่า revenue) หุ้นพุ่ง ~31% วันประกาศ FY2027 guidance implied ~13% growth
 
 Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เดือน, 80% ของ Fortune 500 ใช้ Rovo migrated customer (DC→Cloud) ใช้จ่ายมากขึ้น 1.75x หลัง 3 ปี
 
@@ -77,12 +77,21 @@ Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เ�
 
 **Falsifying number:** ถ้า FCF − SBC เป็นบวก (>0% ของรายได้) **สองไตรมาสติด** (Q1/Q2 FY2027 รายงานราว ต.ค. 2026 และ ม.ค. 2027) = verdict นี้ผิด และ premium multiple มีฐานเศรษฐกิจจริงรองรับ
 
+
+**Refresh 2026-09-28 @ ~$179 (Yahoo):** market cap ~$45.3B → EV/Sales ~6.9x (จาก 7.6x) ราคาลง ~9% โดยไม่มีข้อมูลพื้นฐานใหม่ — SBC math ไม่เปลี่ยน **Verdict ยังเป็น Ahead of itself** falsifying number เดิม การทดสอบถัดไปคือ Q1 FY2027 (~ต.ค. 2026)
+
+## Variant Perception
+- *Thesis metric:* FCF หลังหัก SBC เป็น % ของ revenue (ยังไม่เคยเป็นบวก) — ตัวรอง: Cloud NRR (>120%, q4-2026-call.md line ~46) และ paid-seat growth
+- *Where we differ from consensus:* nothing — we hold the consensus view ข้อมูล seat ล่าสุดยังไม่เห็น AI seat compression แต่ fault line จริงคือ SBC/FCF และ analyst target กว้าง $108-480 สะท้อนว่า consensus เองก็แตก
+
 ## Kill Conditions
 
-- **GAAP net loss ไม่ปิดภายใน 2-3 ปี** ทั้งที่ operating income เป็นบวกแล้ว — แปลว่า SBC/restructuring cost structural ไม่ใช่ transitional
-- **Data Center migration เกิด churn สูงกว่าคาด** — ลูกค้าเลือกย้ายไปคู่แข่งแทนที่จะย้ายไป Cloud
-- **Rovo ไม่แปลงเป็น pricing power จริง** เมื่อ metered AI charge เริ่ม ธ.ค. 2026 — ถ้า adoption หยุดโตหรือลูกค้า resist ค่าใช้จ่ายเพิ่ม
-- **AI coding agent กระทบ Jira seat count จริง** ภายใน 2 ปี — per-seat model เริ่มหดตัวแทนที่จะโต
+- **GAAP net loss ไม่ปิดภายใน 2-3 ปี** ทั้งที่ operating income เป็นบวกแล้ว — แปลว่า SBC/restructuring cost structural ไม่ใช่ transitional — ชัดขึ้น: หรือ SBC >20% ของ revenue ต่อเนื่อง 3 ปี `[open-ended]`
+- **Data Center migration เกิด churn สูงกว่าคาด** — ลูกค้าเลือกย้ายไปคู่แข่งแทนที่จะย้ายไป Cloud `[bounded ~28%]` (Data Center = $1.83B จาก $6.57B)
+- **Rovo ไม่แปลงเป็น pricing power จริง** เมื่อ metered AI charge เริ่ม ธ.ค. 2026 — ถ้า adoption หยุดโตหรือลูกค้า resist ค่าใช้จ่ายเพิ่ม `[bounded, <50%]` (กระทบ growth/multiple ไม่ใช่ subscription หลัก)
+- **AI coding agent กระทบ Jira seat count จริง** ภายใน 2 ปี — per-seat model เริ่มหดตัวแทนที่จะโต — ชัดขึ้น: paid seats ลดสุทธิ ไม่ใช่แค่โตช้าลง `[open-ended]`
+
+*ข้อ 2 และ 3 ต่ำกว่า threshold 50% → loosening candidates ถ้าจะย้ายไป Bear ต้องเขียนเหตุผลเอง (`*Loosened YYYY-MM-DD: ...*`)*
 
 ---
 
