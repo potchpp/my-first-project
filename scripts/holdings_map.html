@@ -23,11 +23,15 @@ h1 em{font:600 1.18em/1 Caveat,"Bradley Hand",cursive;font-style:normal;letter-s
 .lede{margin:0;color:var(--muted);max-width:58ch;font-size:17px;text-wrap:pretty}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:720px;width:100%;margin:6px auto 0}
 @media (max-width:560px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.stat{background:var(--tile);border-radius:20px;padding:16px 10px 12px;text-align:center;display:grid;gap:2px}
+.stat{background:var(--tile);border-radius:20px;padding:16px 10px 12px;text-align:center;display:grid;gap:2px;border:0;font:inherit;color:inherit;cursor:help}
+.stat:hover,.stat[aria-expanded=true]{background:var(--hover)}
+.statnote{max-width:720px;margin:10px auto 0;font-size:13.5px;line-height:1.5;color:var(--muted);text-align:center}
 .stat b{font-weight:400;font-size:34px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .stat span{font-size:13px;color:var(--muted)}
 .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.legend span{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);background:var(--tile);border-radius:999px;padding:5px 12px}
+.legend span,.legend button{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:13px;color:var(--ink);background:var(--tile);border:0;border-radius:999px;padding:5px 12px}
+.legend button{cursor:help}.legend button:hover,.legend button[aria-expanded=true]{background:var(--hover)}
+.legend .statnote{flex-basis:100%;margin-top:4px}
 .legend .plain{background:none;color:var(--muted)}
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
 .main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}
@@ -111,7 +115,7 @@ ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 .role .tk button:focus-visible{outline:2px solid var(--focus)}
 .role .num{text-align:right;font-weight:500}
 @media (max-width:560px){.role{grid-template-columns:1fr auto}.role .tk{grid-column:1/-1}}
-.n circle.watch{fill:var(--panel);stroke-width:2.5}
+.n circle.watch{fill:var(--panel);stroke-width:2;stroke-dasharray:3 2.5}
 @media (max-width:560px){.drv{grid-template-columns:1fr auto}.drv .track{grid-column:1/-1;order:3}}
 .hd{display:flex;gap:14px;align-items:center}
 .hd small{display:block;color:var(--muted);font-size:13px;margin-top:5px}
@@ -133,14 +137,16 @@ ul.pts li::marker{color:var(--edge)}
   <header>
     <h1>See how your holdings <em>connect</em></h1>
     <div class="stats" id="stats"></div>
+    <p class="statnote" id="statnote">Hover or tap a number to see what it means</p>
     <p class="private" id="private" hidden>Local only. This page shows your allocation, so don't upload or share it.</p>
   </header>
   <div class="legend" aria-label="Valuation verdict">
-    <span><i class="dot" style="background:var(--ahead)"></i>Ahead of itself</span>
-    <span><i class="dot" style="background:var(--deserved)"></i>Deserved</span>
-    <span><i class="dot" style="background:var(--under)"></i>Still underrated</span>
-    <span><i class="dot" style="background:var(--none)"></i>No verdict yet</span>
+    <button data-d="The price needs the business to speed up, and the latest numbers don't show that yet."><i class="dot" style="background:var(--ahead)"></i>Ahead of itself</button>
+    <button data-d="The price assumes the business keeps doing what it's already doing. No faster growth is needed for it to make sense."><i class="dot" style="background:var(--deserved)"></i>Deserved</button>
+    <button data-d="The price assumes the business will slow down or get worse, but the evidence doesn't back that up."><i class="dot" style="background:var(--under)"></i>Still underrated</button>
+    <button data-d="No valuation check yet. Run /deep on the ticker to get one."><i class="dot" style="background:var(--none)"></i>No verdict yet</button>
     <span class="plain">Lines show each ticker's 4 strongest links</span>
+    <p class="statnote" id="legnote">How it works: /deep works out what today's price assumes about growth, then compares that with what the company is actually delivering. Every verdict comes with one number, due at a set earnings date, that would prove it wrong (side panel: "What would prove the verdict wrong"). Hover or tap a colour to see what it means.</p>
   </div>
   <section class="attn" id="attn" hidden><p class="lab">Needs a look</p><div class="chips"></div></section>
   <section class="book" id="book" hidden></section>
@@ -162,7 +168,20 @@ ul.pts li::marker{color:var(--edge)}
 const DATA=__DATA__;
 const VC={"Ahead of itself":"var(--ahead)","Deserved":"var(--deserved)","Still underrated":"var(--under)","":"var(--none)"};
 {const hub=[...DATA.nodes].sort((x,y)=>y.k-x.k)[0],nw=DATA.nodes.filter(n=>n.new).length;
-document.getElementById("stats").innerHTML=[[DATA.nodes.length,"tickers"],[DATA.edges.length,"links shown"],[hub.t,"biggest hub"],[nw,"not in graph yet"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");}
+const S=[[DATA.nodes.length,"tickers","Every company with a brief. Each circle on the map is one of them."],
+ [DATA.edges.length,"links shown","Pairs that are really related: one brief names the other, or both share a product, contract or risk. Each ticker draws only its 4 strongest."],
+ [hub.t,"biggest hub",`${hub.t} has the most links, so news about it touches the most of your other holdings.`],
+ [nw,"not in graph yet","Briefs written since the last /graphify run. Until the graph is updated, their links come only from [[TICKER]] mentions in the brief."]];
+const st=document.getElementById("stats"),sn=document.getElementById("statnote");
+st.innerHTML=S.map(([v,l,d],i)=>`<button class="stat" data-i="${i}" aria-expanded="false" aria-controls="statnote"><b>${v}</b><span>${l}</span></button>`).join("");
+explain(st,".stat",sn,b=>S[b.dataset.i][2]);}
+// hover or tap an item to put its description in the note line; leaving restores the hint
+function explain(box,sel,note,text){
+  const hint=note.textContent,show=b=>{box.querySelectorAll(sel).forEach(x=>x.setAttribute("aria-expanded",String(x===b)));note.textContent=b?text(b):hint;};
+  box.addEventListener("click",e=>{const b=e.target.closest(sel);if(b)show(b.getAttribute("aria-expanded")==="true"&&e.pointerType!=="mouse"?null:b);});
+  box.addEventListener("mouseover",e=>{const b=e.target.closest(sel);if(b)show(b);});
+  box.addEventListener("mouseleave",()=>show(null));}
+explain(document.querySelector(".legend"),"button",document.getElementById("legnote"),b=>b.dataset.d);
 const byT=Object.fromEntries(DATA.nodes.map(n=>[n.t,n]));
 const adj={};DATA.nodes.forEach(n=>adj[n.t]=[]);
 DATA.edges.forEach(e=>{adj[e.s].push({o:e.d,l:e.l});adj[e.d].push({o:e.s,l:e.l})});
@@ -180,6 +199,7 @@ const fmt=x=>esc(x).replace(/\[(open-ended[^\]]*|bounded[^\]]*)\]/g,(m,g)=>`<spa
 const lum=h=>{const[a,b,c]=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16)/255);return .2126*a+.7152*b+.0722*c};
 const LOGOS=DATA.logos||{},BRIEFS=DATA.briefs||{};
 function logo(t){const L=LOGOS[t];if(!L)return `<span class="logo mono" aria-hidden="true">${esc(t.slice(0,2))}</span>`;
+  if(L.img)return `<span class="logo" style="background:#fff" aria-hidden="true"><img src="${L.img}" alt="" width="30" height="30" style="border-radius:6px"></span>`;
   return `<span class="logo" style="background:#${L.hex}" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="${lum(L.hex)>.6?"#131922":"#fff"}" d="${L.d}"/></svg></span>`}
 const MON=DATA.monitor||{},RNG=DATA.ranges||{},SPIKE=2;
 const KILL={intact:["ok","Intact"],review:["warn","Needs review"],watch:["warn","Watch"],triggered:["bad","Triggered"]};
@@ -242,8 +262,14 @@ const N=root.append("g").selectAll("g").data(nodes).join("g").attr("class","n")
   .on("click",(e,d)=>select(d.t)).on("keydown",(e,d)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(d.t)}});
 N.append("circle").attr("r",r).attr("fill",d=>VC[d.v])
   .attr("class",d=>isHeld(d.t)?null:"watch").style("stroke",d=>isHeld(d.t)?null:VC[d.v]);
-N.filter(d=>LOGOS[d.t]&&isHeld(d.t)&&r(d)>=11).append("path").attr("d",d=>LOGOS[d.t].d).attr("fill","#fff").attr("pointer-events","none")
+N.filter(d=>LOGOS[d.t]&&LOGOS[d.t].d&&isHeld(d.t)&&r(d)>=10).append("path").attr("d",d=>LOGOS[d.t].d).attr("fill","#fff").attr("pointer-events","none")
   .attr("transform",d=>{const z=r(d)*1.05;return `translate(${-z/2},${-z/2}) scale(${z/24})`});
+// site-icon logos are pictures, not paths: a white disc inside the verdict ring, the icon clipped round
+svg.append("defs").append("clipPath").attr("id","lc").attr("clipPathUnits","objectBoundingBox").append("circle").attr("cx",.5).attr("cy",.5).attr("r",.5);
+const IM=N.filter(d=>LOGOS[d.t]&&LOGOS[d.t].img&&isHeld(d.t)&&r(d)>=10);
+IM.append("circle").attr("r",d=>r(d)*.78).attr("fill","#fff").attr("pointer-events","none");
+IM.append("image").attr("href",d=>LOGOS[d.t].img).attr("preserveAspectRatio","xMidYMid meet").attr("clip-path","url(#lc)").attr("pointer-events","none")
+  .attr("x",d=>-r(d)*.62).attr("y",d=>-r(d)*.62).attr("width",d=>r(d)*1.24).attr("height",d=>r(d)*1.24);
 N.append("text").attr("y",d=>r(d)+13).attr("text-anchor","middle").text(d=>d.t);
 svg.on("click",e=>{if(e.target.tagName==="svg")select(null)});
 
@@ -251,7 +277,7 @@ document.getElementById("iso").innerHTML=iso.map(n=>`<button data-t="${n.t}"${n.
 if(PF){
   document.title="Holdings Map (private)";
   document.getElementById("private").hidden=false;
-  document.querySelector(".legend .plain").textContent="Solid = held, sized by weight · ring = watch list";
+  document.querySelector(".legend .plain").textContent="Solid = held, sized by weight · dashed ring = not held";
   const top=PF.drivers[0]||["none",0],cap=PF.cap||10,scale=Math.max(cap*1.25,...PF.drivers.map(d=>d[1]));
   document.getElementById("stats").innerHTML=[[Object.keys(HELD).length,"held"],[DATA.nodes.filter(n=>!HELD[n.t]).length,"watch list"],[top[1].toFixed(1)+"%",th(top[0])+" of assets"],[esc(PF.as_of),"portfolio as of"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   const el=document.getElementById("drivers");el.hidden=false;

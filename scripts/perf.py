@@ -49,6 +49,8 @@ class Trade:
 
 DATE_FORMATS = ("%Y %m %d", "%Y-%m-%d", "%Y/%m/%d")
 EXPECTED_HEADER = ["symbol", "trade date", "quantity", "purchase price", "commission"]
+# the Sheet export can carry Buy/Sell in the last column instead of a commission (commission then 0)
+TYPED_HEADER = EXPECTED_HEADER[:4] + ["type"]
 
 
 def parse_date(text: str) -> date:
@@ -67,8 +69,9 @@ def load_trades(path: Path) -> List[Trade]:
     if not rows:
         raise ValueError("row 1: empty file")
     header = [h.strip().lower() for h in rows[0]]
-    if header != EXPECTED_HEADER:
-        raise ValueError(f"row 1: header must be {EXPECTED_HEADER}, got {header}")
+    if header not in (EXPECTED_HEADER, TYPED_HEADER):
+        raise ValueError(f"row 1: header must be {EXPECTED_HEADER} or {TYPED_HEADER}, got {header}")
+    typed = header == TYPED_HEADER
     trades = []
     for n, row in enumerate(rows[1:], start=2):
         if not any(cell.strip() for cell in row):
@@ -76,7 +79,7 @@ def load_trades(path: Path) -> List[Trade]:
         try:
             sym, d, q, p, c = [cell.strip() for cell in row]
             qty, price = float(q), float(p)
-            comm = float(c) if c else 0.0
+            comm = 0.0 if typed else (float(c) if c else 0.0)
             when = parse_date(d)
         except ValueError as e:
             raise ValueError(f"row {n}: {e}") from None
@@ -84,6 +87,10 @@ def load_trades(path: Path) -> List[Trade]:
             raise ValueError(f"row {n}: empty symbol")
         if qty == 0:
             raise ValueError(f"row {n}: quantity must not be 0")
+        if typed and c.lower() not in ("buy", "sell"):
+            raise ValueError(f"row {n}: type must be Buy or Sell, got {c!r}")
+        if typed and (c.lower() == "sell") != (qty < 0):
+            raise ValueError(f"row {n}: {c} needs a {'negative' if c.lower() == 'sell' else 'positive'} quantity")
         if price <= 0:
             raise ValueError(f"row {n}: price must be > 0")
         if comm < 0:

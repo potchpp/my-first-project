@@ -53,6 +53,16 @@ class LoadTests(unittest.TestCase):
             trades = perf.load_trades(p)
         self.assertEqual(trades[0].commission, 0.0)
 
+    def test_buy_sell_type_column_means_zero_commission(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = write_csv(d, "Symbol,Trade Date,Quantity,Purchase Price,Type\nSPCX,2025 01 15,2,100,Buy\nSPCX,2025 02 01,-1,120,Sell\n")
+            trades = perf.load_trades(p)
+            self.assertEqual([t.is_sell for t in trades], [False, True])
+            self.assertEqual(trades[0].commission, 0.0)
+            bad = write_csv(d, "Symbol,Trade Date,Quantity,Purchase Price,Type\nSPCX,2025 01 15,2,100,Sell\n")
+            with self.assertRaises(ValueError):  # a Sell must carry a negative quantity
+                perf.load_trades(bad)
+
     def test_zero_quantity_names_row(self):
         with tempfile.TemporaryDirectory() as d:
             p = write_csv(d, HEADER + "AAPL,2025 01 15,1,10,0\nAAPL,2025 01 16,0,10,0\n")

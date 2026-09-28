@@ -1,361 +1,631 @@
 {
- "AAPL": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2027 EPS growth",
-   "breaks": "above",
-   "threshold": 15,
-   "unit": "%",
-   "current": null,
-   "current_label": "",
-   "deadline": "2027-10-31",
-   "note": "brief has no FY2027 EPS growth figure yet"
+  "AAPL": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2027 EPS growth",
+      "breaks": "above",
+      "threshold": 15,
+      "unit": "%",
+      "current": null,
+      "current_label": "",
+      "deadline": "2027-10-31",
+      "note": "brief has no FY2027 EPS growth figure yet"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "AMD": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Data Center revenue growth YoY",
-   "breaks": "below",
-   "threshold": 70,
-   "unit": "%",
-   "current": 107,
-   "current_label": "Q2 2026 actual",
-   "deadline": "2027-12-31"
+  "AMD": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Data Center revenue growth YoY",
+      "breaks": "below",
+      "threshold": 70,
+      "unit": "%",
+      "current": 107,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2027-12-31"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "AMZN": {
-  "falsifier": {
-   "type": "number",
-   "metric": "AWS revenue growth YoY",
-   "breaks": "below",
-   "threshold": 30,
-   "unit": "%",
-   "current": 36.7,
-   "current_label": "Q2 2026 actual",
-   "deadline": "2026-10-31"
+  "AMZN": {
+    "falsifier": {
+      "type": "number",
+      "metric": "AWS revenue growth YoY",
+      "breaks": "below",
+      "threshold": 30,
+      "unit": "%",
+      "current": 36.7,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2026-10-31"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "ASTS": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2027 revenue",
-   "breaks": "above",
-   "threshold": 1000,
-   "unit": "$M",
-   "current": 175,
-   "current_label": "FY2026 guide midpoint",
-   "deadline": "2028-02-28",
-   "judged": "at deadline",
-   "note": "below $500M would confirm the verdict instead"
+  "ASTS": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2027 revenue",
+      "breaks": "above",
+      "threshold": 1000,
+      "unit": "$M",
+      "current": 175,
+      "current_label": "FY2026 guide midpoint",
+      "deadline": "2028-02-28",
+      "judged": "at deadline",
+      "note": "below $500M would confirm the verdict instead"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "CRCL": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2026 adj. EBITDA",
-   "breaks": "above",
-   "threshold": 900,
-   "unit": "$M",
-   "current": 570,
-   "current_label": "H1 2026 annualized run-rate",
-   "deadline": "2027-02-28",
-   "note": "needs ~$180M of Arc presale recognition to get close"
+  "CRCL": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 adj. EBITDA",
+      "breaks": "above",
+      "threshold": 900,
+      "unit": "$M",
+      "current": 570,
+      "current_label": "H1 2026 annualized run-rate",
+      "deadline": "2027-02-28",
+      "note": "needs ~$180M of Arc presale recognition to get close"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "GEV": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2027 adj. EBITDA margin",
-   "breaks": "below",
-   "threshold": 15,
-   "unit": "%",
-   "current": 13,
-   "current_label": "FY2026 guide midpoint (web)",
-   "deadline": "2028-02-28",
-   "judged": "at deadline",
-   "note": "FY2025 was 8.4% (10-K); the 2028 target is 20%"
+  "GEV": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2027 adj. EBITDA margin",
+      "breaks": "below",
+      "threshold": 15,
+      "unit": "%",
+      "current": 13,
+      "current_label": "FY2026 guide midpoint (web)",
+      "deadline": "2028-02-28",
+      "judged": "at deadline",
+      "note": "FY2025 was 8.4% (10-K); the 2028 target is 20%"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "GOOG": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Google Cloud revenue growth YoY",
-   "breaks": "below",
-   "threshold": 40,
-   "unit": "%",
-   "current": 63,
-   "current_label": "Q1 2026 actual",
-   "deadline": "2027-07-31",
-   "note": "Q2 2026 +82% is unverified (web); deadline covers the next 4 quarters"
+  "GOOG": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Google Cloud revenue growth YoY",
+      "breaks": "below",
+      "threshold": 40,
+      "unit": "%",
+      "current": 63,
+      "current_label": "Q1 2026 actual",
+      "deadline": "2027-07-31",
+      "note": "Q2 2026 +82% is unverified (web); deadline covers the next 4 quarters"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "GRMN": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Fitness revenue growth YoY",
-   "breaks": "below",
-   "threshold": 15,
-   "unit": "%",
-   "current": 25,
-   "current_label": "Q2 2026 actual",
-   "deadline": "2027-02-28",
-   "note": "also breaks if Fitness op margin <33% (now 37%)"
+  "GRMN": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Fitness revenue growth YoY",
+      "breaks": "below",
+      "threshold": 15,
+      "unit": "%",
+      "current": 25,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2027-02-28",
+      "note": "also breaks if Fitness op margin <33% (now 37%)"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "HNGE": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2026 revenue",
-   "breaks": "below",
-   "threshold": 856,
-   "unit": "$M",
-   "current": 858,
-   "current_label": "FY2026 guide midpoint",
-   "deadline": "2027-02-28",
-   "note": "also breaks if non-GAAP op margin <28% (guide is 28%)"
+  "HNGE": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 revenue",
+      "breaks": "below",
+      "threshold": 856,
+      "unit": "$M",
+      "current": 858,
+      "current_label": "FY2026 guide midpoint",
+      "deadline": "2027-02-28",
+      "note": "also breaks if non-GAAP op margin <28% (guide is 28%)"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "INTC": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Foundry external revenue in one quarter",
-   "breaks": "below",
-   "threshold": 1.5,
-   "unit": "$B",
-   "current": 0.293,
-   "current_label": "Q2 2026 actual",
-   "deadline": "2027-12-31",
-   "judged": "at deadline",
-   "note": "brief gives $1.5–2B; lower bound used"
+  "INTC": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Foundry external revenue in one quarter",
+      "breaks": "below",
+      "threshold": 1.5,
+      "unit": "$B",
+      "current": 0.293,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2027-12-31",
+      "judged": "at deadline",
+      "note": "brief gives $1.5–2B; lower bound used"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "IREN": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Contracted ARR",
-   "breaks": "below",
-   "threshold": 3.6,
-   "unit": "$B",
-   "current": 1,
-   "current_label": "ARR as of Aug 2026",
-   "deadline": "2027-02-28",
-   "judged": "at deadline",
-   "note": "guide is >$4B by Dec 2026; the falsifier is missing it by >10%"
+  "IREN": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Contracted ARR",
+      "breaks": "below",
+      "threshold": 3.6,
+      "unit": "$B",
+      "current": 1,
+      "current_label": "ARR as of Aug 2026",
+      "deadline": "2027-02-28",
+      "judged": "at deadline",
+      "note": "guide is >$4B by Dec 2026; the falsifier is missing it by >10%"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "LITE": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Non-GAAP gross margin",
-   "breaks": "below",
-   "threshold": 48,
-   "unit": "%",
-   "current": null,
-   "current_label": "",
-   "deadline": "2027-02-28",
-   "note": "also breaks if revenue growth <50%; brief states no current gross margin"
+  "LITE": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Non-GAAP gross margin",
+      "breaks": "below",
+      "threshold": 48,
+      "unit": "%",
+      "current": null,
+      "current_label": "",
+      "deadline": "2027-02-28",
+      "note": "also breaks if revenue growth <50%; brief states no current gross margin"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "LLY": {
-  "falsifier": {
-   "type": "number",
-   "metric": "US net price of Mounjaro+Zepbound YoY",
-   "breaks": "below",
-   "threshold": -15,
-   "unit": "%",
-   "current": -9,
-   "current_label": "Q2 2026 underlying",
-   "deadline": "2027-02-28"
+  "LLY": {
+    "falsifier": {
+      "type": "number",
+      "metric": "US net price of Mounjaro+Zepbound YoY",
+      "breaks": "below",
+      "threshold": -15,
+      "unit": "%",
+      "current": -9,
+      "current_label": "Q2 2026 underlying",
+      "deadline": "2027-02-28"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "LOW": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Adj. operating margin",
-   "breaks": "below",
-   "threshold": 11.6,
-   "unit": "%",
-   "current": 11.6,
-   "current_label": "FY2026 guide (already lowered)",
-   "deadline": "2026-11-30",
-   "note": "also needs comps worse than flat in the same quarter"
+  "LOW": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Adj. operating margin",
+      "breaks": "below",
+      "threshold": 11.6,
+      "unit": "%",
+      "current": 11.6,
+      "current_label": "FY2026 guide (already lowered)",
+      "deadline": "2026-11-30",
+      "note": "also needs comps worse than flat in the same quarter"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "META": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2026 free cash flow",
-   "breaks": "above",
-   "threshold": 25,
-   "unit": "$B",
-   "current": null,
-   "current_label": "",
-   "deadline": "2027-02-28",
-   "note": "Q2 2026 quarterly FCF was $0.78B; no full-year figure yet. FCF ~0 plus 2027 capex >$145B would confirm the verdict"
+  "META": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 free cash flow",
+      "breaks": "above",
+      "threshold": 25,
+      "unit": "$B",
+      "current": null,
+      "current_label": "",
+      "deadline": "2027-02-28",
+      "note": "Q2 2026 quarterly FCF was $0.78B; no full-year figure yet. FCF ~0 plus 2027 capex >$145B would confirm the verdict"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "MSFT": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Azure growth YoY",
-   "breaks": "below",
-   "threshold": 35,
-   "unit": "%",
-   "current": 43,
-   "current_label": "Q4 FY2026 actual",
-   "deadline": "2026-10-31",
-   "note": "only counts while capex/revenue stays >45%"
+  "MSFT": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Azure growth YoY",
+      "breaks": "below",
+      "threshold": 35,
+      "unit": "%",
+      "current": 43,
+      "current_label": "Q4 FY2026 actual",
+      "deadline": "2026-10-31",
+      "note": "only counts while capex/revenue stays >45%"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "NFLX": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Revenue growth YoY",
-   "breaks": "below",
-   "threshold": 9,
-   "unit": "%",
-   "current": 11.7,
-   "current_label": "Q3 2026 guide",
-   "deadline": "2027-01-31",
-   "note": "also breaks if FY2027 op-margin guide <30% (FY2026 guide 31.5%)"
+  "NFLX": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Revenue growth YoY",
+      "breaks": "below",
+      "threshold": 9,
+      "unit": "%",
+      "current": 11.7,
+      "current_label": "Q3 2026 guide",
+      "deadline": "2027-01-31",
+      "note": "also breaks if FY2027 op-margin guide <30% (FY2026 guide 31.5%)"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "NVDA": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY28 revenue growth",
-   "breaks": "below",
-   "threshold": 60,
-   "unit": "%",
-   "current": 70,
-   "current_label": "FY28 guide",
-   "deadline": "2028-02-28"
+  "NVDA": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY28 revenue growth",
+      "breaks": "below",
+      "threshold": 60,
+      "unit": "%",
+      "current": 70,
+      "current_label": "FY28 guide",
+      "deadline": "2028-02-28"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "OMDA": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2026 adj. EBITDA",
-   "breaks": "below",
-   "threshold": 21,
-   "unit": "$M",
-   "current": 24,
-   "current_label": "FY2026 guide midpoint",
-   "deadline": "2027-02-28",
-   "note": "also breaks if revenue <~$325M (guide $334–340M)"
+  "OMDA": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 adj. EBITDA",
+      "breaks": "below",
+      "threshold": 21,
+      "unit": "$M",
+      "current": 24,
+      "current_label": "FY2026 guide midpoint",
+      "deadline": "2027-02-28",
+      "note": "also breaks if revenue <~$325M (guide $334–340M)"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "ORCL": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Non-GAAP operating margin",
-   "breaks": "below",
-   "threshold": 40,
-   "unit": "%",
-   "current": 42,
-   "current_label": "Q1 FY2027 actual",
-   "deadline": "2027-03-15"
+  "ORCL": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Non-GAAP operating margin",
+      "breaks": "below",
+      "threshold": 40,
+      "unit": "%",
+      "current": 42,
+      "current_label": "Q1 FY2027 actual",
+      "deadline": "2027-03-15"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "PLTR": {
-  "falsifier": {
-   "type": "number",
-   "metric": "US commercial revenue growth YoY",
-   "breaks": "below",
-   "threshold": 100,
-   "unit": "%",
-   "current": 149,
-   "current_label": "Q2 2026 actual",
-   "deadline": "2027-08-31"
+  "PLTR": {
+    "falsifier": {
+      "type": "number",
+      "metric": "US commercial revenue growth YoY",
+      "breaks": "below",
+      "threshold": 100,
+      "unit": "%",
+      "current": 149,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2027-08-31"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "RKLB": {
-  "falsifier": {
-   "type": "event",
-   "metric": "Neutron's first successful orbital launch",
-   "deadline": "2027-06-30",
-   "note": "a successful launch by then would prove 'Ahead of itself' wrong; no launch confirms it"
+  "RKLB": {
+    "falsifier": {
+      "type": "event",
+      "metric": "Neutron's first successful orbital launch",
+      "deadline": "2027-06-30",
+      "note": "a successful launch by then would prove 'Ahead of itself' wrong; no launch confirms it"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "SPCX": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Total ARR",
-   "breaks": "above",
-   "threshold": 85,
-   "unit": "$B",
-   "current": 31,
-   "current_label": "Q2 2026 run-rate (derived from quarterly revenue)",
-   "deadline": "2027-02-28",
-   "judged": "at deadline",
-   "note": "also needs Starship orbital catch-and-reuse by end of 2026"
+  "SPCX": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Total ARR",
+      "breaks": "above",
+      "threshold": 85,
+      "unit": "$B",
+      "current": 31,
+      "current_label": "Q2 2026 run-rate (derived from quarterly revenue)",
+      "deadline": "2027-02-28",
+      "judged": "at deadline",
+      "note": "also needs Starship orbital catch-and-reuse by end of 2026"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "TEAM": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FCF minus SBC, % of revenue",
-   "breaks": "above",
-   "threshold": 0,
-   "unit": "%",
-   "current": -4,
-   "current_label": "FY2026 actual",
-   "deadline": "2027-01-31",
-   "note": "needs two consecutive positive quarters (Q1 and Q2 FY27)"
+  "TEAM": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FCF minus SBC, % of revenue",
+      "breaks": "above",
+      "threshold": 0,
+      "unit": "%",
+      "current": -4,
+      "current_label": "FY2026 actual",
+      "deadline": "2027-01-31",
+      "note": "needs two consecutive positive quarters (Q1 and Q2 FY27)"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "TSLA": {
-  "falsifier": {
-   "type": "number",
-   "metric": "Cumulative unsupervised robotaxi miles",
-   "breaks": "above",
-   "threshold": 50,
-   "unit": "M",
-   "current": 0.38,
-   "current_label": "Q2 2026 actual",
-   "deadline": "2027-10-31",
-   "judged": "at deadline",
-   "note": "also needs auto GM ex-credits back above 19% (now ~16%)"
+  "TSLA": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Cumulative unsupervised robotaxi miles",
+      "breaks": "above",
+      "threshold": 50,
+      "unit": "M",
+      "current": 0.38,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2027-10-31",
+      "judged": "at deadline",
+      "note": "also needs auto GM ex-credits back above 19% (now ~16%)"
+    },
+    "kills": []
   },
-  "kills": []
- },
- "TSM": {
-  "falsifier": {
-   "type": "number",
-   "metric": "FY2026 revenue growth YoY (USD)",
-   "breaks": "below",
-   "threshold": 35,
-   "unit": "%",
-   "current": 41,
-   "current_label": "FY2026 guide",
-   "deadline": "2027-01-31",
-   "note": "Q2 2026 alone was +33.7%"
+  "TSM": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 revenue growth YoY (USD)",
+      "breaks": "below",
+      "threshold": 35,
+      "unit": "%",
+      "current": 41,
+      "current_label": "FY2026 guide",
+      "deadline": "2027-01-31",
+      "note": "Q2 2026 alone was +33.7%"
+    },
+    "kills": []
   },
-  "kills": []
- }
+  "RL": {
+    "falsifier": {
+      "type": "number",
+      "metric": "China constant-currency revenue growth YoY",
+      "breaks": "below",
+      "threshold": 10,
+      "unit": "%",
+      "current": 40,
+      "current_label": "Q1 FY2027 actual (easy comparison; guided to mid-teens)",
+      "deadline": "2026-12-15"
+    },
+    "kills": []
+  },
+  "AVGO": {
+    "falsifier": {
+      "type": "number",
+      "metric": "AI semiconductor revenue FY2027",
+      "breaks": "below",
+      "threshold": 100,
+      "unit": "$B",
+      "current": null,
+      "current_label": "FY2027 guided at $115B",
+      "deadline": "2027-12-15",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "RDW": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Non-GAAP gross margin",
+      "breaks": "below",
+      "threshold": 20,
+      "unit": "%",
+      "current": 27.8,
+      "current_label": "Q2 2026 actual",
+      "deadline": "2026-11-30"
+    },
+    "kills": []
+  },
+  "ASML": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2027 net sales growth guidance YoY (proves verdict wrong if at/above)",
+      "breaks": "above",
+      "threshold": 20,
+      "unit": "%",
+      "current": null,
+      "current_label": "not issued yet (FY2026 guide implies ~34%)",
+      "deadline": "2027-01-31",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "SNOW": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Product revenue growth YoY",
+      "breaks": "below",
+      "threshold": 30,
+      "unit": "%",
+      "current": 37,
+      "current_label": "Q2 FY2027 actual",
+      "deadline": "2026-11-30"
+    },
+    "kills": []
+  },
+  "GMAB": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 total revenue",
+      "breaks": "below",
+      "threshold": 4300,
+      "unit": "$M",
+      "current": null,
+      "current_label": "guided $4.3-4.5B",
+      "deadline": "2027-02-28",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "FWONA": {
+    "falsifier": {
+      "type": "number",
+      "metric": "F1 segment Adjusted OIBDA margin FY2026",
+      "breaks": "below",
+      "threshold": 24.4,
+      "unit": "%",
+      "current": 24.4,
+      "current_label": "FY2025 actual",
+      "deadline": "2027-02-28",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "NOW": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Subscription revenue growth YoY",
+      "breaks": "below",
+      "threshold": 18,
+      "unit": "%",
+      "current": 24.5,
+      "current_label": "Q2 2026 (web, unverified)",
+      "deadline": "2026-10-31"
+    },
+    "kills": []
+  },
+  "KO": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q3 2026 organic revenue growth (proves verdict wrong if above)",
+      "breaks": "above",
+      "threshold": 7,
+      "unit": "%",
+      "current": null,
+      "current_label": "Q1 2026 was 10%, inflated by calendar days; Q3 pending",
+      "deadline": "2026-10-31"
+    },
+    "kills": []
+  },
+  "PTON": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Ending paid Connected Fitness subscriptions",
+      "breaks": "below",
+      "threshold": 2.455,
+      "unit": "M",
+      "current": 2.553,
+      "current_label": "FY2026 year-end",
+      "deadline": "2026-11-15"
+    },
+    "kills": []
+  },
+  "WKEY": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Economic (cash-flow) ownership of SEALSQ",
+      "breaks": "below",
+      "threshold": 25,
+      "unit": "%",
+      "current": null,
+      "current_label": "52% voting stake; economic share not disclosed",
+      "deadline": "2027-06-30",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "MMM": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 adjusted EPS",
+      "breaks": "below",
+      "threshold": 8.8,
+      "unit": "$",
+      "current": null,
+      "current_label": "guide $8.80-8.95 (web); Q1 call guide $8.50-8.70",
+      "deadline": "2027-01-20",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "ABBV": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Skyrizi + Rinvoq revenue growth YoY",
+      "breaks": "below",
+      "threshold": 15,
+      "unit": "%",
+      "current": 24,
+      "current_label": "Q2 2026 (Skyrizi +24%, Rinvoq +23.7%)",
+      "deadline": "2027-02-15"
+    },
+    "kills": []
+  },
+  "IONQ": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Adjusted EBITDA margin (proves verdict wrong if above)",
+      "breaks": "above",
+      "threshold": -30,
+      "unit": "%",
+      "current": -150,
+      "current_label": "Q2 2026",
+      "deadline": "2028-02-15",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "NUE": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q4 2026 GAAP diluted EPS",
+      "breaks": "below",
+      "threshold": 4.0,
+      "unit": "$",
+      "current": null,
+      "current_label": "Q3 2026 guide midpoint $5.60 (web)",
+      "deadline": "2027-02-15"
+    },
+    "kills": []
+  },
+  "MU": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Fiscal Q4 2026 revenue vs consensus (proves verdict wrong if above)",
+      "breaks": "above",
+      "threshold": 51.2,
+      "unit": "$B",
+      "current": 41.46,
+      "current_label": "Fiscal Q3 2026 (web, unverified)",
+      "deadline": "2026-09-30",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "TCOM": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q3 2026 revenue growth YoY (RMB)",
+      "breaks": "below",
+      "threshold": 3,
+      "unit": "%",
+      "current": 6,
+      "current_label": "Q2 2026 (web)",
+      "deadline": "2026-11-15"
+    },
+    "kills": []
+  },
+  "ADBE": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Total ending ARR growth YoY",
+      "breaks": "below",
+      "threshold": 10.0,
+      "unit": "%",
+      "current": 11.2,
+      "current_label": "Q3 FY2026",
+      "deadline": "2026-12-15"
+    },
+    "kills": []
+  },
+  "RGTI": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 revenue (proves verdict wrong if above)",
+      "breaks": "above",
+      "threshold": 40,
+      "unit": "$M",
+      "current": null,
+      "current_label": "Q2 2026 quarter was $5.1M",
+      "deadline": "2027-02-15",
+      "judged": "at deadline"
+    },
+    "kills": []
+  },
+  "CUE": {
+    "falsifier": {
+      "type": "number",
+      "metric": "CUE-221 UAS7=0 response rate vs omalizumab",
+      "breaks": "below",
+      "threshold": 25,
+      "unit": "%",
+      "current": null,
+      "current_label": "next tested readout pending",
+      "deadline": "2027-06-30",
+      "judged": "at deadline"
+    },
+    "kills": []
+  }
 }

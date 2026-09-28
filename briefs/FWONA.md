@@ -1,13 +1,13 @@
 ---
 ticker: FWONA
 company: Liberty Media Corporation (Formula One Group)
-updated: 2026-09-18
+updated: 2026-09-26
 type: stock-brief
 shared_driver: consumer-discretionary
 ---
 
 # FWONA — Liberty Media Corporation (Formula One Group)
-**Date:** 2026-09-18 | **Sources:** sources/FWONA/10-k-fy2025.md + web research (sentiment agent) | *No earnings transcript available*
+**Date:** 2026-09-26 | *Refresh via /deep — adds debate round, valuation verdict, variant perception, damage-tagged kill conditions. Price $86.46 (Yahoo, 2026-09-26). No earnings transcript available — latest quarters covered by web sentiment only, UNVERIFIED.*
 
 **Source docs:** [[sources/FWONA/10-k-fy2025]]
 
@@ -15,59 +15,74 @@ shared_driver: consumer-discretionary
 
 ## Company Snapshot
 
-FWONA ถือ Formula 1 + MotoGP (ซื้อ ก.ค. 2025) + minority investments **สำคัญ: หลัง Liberty Live split-off (ธ.ค. 2025) FWONA ไม่ใช่ tracking stock อีกต่อไป** — กลายเป็นหุ้นสามัญตัวเดียวของ Liberty Media ทั้งบริษัท (โครงสร้างง่ายขึ้นกว่าเดิมมาก)
-
-F1 มี **commercial rights ถึงปี 2110** (100-Year Agreement) และ 2026 Concorde Agreement ที่ล็อกทีมทั้งหมดไว้ถึง 2030 — เป็น contract duration ที่หายากมากในโลกธุรกิจ
-
----
+FWONA คือ Liberty Media ทั้งบริษัท ไม่ใช่ tracking stock อีกต่อไปหลัง Liberty Live split-off (ธ.ค. 2025) — ถือ Formula 1 (commercial rights ถึงปี 2110 ตาม 100-Year Agreement) และ MotoGP (~84% equity ซื้อ ก.ค. 2025 ด้วยเงิน $3,659M, มี exclusive FIM rights ถึงปี 2060) *(fundamentals agent, 10-K l.116, 262, 42)*. F1 ยังเป็นตัวขับเคลื่อนหลัก คิดเป็น 86.4% ของรายได้รวม *(fundamentals agent, l.738/794)*.
 
 ## Fundamentals Signal
-*Source: sources/FWONA/10-k-fy2025.md*
 
-**Revenue durability — กระจายตัว สัญญายาว:** F1 revenue แบ่งเป็น Media Rights 31.3%, Race Promotion 26.7%, Sponsorship 21.7% — ไม่มี stream เดียวครองเกินไป สัญญาเป็น multi-year พร้อม escalator (CPI หรือ % คงที่) broadcast agreement 50+ แห่งทั่วโลก ไม่มี concentration เด่นชัด
+- **Revenue durability: กระจาย แต่กระจุกที่ F1** — F1 revenue มี 3 stream (Race Promotion 26.7%, Media Rights 31.3%, Sponsorship 21.7%) ไม่มี stream เดียวครองเกินไป *(fundamentals, 10-K l.70-84)* แต่ consolidated growth +22.7% ส่วนหนึ่งมาจาก MotoGP 7 เดือนแรก ($325M) ไม่ใช่ F1 organic ล้วน (F1 เองโตแค่ +13.5%) *(fundamentals, l.738/742/794/798/752)*
+- **Margin trend: ดีขึ้นจริง แต่มีตัวปรับ** — F1 operating margin 16.3% (จาก 14.4%), Adjusted OIBDA margin 24.4% (จาก 23.2%) *(fundamentals, l.836/738, 920/738)*; consolidated Adjusted OIBDA $1,068M (23.8% margin, จาก 21.2%) — revenue +22.7% แต่ Adj OIBDA +38.0% แปลว่ามี operating leverage จริง *(fundamentals, l.962/966, verified via grep)* — **แต่** margin ที่ดีขึ้นไม่รวม one-time Concorde incentive $50M ที่จ่ายให้ทีมเซ็นสัญญา 2026 *(fundamentals, l.2082)* และ MotoGP margin (9.4% operating) ต่ำกว่า F1 (16.3%) มาก ฉุด blended quality ลง *(fundamentals, l.2450/2366)*
+- **Capital allocation: reinvest หนักผ่านหนี้ใหม่ บนงบที่ไม่มี rating** — Total debt $5,022M ส่วนใหญ่ยาว (>5yr $3,490M); corporate-level แค่ $499M (ส่วนใหญ่ convertible notes 2.25% ครบ 2027) *(fundamentals, l.1722-1738, 436)* **Liberty ไม่มี corporate debt rating เลย** — ยืนยันตรงจากข้อความใน 10-K "Liberty currently does not have a corporate debt rating" (verified by direct grep, ~l.1462) F1 distribute $2.5B ให้ Liberty ปีนี้ *(l.1506)* buyback อนุมัติแล้วแต่ไม่เปิดเผยจำนวนที่ซื้อจริง *(l.1608)*
 
-**Margin trend — ดีขึ้น แต่มีส่วนที่เป็น base-effect:** Consolidated revenue $4,482M (จาก $3,653M) operating margin 12.9% (จาก 7.9%) Adjusted OIBDA margin 23.8% (จาก 21.2%) F1 standalone margin 16.3% (จาก 14.4%) — **แต่บางส่วนของ improvement มาจากการที่ปีก่อนมี one-time $73M QuintEvents goodwill impairment ที่หายไป** ไม่ใช่ organic gain ล้วนๆ
+## Latest Earnings — 2026 (no transcript; web-sourced, UNVERIFIED)
 
-**Capital allocation — reinvest หนักผ่านหนี้ใหม่:** ซื้อ MotoGP $3,267M FY25 fund ด้วยเงินสด + กู้เพิ่มจาก F1 Senior Loan Facility Corporate debt $499M (ส่วนใหญ่ convertible notes $475M ครบกำหนด 2027) **Liberty ไม่มี corporate credit rating เลย** F1 distribute เงินให้ Liberty $2.5B ปีนี้ มี buyback program อนุมัติแล้วแต่ไม่เปิดเผยจำนวนที่ซื้อจริงใน filing นี้
+*Source: sentiment agent — sources/FWONA/ มีแค่ transcript-placeholder.md ที่เป็น stub เปล่า ไม่มี transcript จริงให้อ่าน (earnings agent ยืนยัน)*
 
----
-
-## Latest Earnings
-*Source: sentiment agent — no transcript in sources/FWONA/*
-
-Q1 2026: F1 revenue +53% เป็น $617M, Adjusted OIBDA +102% เป็น $172M cash เพิ่ม $277M ในไตรมาส buyback authorization เหลือ $1.1B (พ.ค. 2026)
-
-**[[AAPL]] ได้ US streaming rights แบบ exclusive เริ่ม 2026** ($150-180M/ปี เกือบเท่าตัวจาก ESPN ที่ ~$90M) — แต่เปลี่ยนเป็น streaming-only 2026 Concorde Agreement เซ็นครบทุกทีม ทีมได้ share รายได้มากขึ้น แลกกับ Cadillac (ทีมใหม่) จ่าย anti-dilution fee $450M F1 2025 revenue $3.9B (+14%)
-
----
+- Q1 2026: F1 revenue $617M (+53%), Adjusted OIBDA $172M (+102%) **[UNVERIFIED]**
+- Q2 2026: consolidated revenue $934M (-30% YoY), F1 revenue $764M (-38%) — สาเหตุคือ**การแข่งน้อยกว่าไตรมาสเดียวกันปีก่อน 4 สนาม** (calendar effect ไม่ใช่ demand ลด) MotoGP pro-forma H1 2026 ~$170M/ไตรมาส OIBDA โตแค่ +3% **[UNVERIFIED]**
+- **[[AAPL]] streaming deal:** exclusive US rights ~5 ปี/$750M รวม (~$150M/ปี) แทน ESPN ~$90M/ปี effective ม.ค. 2026 — ขึ้นราคา ~67% แต่เปลี่ยนจาก linear cable กว้างเป็น streaming-only **[UNVERIFIED]**
+- 2026 Concorde Agreement: cost cap ขึ้น $135M→$220M ทีมทั้งหมด 11 ทีมเซ็นถึง 2030 Cadillac (ทีมใหม่) จ่าย anti-dilution fee $450M **[UNVERIFIED]**
+- Analyst consensus: 6 Buy/0 Sell median PT ~$109 (เทียบราคาปัจจุบัน $86.46 ≈ upside 26%) S&P rating ที่เจอในเว็บบอก CCC+ stable — **ขัดแย้งกับข้อความตรงใน 10-K ที่บอกไม่มี corporate rating เลย** จุดนี้ยังไม่มีคำตอบชัด (อาจเป็น rating ของ instrument เฉพาะ ไม่ใช่ corporate-level) **[UNVERIFIED, unresolved]**
 
 ## Bull / Bear
 
-**Bull**
+**Bull** *(bull_researcher)*
 
-- **Cornered resource:** 100-Year Agreement (ถึง 2110) คือ control point ที่คู่แข่งไม่มีทางลอกเลียนได้ — F1 ไม่ต้องแข่งขันเพื่อ core asset ของตัวเอง เพราะเป็นเจ้าของ exclusive title ตามสัญญา
-- **Switching costs + pricing power:** revenue กระจาย 3 stream ไม่มีคู่สัญญารายเดียวเดินหนีได้ Apple จ่ายเกือบเท่าตัวจาก ESPN ยืนยันว่า pricing power กำลังขึ้น ไม่ใช่ลง ตาม US fanbase ที่โตจาก Drive to Survive
-- **Scale economies:** margin ขยายพร้อม revenue โต 23% — fixed cost (content/logistics) กระจายทั่วผู้ชมที่มากขึ้น โครงสร้างง่ายขึ้นหลังไม่เป็น tracking stock แล้ว = ลด complexity discount ที่เคยมี
+- **Cornered resource:** F1 100-Year Agreement (ถึง 2110) + MotoGP FIM rights (ถึง 2060) เป็นสัญญาที่คู่แข่งลอกไม่ได้ — duration ระดับนี้หายากมาก corporate debt แค่ $499M เทียบกับ F1 distribute $2.5B ให้ Liberty ปีเดียว *(fundamentals l.116, 262, 1506, 1722-1738)*
+- **Process power:** margin ขยายพร้อม operating leverage จริง (revenue +22.7%, Adj OIBDA +38.0%) ไม่ใช่ครั้งเดียว — MotoGP กำลังตาม script เดียวกัน (OIBDA margin 34.8%→35.1%) *(fundamentals l.962/966, 2450/2366)*
+- **Branding/pricing power สองด้าน:** Apple จ่ายเพิ่ม ~67% จาก ESPN, Cadillac จ่าย $450M แค่เพื่อเข้าร่วมทั้งที่ cost cap ขึ้น — ทั้งฝั่ง broadcaster และทีมยอมจ่ายเพิ่มเพื่อเข้าถึง *(sentiment)*
+- **โต้ bear เรื่อง Q2 2026:** ตัวเลข -30%/-38% เป็น calendar artifact (แข่งน้อยกว่า 4 สนาม) สอดคล้องกับ Q1 ที่ +53%/+102% — falsifying metric จริงคือ margin เต็มปี ยังไม่ break
 
-**Bear**
+**Bear** *(bear_researcher)*
 
-- **MotoGP debt-funded ยังพิสูจน์ไม่ได้:** $3,267M ซื้อผ่านหนี้เพิ่มบน balance sheet ที่**ไม่มี credit rating เลย** พร้อม convertible notes $475M ครบ 2027 margin improvement ก็มีส่วนเป็น base-effect จาก impairment ปีก่อนที่หายไป ไม่ใช่ organic ล้วน
-- **Apple deal แลก reach กับราคา:** เปลี่ยนจาก ESPN broadcast กว้างเป็น streaming-only ในสหรัฐฯ — เสี่ยง discoverability ต่อ casual fan ใหม่ที่ Drive to Survive เพิ่งดึงเข้ามา
-- **Concorde Agreement โอน economics ไปทีม:** ทีมได้ share รายได้เพิ่มโดยตรง กดดัน margin ของ Liberty เอง โครงสร้าง Liberty Live/Braves restructuring ยังไม่จบสมบูรณ์ shareholder บางส่วน trim exposure แม้จะ beat earnings
+- **Concentration ปลอมตัวเป็น diversification:** consolidated growth +22.7% ครึ่งหนึ่งมาจาก MotoGP acquisition ไม่ใช่ F1 organic (F1 เองโตแค่ +13.5% และยังคิดเป็น 86.4% ของรายได้) — สัญญา 100 ปีไม่ได้บอกอะไรเรื่อง concentration ของกระแสเงินสด *(fundamentals l.738/742/794/798)*
+- **Margin ที่ขยาย "เช่า" มา ไม่ได้ "earn":** +120bps ไม่รวม one-time Concorde incentive $50M ที่จ่ายให้ทีมเซ็น ขณะที่ cost cap ปีหน้าขึ้น $135M→$220M (ต้นทุนทีมสูงขึ้นถาวร) MotoGP margin (9.4%) ต่ำกว่า F1 มาก และ H1 2026 OIBDA โตแค่ +3% — "growth catalyst" แทบไม่โต *(fundamentals l.2082; sentiment)*
+- **Balance sheet ไม่มีใคร underwrite:** หนี้ $5,022M ไม่มี corporate credit rating เลย ต่อบนโครงสร้างที่พึ่งจะ reshuffle จาก split-off ธ.ค. 2025 convertible notes $475M ครบ 2027 มีความเสี่ยง refinance/dilution — **นี่คือ bear point ที่ไม่มี bull counter ในหลักฐานชุดนี้เลย**
+- **Apple deal คือ reach trade ไม่ใช่แค่ pricing win:** ราคาขึ้น 67% แต่ย้ายจาก linear cable กว้างเป็น subscription paywall — เสี่ยง discoverability ต่อ fan ใหม่ที่ Drive to Survive เพิ่งดึงเข้ามา
 
----
+## Valuation
+
+*Lens: EV/Adjusted OIBDA — เพราะ FWONA เป็น long-duration contracted media-rights platform ไม่ใช่ mature steady-earner GAAP metrics ถูกบิดเบือนจาก MotoGP ที่ consolidate แค่ 7 เดือนและ acquisition accounting (valuation agent)*
+
+Implied expectation: ราคาต้องการให้ F1 margin expansion trend (~100-120bps/ปี, revenue โต low-teens) **ต่อเนื่อง** (ไม่ต้องเร่ง) บวกกับ MotoGP เต็มปีทำผลตอบแทนใกล้เคียง acquisition case Q2 2026 ที่ดูแย่ (-30%/-38%) อธิบายได้ด้วย calendar effect ไม่ใช่ demand หาย สอดคล้องกับ Q1 ที่แข็งแรง Apple deal (+67% pricing) และ Cadillac fee ($450M) ยืนยันว่า broadcaster/ทีมยังจ่ายเพื่อเข้าถึง *(valuation agent note: ไม่มีตัวเลข share count/market cap ที่ verify ได้ จึงคำนวณ EV/OIBDA จริงไม่ได้ — นี่เป็นช่องว่างที่ยอมรับตรงๆ)*
+
+**Verdict: Deserved**
+
+**Falsifying number:** F1 segment Adjusted OIBDA margin เต็มปี FY2026 (FY2026 10-K, คาดออก ~ก.พ. 2027) ต่ำกว่า 24.4% (ระดับ FY2025) → แปลว่า margin-expansion trend ที่ราคาพึ่งพาหยุดแล้ว
+
+*Integrator note: verdict "Deserved" พึ่งพาตัวเลข 2026 ที่เป็น UNVERIFIED (web) บางส่วน — ควร verify กับ 10-Q จริงก่อนเชื่อเต็มที่ นอกจากนี้ valuation agent เองก็ไม่มี market cap ที่ verify ได้ ดังนั้น verdict นี้เป็น trend-continuation call ไม่ใช่ multiple ที่ตรวจสอบได้จริง*
+
+## Variant Perception
+
+- *Thesis metric:* **F1 segment Adjusted OIBDA margin ต่อปี** คู่กับ**ขนาดหนี้ที่ไม่มี rating** — margin บอกว่า pricing power/scale ยังทำงาน หนี้บอกว่า downside มีเพดานแค่ไหนถ้า margin สะดุด
+- *Where we differ from consensus:* ทิศทางไม่ต่าง — sell-side เป็น Strong Buy (6 Buy/0 Sell, PT เฉลี่ย ~$109, unverified) เราเห็น thesis เดียวกัน (rights + margin expansion) สิ่งที่เราเฝ้ามากกว่า consensus คือ **$5,022M หนี้ที่ไม่มีใคร rate เลย** ต่อบนดีลซื้อ MotoGP ด้วยหนี้ — sell-side ดูเหมือนไม่ได้ price ความเสี่ยงนี้แยกออกจากตัวธุรกิจ
 
 ## Kill Conditions
 
-- **MotoGP integration ไม่ generate return คุ้มกับหนี้ที่กู้มา** ภายใน 2-3 ปี
-- **Apple streaming-only deal ทำให้ US viewership ลดลงจริง** (ไม่ใช่แค่ทฤษฎี) วัดจาก subscriber/viewership data หลัง ESPN หมดสัญญา
-- **Credit rating ถูกกำหนดอย่างเป็นทางการและออกมาต่ำ** (ตอนนี้ไม่มี rating เลย) — จะกระทบ cost of capital สำหรับหนี้รอบต่อไป
-- **Team payment share เพิ่มขึ้นต่อเนื่องจน compress margin ของ F1/Liberty อย่างมีนัยสำคัญ**
+Thesis: *F1 + MotoGP เป็น cornered-resource platform ที่ margin ขยายต่อเนื่องพอจะ justify ราคาปัจจุบัน โดยไม่ต้องเร่ง growth*
 
----
+- **หนี้ $5,022M ที่ไม่มี corporate credit rating เลย ต่อบนดีล MotoGP ที่กู้มา** ถ้า margin สะดุด (falsifying number ข้างบน) พร้อมกับ leverage นี้ที่ยังไม่มีใคร underwrite — ไม่มี bull counter ในหลักฐานชุดนี้เลย `[open-ended]` (ไม่มีเพดานที่ประเมินได้เพราะไม่มี rating ให้อ้างอิง)
+- **F1 segment Adjusted OIBDA margin เต็มปี FY2026 ต่ำกว่า 24.4%** (falsifying number เดียวกับ valuation) — แปลว่า margin trend ที่ราคาพึ่งพาหยุดจริง `[bounded ~35%]`
+- **Apple streaming-only deal ทำให้ US viewership ลดลงจริง** วัดจาก subscriber/viewership data หลัง ESPN หมดสัญญา (ไม่ใช่แค่ราคาที่ขึ้น) `[bounded ~20%]`
+- **MotoGP ไม่ generate return คุ้มกับหนี้ที่กู้มา** ภายใน 2-3 ปี (H1 2026 OIBDA โตแค่ +3% เป็นสัญญาณเตือนแรก, UNVERIFIED) `[bounded ~15%]`
+
+*ไม่มีการ loosen เงื่อนไขจากฉบับก่อน (2026-09-18) — เงื่อนไขเดิมทั้งหมดถูกทำให้จำเพาะขึ้น (threshold ชัดขึ้น, damage-tagged) หรือคงไว้เท่าเดิม โดยเงื่อนไข "credit rating ถูกกำหนดอย่างเป็นทางการ" ถูกยกระดับเป็น open-ended เพราะ bear round ชี้ว่าไม่มี bull counter เลยในหลักฐานชุดนี้ ไม่ใช่การผ่อน*
 
 ## What to Ask
 
-1. **MotoGP revenue/margin contribution แยกจาก F1 ชัดเจนแค่ไหนในปีถัดไป?** จะบอกได้ว่าการซื้อครั้งนี้คุ้มหนี้ที่กู้มาไหม
-2. **Apple streaming deal viewership ตัวเลขจริงหลังเปลี่ยนจาก ESPN เป็นยังไง?** นี่คือ real-world test ของ reach risk ที่ sentiment agent flag
-3. **แผน deleverage หรือ credit rating application มีไทม์ไลน์ไหม?** การไม่มี rating เลยตอนนี้เป็นความเสี่ยงที่ยังไม่ quantify ได้
+1. **F1 segment Adjusted OIBDA margin ไตรมาสถัดไปเทียบ 24.4% baseline เป็นยังไง?** นี่คือ falsifying number ตัวเดียวที่ตัดสิน verdict "Deserved"
+2. **แผน deleverage หรือ credit rating application มีไทม์ไลน์ไหม?** หนี้ $5,022M ไม่มี rating เลยเป็น open-ended risk ตัวเดียวที่ไม่มี bull counter
+3. **Apple streaming deal viewership ตัวเลขจริงหลังเปลี่ยนจาก ESPN เป็นยังไง?** ราคาที่ขึ้น 67% มีความหมายก็ต่อเมื่อ reach ไม่หายไปพร้อมกัน
+
+---
+
+*ไม่ใช่คำแนะนำการลงทุน — research summary จาก 10-K FY2025 และ agent analysis (ไม่มี earnings transcript รอบนี้)*

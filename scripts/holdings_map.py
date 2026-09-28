@@ -14,6 +14,7 @@ Run after each graphify update:  python3 scripts/holdings_map.py
 Fetch brand marks once (Simple Icons, pinned):  python3 scripts/holdings_map.py --logos
 Refresh 52-week ranges (perf.py's yfinance cache):  python3 scripts/holdings_map.py --prices
 """
+import base64
 import hashlib
 import json
 import re
@@ -41,6 +42,16 @@ LOGO_SLUGS = {'NVDA': 'nvidia', 'AMD': 'amd', 'AVGO': 'broadcom', 'SPCX': 'space
               'GRMN': 'garmin', 'NFLX': 'netflix', 'PTON': 'peloton', 'FWONA': 'f1', 'TCOM': 'tripdotcom',
               'TEAM': 'atlassian', 'PLTR': 'palantir', 'SNOW': 'snowflake', 'INTC': 'intel', 'ABBV': 'abbvie',
               'GOOG': 'google', 'META': 'meta', 'KO': 'cocacola', 'MMM': '3m', 'TSLA': 'tesla'}
+# not in Simple Icons: the company's own site icon, via Google's favicon service, embedded as a data URI
+# or a full image URL when the site icon is too small (CUE and LOW publish 16px only; BRKB has just a text wordmark)
+LOGO_SITES = {'ADBE': 'adobe.com', 'AMZN': 'amazon.com', 'ASML': 'asml.com', 'ASTS': 'ast-science.com',
+              'CRCL': 'circle.com', 'GEV': 'gevernova.com', 'GMAB': 'genmab.com', 'HNGE': 'hingehealth.com',
+              'IONQ': 'ionq.com', 'IREN': 'iren.com', 'LITE': 'lumentum.com', 'LLY': 'lilly.com',
+              'MSFT': 'microsoft.com', 'MU': 'micron.com', 'NBIS': 'nebius.com', 'NOW': 'servicenow.com',
+              'NUE': 'nucor.com', 'OMDA': 'omadahealth.com', 'ORCL': 'oracle.com', 'RDW': 'redwirespace.com',
+              'RGTI': 'rigetti.com', 'RKLB': 'rocketlabusa.com', 'RL': 'ralphlauren.com', 'SNDK': 'sandisk.com',
+              'USAR': 'usare.com', 'WKEY': 'wisekey.com',
+              'TSM': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Tsmc-text.svg/330px-Tsmc-text.svg.png'}
 EDGES_PER_NODE = 4          # strongest links kept per ticker, so the map stays readable
 # side-panel summary limits: enough to understand a ticker at a glance, the brief has the rest
 SNAPSHOT_CHARS, POINT_CHARS, FALSIFIER_CHARS = 420, 240, 200
@@ -181,6 +192,10 @@ def build():
     nodes, adj, edges = load()
     meta = brief_meta()
     tickers, pairs = links(nodes, adj, edges, meta)
+    for t in meta:  # [[GOOG]] wikilinks in a brief are explicit links, even when graphify dropped them
+        text = (ROOT / 'briefs' / f'{t}.md').read_text(encoding='utf-8')
+        for o in set(re.findall(r'\[\[([A-Z.]+)\]\]', text)) & set(meta) - {t}:
+            pairs[tuple(sorted((t, o)))].append(f'{o} named in {t} research')
     partners = defaultdict(set)
     for a, b in pairs:
         partners[a].add(b)
@@ -430,7 +445,7 @@ def portfolio_view(page, portfolio, policy, moves=None):
     us_share = policy.get('us_stock_share_of_total', 1)
     held, no_brief, exposure = {}, [], defaultdict(float)
     for p in portfolio['positions']:
-        t = p['symbol'].replace('.', '')  # BRK.B -> BRKB, the brief's name
+        t = p['symbol'].replace('.', '').replace('-', '')  # BRK.B / BRK-B -> BRKB, the brief's name
         year = (p.get('windows') or {}).get('1y') or {}  # null for positions held < 1 year
         gain = p['last_close'] / p['avg_cost'] - 1 if p.get('avg_cost') and p.get('last_close') else None
         held[t] = {'w': p['weight'], 'apr': year.get('apr'), 'bench': year.get('bench'), 'under': year.get('underperformer'),
@@ -464,6 +479,11 @@ def fetch_logos():
     logos = {}
     for t, slug in LOGO_SLUGS.items():
         logos[t] = {'hex': hexes[slug], 'd': re.search(r' d="([^"]+)"', get(f'icons/{slug}.svg')).group(1)}
+    for t, site in LOGO_SITES.items():
+        url = site if site.startswith('https://') else f'https://www.google.com/s2/favicons?domain={site}&sz=128'
+        png = subprocess.run(['curl', '-fsSL', '-A', 'holdings-map/1.0', '--max-time', '30', url],
+                             check=True, capture_output=True).stdout
+        logos[t] = {'img': 'data:image/png;base64,' + base64.b64encode(png).decode()}
     LOGOS.write_text(json.dumps(logos), encoding='utf-8')
     print(f'{LOGOS.relative_to(ROOT)}: {len(logos)} logos')
 
@@ -493,7 +513,7 @@ if __name__ == '__main__':
     if PORTFOLIO.exists():
         policy = json.loads(POLICY.read_text(encoding='utf-8')) if POLICY.exists() else {}
         portfolio = json.loads(PORTFOLIO.read_text(encoding='utf-8'))
-        held = [p['symbol'].replace('.', '') for p in portfolio['positions']]
+        held = [p['symbol'].replace('.', '').replace('-', '') for p in portfolio['positions']]
         moves = {**price_ranges([t for t in held if t not in page['ranges']]), **page['ranges']}  # unbriefed holdings too
         view = portfolio_view(page, portfolio, policy, moves)
         PRIVATE_PAGE.write_text(render({**page, 'portfolio': view}, standalone=True), encoding='utf-8')
