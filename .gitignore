@@ -21,3 +21,6 @@ graphify-out/
 
 # Obsidian window layout — changes every session
 .obsidian/workspace.json
+
+# Earnings-call transcripts are third-party copyright — keep local
+sources/*/*-call.md
