@@ -638,7 +638,8 @@
       "current": 3.0,
       "current_label": "ARR end of June 2026",
       "deadline": "2027-02-28",
-      "note": "guidance $7-9B; below $7B flips Deserved to Ahead of itself"
+      "note": "guidance $7-9B at year-end; ARR still ramping, judged on the Q4 2026 report",
+      "judged": "at deadline"
     },
     "kills": []
   },

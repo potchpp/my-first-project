@@ -21,6 +21,8 @@ PAGE = ROOT / 'graphify-out' / 'holdings-map.html'
 MARK = ROOT / 'graphify-out' / '.holdings-map.published'
 PRICE_CACHE = ROOT / 'portfolio' / 'cache'
 PRICE_REFRESH_HOURS = 20  # 52-week bars refresh about once a day (~10s for 50 tickers)
+DEFER = ROOT / 'graphify-out' / '.republish-deferred'  # touched by needs_deep.py: the unattended daily check can't approve a publish
+DEFER_SECONDS = 900
 URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # the one published copy; share edit access with any other account that runs this hook
 
 
@@ -70,6 +72,8 @@ def main():
     commit_site()
     if digest() == (MARK.read_text() if MARK.exists() else ''):
         return
+    if DEFER.exists() and time.time() - DEFER.stat().st_mtime < DEFER_SECONDS:
+        return  # the daily check just ran; the next interactive session will be asked instead
     print(json.dumps({'decision': 'block', 'reason': (
         f'Holdings Map changed. Read {PAGE} and republish it with the Artifact tool, url {URL} '
         f'(same artifact, no icon). Then run: python3 {ROOT}/scripts/republish_map.py --mark'
