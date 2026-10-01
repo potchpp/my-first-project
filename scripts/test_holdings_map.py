@@ -208,5 +208,105 @@ class MoveTests(unittest.TestCase):
         self.assertGreater(c['book'], 0)
 
 
+class NeedsDeepTests(unittest.TestCase):
+    def test_flags_only_what_needs_a_rerun_and_not_twice(self):
+        import needs_deep as nd
+        today = date(2026, 9, 30)
+        kill = [{'status': 'intact'}]
+        monitor = {'AAA': {'falsifier': {'state': 'crossed', 'metric': 'margin'}, 'kills': kill},
+                   'BBB': {'falsifier': {'state': 'close', 'metric': 'growth'}, 'kills': kill},   # watch, not a rerun
+                   'CCC': {'falsifier': None, 'kills': kill},
+                   'DDD': {'falsifier': {'state': 'clear', 'metric': 'x'}, 'kills': kill},
+                   'EEE': {'falsifier': {'state': 'due', 'metric': 'ARR', 'deadline': '2026-09-01'}, 'kills': kill}}
+        ranges = {'BBB': {'z5': 1.0, 'r5': 0.03}, 'CCC': {'z5': -2.4, 'r5': -0.129}}
+        briefs = {t: {'date': '2026-09-26'} for t in monitor} | {'DDD': {'date': '2026-05-01'}}
+        found = nd.flags(monitor, ranges, briefs, today)
+        self.assertEqual([(t, k) for t, k, _ in found],
+                         [('AAA', 'crossed'), ('EEE', 'due'), ('CCC', 'move'), ('DDD', 'stale')])
+        self.assertIn('-12.9%', found[2][2])
+        seen = {'AAA|crossed': '2026-09-29', 'EEE|due': '2026-09-20'}  # told yesterday / told 10 days ago
+        self.assertEqual([t for t, _, _ in nd.unseen(found, seen, today)], ['EEE', 'CCC', 'DDD'])
+
+
+class NewsSpikeTests(unittest.TestCase):
+    class R:  # stub response
+        def __init__(self, code, items=0):
+            self.status_code, self.text = code, '<item>' * items
+
+    def test_count_and_failures(self):
+        import needs_deep as nd
+        self.assertEqual(nd.news_count('q', lambda *a, **k: self.R(200, 37)), 37)
+        self.assertIsNone(nd.news_count('q', lambda *a, **k: self.R(429)))
+        def boom(*a, **k):
+            raise OSError('down')
+        self.assertIsNone(nd.news_count('q', boom))
+
+    def test_fetch_stops_after_three_misses(self):
+        import needs_deep as nd
+        calls = []
+        def dead(*a, **k):
+            calls.append(1)
+            return self.R(503)
+        self.assertEqual(nd.fetch_counts(['AAPL', 'AMD', 'ASML', 'GOOG', 'META'], dead, pause=0), {})
+        self.assertEqual(len(calls), 3)
+
+    def test_spike_rule(self):
+        import needs_deep as nd
+        hist = {f'2026-09-{d:02}': {'A': 10, 'B': 2, 'C': 40} for d in range(20, 27)}  # 7 prior days
+        self.assertEqual(nd.news_spikes(hist, {'A': 35}), {'A': (35, 10)})
+        self.assertEqual(nd.news_spikes(hist, {'A': 29}), {})            # under 3x
+        self.assertEqual(nd.news_spikes(hist, {'B': 8}), {})             # below the floor of 10
+        self.assertEqual(nd.news_spikes(hist, {'C': 100}), {})           # usual 40: can't show 3x under the cap
+        short = dict(list(hist.items())[:6])
+        self.assertEqual(nd.news_spikes(short, {'A': 50}), {})           # 6 days: not enough history
+        gappy = {**hist, '2026-09-27': {'B': 3}}                        # a day without A doesn't count for A
+        self.assertEqual(nd.news_spikes(dict(list(gappy.items())[1:]), {'A': 50}), {})
+
+    def test_news_flag_precedence(self):
+        import needs_deep as nd
+        kill = [{'status': 'intact'}]
+        monitor = {t: {'falsifier': None, 'kills': kill} for t in ('AAA', 'BBB')}
+        ranges = {'AAA': {'z5': 2.5, 'r5': 0.11}}
+        briefs = {t: {'date': '2026-09-26'} for t in monitor}
+        news = {'AAA': (40, 10), 'BBB': (30, 8)}
+        found = nd.flags(monitor, ranges, briefs, date(2026, 9, 30), news)
+        self.assertEqual([(t, k) for t, k, _ in found], [('AAA', 'move'), ('BBB', 'news')])
+        self.assertEqual(found[1][2], 'news spike (30 stories vs usual 8)')
+
+
+class LedgerTests(unittest.TestCase):
+    @staticmethod
+    def brief(verdict, kills, updated='2026-10-01', extra=''):
+        ks = '\n'.join(f'- {k}' for k in kills)
+        return (f'---\nupdated: {updated}\n---\n## Valuation\n**Verdict: {verdict}**\n'
+                f'**Falsifying number:** margin below 15%\n## Kill Conditions\n{ks}\n{extra}\n## What to Ask\n- q\n')
+
+    def check(self, old, new, move=None):
+        import verdict_ledger as vl
+        return vl.coherence(vl.snapshot(old), vl.snapshot(new), new, move)
+
+    def test_marks(self):
+        k = ['Top customer cuts orders by half `[bounded ~50%]`', 'Regulator bans the product `[open-ended]`']
+        base = self.brief('Ahead of itself', k, '2026-09-01')
+        self.assertEqual(self.check(base, base)[0], 'accept')
+        tightened = self.brief('Ahead of itself', [k[0] + ' within two quarters', k[1]])
+        self.assertEqual(self.check(base, tightened)[0], 'accept')                    # tightening keeps the opening
+        friendlier = self.brief('Deserved', k)
+        self.assertEqual(self.check(base, friendlier)[0], 'ego-check')                # no written reason
+        reasoned = self.brief('Deserved', k, extra='*Verdict changed 2026-10-01: margin guide beat the line*')
+        self.assertEqual(self.check(base, reasoned)[0], 'watch')
+        self.assertEqual(self.check(base, reasoned, move=0.22)[0], 'ego-check')       # right after a +22% run
+        harsher = self.brief('Ahead of itself', k[:1] + ['Cash runs out before 2028 `[open-ended]`', k[1]])
+        self.assertEqual(self.check(base, harsher)[0], 'watch')                       # added a condition: fine
+        dropped = self.brief('Ahead of itself', k[:1])
+        self.assertEqual(self.check(base, dropped)[0], 'ego-check')
+        old_reason = self.brief('Ahead of itself', k[:1], extra='*Loosened 2026-08-01: stale*')
+        self.assertEqual(self.check(base, old_reason)[0], 'ego-check')                # reason predates the last entry
+        reworded = self.brief('Ahead of itself', k[:1], extra='*Reworded 2026-10-01: same ban risk, new wording*')
+        self.assertEqual(self.check(base, reworded)[0], 'watch')
+        legacy = '---\nupdated: 2026-09-18\n---\n## Kill Conditions\n- something vague\n## What to Ask\n'
+        self.assertEqual(self.check(legacy, friendlier)[0], 'rebaseline')            # old short format, no verdict
+
+
 if __name__ == '__main__':
     unittest.main()
