@@ -148,6 +148,34 @@ ul.pts li::marker{color:var(--edge)}
   @keyframes trace{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
   @keyframes settle{from{scale:.4;opacity:.2}to{scale:1;opacity:1}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}}}
+.parties{display:grid;gap:10px;justify-items:center;text-align:center}
+.parties .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.parties button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border-radius:999px;padding:6px 13px;font-size:13px;box-shadow:inset 0 0 0 1px var(--line)}
+.parties button:hover,.parties button[aria-pressed=true]{background:var(--hover)}
+.parties button:focus-visible{outline:2px solid var(--focus)}
+.parties button b{font-weight:700}
+.wif{display:grid;gap:8px;background:var(--hover);border-radius:14px;padding:12px 14px;font-size:13.5px}
+.wif input[type=range]{width:100%;accent-color:var(--strong)}
+.wifbar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px;color:var(--muted)}
+.lnk{all:unset;cursor:pointer;font-size:13px;font-weight:500;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.lnk:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.ghost{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--muted);border-radius:2px}
+.jr,.ask{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.jr textarea,.ask input[type=text]{font:inherit;font-size:13.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 10px;width:100%;box-sizing:border-box;resize:vertical;min-width:0}
+.jr input[type=date]{font:inherit;font-size:13px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:5px 8px}
+.jr textarea:focus-visible,.ask input:focus-visible,.jr input:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{all:unset;cursor:pointer;font-size:13px;font-weight:500;background:var(--strong);color:var(--on-strong);border-radius:999px;padding:6px 14px}
+.btn.alt{background:var(--hover);color:var(--ink);text-align:left}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.jl{display:grid;gap:8px;font-size:13.5px}
+.jl label{display:flex;gap:8px;align-items:baseline;cursor:pointer}
+.jl small{color:var(--muted);font-size:12px;margin-left:4px}
+.jl .done span{text-decoration:line-through;color:var(--muted)}
+.jl p{margin:0}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.out{font-size:13.5px;line-height:1.55;white-space:pre-wrap;background:var(--hover);border-radius:14px;padding:11px 14px;margin:0}
 [hidden]{display:none!important}
 </style>
 
@@ -170,6 +198,7 @@ ul.pts li::marker{color:var(--edge)}
   <section class="book" id="book" hidden></section>
   <section class="drivers" id="drivers" hidden></section>
   <section class="chain" id="chain" hidden></section>
+  <section class="parties" id="parties" hidden><p class="lab">Shared counterparties</p><div class="chips"></div><p class="statnote" style="margin:0">Outside companies named in the research of several holdings. One event there reaches all of them. Tap one to see who.</p></section>
   <div class="main">
     <div class="stage"><p class="pan">Swipe sideways to see the whole map</p><svg id="g" role="group" aria-label="Network of holdings linked by shared business relationships. Each ticker is a button."></svg></div>
     <aside class="side" id="side" aria-label="Selected ticker"></aside>
@@ -207,6 +236,11 @@ const linked=DATA.nodes.filter(n=>adj[n.t].length);
 const iso=DATA.nodes.filter(n=>!adj[n.t].length);
 const PF=DATA.portfolio||null,HELD=PF?PF.held:{};
 const isHeld=t=>!PF||t in HELD;
+// what-if: multiplier per held ticker (0.5 = trim half). Recalculates exposure only; nothing is saved or traded.
+let WIF={},CUR=null,DB=null,SAMPLE=null,JR={},CTL=null;
+const US=PF?(PF.us??1):1,F=t=>WIF[t]??1,PARTIES=DATA.parties||[];
+function exposure(){const ex={};for(const[t,h]of Object.entries(HELD)){const n=byT[t];if(n)ex[n.g]=(ex[n.g]||0)+h.w*F(t)*US*100}return Object.entries(ex).sort((a,b)=>b[1]-a[1])}
+const BASE=Object.fromEntries(exposure());
 // private page: circle area = weight in the book, watch-list names are small rings; public page: area = links
 const r=n=>PF?(HELD[n.t]?5+Math.sqrt(HELD[n.t].w*100)*5.5:7):6+Math.sqrt(n.k)*4.2;
 const pct=x=>(x>=0?"+":"")+(x*100).toFixed(1)+"%";
@@ -230,11 +264,16 @@ function attention(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[];
   if(f&&f.state==="crossed")return["bad","Falsifier crossed"];
   if(f&&f.state==="due")return["warn","Falsifier result due"];
   if(k.some(x=>x.status==="watch"))return["warn","Kill condition on watch"];
+  const c=dueCheck(t);if(c)return["warn",c];
   if(f&&f.state==="close")return["warn","Near its falsifier"];
   if(unusual(t))return["warn",`Unusual 5-day move ${pct(RNG[t].r5)}`];
   if(k.some(x=>x.status==="review"))return["","Kill conditions need review"];
   if(f&&f.days!=null&&f.days>=0&&f.days<=21)return["",`Falsifier report in ${f.days} days`];
   return null}
+const today=new Date().toISOString().slice(0,10);
+const inDays=d=>Math.round((new Date(d)-new Date(today))/864e5);
+function dueCheck(t){const c=((JR[t]||{}).checks||[]).filter(x=>!x.done&&x.due&&inDays(x.due)<=14).sort((a,b)=>a.due<b.due?-1:1)[0];
+  return c?`Your checkpoint ${inDays(c.due)<0?"overdue":"in "+inDays(c.due)+" days"}: ${c.text.slice(0,40)}`:null}
 function falsifier(t,b){const f=(MON[t]||{}).falsifier;if(!f)return b.fals?`<div class="fals"><b>What would prove the verdict wrong</b>${fmt(b.fals)}</div>`:"";
   const when=f.deadline?` · ${f.days<0?`${-f.days} days ago`:`in ${f.days} days`} (${esc(f.deadline)})`:"";
   let body="";
@@ -298,40 +337,115 @@ if(PF){
   document.getElementById("private").hidden=false;
   document.getElementById("statnote").hidden=true;  // private tiles are plain numbers, nothing to hover
   document.querySelector(".legend .plain").textContent="Solid = held, sized by weight · dashed ring = not held";
-  const top=PF.drivers[0]||["none",0],cap=PF.cap||10,scale=Math.max(cap*1.25,...PF.drivers.map(d=>d[1]));
+  const top=PF.drivers[0]||["none",0];
   document.getElementById("stats").innerHTML=[[Object.keys(HELD).length,"held"],[DATA.nodes.filter(n=>!HELD[n.t]).length,"watch list"],[top[1].toFixed(1)+"%",th(top[0])+" of assets"],[esc(PF.as_of),"portfolio as of"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
-  const el=document.getElementById("drivers");el.hidden=false;
-  el.innerHTML=`<p class="lab">Shared-driver exposure · % of total assets · cap ${cap}%</p>`+PF.drivers.map(([g,v])=>`<div class="drv"><span>${esc(th(g))}</span><span class="track"><span class="fill${v>=cap?" over":v>=cap*.8?" near":""}" style="width:${Math.min(v/scale*100,100)}%"></span><span class="capline" style="left:${cap/scale*100}%"></span></span><span class="num">${v.toFixed(1)}%</span></div>`).join("");
-  const ch=(PF.chains||{})["hyperscaler-capex"];
-  if(ch){const el=document.getElementById("chain");el.hidden=false;
-    const tickers=ch.roles.flatMap(x=>[...x.held.map(h=>h[0]),...x.watch]);
-    const next=tickers.map(t=>[t,(MON[t]||{}).falsifier]).filter(([,f])=>f&&f.days!=null&&f.days>=0).sort((a,b)=>a[1].days-b[1].days)[0];
-    const lvl=v=>v>=cap?"var(--ahead)":v>=cap*.8?"var(--warn)":"var(--ink)";
-    el.innerHTML=`<p class="lab">Hyperscaler capex chain · one economic bet across four driver tags</p>
-    <div class="modes"><div class="mode"><span>If AI demand disappoints, the whole chain loses</span><b class="num" style="color:${lvl(ch.demand)}">${ch.demand.toFixed(1)}% of assets</b><span class="note" style="border:0;padding:0">Your cap for one driver is ${cap}%</span></div>
-    <div class="mode"><span>If hyperscalers cut capex for discipline, spenders gain and the rest lose</span><b class="num" style="color:${lvl(ch.cut)}">${ch.cut.toFixed(1)}% at risk</b><span class="note" style="border:0;padding:0">${ch.roles[0].pct.toFixed(1)}% in spenders partly offsets it</span></div>
-    ${next?`<div class="mode"><span>Next report that tests the chain</span><b>${next[0]} · ${next[1].days} days</b><span class="note" style="border:0;padding:0">${esc(next[1].metric)}: now ${next[1].current??"?"}${esc(next[1].unit||"")}, line ${next[1].breaks||""} ${next[1].threshold??""}${esc(next[1].unit||"")}</span></div>`:""}</div>
-    <div class="roles">${ch.roles.map(x=>`<div class="role"><div>${esc(x.name)}<small>${esc(x.hit)}</small></div><div class="tk">${x.held.map(([t,w])=>`<button data-t="${t}">${t} ${w.toFixed(1)}%</button>`).join("")}${x.watch.map(t=>`<button class="w" data-t="${t}" title="Watch list, not held">${t}</button>`).join("")}</div><span class="num">${x.pct.toFixed(1)}%</span></div>`).join("")}</div>
-    <p class="note" style="border:0;padding:0">Weights are % of your stock book; totals are % of total assets. Dashed = watch list. Roles are judged from the briefs.</p>`;
-    el.onclick=e=>{const b=e.target.closest("button[data-t]");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}}}
+  drawDrivers();drawChain();
+  document.getElementById("drivers").onclick=e=>{if(e.target.id==="wifreset"){WIF={};drawDrivers();drawChain();if(CUR)select(CUR)}};
+  document.getElementById("chain").onclick=e=>{const b=e.target.closest("button[data-t]");if(b)goTo(b.dataset.t)};
   if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
 }
-{const flagged=DATA.nodes.map(n=>[n.t,attention(n.t)]).filter(([,a])=>a).sort((x,y)=>{const o={bad:0,warn:1,"":2};return o[x[1][0]]-o[y[1][0]]});
-  if(flagged.length){const el=document.getElementById("attn");el.hidden=false;
-    el.querySelector(".chips").innerHTML=flagged.map(([t,a])=>`<button data-t="${t}"><span class="st ${a[0]}">${t}</span>${esc(a[1])}</button>`).join("");
-    el.onclick=e=>{const b=e.target.closest("button");if(b){select(b.dataset.t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}}}}
+function drawAttention(){const flagged=DATA.nodes.map(n=>[n.t,attention(n.t)]).filter(([,a])=>a).sort((x,y)=>{const o={bad:0,warn:1,"":2};return o[x[1][0]]-o[y[1][0]]});
+  const el=document.getElementById("attn");el.hidden=!flagged.length;
+  el.querySelector(".chips").innerHTML=flagged.map(([t,a])=>`<button data-t="${t}"><span class="st ${a[0]}">${t}</span>${esc(a[1])}</button>`).join("");}
+drawAttention();
+document.getElementById("attn").onclick=e=>{const b=e.target.closest("button");if(b)goTo(b.dataset.t)};
+function goTo(t){select(t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
+function changes(){return Object.entries(WIF).filter(([,f])=>f!==1)}
+function drawDrivers(){const el=document.getElementById("drivers");el.hidden=false;
+  const cap=PF.cap||10,cur=exposure(),scale=Math.max(cap*1.25,...cur.map(d=>d[1]),...Object.values(BASE)),ch=changes();
+  const cash=ch.reduce((s,[t,f])=>s+HELD[t].w*(1-f)*US*100,0);
+  el.innerHTML=`<p class="lab">Shared-driver exposure · % of total assets · cap ${cap}%</p>`
+  +(ch.length?`<div class="wifbar"><span><b style="color:var(--ink)">What-if:</b> ${ch.map(([t,f])=>`${t} ${f>1?"+":"−"}${Math.round(Math.abs(f-1)*100)}%`).join(", ")} · ${cash>=0?"moves":"needs"} ${Math.abs(cash).toFixed(1)}% of assets ${cash>=0?"to cash":"from cash"} · grey tick = today</span><button class="lnk" id="wifreset">Reset what-if</button></div>`:"")
+  +cur.map(([g,v])=>{const b=BASE[g]??v;return `<div class="drv"><span>${esc(th(g))}</span><span class="track"><span class="fill${v>=cap?" over":v>=cap*.8?" near":""}" style="width:${Math.min(v/scale*100,100)}%"></span>${Math.abs(b-v)>.005?`<span class="ghost" style="left:${b/scale*100}%"></span>`:""}<span class="capline" style="left:${cap/scale*100}%"></span></span><span class="num">${v.toFixed(1)}%</span></div>`}).join("")}
+function drawChain(){const ch=(PF.chains||{})["hyperscaler-capex"];if(!ch)return;const el=document.getElementById("chain");el.hidden=false;
+  const cap=PF.cap||10,lvl=v=>v>=cap?"var(--ahead)":v>=cap*.8?"var(--warn)":"var(--ink)";
+  const roles=ch.roles.map(x=>({...x,pct:x.held.reduce((s,[t,w])=>s+w*F(t),0)*US}));
+  const demand=roles.reduce((s,x)=>s+x.pct,0),cut=roles.filter(x=>x.key!=="spender").reduce((s,x)=>s+x.pct,0);
+  const tickers=ch.roles.flatMap(x=>[...x.held.map(h=>h[0]),...x.watch]);
+  const next=tickers.map(t=>[t,(MON[t]||{}).falsifier]).filter(([,f])=>f&&f.days!=null&&f.days>=0).sort((a,b)=>a[1].days-b[1].days)[0];
+  el.innerHTML=`<p class="lab">Hyperscaler capex chain · one economic bet across four driver tags${changes().length?" · with your what-if":""}</p>
+  <div class="modes"><div class="mode"><span>If AI demand disappoints, the whole chain loses</span><b class="num" style="color:${lvl(demand)}">${demand.toFixed(1)}% of assets</b><span class="note" style="border:0;padding:0">Your cap for one driver is ${cap}%</span></div>
+  <div class="mode"><span>If hyperscalers cut capex for discipline, spenders gain and the rest lose</span><b class="num" style="color:${lvl(cut)}">${cut.toFixed(1)}% at risk</b><span class="note" style="border:0;padding:0">${roles[0].pct.toFixed(1)}% in spenders partly offsets it</span></div>
+  ${next?`<div class="mode"><span>Next report that tests the chain</span><b>${next[0]} · ${next[1].days} days</b><span class="note" style="border:0;padding:0">${esc(next[1].metric)}: now ${next[1].current??"?"}${esc(next[1].unit||"")}, line ${next[1].breaks||""} ${next[1].threshold??""}${esc(next[1].unit||"")}</span></div>`:""}</div>
+  <div class="roles">${roles.map(x=>`<div class="role"><div>${esc(x.name)}<small>${esc(x.hit)}</small></div><div class="tk">${x.held.map(([t,w])=>`<button data-t="${t}">${t} ${(w*F(t)).toFixed(1)}%</button>`).join("")}${x.watch.map(t=>`<button class="w" data-t="${t}" title="Watch list, not held">${t}</button>`).join("")}</div><span class="num">${x.pct.toFixed(1)}%</span></div>`).join("")}</div>
+  <p class="note" style="border:0;padding:0">Weights are % of your stock book; totals are % of total assets. Dashed = watch list. Roles are judged from the briefs.</p>`}
 if(PF&&PF.moves){const col=(title,m)=>{if(!m||!m.by.length)return "";const top=m.by.slice(0,5),low=m.by.slice(-3).reverse().filter(x=>x[1]<0&&!top.includes(x)),rows=[...top,...low],mx=Math.max(...rows.map(x=>Math.abs(x[1])),.01);
     return `<div><h3>${title}<b class="num">${pct(m.book/100)}</b></h3><p class="note" style="border:0;padding:0;margin:4px 0 10px">Percentage points of your stock book, biggest movers</p>${rows.map(([t,v])=>`<div class="crow"><b>${t}</b><span class="bar"><i style="${v>=0?`left:50%;width:${v/mx*50}%;background:var(--deserved)`:`right:50%;width:${-v/mx*50}%;background:var(--ahead)`}"></i></span><span class="num">${v>=0?"+":""}${v.toFixed(2)}</span></div>`).join("")}</div>`};
   const el=document.getElementById("book");el.hidden=false;
   el.innerHTML=`<p class="lab">What moved your book</p><div class="cols">${col("Last day",PF.moves.r1)}${col("Last 5 days",PF.moves.r5)}</div>`}
+if(PARTIES.length){const el=document.getElementById("parties");el.hidden=false;
+  el.querySelector(".chips").innerHTML=PARTIES.map((p,i)=>`<button data-p="${i}" aria-pressed="false"><b>${esc(p.n)}</b>${Object.keys(p.t).length} holdings${p.kill.length?` <span class="st bad">in ${p.kill.length} kill conditions</span>`:""}</button>`).join("");
+  el.onclick=e=>{const b=e.target.closest("button[data-p]");if(b){selectParty(+b.dataset.p);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}}}
 document.getElementById("iso").onclick=e=>{const b=e.target.closest("button");if(b)select(b.dataset.t)};
 
 const side=document.getElementById("side");
 const hubs=[...DATA.nodes].sort((a,b)=>b.k-a.k).slice(0,6);
 function row(t,sub){const n=byT[t];return `<li><button data-t="${t}"><b><i class="dot" style="background:${VC[n.v]}"></i> ${t}</b><small>${sub}</small></button></li>`}
+function pressParty(i){document.querySelectorAll("#parties button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.p===i)))}
+function selectParty(i){const p=PARTIES[i],set=new Set(Object.keys(p.t));CUR=null;pressParty(i);
+  svg.node().classList.add("dim");E.classed("on",d=>set.has(d.source.t)&&set.has(d.target.t));N.classed("on",d=>set.has(d.t));
+  const mine=PF?Object.keys(p.t).filter(t=>HELD[t]):[],tot=mine.reduce((s,t)=>s+HELD[t].w*F(t)*US*100,0);
+  side.innerHTML=`<div class="hd"><span class="logo mono" aria-hidden="true">${esc(p.n.slice(0,2))}</span><div><h2 tabindex="-1">${esc(p.n)}</h2><small>Named in the research of ${set.size} holdings</small></div></div>
+  ${PF?`<div class="meta"><span class="pill num">${mine.length} held</span><span class="pill num">${tot.toFixed(1)}% of total assets</span></div>`:""}
+  ${p.kill.length?`<div class="fals"><b>Named in kill conditions</b>${p.kill.join(", ")}. One bad event at ${esc(p.n)} could trip all of these at once.</div>`:""}
+  <p class="lab">Where it shows up</p><ul>${Object.entries(p.t).map(([t,l])=>row(t,esc(l.join("; "))+(PF?(HELD[t]?` · <span class="num">${(HELD[t].w*F(t)*100).toFixed(1)}%</span> of book`:" · watch list"):""))).join("")}</ul>
+  ${askBox("party")}
+  <p class="note">A shared counterparty is a hidden driver: these holdings can sit under different driver tags and still move on the same news.</p>
+  <button id="clr" class="clr">Show biggest hubs</button>`;
+  document.getElementById("clr").onclick=()=>select(null);
+  wireAsk(()=>partyCtx(p));side.querySelector("h2").focus({preventScroll:true});}
+const RULES=`You advise a long-term investor (2+ year holds) about holdings shown on their private Holdings Map. Their rules: judge by the size of business damage, not price moves; trim only for position size or valuation running ahead of fundamentals, never because a stock rose; a full exit needs a broken thesis (a kill condition); several holdings on one driver are one bet; conviction needs evidence, not the fact of owning it. Use ONLY the page data below. If it doesn't hold the answer, say what is missing and which brief or /deep run would supply it. Never give buy or sell instructions; give the reasoning. Don't use the word "moat". Plain English, short bullets, under 200 words.`;
+const PRESETS={ticker:["What would break this thesis first?","Is there a size or valuation reason to trim?","Which other holdings would the same news hit?"],party:["How exposed is my book to this company?","Which kill conditions could one bad event trip?"]};
+function tickerCtx(t){const n=byT[t],h=HELD[t],b=BRIEFS[t]||{},m=MON[t]||{};
+  return {ticker:t,company:b.name,verdict:n.v||"none yet",driver:n.g,brief_updated:b.date,snapshot:b.snap,bull:b.bull,bear:b.bear,
+    kill_conditions:m.kills||b.kill,falsifier:m.falsifier||b.fals,open_questions:b.ask,links_to_other_holdings:adj[t].map(a=>({to:a.o,via:a.l})),
+    shared_counterparties:PARTIES.filter(p=>t in p.t).map(p=>p.n),price_52w:RNG[t],
+    ...(PF?{position:h?{pct_of_stock_book:+(h.w*100).toFixed(2),gain_vs_cost:h.gain,one_year_return:h.apr,sp500_one_year:h.bench}:"not held (watch list)",
+      driver_exposure_pct_of_assets:Object.fromEntries(exposure().map(([g,v])=>[g,+v.toFixed(2)])),driver_cap_pct:PF.cap,what_if_multipliers:changes().length?Object.fromEntries(changes()):undefined}:{}),
+    my_notes:JR[t]}}
+function partyCtx(p){return {counterparty:p.n,named_in_kill_conditions_of:p.kill,holdings:Object.entries(p.t).map(([t,l])=>({ticker:t,how_named:l,verdict:(byT[t]||{}).v,driver:(byT[t]||{}).g,
+  kill_conditions:((MON[t]||{}).kills||[]).map(k=>k.text),...(PF?{pct_of_stock_book:HELD[t]?+(HELD[t].w*F(t)*100).toFixed(2):"not held"}:{})})),
+  ...(PF?{driver_exposure_pct_of_assets:Object.fromEntries(exposure().map(([g,v])=>[g,+v.toFixed(2)])),driver_cap_pct:PF.cap,stock_share_of_total_assets:US}:{})}}
+function askBox(kind){return SAMPLE?`<div class="ask"><p class="lab">Ask Claude</p><div class="row">${PRESETS[kind].map((q,i)=>`<button class="btn alt" data-q="${i}" data-k="${kind}">${esc(q)}</button>`).join("")}</div>
+  <div class="row"><input type="text" id="askq" aria-label="Your own question" placeholder="Or ask your own question" style="flex:1"><button class="btn" id="askgo">Ask</button><button class="btn alt" id="askstop" hidden>Stop</button></div>
+  <p class="out" id="askout" aria-live="polite" hidden></p><p class="hint">Answers use only what this page shows, and count toward your Claude usage.</p></div>`:""}
+function wireAsk(ctx){const box=side.querySelector(".ask");if(!box)return;
+  const go=q=>q&&ask(q,ctx());
+  box.onclick=e=>{const b=e.target.closest("button");if(!b)return;
+    if(b.dataset.q!=null)go(PRESETS[b.dataset.k][+b.dataset.q]);else if(b.id==="askgo")go(document.getElementById("askq").value.trim());else if(b.id==="askstop")CTL?.abort()};
+  document.getElementById("askq").onkeydown=e=>{if(e.key==="Enter")go(e.target.value.trim())}}
+async function ask(q,ctx){const out=document.getElementById("askout"),go=document.getElementById("askgo"),stop=document.getElementById("askstop");if(!SAMPLE||!out)return;
+  CTL?.abort();CTL=new AbortController();out.hidden=false;out.textContent="Thinking…";stop.hidden=false;go.disabled=true;
+  try{await SAMPLE(`${RULES}\n\nPage data (JSON):\n${JSON.stringify(ctx)}\n\nQuestion: ${q}`,{signal:CTL.signal,onText:({text})=>{out.textContent=text}})}
+  catch(e){out.textContent=e.text||"";if(e.code!=="cancelled"){const m={not_granted:"Claude isn't allowed on this page.",rate_limited:"Too many questions at once. Try again in a minute.",session_expired:"Sign in to claude.ai again, then ask.",refused:"Claude didn't answer that. Try asking it another way.",prompt_too_large:"Too much data for one question."};
+    out.textContent+=(out.textContent?"\n\n":"")+(m[e.code]||"That didn't go through. Ask again.");}
+    if(["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"].includes(e.code))SAMPLE=null}
+  finally{stop.hidden=true;go.disabled=false}}
+function wifText(t){const h=HELD[t],f=F(t),g=byT[t].g,ex=Object.fromEntries(exposure()),cap=PF.cap||10;
+  if(f===1)return `Drag to try a trim or an add. The driver bars and the capex chain above recalculate; nothing is saved or traded.`;
+  return `${f<1?"Trim":"Add"} ${Math.round(Math.abs(f-1)*100)}% → ${t} ${(h.w*f*US*100).toFixed(1)}% of assets (now ${(h.w*US*100).toFixed(1)}%). ${th(g)} ${ex[g].toFixed(1)}% vs cap ${cap}%${ex[g]>=cap?", still over":", under cap"}.`}
+function journalBox(){return DB?`<div class="jr"><p class="lab">Your notes and checkpoints</p><div class="jl" id="jl"></div>
+  <textarea id="jrt" rows="2" aria-label="Note or checkpoint" placeholder="A note, or a checkpoint if you add a date"></textarea>
+  <div class="row"><label for="jrd" class="hint">Due</label><input type="date" id="jrd"><button class="btn" id="jrs">Save</button><span id="jrm" class="hint" aria-live="polite"></span></div>
+  <p class="hint">Only you can see these. /deep and /council read them.</p></div>`:""}
+function drawJournal(t){const el=document.getElementById("jl");if(!el)return;const j=JR[t]||{},cs=[...(j.checks||[])].sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1),ns=[...(j.notes||[])].reverse();
+  el.innerHTML=(cs.length||ns.length)?cs.map(c=>`<label class="${c.done?"done":""}"><input type="checkbox" data-c="${esc(c.id)}"${c.done?" checked":""}><span>${esc(c.text)}<small>${c.due?(c.done?"":inDays(c.due)<0?"overdue · ":"")+esc(c.due):""}</small></span></label>`).join("")+ns.map(n=>`<p>${esc(n.text)}<small>${esc(n.d)}</small></p>`).join("")
+    :`<p class="hint">Nothing saved for ${t} yet. Write what you decided and why, or add a date to make it a checkpoint that shows under "Needs a look" two weeks before it's due.</p>`}
+let busy=false;
+async function saveJournal(t,body){const m=document.getElementById("jrm");if(busy)return false;busy=true;if(m)m.textContent="Saving…";
+  try{await DB.doc("journal/"+t).set(body);if(m)m.textContent="Saved";return true}
+  catch(e){if(m)m.textContent=e.code==="quota_exceeded"?"Storage is full. Delete old notes first.":"Couldn't save. Try again.";return false}
+  finally{busy=false}}
+function wireJournal(t){const box=side.querySelector(".jr");if(!box)return;drawJournal(t);
+  const cur=()=>{const j=JR[t]||{};return {notes:[...(j.notes||[])],checks:(j.checks||[]).map(c=>({...c}))}};
+  document.getElementById("jrs").onclick=async()=>{const tx=document.getElementById("jrt"),d=document.getElementById("jrd"),text=tx.value.trim();if(!text)return;
+    const b=cur();if(d.value)b.checks.push({id:Date.now().toString(36),text,due:d.value,done:false,d:today});else b.notes.push({d:today,text});
+    if(await saveJournal(t,b)){tx.value="";d.value=""}};
+  box.onchange=async e=>{const id=e.target.dataset.c;if(!id)return;const b=cur(),c=b.checks.find(x=>x.id===id);if(!c)return;c.done=e.target.checked;if(!await saveJournal(t,b))e.target.checked=!c.done}}
 function select(t,focus){
+  CUR=t;pressParty(-1);
   const s=svg.node();
-  if(!t){s.classList.remove("dim");E.classed("on",false);N.classed("on",false);
+  if(!t){CUR=null;s.classList.remove("dim");E.classed("on",false);N.classed("on",false);
     side.innerHTML=`<p class="lab">Biggest hubs</p><ul>${hubs.map(n=>row(n.t,`<span class="num">${n.k}</span> links · ${th(n.g)}`)).join("")}</ul>
     <p class="note">Tap any ticker to see what connects it to the rest of your book.</p>`;return}
   const n=byT[t],nb=new Set(adj[t].map(a=>a.o).concat(t));
@@ -343,17 +457,28 @@ function select(t,focus){
   const pp=!PF?mv:h?mv+`<span class="pill num">${(h.w*100).toFixed(1)}% of book</span>${h.gain!=null?`<span class="pill num">${pct(h.gain)} vs your cost</span>`:""}${h.apr!=null?`<span class="pill num">1y ${pct(h.apr)} vs S&amp;P ${pct(h.bench)}</span>`:""}${h.under?`<span class="pill v" style="background:var(--warn)">1y underperformer</span>`:""}`:`<span class="pill">Watch list · not held</span>`;
   side.innerHTML=`<div class="hd">${logo(t)}<div><h2 tabindex="-1">${t}</h2><small>${esc(b.name||"")}${b.date?` · brief updated ${esc(b.date)}`:""}</small></div></div>
   <div class="meta">${vp}<span class="pill">${th(n.g)}</span><span class="pill num">${n.k} links</span>${pp}</div>
+  ${PF&&h?`<div class="wif"><label class="lab" for="wif">What if you changed ${t}?</label><input type="range" id="wif" min="-100" max="100" step="5" value="${Math.round((F(t)-1)*100)}"><span id="wifv" class="num">${wifText(t)}</span></div>`:""}
   ${range52(t)}
   ${b.snap?`<p class="snap">${fmt(b.snap)}</p>`:""}
   ${falsifier(t,b)}
   ${kills(t,b)}${list("Bull",b.bull)}${list("Bear",b.bear)}${list("What to ask",b.ask)}
   ${adj[t].length?`<p class="lab">Shown connections</p><ul>${adj[t].map(a=>row(a.o,nice(a.l))).join("")}</ul>`:n.new?`<p class="note" style="border:0;padding:0">New brief, not in the knowledge graph yet. Run /graphify --update to find its links.</p>`:`<p class="note" style="border:0;padding:0">No links to your other holdings. A shock elsewhere in the book is unlikely to reach this thesis.</p>`}
+  ${journalBox()}${askBox("ticker")}
   <p class="note">${n.k>=8?"This is a hub. Before adding more, check how many other theses rest on the same driver.":"Full thesis: briefs/"+t+".md"}</p>
   <button id="clr" class="clr">Show biggest hubs</button>`;
   document.getElementById("clr").onclick=()=>select(null);
+  const sl=document.getElementById("wif");
+  if(sl)sl.oninput=()=>{const v=+sl.value;if(v)WIF[t]=1+v/100;else delete WIF[t];drawDrivers();drawChain();document.getElementById("wifv").textContent=wifText(t)};
+  wireJournal(t);wireAsk(()=>tickerCtx(t));
   side.scrollTop=0;
   if(focus)side.querySelector("h2").focus({preventScroll:true});
 }
 side.onclick=e=>{const b=e.target.closest("li button");if(b)select(b.dataset.t,e.detail===0)};
 select("NVDA");
+// claude.ai viewer only: the journal (private db) and Ask Claude light up when granted; elsewhere the page stays as is
+if(window.claude?.use)(async()=>{
+  const [db,sample]=await Promise.all([claude.use("db").catch(()=>null),claude.use("sample").catch(()=>null)]);
+  DB=db;SAMPLE=sample;
+  if(DB)DB.collection("journal").onSnapshot(q=>{JR={};q.docs.forEach(d=>{JR[d.id]=d.data()});drawAttention();if(CUR)drawJournal(CUR)},()=>{});
+  if(DB||SAMPLE){if(CUR)select(CUR);}})();
 </script>

@@ -21,7 +21,7 @@ import re
 import subprocess
 import sys
 from datetime import date, timedelta
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -58,7 +58,10 @@ EDGES_PER_NODE = 4          # strongest links kept per ticker, so the map stays 
 SNAPSHOT_CHARS, POINT_CHARS, FALSIFIER_CHARS = 420, 240, 200
 POINTS_PER_SIDE, KILL_CONDITIONS, QUESTIONS = 3, 4, 3
 # brand names research uses that differ from the brief's legal company name
-COMMON_NAMES = {'google': 'GOOG', 'facebook': 'META', 'berkshire': 'BRKB'}
+COMMON_NAMES = {'google': 'GOOG', 'facebook': 'META', 'berkshire': 'BRKB', 'spacex': 'SPCX', 'tsmc': 'TSM', 'aws': 'AMZN',
+                'amazonwebservices': 'AMZN', 'starlink': 'SPCX', 'xai': 'SPCX'}  # SpaceX owns Starlink and xAI
+PARTY_MIN = 3  # an outside company named in this many holdings' research is a shared counterparty
+PARTY_SKIP = {'apollo'}  # one name, different things (Palantir's software, a credit firm)
 # one economic chain, four roles: judged from the briefs (who pays for AI data centers, who sells into them).
 # Driver tags split this chain across ai-capex / cloud-hyperscale / digital-ads / energy; this view puts it back together.
 CHAINS = {'hyperscaler-capex': [
@@ -103,6 +106,8 @@ def brief_meta():
     meta = {}
     for b in sorted((ROOT / 'briefs').glob('*.md')):
         text = b.read_text(encoding='utf-8')
+        if not re.search(r'^ticker:', text, re.M):  # briefs/scorecard.md and other non-company pages
+            continue
         drv = re.search(r'^shared_driver:\s*(\S+)', text, re.M)
         ver = re.search(r'Verdict[^A-Za-z]*(Ahead of itself|Deserved|Still underrated)', text)
         com = re.search(r'^company:\s*(.+)$', text, re.M)
@@ -131,6 +136,12 @@ def links(nodes, adj, edges, meta):
             m = re.match(r'briefs/([A-Z.]+)\.md$', nodes[a].get('source_file') or '')
             if m:
                 rep[a] = m.group(1)
+    for nid, n in nodes.items():  # the brief's own node; hub edges vanish when a hub's first brief is re-extracted
+        m = re.match(r'briefs/([A-Z.]+)\.md$', n.get('source_file') or '')
+        t = m and m.group(1)
+        if t in meta and (n.get('ticker') == t or re.match(re.escape(t) + r'\s+[—-]', n.get('label', ''))
+                          or nid in {f'briefs_{t.lower()}{s}' for s in ('', '_doc', f'_{t.lower()}')}):
+            rep.setdefault(nid, m.group(1))
     main = dict(rep)
     by_ticker = {t: a for a, t in main.items()}
     for e in edges:  # alias edges written by the graph clean-up
@@ -151,8 +162,8 @@ def links(nodes, adj, edges, meta):
         if t:
             rep.setdefault(nid, t)
 
-    def research(x):  # only research content, never code/scripts
-        return (nodes[x].get('source_file') or '').startswith(('briefs/', 'sources/'))
+    def research(x):  # a holding's own research only: not code, the scorecard page, or verdict labels
+        return owner(nodes[x]) in by_ticker and not nodes[x].get('label', '').startswith('Verdict')
 
     pairs = defaultdict(list)  # (A, B) -> labels of what connects them
     own = defaultdict(set)  # every entity extracted from a ticker's brief or sources/ is part of its research
@@ -457,10 +468,39 @@ def portfolio_view(page, portfolio, policy, moves=None):
             exposure[driver_of[t]] += p['weight'] * us_share * 100
         else:
             no_brief.append(t)
-    return {'as_of': portfolio.get('as_of', ''), 'cap': policy.get('driver_cap_pct_total'), 'held': held,
+    return {'as_of': portfolio.get('as_of', ''), 'cap': policy.get('driver_cap_pct_total'), 'us': us_share, 'held': held,
             'no_brief': sorted(no_brief), 'drivers': sorted(([g, round(v, 2)] for g, v in exposure.items()), key=lambda d: -d[1]),
             'moves': {p: contributions({t: h['w'] for t, h in held.items()}, moves, p) for p in ('r1', 'r5')},
             'chains': {name: chain_exposure(roles, held, us_share) for name, roles in CHAINS.items()}}
+
+
+def parties(nodes, meta, briefs):
+    """Outside companies (OpenAI, Anthropic, ...) named in several holdings' research: one event there reaches all
+    of them. Holdings themselves, analysts, and kill/verdict/risk labels are excluded; names are matched with
+    name_key, so "OpenAI" and "OpenAI (customer concentration)" count once."""
+    held = {v['name'] for v in meta.values() if v['name']} | set(COMMON_NAMES)
+    seen = defaultdict(lambda: defaultdict(set))
+    for n in nodes.values():
+        t, lab = owner(n), n.get('label', '')
+        bare = re.sub(r'\(.*?\)', '', lab).strip()
+        if (t not in meta or n.get('file_type') in ('rationale', 'code', 'document') or len(bare.split()) > 3
+                or re.match(r'(Kill|Verdict|Risk|Falsif|Thesis|Q\d|FY|\$)', lab) or 'analyst' in lab.lower()):
+            continue
+        k = name_key(lab)
+        if len(k) >= 3 and k not in held and k not in PARTY_SKIP and k.upper() not in meta:
+            seen[k][t].add(lab)
+    out = []
+    for by in seen.values():
+        if len(by) < PARTY_MIN:
+            continue
+        name = Counter(re.sub(r'\(.*?\)', '', l).strip() for labs in by.values() for l in labs).most_common(1)[0][0]
+        hit = re.compile(rf'\b{re.escape(name)}\b', re.I)
+        kill = sorted(t for t in meta if any(hit.search(k) for k in briefs.get(t, {}).get('kill', [])))
+        tick = {t: sorted(labs)[:2] for t, labs in sorted(by.items())}
+        for t in kill:
+            tick.setdefault(t, ['named in a kill condition'])
+        out.append({'n': name, 't': tick, 'kill': kill})
+    return sorted(out, key=lambda p: (-len(p['t']), p['n']))
 
 
 # the Artifact host wraps the published page in its own <head>; the local page opens straight from disk
@@ -509,6 +549,7 @@ if __name__ == '__main__':
     page['logos'] = json.loads(LOGOS.read_text(encoding='utf-8')) if LOGOS.exists() else {}
     page['ranges'] = price_ranges([n['t'] for n in page['nodes']], fetch='--prices' in sys.argv)
     page['monitor'] = monitor([n['t'] for n in page['nodes']], page['briefs'], date.today())
+    page['parties'] = parties(load()[0], brief_meta(), page['briefs'])
     check(canvas)
     OUT.write_text(json.dumps(canvas, indent=1, ensure_ascii=False), encoding='utf-8')
     assert 'portfolio' not in page, 'the published page must never carry portfolio data'
