@@ -106,6 +106,10 @@ ul.pts li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 .drivers{display:grid;gap:12px;background:var(--panel);border-radius:28px;padding:20px 22px}
 .drv{display:grid;grid-template-columns:minmax(110px,170px) 1fr 52px;gap:14px;align-items:center;font-size:13.5px;text-transform:capitalize}
 .drv .num{text-align:right}
+button.drv{width:100%;background:none;border:0;font:inherit;color:inherit;text-align:left;padding:5px 8px;margin:0 -8px;box-sizing:content-box;border-radius:10px;cursor:pointer}
+button.drv:hover,button.drv[aria-expanded=true]{background:var(--hover)}
+button.drv:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+#drvnote{margin:0;text-align:left;max-width:none}
 .track{position:relative;height:10px;border-radius:999px;background:var(--hover)}
 .fill{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--under)}
 .fill.near{background:var(--warn)}.fill.over{background:var(--ahead)}
@@ -241,7 +245,7 @@ const iso=DATA.nodes.filter(n=>!adj[n.t].length);
 const PF=DATA.portfolio||null,HELD=PF?PF.held:{};
 const isHeld=t=>!PF||t in HELD;
 // what-if: multiplier per held ticker (0.5 = trim half). Recalculates exposure only; nothing is saved or traded.
-let WIF={},CUR=null,DB=null,SAMPLE=null,JR={},CTL=null;
+let WIF={},DRV=null,CUR=null,DB=null,SAMPLE=null,JR={},CTL=null;
 const US=PF?(PF.us??1):1,F=t=>WIF[t]??1,PARTIES=DATA.parties||[];
 function exposure(){const ex={};for(const[t,h]of Object.entries(HELD)){const n=byT[t];if(n)ex[n.g]=(ex[n.g]||0)+h.w*F(t)*US*100}return Object.entries(ex).sort((a,b)=>b[1]-a[1])}
 const BASE=Object.fromEntries(exposure());
@@ -344,7 +348,13 @@ if(PF){
   const top=PF.drivers[0]||["none",0];
   document.getElementById("stats").innerHTML=[[Object.keys(HELD).length,"held"],[DATA.nodes.filter(n=>!HELD[n.t]).length,"watch list"],[top[1].toFixed(1)+"%",th(top[0])+" of assets"],[esc(PF.as_of),"portfolio as of"]].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   drawDrivers();drawChain();
-  document.getElementById("drivers").onclick=e=>{if(e.target.id==="wifreset"){WIF={};drawDrivers();drawChain();if(CUR)select(CUR)}};
+  {const el=document.getElementById("drivers");let pinned=null;
+  el.onclick=e=>{if(e.target.id==="wifreset"){WIF={};drawDrivers();drawChain();if(CUR)select(CUR);return}
+    const b=e.target.closest("button.drv");if(!b)return;const g=b.dataset.g;pinned=pinned===g?null:g;showDriver(pinned);
+    if(pinned){const set=new Set(DATA.nodes.filter(n=>n.g===g).map(n=>n.t));svg.node().classList.add("dim");E.classed("on",d=>set.has(d.source.t)&&set.has(d.target.t));N.classed("on",d=>set.has(d.t))}
+    else if(CUR)select(CUR);else select(null)};
+  el.onmouseover=e=>{const b=e.target.closest("button.drv");if(b)showDriver(b.dataset.g)};
+  el.onmouseleave=()=>showDriver(pinned);}
   document.getElementById("chain").onclick=e=>{const b=e.target.closest("button[data-t]");if(b)goTo(b.dataset.t)};
   if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
 }
@@ -360,7 +370,14 @@ function drawDrivers(){const el=document.getElementById("drivers");el.hidden=fal
   const cash=ch.reduce((s,[t,f])=>s+HELD[t].w*(1-f)*US*100,0);
   el.innerHTML=`<p class="lab">Shared-driver exposure · % of total assets · cap ${cap}%</p>`
   +(ch.length?`<div class="wifbar"><span><b style="color:var(--ink)">What-if:</b> ${ch.map(([t,f])=>`${t} ${f>1?"+":"−"}${Math.round(Math.abs(f-1)*100)}%`).join(", ")} · ${cash>=0?"moves":"needs"} ${Math.abs(cash).toFixed(1)}% of assets ${cash>=0?"to cash":"from cash"} · grey tick = today</span><button class="lnk" id="wifreset">Reset what-if</button></div>`:"")
-  +cur.map(([g,v])=>{const b=BASE[g]??v;return `<div class="drv"><span>${esc(th(g))}</span><span class="track"><span class="fill${v>=cap?" over":v>=cap*.8?" near":""}" style="width:${Math.min(v/scale*100,100)}%"></span>${Math.abs(b-v)>.005?`<span class="ghost" style="left:${b/scale*100}%"></span>`:""}<span class="capline" style="left:${cap/scale*100}%"></span></span><span class="num">${v.toFixed(1)}%</span></div>`}).join("")}
+  +cur.map(([g,v])=>{const b=BASE[g]??v;return `<button class="drv" data-g="${esc(g)}" aria-expanded="${g===DRV}" aria-controls="drvnote"><span>${esc(th(g))}</span><span class="track"><span class="fill${v>=cap?" over":v>=cap*.8?" near":""}" style="width:${Math.min(v/scale*100,100)}%"></span>${Math.abs(b-v)>.005?`<span class="ghost" style="left:${b/scale*100}%"></span>`:""}<span class="capline" style="left:${cap/scale*100}%"></span></span><span class="num">${v.toFixed(1)}%</span></button>`}).join("")
+  +`<p class="statnote" id="drvnote" aria-live="polite">${DRV?drvText(DRV):"Hover or tap a driver to see which holdings sit in it. Tap again to clear."}</p>`}
+// which holdings make up a driver, biggest first, as % of total assets (with any what-if applied)
+function drvText(g){const held=Object.keys(HELD).filter(t=>byT[t]&&byT[t].g===g).map(t=>[t,HELD[t].w*F(t)*US*100]).sort((a,b)=>b[1]-a[1]);
+  const watch=DATA.nodes.filter(n=>n.g===g&&!HELD[n.t]).map(n=>n.t);
+  return `${th(g).replace(/^./,c=>c.toUpperCase())}: ${held.map(([t,v])=>`${t} ${v.toFixed(1)}%`).join(" · ")||"nothing held"}${watch.length?`. Watch list: ${watch.join(", ")}`:""}`}
+function showDriver(g){DRV=g;document.querySelectorAll("#drivers button.drv").forEach(b=>b.setAttribute("aria-expanded",String(b.dataset.g===g)));
+  const n=document.getElementById("drvnote");if(n)n.textContent=g?drvText(g):"Hover or tap a driver to see which holdings sit in it. Tap again to clear.";}
 function drawChain(){const ch=(PF.chains||{})["hyperscaler-capex"];if(!ch)return;const el=document.getElementById("chain");el.hidden=false;
   const cap=PF.cap||10,lvl=v=>v>=cap?"var(--ahead)":v>=cap*.8?"var(--warn)":"var(--ink)";
   const roles=ch.roles.map(x=>({...x,pct:x.held.reduce((s,[t,w])=>s+w*F(t),0)*US}));
