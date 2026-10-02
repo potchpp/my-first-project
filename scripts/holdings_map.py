@@ -561,6 +561,9 @@ if __name__ == '__main__':
         held = [p['symbol'].replace('.', '').replace('-', '') for p in portfolio['positions']]
         moves = {**price_ranges([t for t in held if t not in page['ranges']]), **page['ranges']}  # unbriefed holdings too
         view = portfolio_view(page, portfolio, policy, moves)
+        import perf  # the S&P 500 total-return series perf.py already keeps fresh: the book's goal is to beat it
+        bench = perf.get_prices({perf.BENCH}, date.today() - timedelta(days=372), date.today(), fetch=False).get(perf.BENCH, {})
+        view['bench'] = recent_move(bench)
         PRIVATE_PAGE.write_text(render({**page, 'portfolio': view}, standalone=True), encoding='utf-8')
     tickers = sum(1 for n in canvas['nodes'] if n['type'] == 'text') - 1
     print(f'{OUT.relative_to(ROOT)}: {tickers} tickers, {len(canvas["edges"])} links')
