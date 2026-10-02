@@ -127,7 +127,7 @@ button.drv:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
 .role .tk button:focus-visible{outline:2px solid var(--focus)}
 .role .num{text-align:right;font-weight:500}
 @media (max-width:560px){.role{grid-template-columns:1fr auto}.role .tk{grid-column:1/-1}}
-.n circle.watch{fill:var(--panel);stroke-width:2;stroke-dasharray:3 2.5}
+.n circle.watch{fill-opacity:.45;stroke-width:2.5;stroke-dasharray:4 2}  /* watch list: verdict colour, lighter fill, dashed ring */
 @media (max-width:560px){.drv{grid-template-columns:1fr auto}.drv .track{grid-column:1/-1;order:3}}
 .hd{display:flex;gap:14px;align-items:center}
 .hd small{display:block;color:var(--muted);font-size:13px;margin-top:5px}
@@ -328,13 +328,13 @@ const N=root.append("g").selectAll("g").data(nodes).join("g").attr("class","n")
 N.append("circle").attr("r",r).attr("fill",d=>VC[d.v])
   .attr("class",d=>isHeld(d.t)?null:"watch").style("stroke",d=>isHeld(d.t)?null:VC[d.v]);
 N.filter(d=>LOGOS[d.t]&&LOGOS[d.t].d&&isHeld(d.t)&&r(d)>=10).append("path").attr("d",d=>LOGOS[d.t].d).attr("fill","#fff").attr("pointer-events","none")
-  .attr("transform",d=>{const z=r(d)*1.05;return `translate(${-z/2},${-z/2}) scale(${z/24})`});
+  .attr("transform",d=>{const z=r(d)*.95;return `translate(${-z/2},${-z/2}) scale(${z/24})`});
 // site-icon logos are pictures, not paths: a white disc inside the verdict ring, the icon clipped round
 svg.append("defs").append("clipPath").attr("id","lc").attr("clipPathUnits","objectBoundingBox").append("circle").attr("cx",.5).attr("cy",.5).attr("r",.5);
 const IM=N.filter(d=>LOGOS[d.t]&&LOGOS[d.t].img&&isHeld(d.t)&&r(d)>=10);
-IM.append("circle").attr("r",d=>r(d)*.78).attr("fill","#fff").attr("pointer-events","none");
+IM.append("circle").attr("r",d=>r(d)*.62).attr("fill","#fff").attr("pointer-events","none");
 IM.append("image").attr("href",d=>LOGOS[d.t].img).attr("preserveAspectRatio","xMidYMid meet").attr("clip-path","url(#lc)").attr("pointer-events","none")
-  .attr("x",d=>-r(d)*.62).attr("y",d=>-r(d)*.62).attr("width",d=>r(d)*1.24).attr("height",d=>r(d)*1.24);
+  .attr("x",d=>-r(d)*.48).attr("y",d=>-r(d)*.48).attr("width",d=>r(d)*.96).attr("height",d=>r(d)*.96);
 N.append("text").attr("y",d=>r(d)+13).attr("text-anchor","middle").text(d=>d.t);
 svg.on("click",e=>{if(e.target.tagName==="svg")select(null)});
 {const st=document.querySelector(".stage");st.scrollLeft=(st.scrollWidth-st.clientWidth)/2}  // phones pan the map; open it centred on the hubs
