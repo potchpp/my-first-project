@@ -308,5 +308,33 @@ class LedgerTests(unittest.TestCase):
         self.assertEqual(self.check(legacy, friendlier)[0], 'rebaseline')            # old short format, no verdict
 
 
+class ScorecardTests(unittest.TestCase):
+    def test_held_and_market_check(self):
+        import scorecard as sc
+        below = {'type': 'number', 'breaks': 'below', 'threshold': 7}
+        above = {'type': 'number', 'breaks': 'above', 'threshold': 51.2}
+        self.assertTrue(sc.held(below, 7.5))
+        self.assertFalse(sc.held(below, 6.9))
+        self.assertFalse(sc.held(above, 54.23))          # MU, 2026-09-30: Ahead of itself broken
+        self.assertTrue(sc.held({'type': 'event'}, 'not'))
+        self.assertFalse(sc.held({'type': 'event'}, 'happened'))
+        self.assertTrue(sc.market_right('Ahead of itself', -0.05))
+        self.assertFalse(sc.market_right('Still underrated', -0.05))
+        self.assertTrue(sc.market_right('Deserved', 0.08))
+        self.assertFalse(sc.market_right('Deserved', 0.15))
+
+    def test_market_checks_wait_for_the_horizon(self):
+        import scorecard as sc
+        d = date(2026, 1, 2)
+        series = lambda a, b: {d: a, d + timedelta(days=182): b, d + timedelta(days=365): b}
+        prices = {'AAA': series(100, 90), 'BBB': series(100, 130), 'BENCH': series(100, 110)}
+        entries = [{'ticker': 'AAA', 'verdict': 'Ahead of itself', 'price': 100, 'logged': d.isoformat()},
+                   {'ticker': 'BBB', 'verdict': 'Still underrated', 'price': 100, 'logged': d.isoformat()},
+                   {'ticker': 'CCC', 'verdict': 'Deserved', 'price': None, 'logged': d.isoformat()}]  # no price: skipped
+        done, first = sc.market_checks(entries, d + timedelta(days=200), prices)
+        self.assertEqual([(t, h, ok) for t, _, h, _, ok in done], [('AAA', 182, True), ('BBB', 182, True)])
+        self.assertEqual(first, d + timedelta(days=365))     # 12-month checks still pending
+
+
 if __name__ == '__main__':
     unittest.main()

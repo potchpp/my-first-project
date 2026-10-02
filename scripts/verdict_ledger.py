@@ -52,8 +52,9 @@ def reasons(text, since):
 def kept(old, new_kills):
     """A prior kill condition survives if a new one starts the same way or reads mostly the same (tightening
     usually appends to the wording, so the opening survives)."""
-    head = old[:40].lower()
-    return any(k.lower().startswith(head) or difflib.SequenceMatcher(None, old.lower(), k.lower()).ratio() > 0.6
+    norm = lambda s: ' '.join(re.sub(r'\[(?:bounded|open-ended)[^\]]*\]', '', s).lower().split())  # tags move around
+    old, head = norm(old), norm(old)[:40]
+    return any(norm(k).startswith(head) or difflib.SequenceMatcher(None, old, norm(k)).ratio() > 0.6
                for k in new_kills)
 
 

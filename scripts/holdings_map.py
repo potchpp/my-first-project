@@ -368,6 +368,8 @@ def falsifier_state(f, today):
     state = 'crossed' if room < 0 else 'close' if room < FALSIFIER_CLOSE else 'clear'
     if f.get('judged') == 'at deadline' and state != 'clear':
         state = 'due' if days is not None and days < 0 else 'pending'  # a target still being built toward
+    if days is not None and days < 0 and state != 'crossed':
+        state = 'due'  # the deadline has passed: the reported number decides, not the last value we stored
     return {**f, 'state': state, 'room': round(room, 3), 'days': days}
 
 

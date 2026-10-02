@@ -1,0 +1,1 @@
+{"ticker": "MU", "verdict": "Ahead of itself", "metric": "Fiscal Q4 2026 revenue vs consensus (proves verdict wrong if above)", "type": "number", "breaks": "above", "threshold": 51.2, "unit": "$B", "deadline": "2026-09-30", "value": 54.23, "held": false, "recorded": "2026-10-02", "note": "FQ4 2026 revenue (qtr ended 2026-09-03), SEC 8-K ex99.1 a2026q4ex991-pressrelease.htm"}

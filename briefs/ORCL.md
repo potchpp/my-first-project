@@ -1,7 +1,7 @@
 ---
 ticker: ORCL
 company: Oracle
-updated: 2026-09-25
+updated: 2026-10-02
 type: stock-brief
 shared_driver: ai-capex
 ---
@@ -78,14 +78,21 @@ Oracle ขาย enterprise software (database, apps, support) ที่ mature 
 - *Where we differ from consensus:* **ไม่มี — เราถือ consensus view** ราคาสะท้อนทั้ง backlog และความเสี่ยงทางการเงินแล้ว
 
 ## Kill Conditions
-1. **OpenAI ผิดนัดชำระหรือ renegotiate สัญญาลงอย่างมีนัยสำคัญ** `[bounded ~20–25%]` — *Status 2026-09-25: ยังไม่ fire — ความสัมพันธ์ขยาย (GPT-6 ที่ Abilene); ขึ้นกับ OpenAI IPO ต้นปี 2027*
+1. **OpenAI ผิดนัดชำระหรือ renegotiate สัญญาลงอย่างมีนัยสำคัญ** `[bounded ~20–25%]` — *Status 2026-09-25: ยังไม่ fire — ความสัมพันธ์ขยาย (GPT-6 ที่ Abilene); ขึ้นกับ OpenAI IPO ต้นปี 2027* — *ตั้งแต่ 2026-10-02: เป็น exit trigger ที่ตกลงไว้ล่วงหน้า (tightened)*
 2. **Credit rating ถูก downgrade เข้า junk** `[open-ended]` — capex $90–95B ต้องพึ่งตลาดทุน; ถ้า junk ต้นทุนเงินพุ่งและอาจต้องเพิ่มทุนต่อที่ราคาต่ำ ไม่มี floor ที่มองเห็น — *Status: ใกล้ — BBB- (ห่างหนึ่งขั้น), Moody's outlook ลบ*
 3. **Cloud/software margin ลดลงต่อเนื่อง 2+ ไตรมาสติด** โดยไม่เห็นสัญญาณว่า infra cost จะ stabilize `[bounded ~30%]` — *Status: gross margin ลด, op margin ทรง 42% ด้วยการตัด opex — เฝ้าดู*
 4. **Free cash flow ติดลบต่อเนื่องเกิน 3–4 ไตรมาส โดยไม่มี debt reduction plan ชัดเจน** `[open-ended]`
    ***Status 2026-09-25: FIRED (very likely)*** — FCF ติดลบตั้งแต่อย่างน้อย Q1 FY26 (−$5.4B) ถึง Q1 FY27 (−$5B), FY26 ทั้งปี ~−$23.7B *(web, unverified)*; management ไม่ให้ timeline FCF บวก และ fund ด้วยการเพิ่มทุน $20B + หนี้ — ไม่ใช่แผนลดหนี้
+   ***Confirmed 2026-10-02 — FIRED, accepted:*** 10-K FY2026: OCF $32.0B − capex $55.7B = FCF −$23.7B, fund ด้วย senior notes ใหม่ $42.7B — ไม่ใช่แผนลดหนี้ (10-k-fy2026.md:7692) ไม่แก้ถ้อยคำเงื่อนไขนี้
    *เงื่อนไขนี้ถูกเขียนไว้ตอนที่รู้อยู่แล้วว่าจะมี buildout — มันจึง fire ตามที่ออกแบบไว้ การแก้ถ้อยคำเงื่อนไขนี้ตอนนี้ (หลังมัน fire) คือ ego pattern การตัดสินใจเป็นของผู้ลงทุน: (a) ยอมรับว่า thesis เปลี่ยน หรือ (b) loosen พร้อมเขียนเหตุผลและหลักฐานใหม่ที่ไม่มีตอนเขียนเงื่อนไข*
 
 *Kill conditions 1 และ 3 ต่ำกว่าเกณฑ์ ≥50% — ตามกฎควรย้ายไป Bear แต่การย้าย = loosening ต้องให้ผู้ลงทุนเขียนเหตุผลเอง*
+
+*Thesis restated 2026-10-02 (investor decision after /council):* thesis เดิม "OCI buildout จ่ายตัวเองได้" พังที่ขา cash (KC4) — ผู้ลงทุนเลือกถือต่อในฐานะ **bet ใหม่: AI buildout ที่ fund ด้วยหนี้** โดยรู้ตัว ไม่ใช่เพราะหวังให้กลับทุน
+• **ขนาด:** คงเดิมหรือน้อยกว่า, ไม่เพิ่มขณะที่ shared driver `ai-capex` เกิน cap
+• **Exit ทั้งหมด (ตกลงล่วงหน้า):** (a) Moody's หรือ S&P ลด rating เป็น junk (KC2) หรือ (b) OpenAI ผิดนัด/renegotiate สัญญาลง (KC1)
+• **Checkpoint:** ผล Q2 FY27 (~กลาง ธ.ค. 2026) — FCF กลับเป็นบวก หรือมี timeline ลดหนี้ที่ชัด → thesis เดิมกลับมา; ถ้าไม่มี ทั้งคู่ → ทบทวนใหม่ด้วย /council
+• **Dissent ที่แรงที่สุด (Critic):** KC2 กับ KC4 วิ่งผ่านช่องทาง funding เดียวกัน — ถ้า funding ตึง ไม่มี earnings beat ไหนช่วยได้
 
 ## What to Ask
 1. **ถ้า OpenAI ประสบปัญหา Oracle มี contractual protection อะไร?** (prepayment, minimum commitment, capacity ที่ขายต่อได้) — และ OpenAI IPO ต้นปี 2027 เลื่อนได้ไหม?

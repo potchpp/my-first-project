@@ -276,7 +276,26 @@
       "current_label": "Q1 FY2027 actual",
       "deadline": "2027-03-15"
     },
-    "kills": []
+    "kills": [
+      {
+        "match": "Free cash flow ติดลบต่อเนื่อง",
+        "status": "triggered",
+        "checked": "2026-10-02",
+        "note": "fired and accepted 2026-10-02 (10-K FY26 FCF -$23.7B, debt-funded); thesis restated as a debt-funded AI buildout bet"
+      },
+      {
+        "match": "Credit rating ถูก downgrade เข้า junk",
+        "status": "watch",
+        "checked": "2026-10-02",
+        "note": "BBB-, Moody's outlook negative: a junk downgrade is a pre-committed full exit"
+      },
+      {
+        "match": "OpenAI ผิดนัดชำระ",
+        "status": "intact",
+        "checked": "2026-10-02",
+        "note": "pre-committed full exit trigger since 2026-10-02"
+      }
+    ]
   },
   "PLTR": {
     "falsifier": {

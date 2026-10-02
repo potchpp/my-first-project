@@ -3,8 +3,9 @@ About once a day, and whenever the holdings CSV is saved, it also runs perf.py, 
 from the same price cache the public page uses.
 
 When a brief (or the graph) is newer than graphify-out/holdings-map.html, rebuild it with
-holdings_map.py. If the page differs from what was last published, block the stop once and
-ask Claude to republish it to the same artifact URL.
+holdings_map.py. The claude.ai artifact carries the PRIVATE page (your allocation; the public map
+lives on Vercel), so if the private page differs from what was last published, block the stop once
+and ask Claude to republish it to the same artifact URL.
 
   python3 scripts/republish_map.py          # hook mode (reads hook JSON on stdin)
   python3 scripts/republish_map.py --mark   # record the current page as published
@@ -18,12 +19,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PAGE = ROOT / 'graphify-out' / 'holdings-map.html'
+PRIVATE = ROOT / 'graphify-out' / 'holdings-map-private.html'  # what the artifact shows (decided 2026-10-02)
 MARK = ROOT / 'graphify-out' / '.holdings-map.published'
 PRICE_CACHE = ROOT / 'portfolio' / 'cache'
 PRICE_REFRESH_HOURS = 20  # 52-week bars refresh about once a day (~10s for 50 tickers)
 DEFER = ROOT / 'graphify-out' / '.republish-deferred'  # touched by needs_deep.py: the unattended daily check can't approve a publish
 DEFER_SECONDS = 900
-URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # the one published copy; share edit access with any other account that runs this hook
+URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # private view: never share this link (it shows weights and cost basis)
 
 
 def commit_site():
@@ -36,8 +38,13 @@ def commit_site():
                    cwd=ROOT, capture_output=True, text=True)
 
 
+def published_page():
+    return PRIVATE if PRIVATE.exists() else PAGE  # no portfolio.json yet: fall back to the public map
+
+
 def digest():
-    return hashlib.sha256(PAGE.read_bytes()).hexdigest() if PAGE.exists() else ''
+    page = published_page()
+    return hashlib.sha256(page.read_bytes()).hexdigest() if page.exists() else ''
 
 
 def main():
@@ -75,7 +82,7 @@ def main():
     if DEFER.exists() and time.time() - DEFER.stat().st_mtime < DEFER_SECONDS:
         return  # the daily check just ran; the next interactive session will be asked instead
     print(json.dumps({'decision': 'block', 'reason': (
-        f'Holdings Map changed. Read {PAGE} and republish it with the Artifact tool, url {URL} '
+        f'Holdings Map changed. Read {published_page()} and republish it with the Artifact tool, url {URL} '
         f'(same artifact, no icon). Then run: python3 {ROOT}/scripts/republish_map.py --mark'
         + (f'. Tell the user these briefs were left out of the map: {warnings}' if warnings else ''))}))
 
