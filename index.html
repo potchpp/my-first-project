@@ -260,6 +260,11 @@ const BASE=Object.fromEntries(exposure());
 const PERS=[["r5","5 days"],["apr","1 year (your APR)"],["gain","since you bought"]];
 const HINT="Hover or tap a driver to see each holding's share and return. Tap again to clear. Driver return = weighted by your position sizes.";
 const perOf=t=>PER==="r5"?(RNG[t]||{}).r5:(HELD[t]||{})[PER];
+// your whole book beside the S&P for the same window: 5-day move, 1-year APR, or APR since you started
+function bookVs(){const B=PF.book||{},row=(l,me,sp)=>me==null&&sp==null?"":`<span>· ${l}: <b style="color:var(--ink)">your book</b> ${pctc(me)} vs S&amp;P 500 ${pctc(sp)}${me!=null&&sp!=null?` (${me>=sp?"ahead":"behind"} ${Math.abs((me-sp)*100).toFixed(1)} pts)`:""}</span>`;
+  if(PER==="r5")return row("5 days",PF.moves&&PF.moves.r5?PF.moves.r5.book/100:null,(PF.bench||{}).r5);
+  if(PER==="apr")return row("1 year (return on your capital)",(B["1y"]||{}).apr,(B["1y"]||{}).bench);
+  const i=B.inception||{};return row(`since you started${i.start?" ("+esc(i.start)+")":""}, total`,i.apr,i.bench)}
 const benchPer=()=>PER==="r5"?(PF.bench||{}).r5:PER==="apr"?Object.values(HELD).find(h=>h.bench!=null)?.bench:null;
 const pctc=x=>x==null?`<span style="color:var(--muted)">—</span>`:`<span class="${x>=0?"up":"dn"}">${pct(x)}</span>`;
 // private page: circle area = weight in the book, watch-list names are small rings; public page: area = links
@@ -384,7 +389,7 @@ function drawDrivers(){const el=document.getElementById("drivers");el.hidden=fal
   const cash=ch.reduce((s,[t,f])=>s+HELD[t].w*(1-f)*US*100,0);
   const bp=benchPer();
   el.innerHTML=`<p class="lab">Shared-driver exposure · % of total assets · cap ${cap}% · return</p>
-  <div class="per" role="group" aria-label="Return period">Return over ${PERS.map(([k,l])=>`<button data-per="${k}" aria-pressed="${k===PER}">${l}</button>`).join("")}${bp!=null?`<span>· S&amp;P 500 ${pctc(bp)}</span>`:""}</div>`
+  <div class="per" role="group" aria-label="Return period">Return over ${PERS.map(([k,l])=>`<button data-per="${k}" aria-pressed="${k===PER}">${l}</button>`).join("")}${bookVs()}</div>`
   +(ch.length?`<div class="wifbar"><span><b style="color:var(--ink)">What-if:</b> ${ch.map(([t,f])=>`${t} ${f>1?"+":"−"}${Math.round(Math.abs(f-1)*100)}%`).join(", ")} · ${cash>=0?"moves":"needs"} ${Math.abs(cash).toFixed(1)}% of assets ${cash>=0?"to cash":"from cash"} · grey tick = today</span><button class="lnk" id="wifreset">Reset what-if</button></div>`:"")
   +cur.map(([g,v])=>{const b=BASE[g]??v;return `<button class="drv" data-g="${esc(g)}" aria-expanded="${g===DRV}" aria-controls="drvnote"><span>${esc(th(g))}</span><span class="track"><span class="fill${v>=cap?" over":v>=cap*.8?" near":""}" style="width:${Math.min(v/scale*100,100)}%"></span>${Math.abs(b-v)>.005?`<span class="ghost" style="left:${b/scale*100}%"></span>`:""}<span class="capline" style="left:${cap/scale*100}%"></span></span><span class="num">${v.toFixed(1)}%</span><span class="num">${pctc(drvPerf(g))}</span></button>`}).join("")
   +`<div class="statnote" id="drvnote" aria-live="polite">${DRV?drvText(DRV):HINT}</div>`}
