@@ -78,11 +78,6 @@ li small{color:var(--muted);font-size:var(--fs-sm)}
 .clr{all:unset;cursor:pointer;justify-self:start;font-weight:500;font-size:var(--fs-sm);background:var(--strong);color:var(--on-strong);border-radius:var(--r-chip);padding:8px 16px}
 .clr:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.attn{display:grid;gap:12px;justify-items:center;text-align:center}
-.attn .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.attn button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border-radius:var(--r-chip);padding:8px 12px 8px 8px;font-size:var(--fs-sm)}
-.attn button:hover{background:var(--hover)}.attn button:focus-visible{outline:2px solid var(--focus)}
-.attn button b{font-weight:700}
 .st{font-size:var(--fs-xs);font-weight:500;border-radius:var(--r-chip);padding:4px 8px;white-space:nowrap;background:var(--hover);color:var(--muted)}
 .st.ok{color:var(--deserved)}.st.warn{background:var(--warn);color:var(--on-color)}.st.bad{background:var(--ahead);color:var(--on-color)}
 ul.pts li .st{margin-right:8px}
@@ -210,7 +205,7 @@ ul.pts li::marker{color:var(--edge)}
 .out{font-size:var(--fs-sm);line-height:1.55;white-space:pre-wrap;background:var(--hover);border-radius:var(--r-tile);padding:12px 16px;margin:0}
 /* tap targets: every control at least 24px tall (WCAG 2.2 target size) */
 .role .tk button,.per button,.lnk{display:inline-flex;align-items:center}
-.role .tk button,.per button,.parties button,.attn button,.iso button,.legend button,.lnk,.btn,.clr{min-height:24px;box-sizing:border-box}
+.role .tk button,.per button,.parties button,.qtk,.iso button,.legend button,.lnk,.btn,.clr{min-height:24px;box-sizing:border-box}
 .wif input[type=range]{height:24px}
 .note.flat{border:0;padding:0}
 .stat b.date{font-size:var(--fs-lg);white-space:nowrap;align-self:center}
@@ -222,6 +217,37 @@ ul.pts li::marker{color:var(--edge)}
 .more>summary::before{content:"▸ ";color:var(--muted)}.more[open]>summary::before{content:"▾ "}
 .more>summary:hover{background:var(--hover)}
 .more>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* review queue: finding · evidence · next step, one row per stock; your actions: the open to-do list from the journal */
+.queue,.actions{display:grid;gap:4px;background:var(--panel);border-radius:var(--r-panel);padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
+.qhead{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.qrow{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,320px);gap:16px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+@media (max-width:760px){.qrow{grid-template-columns:1fr;gap:8px}}
+.qt{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.qtk{all:unset;cursor:pointer;font-weight:700;font-size:var(--fs-sm);display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--edge)}
+.qtk:hover{text-decoration-color:var(--ink)}.qtk:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.qf{display:grid;gap:4px;min-width:0;font-size:var(--fs-sm)}
+.qf>b{font-weight:600}
+.qe{color:var(--muted)}
+.qa{display:grid;gap:8px;min-width:0}
+.cmd{display:flex;gap:8px;align-items:center;background:var(--hover);border-radius:var(--r-tile);padding:8px 12px;min-width:0}
+.cmd code{flex:1;min-width:0;overflow-wrap:anywhere;font:500 var(--fs-xs)/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink)}
+.qa input[type=date]{font:inherit;font-size:var(--fs-xs);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-tile);padding:4px 8px;min-height:24px}
+.qa input[type=date]:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.state{font-size:var(--fs-xs);color:var(--muted)}.state b{color:var(--deserved);font-weight:600}
+.how{font-size:var(--fs-xs);color:var(--muted)}
+.how>summary{cursor:pointer;width:max-content;max-width:100%;min-height:24px;display:flex;align-items:center}
+.how>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.how p{margin:8px 0 0;max-width:80ch;line-height:1.6}
+.tw{overflow-x:auto;margin-top:8px}
+table.tr{border-collapse:collapse;width:100%;font-size:var(--fs-xs);color:var(--ink)}
+table.tr th{font-weight:500;color:var(--muted);text-align:left;padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.tr td{padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.tr .num{text-align:right}
+.alist{display:grid}
+.arow2{display:grid;grid-template-columns:24px minmax(0,1fr) auto auto;gap:8px 12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:var(--fs-sm)}
+.arow2 input{width:18px;height:18px;margin:0;accent-color:var(--strong)}
+.arow2 label{cursor:pointer}
+@media (max-width:560px){.arow2{grid-template-columns:24px minmax(0,1fr)}.arow2>:nth-child(n+3){grid-column:2}}
 [hidden]{display:none!important}
 </style>
 
@@ -241,7 +267,8 @@ ul.pts li::marker{color:var(--edge)}
     <p class="statnote" id="legnote">How it works: /deep works out what today's price assumes about growth, then compares that with what the company is actually delivering. Every verdict comes with one number, due at a set earnings date, that would prove it wrong (side panel: "What would prove the verdict wrong"). Hover or tap a colour to see what it means.</p>
   </div>
   <section class="score" id="score" hidden></section>
-  <section class="attn" id="attn" hidden><p class="lab">Needs a look</p><div class="chips"></div></section>
+  <section class="actions" id="actions" hidden></section>
+  <section class="queue" id="attn" hidden></section>
   <div class="main">
     <div class="stage"><p class="pan">Swipe sideways to see the whole map</p><svg id="g" role="group" aria-label="Network of holdings linked by shared business relationships. Each ticker is a button."></svg></div>
     <aside class="side" id="side" aria-label="Selected ticker"></aside>
@@ -327,25 +354,91 @@ const FST={clear:["ok","Clear"],close:["warn","Close to line"],crossed:["bad","L
 const chip=([c,l])=>`<span class="st ${c}">${l}</span>`;
 const unusual=t=>RNG[t]&&Math.abs(RNG[t].z5||0)>=SPIKE;
 // one reason per ticker, most serious first: a broken line or kill beats a stale check or a big move
-function attention(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[];
-  if(k.some(x=>x.status==="triggered"))return["bad","Kill condition triggered"];
-  if(f&&f.state==="crossed")return["bad","Falsifier crossed"];
-  if(f&&f.state==="due")return["warn","Falsifier result due"];
-  const h=HELD[t],judged=h&&h.days2!=null&&h.days2>=365;
-  if(judged&&h.g2!=null&&h.g2<0){const weak=k.some(x=>x.status==="watch")?"a kill condition on watch":k.some(x=>x.status==="review")?"kill conditions due for review":(byT[t]||{}).v==="Ahead of itself"?"an Ahead of itself verdict":null;
-    if(weak)return["warn",`Behind the S&P with your money (${ptsy(h.g2)}) and ${weak}`]}
-  if(k.some(x=>x.status==="watch"))return["warn","Kill condition on watch"];
-  const c=dueCheck(t);if(c)return["warn",c];
-  if(f&&f.state==="close")return["warn","Near its falsifier"];
-  if(unusual(t))return["warn",`Unusual 5-day move ${pct(RNG[t].r5)}`];
-  const ad=ADDS[t];if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return["warn",`Adding hasn't worked: ${ad[1]} of ${ad[0]} adds beat the S&P`];
-  if(k.some(x=>x.status==="review"))return["","Kill conditions need review"];
-  if(f&&f.days!=null&&f.days>=0&&f.days<=21)return["",`Falsifier report in ${f.days} days`];
-  return null}
+// ---- review queue: one finding per stock (most serious first) plus book-level findings, each with its evidence,
+// a next step for your process (never a buy/sell instruction), and a way to put that step on your action list
+const SEV={bad:0,warn:1,"":2},SEVL={bad:"Act now",warn:"Look",["" ]:"FYI"};
 const today=new Date().toISOString().slice(0,10);
 const inDays=d=>Math.round((new Date(d)-new Date(today))/864e5);
-function dueCheck(t){const c=((JR[t]||{}).checks||[]).filter(x=>!x.done&&x.due&&inDays(x.due)<=14).sort((a,b)=>a.due<b.due?-1:1)[0];
-  return c?`Your checkpoint ${inDays(c.due)<0?"overdue":"in "+inDays(c.due)+" days"}: ${c.text.slice(0,40)}`:null}
+const plusDays=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,10);
+const kOf=(k,st)=>k.find(x=>x.status===st);
+// checkpoints you wrote yourself; steps added from the queue stay on their own finding row
+function nextCheck(t){return ((JR[t]||{}).checks||[]).filter(x=>!x.src&&!x.done&&x.due&&inDays(x.due)<=14).sort((a,b)=>a.due<b.due?-1:1)[0]}
+function fev(f){return `${esc(f.metric)}${f.current!=null?`: now ${f.current}${esc(f.unit||"")}`:""}${f.threshold!=null?`, line ${esc(f.breaks||"")} ${f.threshold}${esc(f.unit||"")}`:""}${f.deadline?` · ${f.days<0?-f.days+" days ago":"in "+f.days+" days"} (${esc(f.deadline)})`:""}`}
+function finding(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[],h=HELD[t],n=byT[t]||{};
+  const F=(sev,kind,title,ev,step,act,due)=>({t,sev,key:kind+":"+t,kind,title,ev,step,act,due});
+  let x=kOf(k,"triggered");
+  if(x)return F("bad","kill","Kill condition triggered",fmt(x.text)+(x.note?` · ${esc(x.note)}`:""),`/council ${t} kill condition fired: does the thesis still stand?`,`Decide on ${t}: a kill condition fired`);
+  if(f&&f.state==="crossed")return F("bad","fals","Falsifier line crossed",fev(f),`/deep ${t}`,`Re-run /deep ${t}: its falsifier line was crossed`);
+  if(f&&f.state==="due")return F("warn","fals","Falsifier result due",fev(f),`/deep ${t}`,`Score ${t}'s verdict with /deep: the falsifier date has passed`);
+  if(h&&h.days2!=null&&h.days2>=365&&h.g2!=null&&h.g2<0){
+    const weak=kOf(k,"watch")?"a kill condition on watch":kOf(k,"review")?"kill conditions due for review":n.v==="Ahead of itself"?"an Ahead of itself verdict":null;
+    if(weak){const a=(h.w*US*100).toFixed(1);
+      return F("warn","size","Behind the S&P, with a weak thesis signal",`${ptsy(h.g2)} vs the same money in the S&P over 2 years · ${weak} · ${a}% of assets`,
+        `/council "${t} is ${a}% of assets, ${ptsy(h.g2)} behind the index with my money, and has ${weak}: does its size match the evidence?"`,`Council on ${t}'s size against its evidence`)}}
+  x=kOf(k,"watch");
+  if(x)return F("warn","watch","Kill condition on watch",fmt(x.text)+(x.note?` · ${esc(x.note)}`:""),`/deep ${t}`,`Re-check ${t}'s kill condition on watch`);
+  const c=nextCheck(t);
+  if(c)return F("warn","check",`Your checkpoint is ${inDays(c.due)<0?"overdue":"due in "+inDays(c.due)+" days"}`,`${esc(c.text)} · due ${esc(c.due)}`,null,null);
+  if(f&&f.state==="close")return F("warn","near","Near its falsifier",fev(f)+(f.room!=null?` · ${Math.round(f.room*100)}% room`:""),`Check ${t}'s report${f.deadline?" on "+f.deadline:""} against the line`,`Check ${t}'s report against its falsifier`,f.deadline);
+  if(unusual(t))return F("warn","move","Unusual 5-day move",`${pct(RNG[t].r5)} in 5 days, ${Math.abs(RNG[t].z5).toFixed(1)}× its usual weekly move`,`Check the news: real catalyst or drift? /deep ${t} if it touches the thesis`,`Find out what moved ${t}`);
+  const ad=ADDS[t];
+  if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return F("warn","adds","Adding hasn't worked",`${ad[1]} of ${ad[0]} adds beat the S&P over the next 3 months · ${ad[2]>=0?"+":"−"}${Math.abs(ad[2]).toFixed(2)}% of book`,`/deep ${t} before any further add`,`No more adds to ${t} until /deep shows the evidence improved`);
+  x=kOf(k,"review");
+  if(x)return F("","review","Kill conditions need review",`Last checked ${esc(x.checked||"never")}, over 120 days ago`,`/deep ${t}`,`Refresh ${t}'s brief: kill conditions not checked in 120 days`);
+  if(f&&f.days!=null&&f.days>=0&&f.days<=21)return F("","soon",`Falsifier report in ${f.days} days`,fev(f),`Check ${t}'s report on ${f.deadline} against the line`,`Check ${t}'s report against its falsifier`,f.deadline);
+  return null}
+function bookFindings(){if(!PF)return[];const out=[],cap=PF.cap||10,S=PF.score||{},B=(sev,kind,title,ev,step,act)=>({t:"BOOK",sev,key:kind,kind,title,ev,step,act});
+  for(const[g,v]of exposure())if(v>=cap){const ts=Object.keys(HELD).filter(t=>byT[t]&&byT[t].g===g);
+    out.push(B("warn","cap:"+g,`${cap1(th(g))} is over its cap`,`${v.toFixed(1)}% of total assets vs your ${cap}% cap · ${ts.length} holdings: ${ts.join(", ")}`,
+      `/council "${cap1(th(g))} is ${v.toFixed(1)}% of assets vs a ${cap}% cap: which holding gives way, judged by thesis and valuation?"`,`Council on the ${th(g)} cap`))}
+  const y=S["1y"],z=S["2y"]||{};
+  if(y&&y.gap_pp!=null&&y.gap_pp<0)out.push(B("","rule","Behind the S&P over the last year",`1 year ${ptsy(y.gap_pp)} · 2 years ${ptsy(z.gap_pp)} · your money vs the same money in the S&P`,
+    "Write your index-core rule now: what must the 2-year gap show at the next review, and what happens if it doesn't?","Write the index-core rule before the next review"));
+  const sm=Object.values(HELD).filter(h=>h.w*US*100<0.5);
+  if(sm.length>=10)out.push(B("","small",`${sm.length} small positions`,`Each under 0.5% of assets, ${sm.reduce((a,h)=>a+h.w*US*100,0).toFixed(1)}% in total · too small to move the score`,
+    "At your review: give each a written thesis and a real size, or merge it into one you hold with conviction",`Decide on the ${sm.length} small positions`));
+  return out}
+const sz=t=>t==="BOOK"?99:HELD[t]?HELD[t].w:0;
+let FIND={};
+function srcCheck(f){return ((JR[f.t]||{}).checks||[]).find(c=>c.src===f.key)}
+function actCtl(f){if(!f.act)return f.kind==="check"?`<span class="state">Already in your actions</span>`:"";
+  const c=srcCheck(f);
+  if(c)return `<span class="state">${c.done?`<b>Done</b>${c.doneOn?" "+esc(c.doneOn):""}`:`In your actions · due ${esc(c.due||"")}`}</span>`;
+  if(!DB)return "";
+  const due=f.due&&inDays(f.due)>=0?f.due:plusDays(14);
+  return `<div class="row"><input type="date" aria-label="Due date" data-due="${esc(f.key)}" value="${due}"><button class="btn" data-add="${esc(f.key)}">Add to my actions</button></div>`}
+function tradeTable(rows,t,what){if(!rows||!rows.length)return "";
+  return `<details class="how"><summary>Show the ${rows.length} ${what} (last 2 years)</summary><div class="tw"><table class="tr"><thead><tr><th>Date</th><th>Kind</th><th>Month before</th><th class="num">${esc(t)}, next 3 mo</th><th class="num">S&amp;P</th><th>Helped?</th><th class="num">% of book</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]||"—"}</td><td class="num">${pct(r[3])}</td><td class="num">${pct(r[4])}</td><td class="${r[5]?"up":"dn"}">${r[5]?"yes":"no"}</td><td class="num">${r[6]>=0?"+":""}${r[6].toFixed(2)}</td></tr>`).join("")}</tbody></table></div></details>`}
+const AROWS=PF&&PF.audit_rows||{};
+function qrow(f){const tk=f.t==="BOOK"?`<b>Whole book</b>`:`<button class="qtk" data-t="${f.t}">${f.t}</button>`;
+  const ev=f.kind==="adds"?tradeTable((AROWS[f.t]||[]).filter(r=>r[1]==="add"),f.t,"adds"):"";
+  return `<div class="qrow"><div class="qt"><span class="st ${f.sev}">${SEVL[f.sev]}</span>${tk}</div>
+  <div class="qf"><b>${esc(f.title)}</b><div class="qe">${f.ev}</div>${ev}</div>
+  <div class="qa">${f.step?`<div class="cmd"><code>${esc(f.step)}</code><button class="lnk" data-copy="${esc(f.key)}">Copy</button></div>`:""}${actCtl(f)}</div></div>`}
+const HOW_Q=`<details class="how"><summary>How findings are chosen</summary><p>One finding per stock, the most serious first: kill condition triggered → falsifier line crossed → falsifier date passed → behind the S&amp;P with your money (held a year or more) and a weak thesis signal → kill condition on watch → your checkpoint due within 14 days → within 15% of its falsifier → a 5-day move beyond 2× its usual → adding hasn't worked (4+ adds, under a quarter beat the S&amp;P over the next 3 months) → kill conditions not checked in 120 days → falsifier report within 21 days. Whole-book findings: a driver over your cap, a negative 1-year gap, 10+ positions under 0.5% of assets. Rows are ranked by severity, then position size. Next steps are suggestions for your process; none is an instruction to buy or sell. Sources: briefs/monitor.json, scripts/perf.py, scripts/trade_audit.py.</p></details>`;
+function drawQueue(){const el=document.getElementById("attn");
+  const all=[...bookFindings(),...DATA.nodes.map(n=>finding(n.t)).filter(Boolean)].sort((a,b)=>SEV[a.sev]-SEV[b.sev]||sz(b.t)-sz(a.t));
+  FIND=Object.fromEntries(all.map(f=>[f.key,f]));el.hidden=!all.length;
+  el.innerHTML=`<div class="qhead"><p class="lab">Review queue · ${all.length} finding${all.length===1?"":"s"}</p><span class="hint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</span></div>`+all.map(qrow).join("")+HOW_Q}
+function drawActions(){const el=document.getElementById("actions");if(!DB){el.hidden=true;return}
+  const open=Object.entries(JR).flatMap(([t,j])=>(j.checks||[]).filter(c=>!c.done).map(c=>({...c,t}))).sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1);
+  el.hidden=false;
+  el.innerHTML=`<div class="qhead"><p class="lab">Your actions · ${open.length} open</p><span class="hint">Tick one when it's done. Saved privately; /deep and /council read it.</span></div>`
+  +(open.length?`<div class="alist">${open.map((c,i)=>`<div class="arow2"><input type="checkbox" id="ac${i}" data-doc="${esc(c.t)}" data-c="${esc(c.id)}"><label for="ac${i}">${esc(c.text)}</label>${c.t==="BOOK"?`<span class="state">Whole book</span>`:`<button class="qtk" data-t="${esc(c.t)}">${esc(c.t)}</button>`}<span class="num ${c.due&&inDays(c.due)<0?"dn":"state"}">${c.due?(inDays(c.due)<0?"overdue · ":"due ")+esc(c.due):""}</span></div>`).join("")}</div>`
+    :`<p class="hint">Nothing open. Add a next step from the review queue below, or a checkpoint from any holding's panel.</p>`)}
+const jclone=t=>{const j=JR[t]||{};return {notes:[...(j.notes||[])],checks:(j.checks||[]).map(c=>({...c}))}};
+async function copyText(btn,text){try{await navigator.clipboard.writeText(text);btn.textContent="Copied"}catch(e){const code=btn.previousElementSibling,r=document.createRange();r.selectNodeContents(code);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Press ⌘C"}
+  setTimeout(()=>{btn.textContent="Copy"},2000)}
+function wireQueue(){const q=document.getElementById("attn"),a=document.getElementById("actions");
+  q.onclick=async e=>{const b=e.target.closest("button");if(!b)return;
+    if(b.dataset.copy){copyText(b,FIND[b.dataset.copy].step);return}
+    if(b.dataset.add){const f=FIND[b.dataset.add],d=q.querySelector(`input[data-due="${CSS.escape(f.key)}"]`),body=jclone(f.t);
+      body.checks.push({id:Date.now().toString(36),text:f.act,due:d&&d.value||plusDays(14),done:false,d:today,src:f.key});
+      b.disabled=true;b.textContent="Saving…";if(!await saveJournal(f.t,body)){b.disabled=false;b.textContent="Couldn't save · try again"}return}
+    if(b.dataset.t)goTo(b.dataset.t)};
+  a.onclick=e=>{const b=e.target.closest("button[data-t]");if(b)goTo(b.dataset.t)};
+  a.onchange=async e=>{const x=e.target;if(!x.dataset.c)return;const body=jclone(x.dataset.doc),c=body.checks.find(y=>y.id===x.dataset.c);if(!c)return;
+    c.done=true;c.doneOn=today;x.disabled=true;if(!await saveJournal(x.dataset.doc,body)){x.checked=false;x.disabled=false}}}
 function falsifier(t,b){const f=(MON[t]||{}).falsifier;if(!f)return b.fals?`<div class="fals"><b>What would prove the verdict wrong</b>${fmt(b.fals)}</div>`:"";
   const when=f.deadline?` · ${f.days<0?`${-f.days} days ago`:`in ${f.days} days`} (${esc(f.deadline)})`:"";
   let body="";
@@ -423,11 +516,7 @@ if(PF){
   document.getElementById("chain").onclick=e=>{const b=e.target.closest("button[data-t]");if(b)goTo(b.dataset.t)};
   if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
 }
-function drawAttention(){const flagged=DATA.nodes.map(n=>[n.t,attention(n.t)]).filter(([,a])=>a).sort((x,y)=>{const o={bad:0,warn:1,"":2};return o[x[1][0]]-o[y[1][0]]});
-  const el=document.getElementById("attn");el.hidden=!flagged.length;
-  el.querySelector(".chips").innerHTML=flagged.map(([t,a])=>`<button data-t="${t}"><span class="st ${a[0]}">${t}</span>${esc(a[1])}</button>`).join("");}
-drawAttention();
-document.getElementById("attn").onclick=e=>{const b=e.target.closest("button");if(b)goTo(b.dataset.t)};
+drawQueue();wireQueue();
 function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)return;const el=document.getElementById("score");el.hidden=false;
   const yr=x=>x==null?"—":pct(x),rv=PF.review,cls=x=>x==null?"":x>=0?"up":"dn";
   const mini=(l,w,note)=>w?`<div class="mini"><span>${l}</span><b class="num ${cls(w.gap_pp)}">${ptsy(w.gap_pp)}</b><small>${note}</small></div>`:"";
@@ -442,6 +531,7 @@ function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)retu
     ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>beat the S&amp;P over the next 3 months, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
     <div class="mini"><span>Money timing · 2 years</span><b class="num ${cls(s2.timing_pp)}">${ptsy(s2.timing_pp)}</b><small>Your money vs the picks alone (${yr(s2.twr_ann)}/yr). Negative mostly means most of your money arrived recently, not that trades were mistimed.</small></div></div></div>
   <div class="acols">${col("Added money vs the index",up)}${col("Cost money vs the index",dn)}</div>
+  <details class="how"><summary>How this is calculated</summary><p><b>Your money</b>: the money-weighted return (XIRR) of every deposit and sale in the window, start value included. <b>Same money in the S&amp;P</b>: those same dated cash flows put into the S&amp;P 500 total-return index instead. <b>Gap</b>: the difference, in points a year. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Money timing</b>: money-weighted minus time-weighted return; for this book it mostly reflects when money arrived. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
   <p class="note flat">Each holding's extra money over putting the same cash into the S&amp;P 500, as % of your book, last 2 years. Sold names count; positions under 0.5% of assets are grouped. Evidence for your review, never a signal to trade on its own: exits stay on kill conditions.</p>`}
 function goTo(t){select(t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 function changes(){return Object.entries(WIF).filter(([,f])=>f!==1)}
@@ -537,9 +627,9 @@ function journalBox(){return DB?`<div class="jr"><p class="lab">Your notes and c
   <p class="hint">Only you can see these. /deep and /council read them.</p></div>`:""}
 function drawJournal(t){const el=document.getElementById("jl");if(!el)return;const j=JR[t]||{},cs=[...(j.checks||[])].sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1),ns=[...(j.notes||[])].reverse();
   el.innerHTML=(cs.length||ns.length)?cs.map(c=>`<label class="${c.done?"done":""}"><input type="checkbox" data-c="${esc(c.id)}"${c.done?" checked":""}><span>${esc(c.text)}<small>${c.due?(c.done?"":inDays(c.due)<0?"overdue · ":"")+esc(c.due):""}</small></span></label>`).join("")+ns.map(n=>`<p>${esc(n.text)}<small>${esc(n.d)}</small></p>`).join("")
-    :`<p class="hint">Nothing saved for ${t} yet. Write what you decided and why, or add a date to make it a checkpoint that shows under "Needs a look" two weeks before it's due.</p>`}
+    :`<p class="hint">Nothing saved for ${t} yet. Write what you decided and why, or add a date to make it a checkpoint that shows in Your actions and the review queue two weeks before it's due.</p>`}
 let busy=false;
-async function saveJournal(t,body){const m=document.getElementById("jrm");if(busy)return false;busy=true;if(m)m.textContent="Saving…";
+async function saveJournal(t,body){const m=CUR===t?document.getElementById("jrm"):null;if(busy)return false;busy=true;if(m)m.textContent="Saving…";
   try{await DB.doc("journal/"+t).set(body);if(m)m.textContent="Saved";return true}
   catch(e){if(m)m.textContent=e.code==="quota_exceeded"?"Storage is full. Delete old notes first.":"Couldn't save. Try again.";return false}
   finally{busy=false}}
@@ -565,6 +655,7 @@ function select(t,focus){
   side.innerHTML=`<div class="hd">${logo(t)}<div><h2 tabindex="-1">${t}</h2><small>${esc(b.name||"")}${b.date?` · brief updated ${esc(b.date)}`:""}</small></div></div>
   <div class="meta">${vp}<span class="pill">${th(n.g)}</span><span class="pill num">${n.k} links</span>${pp}</div>
   ${PF&&h?`<div class="wif"><label class="lab" for="wif">What if you changed ${t}?</label><input type="range" id="wif" min="-100" max="100" step="5" value="${Math.round((F(t)-1)*100)}"><span id="wifv" class="num">${wifText(t)}</span></div>`:""}
+  ${PF&&h?tradeTable(AROWS[t],t,"trades"):""}
   ${range52(t)}
   ${b.snap?`<p class="snap">${fmt(b.snap)}</p>`:""}
   ${falsifier(t,b)}
@@ -592,6 +683,7 @@ select("NVDA");
 if(window.claude?.use)(async()=>{
   const [db,sample]=await Promise.all([claude.use("db").catch(()=>null),claude.use("sample").catch(()=>null)]);
   DB=db;SAMPLE=sample;
-  if(DB)DB.collection("journal").onSnapshot(q=>{JR={};q.docs.forEach(d=>{JR[d.id]=d.data()});drawAttention();if(CUR)drawJournal(CUR)},()=>{});
+  if(DB)DB.collection("journal").onSnapshot(q=>{JR={};q.docs.forEach(d=>{JR[d.id]=d.data()});drawQueue();drawActions();if(CUR)drawJournal(CUR)},()=>{});
+  if(DB){drawQueue();drawActions()}
   if(DB||SAMPLE){if(CUR)select(CUR);}})();
 </script>
