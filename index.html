@@ -297,6 +297,8 @@ const perOf=t=>PER==="r5"?(RNG[t]||{}).r5:(HELD[t]||{})[PER];
 const ptsy=x=>x==null?"—":`${x>=0?"+":"−"}${Math.abs(x).toFixed(1)} pts/yr`;
 const ptsc=x=>x==null?`<span style="color:var(--muted)">—</span>`:`<span class="${x>=0?"up":"dn"}">${ptsy(x)}</span>`;
 const early=h=>h&&h.days2!=null&&h.days2<365;
+// trade audit: per stock [adds judged, beat the S&P over 3 months, impact % of book], last 2 years
+const ADDS=PF&&PF.adds||{},[ADDMIN,ADDHIT]=PF&&PF.add_flag||[4,.25];
 // your whole book beside the S&P for the same window. 2 years and since you started are money-weighted (a year),
 // against the same deposits and sales put into the S&P 500; 5 days is the plain move
 function bookVs(){const S=PF.score||{},row=(l,me,sp,yr)=>me==null&&sp==null?"":`<span>· ${l}: <b style="color:var(--ink)">your money</b> ${pctc(me)}${yr?"/yr":""} vs S&amp;P 500 ${pctc(sp)}${yr?"/yr":""}${me!=null&&sp!=null?` (${me>=sp?"ahead":"behind"} ${Math.abs((me-sp)*100).toFixed(1)} pts${yr?"/yr":""})`:""}</span>`;
@@ -336,7 +338,7 @@ function attention(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[];
   const c=dueCheck(t);if(c)return["warn",c];
   if(f&&f.state==="close")return["warn","Near its falsifier"];
   if(unusual(t))return["warn",`Unusual 5-day move ${pct(RNG[t].r5)}`];
-  if(judged&&h.tm2!=null&&h.tm2<=-5&&h.w*US*100>=0.5)return["",`Trading around it cost ${ptsy(h.tm2)} vs just holding`];
+  const ad=ADDS[t];if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return["warn",`Adding hasn't worked: ${ad[1]} of ${ad[0]} adds beat the S&P`];
   if(k.some(x=>x.status==="review"))return["","Kill conditions need review"];
   if(f&&f.days!=null&&f.days>=0&&f.days<=21)return["",`Falsifier report in ${f.days} days`];
   return null}
@@ -426,7 +428,7 @@ function drawAttention(){const flagged=DATA.nodes.map(n=>[n.t,attention(n.t)]).f
   el.querySelector(".chips").innerHTML=flagged.map(([t,a])=>`<button data-t="${t}"><span class="st ${a[0]}">${t}</span>${esc(a[1])}</button>`).join("");}
 drawAttention();
 document.getElementById("attn").onclick=e=>{const b=e.target.closest("button");if(b)goTo(b.dataset.t)};
-function drawScore(){const S=PF.score||{},s2=S["2y"];if(!s2)return;const el=document.getElementById("score");el.hidden=false;
+function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)return;const el=document.getElementById("score");el.hidden=false;
   const yr=x=>x==null?"—":pct(x),rv=PF.review,cls=x=>x==null?"":x>=0?"up":"dn";
   const mini=(l,w,note)=>w?`<div class="mini"><span>${l}</span><b class="num ${cls(w.gap_pp)}">${ptsy(w.gap_pp)}</b><small>${note}</small></div>`:"";
   const A=PF.attr||[],up=A.filter(a=>a[1]>0).slice(0,5),dn=A.filter(a=>a[1]<0).slice(-5).reverse(),mx=Math.max(...A.map(a=>Math.abs(a[1])),.01);
@@ -437,7 +439,8 @@ function drawScore(){const S=PF.score||{},s2=S["2y"];if(!s2)return;const el=docu
     <b class="big num ${cls(s2.gap_pp)}">${s2.gap_pp==null?"—":(s2.gap_pp>=0?"+":"−")+Math.abs(s2.gap_pp).toFixed(1)} <span>pts a year</span></b>
     <p class="hint">Your money ${yr(s2.mwr)}/yr vs the same deposits and sales put into the S&amp;P 500 ${yr(s2.shadow_mwr)}/yr${since}</p></div>
     <div class="minis">${mini("1 year · early warning",S["1y"],"Shorter than your holding period")}${mini("Since you started",S.inception,esc((S.inception||{}).start||""))}
-    <div class="mini"><span>Trade-around · 2 years</span><b class="num ${cls(s2.timing_pp)}">${ptsy(s2.timing_pp)}</b><small>Your adds and trims vs just holding. Picks alone made ${yr(s2.twr_ann)}/yr.</small></div></div></div>
+    ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>beat the S&amp;P over the next 3 months, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
+    <div class="mini"><span>Money timing · 2 years</span><b class="num ${cls(s2.timing_pp)}">${ptsy(s2.timing_pp)}</b><small>Your money vs the picks alone (${yr(s2.twr_ann)}/yr). Negative mostly means most of your money arrived recently, not that trades were mistimed.</small></div></div></div>
   <div class="acols">${col("Added money vs the index",up)}${col("Cost money vs the index",dn)}</div>
   <p class="note flat">Each holding's extra money over putting the same cash into the S&amp;P 500, as % of your book, last 2 years. Sold names count; positions under 0.5% of assets are grouped. Evidence for your review, never a signal to trade on its own: exits stay on kill conditions.</p>`}
 function goTo(t){select(t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
@@ -503,7 +506,7 @@ function tickerCtx(t){const n=byT[t],h=HELD[t],b=BRIEFS[t]||{},m=MON[t]||{};
   return {ticker:t,company:b.name,verdict:n.v||"none yet",driver:n.g,brief_updated:b.date,snapshot:b.snap,bull:b.bull,bear:b.bear,
     kill_conditions:m.kills||b.kill,falsifier:m.falsifier||b.fals,open_questions:b.ask,links_to_other_holdings:adj[t].map(a=>({to:a.o,via:a.l})),
     shared_counterparties:PARTIES.filter(p=>t in p.t).map(p=>p.n),price_52w:RNG[t],
-    ...(PF?{position:h?{pct_of_stock_book:+(h.w*100).toFixed(2),gain_vs_cost:h.gain,gap_vs_same_money_in_sp500_2y_pts_per_year:early(h)?"held under a year: too early":h.g2,trade_around_value_2y_pts_per_year:h.tm2,held_days_in_2y_window:h.days2}:"not held (watch list)",
+    ...(PF?{position:h?{pct_of_stock_book:+(h.w*100).toFixed(2),gain_vs_cost:h.gain,gap_vs_same_money_in_sp500_2y_pts_per_year:early(h)?"held under a year: too early":h.g2,adds_last_2y_judged_beat_index_impact_pct_of_book:ADDS[t]||"no adds judged",held_days_in_2y_window:h.days2}:"not held (watch list)",
       book_score:PF.score,
       driver_exposure_pct_of_assets:Object.fromEntries(exposure().map(([g,v])=>[g,+v.toFixed(2)])),driver_cap_pct:PF.cap,what_if_multipliers:changes().length?Object.fromEntries(changes()):undefined}:{}),
     my_notes:JR[t]}}
@@ -558,7 +561,7 @@ function select(t,focus){
   const vp=n.v?`<span class="pill v" style="background:${VC[n.v]}">${n.v}</span>`:`<span class="pill">No verdict yet</span>`;
   const b=BRIEFS[t]||{},h=HELD[t];
   const R=RNG[t],mv=R&&R.r5!=null?`<span class="pill num"${unusual(t)?' style="background:var(--warn);color:var(--on-color)"':""}>5d ${pct(R.r5)}${unusual(t)?` · unusual (${Math.abs(R.z5).toFixed(1)}σ)`:""}</span>`:"";
-  const pp=!PF?mv:h?mv+`<span class="pill num">${(h.w*100).toFixed(1)}% of book</span>${h.gain!=null?`<span class="pill num">${pct(h.gain)} vs your cost</span>`:""}${early(h)?`<span class="pill">Too early to judge vs the S&amp;P (held ${h.days2} days)</span>`:h.g2!=null?`<span class="pill num">2y vs S&amp;P, your money: ${ptsy(h.g2)}</span>${h.tm2!=null?`<span class="pill num">trade-around: ${ptsy(h.tm2)}</span>`:""}`:""}`:`<span class="pill">Watch list · not held</span>`;
+  const pp=!PF?mv:h?mv+`<span class="pill num">${(h.w*100).toFixed(1)}% of book</span>${h.gain!=null?`<span class="pill num">${pct(h.gain)} vs your cost</span>`:""}${early(h)?`<span class="pill">Too early to judge vs the S&amp;P (held ${h.days2} days)</span>`:h.g2!=null?`<span class="pill num">2y vs S&amp;P, your money: ${ptsy(h.g2)}</span>`:""}${ADDS[t]?`<span class="pill num">adds: ${ADDS[t][1]} of ${ADDS[t][0]} beat the S&amp;P</span>`:""}`:`<span class="pill">Watch list · not held</span>`;
   side.innerHTML=`<div class="hd">${logo(t)}<div><h2 tabindex="-1">${t}</h2><small>${esc(b.name||"")}${b.date?` · brief updated ${esc(b.date)}`:""}</small></div></div>
   <div class="meta">${vp}<span class="pill">${th(n.g)}</span><span class="pill num">${n.k} links</span>${pp}</div>
   ${PF&&h?`<div class="wif"><label class="lab" for="wif">What if you changed ${t}?</label><input type="range" id="wif" min="-100" max="100" step="5" value="${Math.round((F(t)-1)*100)}"><span id="wifv" class="num">${wifText(t)}</span></div>`:""}
