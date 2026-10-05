@@ -238,6 +238,8 @@ ul.pts li::marker{color:var(--edge)}
 .how>summary{cursor:pointer;width:max-content;max-width:100%;min-height:24px;display:flex;align-items:center}
 .how>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .how p{margin:8px 0 0;max-width:80ch;line-height:1.6}
+.arch{border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
+.arch .qrow{opacity:.75}
 .tw{overflow-x:auto;margin-top:8px}
 table.tr{border-collapse:collapse;width:100%;font-size:var(--fs-xs);color:var(--ink)}
 table.tr th{font-weight:500;color:var(--muted);text-align:left;padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -416,16 +418,25 @@ function qrow(f){const tk=f.t==="BOOK"?`<b>Whole book</b>`:`<button class="qtk" 
   <div class="qf"><b>${esc(f.title)}</b><div class="qe">${f.ev}</div>${ev}</div>
   <div class="qa">${f.step?`<div class="cmd"><code>${esc(f.step)}</code><button class="lnk" data-copy="${esc(f.key)}">Copy</button></div>`:""}${actCtl(f)}</div></div>`}
 const HOW_Q=`<details class="how"><summary>How findings are chosen</summary><p>One finding per stock, the most serious first: kill condition triggered → falsifier line crossed → falsifier date passed → behind the S&amp;P with your money (held a year or more) and a weak thesis signal → kill condition on watch → your checkpoint due within 14 days → within 15% of its falsifier → a 5-day move beyond 2× its usual → adding hasn't worked (4+ adds, under a quarter beat the S&amp;P over the next 3 months) → kill conditions not checked in 120 days → falsifier report within 21 days. Whole-book findings: a driver over your cap, a negative 1-year gap, 10+ positions under 0.5% of assets. Rows are ranked by severity, then position size. Next steps are suggestions for your process; none is an instruction to buy or sell. Sources: briefs/monitor.json, scripts/perf.py, scripts/trade_audit.py.</p></details>`;
+// a finding whose action you ticked done waits in "Done" for one review cycle, then returns if it's still true
+const ARCHIVE_DAYS=120;
+const archived=f=>{const c=srcCheck(f);return !!(c&&c.done&&(!c.doneOn||inDays(c.doneOn)>-ARCHIVE_DAYS))};
+const keepOpen=(el,sel)=>!!(el.querySelector(sel)||{}).open;
 function drawQueue(){const el=document.getElementById("attn");
   const all=[...bookFindings(),...DATA.nodes.map(n=>finding(n.t)).filter(Boolean)].sort((a,b)=>SEV[a.sev]-SEV[b.sev]||sz(b.t)-sz(a.t));
+  const live=all.filter(f=>!archived(f)),done=all.filter(archived),wasOpen=keepOpen(el,"details.arch");
   FIND=Object.fromEntries(all.map(f=>[f.key,f]));el.hidden=!all.length;
-  el.innerHTML=`<div class="qhead"><p class="lab">Review queue · ${all.length} finding${all.length===1?"":"s"}</p><span class="hint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</span></div>`+all.map(qrow).join("")+HOW_Q}
+  el.innerHTML=`<div class="qhead"><p class="lab">Review queue · ${live.length} finding${live.length===1?"":"s"}</p><span class="hint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</span></div>`+(live.length?live.map(qrow).join(""):`<p class="hint">Nothing needs a look right now.</p>`)
+  +(done.length?`<details class="how arch"${wasOpen?" open":""}><summary>Done · ${done.length} · each comes back after ${ARCHIVE_DAYS} days if it's still true, or when you reopen its action</summary>${done.map(qrow).join("")}</details>`:"")+HOW_Q}
+const aRow=(c,id)=>`<div class="arow2"><input type="checkbox" id="${id}" data-doc="${esc(c.t)}" data-c="${esc(c.id)}"${c.done?" checked":""}><label for="${id}">${esc(c.text)}</label>${c.t==="BOOK"?`<span class="state">Whole book</span>`:`<button class="qtk" data-t="${esc(c.t)}">${esc(c.t)}</button>`}<span class="num ${!c.done&&c.due&&inDays(c.due)<0?"dn":"state"}">${c.done?"done "+esc(c.doneOn||""):c.due?(inDays(c.due)<0?"overdue · ":"due ")+esc(c.due):""}</span></div>`;
 function drawActions(){const el=document.getElementById("actions");if(!DB){el.hidden=true;return}
-  const open=Object.entries(JR).flatMap(([t,j])=>(j.checks||[]).filter(c=>!c.done).map(c=>({...c,t}))).sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1);
+  const mine=Object.entries(JR).flatMap(([t,j])=>(j.checks||[]).map(c=>({...c,t}))),wasOpen=keepOpen(el,"details.arch");
+  const open=mine.filter(c=>!c.done).sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1),done=mine.filter(c=>c.done).sort((a,b)=>(a.doneOn||"")<(b.doneOn||"")?1:-1);
   el.hidden=false;
   el.innerHTML=`<div class="qhead"><p class="lab">Your actions · ${open.length} open</p><span class="hint">Tick one when it's done. Saved privately; /deep and /council read it.</span></div>`
-  +(open.length?`<div class="alist">${open.map((c,i)=>`<div class="arow2"><input type="checkbox" id="ac${i}" data-doc="${esc(c.t)}" data-c="${esc(c.id)}"><label for="ac${i}">${esc(c.text)}</label>${c.t==="BOOK"?`<span class="state">Whole book</span>`:`<button class="qtk" data-t="${esc(c.t)}">${esc(c.t)}</button>`}<span class="num ${c.due&&inDays(c.due)<0?"dn":"state"}">${c.due?(inDays(c.due)<0?"overdue · ":"due ")+esc(c.due):""}</span></div>`).join("")}</div>`
-    :`<p class="hint">Nothing open. Add a next step from the review queue below, or a checkpoint from any holding's panel.</p>`)}
+  +(open.length?`<div class="alist">${open.map((c,i)=>aRow(c,"ac"+i)).join("")}</div>`
+    :`<p class="hint">Nothing open. Add a next step from the review queue below, or a checkpoint from any holding's panel.</p>`)
+  +(done.length?`<details class="how arch"${wasOpen?" open":""}><summary>Done · ${done.length} · untick one to reopen it</summary><div class="alist">${done.map((c,i)=>aRow(c,"ad"+i)).join("")}</div></details>`:"")}
 const jclone=t=>{const j=JR[t]||{};return {notes:[...(j.notes||[])],checks:(j.checks||[]).map(c=>({...c}))}};
 async function copyText(btn,text){try{await navigator.clipboard.writeText(text);btn.textContent="Copied"}catch(e){const code=btn.previousElementSibling,r=document.createRange();r.selectNodeContents(code);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Press ⌘C"}
   setTimeout(()=>{btn.textContent="Copy"},2000)}
@@ -438,7 +449,8 @@ function wireQueue(){const q=document.getElementById("attn"),a=document.getEleme
     if(b.dataset.t)goTo(b.dataset.t)};
   a.onclick=e=>{const b=e.target.closest("button[data-t]");if(b)goTo(b.dataset.t)};
   a.onchange=async e=>{const x=e.target;if(!x.dataset.c)return;const body=jclone(x.dataset.doc),c=body.checks.find(y=>y.id===x.dataset.c);if(!c)return;
-    c.done=true;c.doneOn=today;x.disabled=true;if(!await saveJournal(x.dataset.doc,body)){x.checked=false;x.disabled=false}}}
+    c.done=x.checked;if(x.checked)c.doneOn=today;else delete c.doneOn;
+    x.disabled=true;if(!await saveJournal(x.dataset.doc,body)){x.checked=!x.checked;x.disabled=false}}}
 function falsifier(t,b){const f=(MON[t]||{}).falsifier;if(!f)return b.fals?`<div class="fals"><b>What would prove the verdict wrong</b>${fmt(b.fals)}</div>`:"";
   const when=f.deadline?` · ${f.days<0?`${-f.days} days ago`:`in ${f.days} days`} (${esc(f.deadline)})`:"";
   let body="";
