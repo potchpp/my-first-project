@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Holdings Map</title>
+<title>Holdings Connect</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;700&family=Caveat:wght@600&display=swap">
 <style>
 :root{
@@ -384,7 +384,7 @@ function finding(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[],h=HELD[t],n=b
   if(f&&f.state==="close")return F("warn","near","Near its falsifier",fev(f)+(f.room!=null?` · ${Math.round(f.room*100)}% room`:""),`Check ${t}'s report${f.deadline?" on "+f.deadline:""} against the line`,`Check ${t}'s report against its falsifier`,f.deadline);
   if(unusual(t))return F("warn","move","Unusual 5-day move",`${pct(RNG[t].r5)} in 5 days, ${Math.abs(RNG[t].z5).toFixed(1)}× its usual weekly move`,`Check the news: real catalyst or drift? /deep ${t} if it touches the thesis`,`Find out what moved ${t}`);
   const ad=ADDS[t];
-  if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return F("warn","adds","Adding hasn't worked",`${ad[1]} of ${ad[0]} adds beat the S&P over the next 3 months · ${ad[2]>=0?"+":"−"}${Math.abs(ad[2]).toFixed(2)}% of book`,`/deep ${t} before any further add`,`No more adds to ${t} until /deep shows the evidence improved`);
+  if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return F("warn","adds","Adding hasn't worked",`${ad[1]} of ${ad[0]} past adds beat the S&P in the 3 months after each · ${ad[2]>=0?"+":"−"}${Math.abs(ad[2]).toFixed(2)}% of book`,`/deep ${t} before any further add`,`No more adds to ${t} until /deep shows the evidence improved`);
   x=kOf(k,"review");
   if(x)return F("","review","Kill conditions need review",`Last checked ${esc(x.checked||"never")}, over 120 days ago`,`/deep ${t}`,`Refresh ${t}'s brief: kill conditions not checked in 120 days`);
   if(f&&f.days!=null&&f.days>=0&&f.days<=21)return F("","soon",`Falsifier report in ${f.days} days`,fev(f),`Check ${t}'s report on ${f.deadline} against the line`,`Check ${t}'s report against its falsifier`,f.deadline);
@@ -540,7 +540,7 @@ function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)retu
     <b class="big num ${cls(s2.gap_pp)}">${s2.gap_pp==null?"—":(s2.gap_pp>=0?"+":"−")+Math.abs(s2.gap_pp).toFixed(1)} <span>pts a year</span></b>
     <p class="hint">Your money ${yr(s2.mwr)}/yr vs the same deposits and sales put into the S&amp;P 500 ${yr(s2.shadow_mwr)}/yr${since}</p></div>
     <div class="minis">${mini("1 year · early warning",S["1y"],"Shorter than your holding period")}${mini("Since you started",S.inception,esc((S.inception||{}).start||""))}
-    ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>beat the S&amp;P over the next 3 months, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
+    ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>past adds beat the S&amp;P in the 3 months after each, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
     <div class="mini"><span>Money timing · 2 years</span><b class="num ${cls(s2.timing_pp)}">${ptsy(s2.timing_pp)}</b><small>Your money vs the picks alone (${yr(s2.twr_ann)}/yr). Negative mostly means most of your money arrived recently, not that trades were mistimed.</small></div></div></div>
   <div class="acols">${col("Added money vs the index",up)}${col("Cost money vs the index",dn)}</div>
   <details class="how"><summary>How this is calculated</summary><p><b>Your money</b>: the money-weighted return (XIRR) of every deposit and sale in the window, start value included. <b>Same money in the S&amp;P</b>: those same dated cash flows put into the S&amp;P 500 total-return index instead. <b>Gap</b>: the difference, in points a year. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Money timing</b>: money-weighted minus time-weighted return; for this book it mostly reflects when money arrived. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
