@@ -206,6 +206,18 @@ class TwrTests(unittest.TestCase):
 
 
 class ComputeTests(unittest.TestCase):
+    @staticmethod
+    def prices_fixture():
+        t = ComputeTests()
+        t.setUp()
+        return t.prices
+
+    @staticmethod
+    def trades_fixture():
+        t = ComputeTests()
+        t.setUp()
+        return t.trades
+
     def setUp(self):
         self.cal = c = days(300)             # ~14 months of weekdays
         n = len(c)
@@ -236,7 +248,8 @@ class ComputeTests(unittest.TestCase):
         self.assertIsNone(r["windows"]["5y"])
         w = r["windows"]["inception"]
         self.assertEqual(w["start"], self.cal[0].isoformat())
-        self.assertEqual(set(w), {"start", "end", "apr", "bench", "alpha_pp", "twr", "beat"})
+        self.assertEqual(set(w), {"start", "end", "apr", "bench", "alpha_pp", "twr", "beat",
+                                  "mwr", "shadow_mwr", "gap_pp", "twr_ann", "timing_pp", "excess_usd"})
         self.assertAlmostEqual(w["alpha_pp"], (w["apr"] - w["bench"]) * 100)
         self.assertEqual(w["beat"], w["apr"] > w["bench"])
 
@@ -290,6 +303,105 @@ class ComputeTests(unittest.TestCase):
         self.assertIsNone(perf.avg_cost([], cal[0]))
 
 
+class MoneyWeightedTests(unittest.TestCase):
+    def test_xirr_known_case(self):
+        # 100 in, 110 out one year later = 10% a year
+        self.assertAlmostEqual(perf.xirr([(date(2024, 1, 1), -100.0), (date(2024, 12, 31), 110.0)]), 0.10, places=3)
+        self.assertIsNone(perf.xirr([(date(2024, 1, 1), -100.0)]))
+        self.assertIsNone(perf.xirr([(date(2024, 1, 1), -100.0), (date(2024, 6, 1), -5.0)]))
+
+    def test_holding_the_index_has_no_gap(self):
+        cal = days(300)
+        n = len(cal)
+        idx = [100 + i * 0.1 for i in range(n)]
+        prices = {perf.BENCH: series(cal, idx), "IDX": series(cal, idx)}
+        r = perf.compute([Trade("IDX", cal[1], 10, idx[1], 0), Trade("IDX", cal[150], 5, idx[150], 0)], prices, cal[-1])
+        w = r["windows"]["inception"]
+        self.assertAlmostEqual(w["gap_pp"], 0.0, places=6)
+        self.assertAlmostEqual(w["excess_usd"], 0.0, places=6)
+
+    def test_buying_before_a_rise_has_positive_trade_around_value(self):
+        cal = days(300)
+        n = len(cal)
+        px = [10.0] * 150 + [20.0] * (n - 150)               # flat, then doubles
+        prices = {perf.BENCH: series(cal, [100.0] * n), "AAA": series(cal, px)}
+        trades = [Trade("AAA", cal[1], 1, 10, 0), Trade("AAA", cal[100], 9, 10, 0)]   # added most money before the jump
+        w = perf.compute(trades, prices, cal[-1])["positions"][0]["windows"]["inception"]
+        self.assertGreater(w["timing_pp"], 0)
+        self.assertGreater(w["gap_pp"], 0)                   # beat a flat index
+
+    def test_holding_excess_sums_to_book_excess(self):
+        r = perf.compute(ComputeTests.trades_fixture(), ComputeTests.prices_fixture(), days(300)[-1])
+        for name in ("inception", "6m", "1y"):
+            book = r["windows"][name]["excess_usd"]
+            parts = sum(p["windows"][name]["excess_usd"] for p in r["positions"] if p["windows"][name])
+            self.assertAlmostEqual(parts, book, places=6, msg=name)
+
+    def test_record_kpi_keeps_one_row_per_day(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "kpi.jsonl"
+            r = {"as_of": "2026-10-03", "windows": {"2y": {"gap_pp": -0.6}, "5y": None}}
+            perf.record_kpi(r, path)
+            perf.record_kpi({**r, "windows": {"2y": {"gap_pp": -0.5}, "5y": None}}, path)
+            rows = [json.loads(l) for l in path.read_text().splitlines()]
+            self.assertEqual(rows, [{"date": "2026-10-03", "2y": -0.5, "5y": None}])
+
+
+class TradeAuditTests(unittest.TestCase):
+    def setUp(self):
+        import trade_audit
+        self.ta = trade_audit
+        self.cal = c = days(200)
+        n = len(c)
+        # flat for 100 days with a drop at day 79-99, then the stock doubles; the index stays flat throughout
+        px = [10.0] * 79 + [8.0] * 21 + [20.0] * (n - 100)
+        self.prices = {perf.BENCH: series(c, [100.0] * n), "AAA": series(c, px)}
+
+    def test_kinds_context_and_forward_edge(self):
+        c = self.cal
+        trades = [Trade("AAA", c[30], 10, 10, 0),     # open, flat month before
+                  Trade("AAA", c[99], 5, 8, 0),       # add after a drop, right before the jump: helped
+                  Trade("AAA", c[90], -2, 8, 0),      # trim before the jump: did not help
+                  Trade("AAA", c[190], -13, 20, 0)]   # exit, too recent to judge at a 63-day horizon
+        rows = {r["kind"]: r for r in self.ta.audit(trades, self.prices)}
+        self.assertEqual(set(rows), {"open", "add", "trim", "exit"})
+        self.assertEqual(rows["open"]["context"], "flat")
+        self.assertEqual(rows["add"]["context"], "after a drop")
+        self.assertTrue(rows["add"]["helped"])
+        self.assertGreater(rows["add"]["impact"], 0)
+        self.assertFalse(rows["trim"]["helped"])
+        self.assertLess(rows["trim"]["impact"], 0)    # selling before a rise cost money vs the index
+        self.assertNotIn("impact", rows["exit"])
+
+    def test_add_record_counts_only_recent_judged_adds(self):
+        d = date(2026, 1, 5)
+        rows = [{"kind": "add", "symbol": "BRK-B", "date": d, "helped": True, "impact": 20.0},
+                {"kind": "add", "symbol": "BRK-B", "date": d, "helped": False, "impact": -40.0},
+                {"kind": "add", "symbol": "BRK-B", "date": d},                                    # too recent
+                {"kind": "add", "symbol": "AAA", "date": date(2023, 1, 2), "helped": True, "impact": 99.0},  # too old
+                {"kind": "trim", "symbol": "AAA", "date": d, "helped": True, "impact": 5.0}]     # not an add
+        per, total = self.ta.add_record(rows, date(2025, 1, 1), 1000.0)
+        self.assertEqual(per, {"BRKB": [2, 1, -2.0]})
+        self.assertEqual(total, [2, 1, -2.0])
+
+    def test_stock_rows_are_newest_first_and_judged_only(self):
+        rows = [{"kind": "add", "symbol": "BRK-B", "date": date(2026, 1, 5), "context": "flat", "stock": 0.1, "index": 0.05,
+                 "helped": True, "impact": 5.0},
+                {"kind": "trim", "symbol": "BRK-B", "date": date(2026, 2, 5), "context": None, "stock": 0.2, "index": 0.0,
+                 "helped": False, "impact": -20.0},
+                {"kind": "add", "symbol": "BRK-B", "date": date(2026, 3, 5)}]                       # too recent
+        out = self.ta.stock_rows(rows, date(2025, 1, 1), 1000.0)
+        self.assertEqual(out, {"BRKB": [["2026-02-05", "trim", None, 0.2, 0.0, 0, -2.0],
+                                        ["2026-01-05", "add", "flat", 0.1, 0.05, 1, 0.5]]})
+
+    def test_summary_hit_rate_and_share_of_book(self):
+        rows = [{"kind": "add", "helped": True, "impact": 10.0}, {"kind": "add", "helped": False, "impact": -30.0},
+                {"kind": "add"}]
+        g = self.ta.summarise(rows, lambda r: r["kind"], 1000.0)["add"]
+        self.assertEqual((g["n"], g["judged"], g["hit"]), (3, 2, 0.5))
+        self.assertAlmostEqual(g["pct"], -2.0)
+
+
 class PriceCacheTests(unittest.TestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
@@ -316,6 +428,14 @@ class PriceCacheTests(unittest.TestCase):
         self.assertIn("AAA", p3)
         self.assertNotIn("NOPE", p3)
         self.assertEqual(len(calls), 2)
+
+    def test_renamed_symbol_gets_old_history_scaled(self):
+        cal = days(3)
+        perf.save_cache("WKEY", {cal[0]: 6.0, cal[1]: 6.5})
+        perf.save_cache("WQEY", {cal[2]: 14.0})
+        p = perf.get_prices(["WQEY"], cal[0], cal[2], fetch=False)
+        self.assertEqual(p["WQEY"], {cal[0]: 12.0, cal[1]: 13.0, cal[2]: 14.0})
+        self.assertEqual(perf.load_cache("WQEY"), {cal[2]: 14.0})  # the cache keeps only real WQEY closes
 
     def test_failed_or_empty_fetch_keeps_cache_and_excludes_unknown(self):
         cal = days(2)

@@ -29,7 +29,7 @@ Output is measurement and diagnostics only.
 | Benchmark | `^SP500TR` (S&P 500 Total Return index) from Yahoo Finance | Literal match to the KPI wording; dividends reinvested |
 | Holding valuation | Unadjusted daily close | Dividends land as cash at Dime!, not reinvested; adjusted closes would overstate. Slightly understates return on dividend payers — conservative, documented |
 | Input source of truth | The Google Sheet's Yahoo-Finance-format export, dropped into `portfolio/` under its own export name | Already exported from the owner's Google Sheet; normalised one-row-per-trade; no renaming step |
-| Methodology | APR vs. static index as the KPI; TWR as a single diagnostic column | Owner's definition. Shadow-portfolio / XIRR explicitly dropped |
+| Methodology | **Superseded 2026-10-03, see §9.** Was: APR vs. static index as the KPI; TWR as a single diagnostic column | Owner's definition at the time. Shadow-portfolio / XIRR were dropped then, and adopted in §9 |
 
 ## 3. Input contract — the transactions file
 
@@ -263,3 +263,28 @@ tests contain no real holdings. This spec contains no real amounts.
 2. **Portfolio-aware `trading-desk`**: risk manager reads `portfolio.json` for real weights, concentration, and the `underperformer` / `brief` flags.
 3. **Kill-condition monitor**: cross `briefs/<SYMBOL>.md` kill conditions with news/sentiment for held positions.
 4. Dime! PDF reconciliation (holdings snapshot vs. computed holdings), dividends and fees as explicit rows, cash-drag accounting via the currency rows.
+
+## 9. Decision change (2026-10-03): money-weighted return against the same money in the S&P 500
+
+**What changed.** The KPI is now the money-weighted return (XIRR) of the book against the same dated cash flows put
+into `^SP500TR` (a shadow portfolio), over a **rolling 2 years**; 1 year is an early warning and since inception is
+context. APR (§5.4) stays in `portfolio.json` as data. TWR (§5.6) stays as the picks diagnostic, annualised, for 1y
+and 2y only. New per-window and per-position fields: `mwr`, `shadow_mwr`, `gap_pp`, `twr_ann`, `timing_pp`,
+`excess_usd` (+ per position `excess_pct_book`, `held_days`). `portfolio/kpi-history.jsonl` keeps one row per day.
+
+**Why.** APR divides profit by start value plus all new money, so money added late counts as full capital with little
+time to earn, while the index is measured point to point. With money added over the years this made the book look
+tens of points behind when, measured in the owner's actual dollars against the same dollars in the index, it was
+roughly level. The owner's goal is "beat the S&P 500 with my money", which is exactly the shadow comparison.
+
+**How each number is used** (plan: `plans/mwr-scorecard.md`): the 2y gap answers "is picking worth it" at each review;
+`timing_pp` (MWR minus annualised TWR) tests whether adds and trims beat just holding; per-holding gaps are a
+tie-breaker when a driver is over its cap and a prompt to re-check the thesis, never an exit trigger. Holdings under a
+year are "too early to judge". Cash and total-asset returns remain out of scope.
+
+**Correction (same day).** `timing_pp` was first read as "do adds and trims beat just holding". The trade audit
+(`scripts/trade_audit.py`: each trade's stock vs the index over the next 63 trading days) showed that reading was
+wrong for this book: individual adds were roughly neutral, while about 70% of the money arrived in the last 18
+months, so MWR − TWR mostly measures when money arrived. The map now labels it "money timing", and add quality comes
+from the audit (per stock: adds judged, how many beat the index; flagged at 4+ adds with under 25% beating it).
+

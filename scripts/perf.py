@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Portfolio APR vs S&P 500 TR.
+"""Portfolio returns vs S&P 500 TR.
 
-Spec: docs/superpowers/specs/2026-09-18-portfolio-apr-core-design.md
+KPI (since 2026-10-03): money-weighted return (XIRR) against the same dated cash flows put into the S&P 500 TR,
+rolling 2 years. TWR and the simple return on capital ("apr") stay as diagnostics.
+Spec: docs/superpowers/specs/2026-09-18-portfolio-apr-core-design.md · plan: plans/mwr-scorecard.md
 """
 import argparse
 import bisect
@@ -22,6 +24,7 @@ PORTFOLIO_DIR = ROOT / "portfolio"
 DEFAULT_TRANSACTIONS = PORTFOLIO_DIR / "My Asset Portfolio - Export - Yahoo Finance.csv"
 CACHE_DIR = PORTFOLIO_DIR / "cache"
 BENCH = "^SP500TR"
+KPI_HISTORY = PORTFOLIO_DIR / "kpi-history.jsonl"  # one row per day: the gap per window, for 'change since last review'
 WINDOWS = {"inception": None, "6m": 6, "1y": 12, "2y": 24, "5y": 60}
 
 Prices = Dict[str, Dict[date, float]]
@@ -216,6 +219,46 @@ def twr(total: List[float], flows: Dict[int, float], s: int, e: int) -> Optional
     return growth - 1 if any_day else None
 
 
+def xirr(cfs: List[Tuple[date, float]]) -> Optional[float]:
+    """Annualised money-weighted return of dated cash flows (money in < 0, money out > 0). None when unsolvable."""
+    if len(cfs) < 2 or not any(a < 0 for _, a in cfs) or not any(a > 0 for _, a in cfs):
+        return None
+    d0 = cfs[0][0]
+    if (cfs[-1][0] - d0).days < 1:
+        return None
+    npv = lambda r: sum(a / (1 + r) ** ((d - d0).days / 365.25) for d, a in cfs)
+    lo, hi = -0.9999, 100.0
+    if npv(lo) * npv(hi) > 0:
+        return None
+    for _ in range(200):  # bisection: slow but cannot diverge
+        mid = (lo + hi) / 2
+        if npv(lo) * npv(mid) <= 0:
+            hi = mid
+        else:
+            lo = mid
+    return (lo + hi) / 2
+
+
+def money_weighted(vals: List[float], flows: Dict[int, float], days: List[date], bench: Dict[date, float],
+                   s: int, e: int) -> Optional[dict]:
+    """MWR of one value series over days[s]..days[e], and the same cash flows put into the benchmark instead.
+    excess_usd = end value minus the shadow's end value: the extra money this choice made over the index."""
+    moves = [(i, flows[i]) for i in range(s + 1, e + 1) if abs(flows.get(i, 0.0)) > 1e-9]
+    if vals[s] <= 1e-9 and not moves:
+        return None
+    cfs = ([(days[s], -vals[s])] if vals[s] > 1e-9 else []) + [(days[i], -f) for i, f in moves] + [(days[e], vals[e])]
+    units = vals[s] / bench[days[s]] + sum(f / bench[days[i]] for i, f in moves)
+    shadow_end = units * bench[days[e]]
+    mwr, shadow = xirr(cfs), xirr(cfs[:-1] + [(days[e], shadow_end)])
+    years = (days[e] - (cfs[0][0])).days / 365.25
+    t = twr(vals, flows, s, e)
+    twr_ann = (1 + t) ** (1 / years) - 1 if t is not None and years > 0 and t > -1 else None
+    return {"mwr": mwr, "shadow_mwr": shadow,
+            "gap_pp": (mwr - shadow) * 100 if mwr is not None and shadow is not None else None,
+            "twr_ann": twr_ann, "timing_pp": (mwr - twr_ann) * 100 if mwr is not None and twr_ann is not None else None,
+            "excess_usd": vals[e] - shadow_end}
+
+
 # ---- compute ----
 
 def avg_cost(sym_trades: List[Trade], upto: date) -> Optional[float]:
@@ -276,11 +319,15 @@ def compute(trades: List[Trade], prices: Prices, as_of: date, excluded=()) -> di
             "start": days[s].isoformat(), "end": days[e].isoformat(),
             "apr": a["apr"], "bench": br, "alpha_pp": (a["apr"] - br) * 100,
             "twr": twr(total, flows, s, e), "beat": a["apr"] > br,
+            **(money_weighted(total, flows, days, bench, s, e) or {}),
         }
 
     for sym in sorted({t.symbol for t in trades}):
         sym_trades = [t for t in trades if t.symbol == sym]
         vals = values[sym]
+        sym_flows: Dict[int, float] = defaultdict(float)
+        for t in sym_trades:
+            sym_flows[day_index[t.date]] += -t.cash if t.is_sell else t.cash
         pos = {
             "symbol": sym,
             "yahoo_symbol": yahoo_symbol(sym),
@@ -308,10 +355,15 @@ def compute(trades: List[Trade], prices: Prices, as_of: date, excluded=()) -> di
                 pos["windows"][name] = None
                 continue
             active = True
+            mw = money_weighted(vals, sym_flows, days, bench, s, e) or {}
+            first = min(t.date for t in sym_trades)
             pos["windows"][name] = {
                 "apr": a["apr"], "bench": w["bench"],
                 "contribution_pp": a["profit"] / capital_total[name] * 100,
                 "underperformer": a["apr"] < w["bench"],
+                **mw, "held_days": (days[e] - max(first, days[s])).days,
+                # this holding's extra money vs the index, as % of the book's end value (sums to the book's)
+                "excess_pct_book": mw["excess_usd"] / total[e] * 100 if mw and total[e] else None,
             }
         if active:
             result["positions"].append(pos)
@@ -323,6 +375,11 @@ def compute(trades: List[Trade], prices: Prices, as_of: date, excluded=()) -> di
 
 
 # ---- prices ----
+
+# Ticker changes: new symbol -> (old symbol, new-share price per old-share price). Write the trade file in the new
+# symbol; WISeKey ADS became WISeQey ordinary shares 2:1 on 2026-10-05, so WQEY = 2 x WKEY before that.
+RENAMED = {"WQEY": ("WKEY", 2.0)}
+
 
 def load_cache(ysym: str) -> Dict[date, float]:
     p = CACHE_DIR / f"{ysym}.csv"
@@ -369,6 +426,9 @@ def get_prices(ysymbols, start: date, end: date, fetch: bool = True,
                 if new:
                     closes.update(new)
                     save_cache(ysym, closes)
+        if ysym in RENAMED:  # before the ticker change, the old symbol's closes scaled to the new share
+            old, ratio = RENAMED[ysym]
+            closes = {**{d: c * ratio for d, c in load_cache(old).items()}, **closes}
         if closes:
             prices[ysym] = closes
     return prices
@@ -481,7 +541,16 @@ def main(argv=None) -> int:
     PORTFOLIO_DIR.mkdir(parents=True, exist_ok=True)
     (PORTFOLIO_DIR / "report.md").write_text(report, encoding="utf-8")
     write_json_atomic(PORTFOLIO_DIR / "portfolio.json", result)
+    record_kpi(result)
     return 0
+
+
+def record_kpi(result: dict, path: Path = KPI_HISTORY) -> None:
+    """Keep one row per as-of date with the MWR gap per window, so the map can show the change since a review."""
+    row = {"date": result["as_of"], **{k: (w or {}).get("gap_pp") for k, w in result["windows"].items()}}
+    rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()] if path.exists() else []
+    rows = [r for r in rows if r["date"] != row["date"]] + [row]
+    path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
 
 
 if __name__ == "__main__":

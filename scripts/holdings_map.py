@@ -51,7 +51,7 @@ LOGO_SITES = {'ADBE': 'adobe.com', 'AMZN': 'amazon.com', 'ASML': 'asml.com', 'AS
               'MSFT': 'microsoft.com', 'MU': 'micron.com', 'NBIS': 'nebius.com', 'NOW': 'servicenow.com',
               'NUE': 'nucor.com', 'OMDA': 'omadahealth.com', 'ORCL': 'oracle.com', 'RDW': 'redwirespace.com',
               'RGTI': 'rigetti.com', 'RKLB': 'rocketlabusa.com', 'RL': 'ralphlauren.com', 'SNDK': 'sandisk.com',
-              'USAR': 'usare.com', 'WKEY': 'wisekey.com',
+              'USAR': 'usare.com', 'WQEY': 'wisekey.com',
               'TSM': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Tsmc-text.svg/330px-Tsmc-text.svg.png'}
 EDGES_PER_NODE = 4          # strongest links kept per ticker, so the map stays readable
 # side-panel summary limits: enough to understand a ticker at a glance, the brief has the rest
@@ -451,27 +451,65 @@ def chain_exposure(roles, held, us_share):
     return {'roles': out, 'cut': round(cut, 2), 'demand': round(demand, 2)}
 
 
+KPI_HISTORY = ROOT / 'portfolio' / 'kpi-history.jsonl'  # perf.py: one row per day, the MWR gap per window
+REVIEW_GAP_DAYS = 120  # "since your last review": the investor reviews 2-3 times a year
+SMALL_PCT = 0.5        # positions under this % of total assets are grouped: their percentages are noise
+
+
+def r1(x, n=2):
+    return round(x, n) if x is not None else None
+
+
+def review_point(as_of, history=KPI_HISTORY):
+    """The 2y gap recorded about REVIEW_GAP_DAYS before as_of (or the oldest row), for 'change since last review'."""
+    if not as_of or not history.exists():
+        return None
+    rows = [json.loads(l) for l in history.read_text(encoding='utf-8').splitlines() if l.strip()]
+    cut = (date.fromisoformat(as_of) - timedelta(days=REVIEW_GAP_DAYS)).isoformat()
+    old = [r for r in rows if r['date'] <= cut and r.get('2y') is not None] or [r for r in rows if r.get('2y') is not None]
+    r = old[-1] if old else None
+    return {'date': r['date'], 'gap': r1(r['2y'])} if r and r['date'] < as_of else None
+
+
 def portfolio_view(page, portfolio, policy, moves=None):
-    """Per held ticker: weight, 1y return vs benchmark, gain vs cost; per driver: % of total assets vs cap;
-    the book's 1-day and 5-day move by holding. Percentages only — never dollar amounts or share counts."""
+    """Per held ticker: weight, gain vs cost, and the 2y money-weighted gap vs the same money in the S&P with its
+    money-timing figure; per driver: % of total assets vs cap and its 2y extra money vs the index; the book's score
+    and which holdings explain it. Percentages only — never dollar amounts or share counts."""
     moves = moves or {}
     driver_of = {n['t']: n['g'] for n in page['nodes']}
     us_share = policy.get('us_stock_share_of_total', 1)
-    held, no_brief, exposure = {}, [], defaultdict(float)
+    held, no_brief, exposure, attr = {}, [], defaultdict(float), []
+    drv_ex, drv_val = defaultdict(float), defaultdict(float)
     for p in portfolio['positions']:
         t = p['symbol'].replace('.', '').replace('-', '')  # BRK.B / BRK-B -> BRKB, the brief's name
-        year = (p.get('windows') or {}).get('1y') or {}  # null for positions held < 1 year
+        two = (p.get('windows') or {}).get('2y') or {}
+        if two.get('excess_pct_book') is not None:  # sold names count too: they explain part of the gap
+            attr.append([t, round(two['excess_pct_book'], 2), abs(p.get('qty', 1)) < 1e-9])
+            if t in driver_of:
+                drv_ex[driver_of[t]] += two['excess_usd']
+                drv_val[driver_of[t]] += p.get('value_usd', 0)
+        if abs(p.get('qty', 1)) < 1e-9:
+            continue  # sold out: not a holding any more
         gain = p['last_close'] / p['avg_cost'] - 1 if p.get('avg_cost') and p.get('last_close') else None
-        held[t] = {'w': p['weight'], 'apr': year.get('apr'), 'bench': year.get('bench'), 'under': year.get('underperformer'),
-                   'gain': round(gain, 4) if gain is not None else None}
+        held[t] = {'w': p['weight'], 'gain': r1(gain, 4), 'g2': r1(two.get('gap_pp')), 'tm2': r1(two.get('timing_pp')),
+                   'days2': two.get('held_days')}
         if t in driver_of:
             exposure[driver_of[t]] += p['weight'] * us_share * 100
         else:
             no_brief.append(t)
+    # group small current holdings in the attribution; sold names keep their own row
+    small = [a for a in attr if not a[2] and held.get(a[0], {}).get('w', 0) * us_share * 100 < SMALL_PCT]
+    attr = [a for a in attr if a not in small] + ([['small', round(sum(a[1] for a in small), 2), False, len(small)]] if small else [])
+    win = portfolio.get('windows') or {}
+    score = {k: {f: r1(w.get(f), 4 if f in ('mwr', 'shadow_mwr', 'twr_ann') else 2) for f in ('mwr', 'shadow_mwr', 'gap_pp', 'twr_ann', 'timing_pp')}
+                | {'start': w.get('start')} for k, w in win.items() if w and k in ('2y', '1y', 'inception')}
     return {'as_of': portfolio.get('as_of', ''), 'cap': policy.get('driver_cap_pct_total'), 'us': us_share, 'held': held,
             'no_brief': sorted(no_brief), 'drivers': sorted(([g, round(v, 2)] for g, v in exposure.items()), key=lambda d: -d[1]),
             'moves': {p: contributions({t: h['w'] for t, h in held.items()}, moves, p) for p in ('r1', 'r5')},
-            'chains': {name: chain_exposure(roles, held, us_share) for name, roles in CHAINS.items()}}
+            'chains': {name: chain_exposure(roles, held, us_share) for name, roles in CHAINS.items()},
+            'score': score, 'review': review_point(portfolio.get('as_of')),
+            'attr': sorted(attr, key=lambda a: -a[1]),
+            'drv2': {g: round(drv_ex[g] / drv_val[g] * 100, 2) for g in drv_ex if drv_val[g] > 0}}
 
 
 def parties(nodes, meta, briefs):
@@ -564,6 +602,15 @@ if __name__ == '__main__':
         import perf  # the S&P 500 total-return series perf.py already keeps fresh: the book's goal is to beat it
         bench = perf.get_prices({perf.BENCH}, date.today() - timedelta(days=372), date.today(), fetch=False).get(perf.BENCH, {})
         view['bench'] = recent_move(bench)
+        try:  # did adding to each stock beat the index over the next 3 months? (scripts/trade_audit.py)
+            import trade_audit as ta
+            trades, prices, book = ta.load()
+            rows, since = ta.audit(trades, prices), date.today() - timedelta(days=730)
+            view['adds'], view['adds_book'] = ta.add_record(rows, since, book)
+            view['audit_rows'] = ta.stock_rows(rows, since, book)  # the evidence behind each add record, for checking
+            view['add_flag'] = [ta.ADD_MIN, ta.ADD_HIT]
+        except (OSError, ValueError, KeyError) as e:
+            print(f'  skip trade audit: {e}', file=sys.stderr)
         PRIVATE_PAGE.write_text(render({**page, 'portfolio': view}, standalone=True), encoding='utf-8')
     tickers = sum(1 for n in canvas['nodes'] if n['type'] == 'text') - 1
     print(f'{OUT.relative_to(ROOT)}: {tickers} tickers, {len(canvas["edges"])} links')

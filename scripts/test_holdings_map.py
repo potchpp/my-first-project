@@ -1,4 +1,5 @@
 import sys
+import tempfile
 import unittest
 from datetime import date, timedelta
 from pathlib import Path
@@ -131,11 +132,31 @@ class PortfolioViewTests(unittest.TestCase):
 
     def test_only_percentages_leave_the_portfolio_file(self):
         v = hm.portfolio_view(self.PAGE, self.PORTFOLIO, {})
-        self.assertEqual(set(v['held']['NVDA']), {'w', 'apr', 'bench', 'under', 'gain'})
+        self.assertEqual(set(v['held']['NVDA']), {'w', 'gain', 'g2', 'tm2', 'days2'})
         self.assertEqual(v['held']['NVDA']['gain'], 0.5)  # a ratio, never the cost itself
         self.assertNotIn('12345', str(v))
         self.assertNotIn('100.0', str(v['held']))
 
+
+    def test_sold_names_explain_the_gap_but_are_not_held(self):
+        two = lambda ex, usd: {'2y': {'gap_pp': 1.0, 'timing_pp': -2.0, 'held_days': 700, 'excess_pct_book': ex, 'excess_usd': usd}}
+        pf = {'as_of': '2026-09-25', 'windows': {'2y': {'mwr': 0.18, 'shadow_mwr': 0.19, 'gap_pp': -0.6, 'twr_ann': 0.3,
+                                                        'timing_pp': -12.0, 'start': '2024-09-25'}}, 'positions': [
+            {'symbol': 'NVDA', 'weight': 0.9, 'qty': 5, 'value_usd': 900, 'windows': two(3.0, 30)},
+            {'symbol': 'TSM', 'weight': 0.0, 'qty': 0, 'value_usd': 0, 'windows': two(-4.0, -40)},
+            {'symbol': 'BRK.B', 'weight': 0.001, 'qty': 1, 'value_usd': 1, 'windows': two(0.1, 1)}]}
+        v = hm.portfolio_view(self.PAGE, pf, {'us_stock_share_of_total': 0.5})
+        self.assertNotIn('TSM', v['held'])
+        self.assertEqual(v['attr'], [['NVDA', 3.0, False], ['small', 0.1, False, 1], ['TSM', -4.0, True]])
+        self.assertEqual(v['drv2']['ai-capex'], round(-10 / 900 * 100, 2))  # sold TSM counts against the driver
+        self.assertEqual(v['score']['2y']['gap_pp'], -0.6)
+
+    def test_review_point_is_the_gap_about_120_days_back(self):
+        with tempfile.TemporaryDirectory() as d:
+            h = Path(d) / 'k.jsonl'
+            h.write_text('{"date": "2026-05-01", "2y": -2.0}\n{"date": "2026-06-10", "2y": -1.0}\n{"date": "2026-09-30", "2y": -0.5}\n')
+            self.assertEqual(hm.review_point('2026-10-01', h), {'date': '2026-05-01', 'gap': -2.0})
+            self.assertIsNone(hm.review_point('2026-10-01', Path(d) / 'none.jsonl'))
 
 
 class RangeTests(unittest.TestCase):
