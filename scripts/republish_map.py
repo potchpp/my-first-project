@@ -12,6 +12,7 @@ and ask Claude to republish it to the same artifact URL.
 """
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -25,6 +26,7 @@ PRICE_CACHE = ROOT / 'portfolio' / 'cache'
 PRICE_REFRESH_HOURS = 20  # 52-week bars refresh about once a day (~10s for 50 tickers)
 DEFER = ROOT / 'graphify-out' / '.republish-deferred'  # touched by needs_deep.py: the unattended daily check can't approve a publish
 DEFER_SECONDS = 900
+NO_PUBLISH = ROOT / '.claude' / 'no-publish-orgs'  # gitignored: one org id per line whose sessions can't write the artifact (another org owns it)
 URL = 'https://claude.ai/artifact/SUwuadkMdVBpPTn6VHiss8'  # private view: never share this link (it shows weights and cost basis)
 
 
@@ -81,6 +83,8 @@ def main():
         return
     if DEFER.exists() and time.time() - DEFER.stat().st_mtime < DEFER_SECONDS:
         return  # the daily check just ran; the next interactive session will be asked instead
+    if NO_PUBLISH.exists() and os.environ.get('CLAUDE_CODE_ORGANIZATION_UUID', '') in NO_PUBLISH.read_text().split():
+        return  # this account can't write the artifact; the owner account's next session republishes
     print(json.dumps({'decision': 'block', 'reason': (
         f'Holdings Map changed. Read {published_page()} and republish it with the Artifact tool, url {URL} '
         f'(same artifact, no icon). Then run: python3 {ROOT}/scripts/republish_map.py --mark'
