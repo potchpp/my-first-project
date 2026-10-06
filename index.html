@@ -219,6 +219,7 @@ ul.pts li::marker{color:var(--edge)}
 .more>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 /* review queue: finding · evidence · next step, one row per stock; your actions: the open to-do list from the journal */
 .queue,.actions{display:grid;gap:4px;background:var(--panel);border-radius:var(--r-panel);padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
+#attn>.per{margin:0 0 12px}
 .qhead{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
 .qrow{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,320px);gap:16px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
 @media (max-width:760px){.qrow{grid-template-columns:1fr;gap:8px}}
@@ -424,11 +425,14 @@ const HOW_Q=`<details class="how"><summary>How findings are chosen</summary><p>O
 const ARCHIVE_DAYS=120;
 const archived=f=>{const c=srcCheck(f);return !!(c&&c.done&&(!c.doneOn||inDays(c.doneOn)>-ARCHIVE_DAYS))};
 const keepOpen=(el,sel)=>!!(el.querySelector(sel)||{}).open;
+let QF=(()=>{try{return localStorage.getItem("qf")??"bad"}catch(e){return "bad"}})();
 function drawQueue(){const el=document.getElementById("attn");
   const all=[...bookFindings(),...DATA.nodes.map(n=>finding(n.t)).filter(Boolean)].sort((a,b)=>SEV[a.sev]-SEV[b.sev]||sz(b.t)-sz(a.t));
   const live=all.filter(f=>!archived(f)),done=all.filter(archived),wasOpen=keepOpen(el,"details.arch");
   FIND=Object.fromEntries(all.map(f=>[f.key,f]));el.hidden=!all.length;
-  el.innerHTML=`<div class="qhead"><p class="lab">Review queue · ${live.length} finding${live.length===1?"":"s"}</p><span class="hint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</span></div>`+(live.length?live.map(qrow).join(""):`<p class="hint">Nothing needs a look right now.</p>`)
+  const n=s=>live.filter(f=>SEV[f.sev]<=SEV[s]).length,lv=QF==="bad"&&!n("bad")?"warn":QF,shown=live.filter(f=>SEV[f.sev]<=SEV[lv]),hid=live.length-shown.length;
+  const tg=live.length?`<div class="per" role="group" aria-label="Show findings">Show ${[["bad","Act now"],["warn","+ Look"],["","All"]].map(([s,l])=>`<button data-qf="${s}" aria-pressed="${lv===s}">${l} · ${n(s)}</button>`).join("")}</div>`:"";
+  el.innerHTML=`<div class="qhead"><p class="lab">Review queue · ${live.length} finding${live.length===1?"":"s"}</p><span class="hint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</span></div>`+tg+(live.length?shown.map(qrow).join("")+(hid?`<p class="hint">${hid} more below this level · use Show above to see them</p>`:""):`<p class="hint">Nothing needs a look right now.</p>`)
   +(done.length?`<details class="how arch"${wasOpen?" open":""}><summary>Done · ${done.length} · each comes back after ${ARCHIVE_DAYS} days if it's still true, or when you reopen its action</summary>${done.map(qrow).join("")}</details>`:"")+HOW_Q}
 const aRow=(c,id)=>`<div class="arow2"><input type="checkbox" id="${id}" data-doc="${esc(c.t)}" data-c="${esc(c.id)}"${c.done?" checked":""}><label for="${id}">${esc(c.text)}</label>${c.t==="BOOK"?`<span class="state">Whole book</span>`:`<button class="qtk" data-t="${esc(c.t)}">${esc(c.t)}</button>`}<span class="num ${!c.done&&c.due&&inDays(c.due)<0?"dn":"state"}">${c.done?"done "+esc(c.doneOn||""):c.due?(inDays(c.due)<0?"overdue · ":"due ")+esc(c.due):""}</span></div>`;
 function drawActions(){const el=document.getElementById("actions");if(!DB){el.hidden=true;return}
@@ -444,6 +448,7 @@ async function copyText(btn,text){try{await navigator.clipboard.writeText(text);
   setTimeout(()=>{btn.textContent="Copy"},2000)}
 function wireQueue(){const q=document.getElementById("attn"),a=document.getElementById("actions");
   q.onclick=async e=>{const b=e.target.closest("button");if(!b)return;
+    if(b.dataset.qf!==undefined){QF=b.dataset.qf;try{localStorage.setItem("qf",QF)}catch(e){}drawQueue();return}
     if(b.dataset.copy){copyText(b,FIND[b.dataset.copy].step);return}
     if(b.dataset.add){const f=FIND[b.dataset.add],d=q.querySelector(`input[data-due="${CSS.escape(f.key)}"]`),body=jclone(f.t);
       body.checks.push({id:Date.now().toString(36),text:f.act,due:d&&d.value||plusDays(14),done:false,d:today,src:f.key});
