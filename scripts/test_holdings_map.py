@@ -74,6 +74,21 @@ Xyz sells soda in 200 countries.
 """
 
 
+class ResolveTests(unittest.TestCase):
+    def test_every_name_variant_maps_to_the_held_ticker(self):
+        nodes = {'briefs_nvda_nvda': {'label': 'NVDA — Nvidia', 'source_file': 'briefs/NVDA.md'},
+                 'a': {'label': 'NVIDIA Corporation', 'source_file': 'sources/AMD/10-k.md'},
+                 'b': {'label': 'Nvidia (silicon partner)', 'source_file': 'briefs/ORCL.md'},
+                 'c': {'label': 'NVIDIA Blackwell Architecture', 'source_file': 'sources/NVDA/call.md'},
+                 'd': {'label': 'Micron', 'source_file': 'sources/TSLA/call.md'},
+                 'briefs_mu_mu': {'label': 'MU — Micron Technology', 'source_file': 'briefs/MU.md'}}
+        meta = {'NVDA': {'name': hm.name_key('NVIDIA Corporation')}, 'MU': {'name': hm.name_key('Micron Technology')}}
+        _, rep, main, _ = hm.resolve(nodes, {n: set() for n in nodes}, [], meta)
+        self.assertEqual((rep['a'], rep['b'], rep['d']), ('NVDA', 'NVDA', 'MU'))
+        self.assertNotIn('c', rep)  # a product is part of the company, not the company
+        self.assertEqual(set(main), {'briefs_nvda_nvda', 'briefs_mu_mu'})
+
+
 class SummaryTests(unittest.TestCase):
     def test_new_format_reads_every_section_and_strips_markup(self):
         s = hm.summary(NEW_FORMAT)

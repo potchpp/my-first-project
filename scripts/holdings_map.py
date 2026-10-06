@@ -58,7 +58,7 @@ EDGES_PER_NODE = 4          # strongest links kept per ticker, so the map stays 
 SNAPSHOT_CHARS, POINT_CHARS, FALSIFIER_CHARS = 420, 240, 200
 POINTS_PER_SIDE, KILL_CONDITIONS, QUESTIONS = 3, 4, 3
 # brand names research uses that differ from the brief's legal company name
-COMMON_NAMES = {'google': 'GOOG', 'facebook': 'META', 'berkshire': 'BRKB', 'spacex': 'SPCX', 'tsmc': 'TSM', 'aws': 'AMZN',
+COMMON_NAMES = {'micron': 'MU', 'wisekey': 'WQEY', 'wisekeyinternational': 'WQEY', 'google': 'GOOG', 'facebook': 'META', 'berkshire': 'BRKB', 'spacex': 'SPCX', 'tsmc': 'TSM', 'aws': 'AMZN',
                 'amazonwebservices': 'AMZN', 'starlink': 'SPCX', 'xai': 'SPCX'}  # SpaceX owns Starlink and xAI
 PARTY_MIN = 3  # an outside company named in this many holdings' research is a shared counterparty
 PARTY_SKIP = {'apollo'}  # one name, different things (Palantir's software, a credit firm)
@@ -81,14 +81,17 @@ def hid(s):
     return hashlib.sha1(s.encode()).hexdigest()[:16]
 
 
+SAME = 'same_company_as'  # graph.json edges link_graph() writes: every name of a held company -> its ticker node
+
+
 def load():
     g = json.loads(GRAPH.read_text(encoding='utf-8'))
     nodes = {n['id']: n for n in g['nodes']}
     edges = g.get('links') or g['edges']
     adj = defaultdict(set)
     for e in edges:
-        if e.get('confidence') == 'AMBIGUOUS' or e.get('relation') == 'semantically_similar_to':
-            continue  # "looks similar" is not a business relationship
+        if e.get('confidence') == 'AMBIGUOUS' or e.get('relation') in ('semantically_similar_to', SAME):
+            continue  # "looks similar" is not a business relationship; SAME edges are this file's own output
         adj[e['source']].add(e['target'])
         adj[e['target']].add(e['source'])
     return nodes, adj, edges
@@ -122,13 +125,8 @@ def owner(node):
     return (m.group(1) or m.group(2)).replace('-', '') if m else None
 
 
-def links(nodes, adj, edges, meta):
-    """Ticker pairs that are really related.
-
-    Every name variant of a held company ("Nvidia", "NVIDIA (partner)", "GOOG brief") counts as
-    that company. A–B is a link when A's research names B, or A and B share a concept (a product,
-    contract, risk). Two companies that merely both name a third holding are NOT linked.
-    """
+def resolve(nodes, adj, edges, meta):
+    """Which held company each node stands for: node id -> ticker (rep), each ticker's own node (main)."""
     hubs = {n for n in nodes if n.startswith('shared_driver_')}
     rep = {}  # node id -> ticker it stands for
     for h in hubs:
@@ -161,6 +159,35 @@ def links(nodes, adj, edges, meta):
         t = names.get(name_key(n.get('label', '')))
         if t:
             rep.setdefault(nid, t)
+    return hubs, rep, main, by_ticker
+
+
+def link_graph():
+    """Join each name variant of a held company ("Nvidia", "NVIDIA Corporation") to its ticker node in
+    graph.json, so graph.html and graphify queries see one company. Rebuilt on every run, since a
+    graphify re-extract drops edges from the files it re-reads."""
+    g = json.loads(GRAPH.read_text(encoding='utf-8'))
+    nodes, adj, edges = load()
+    _, rep, main, _ = resolve(nodes, adj, edges, brief_meta())
+    node_of = {t: a for a, t in main.items()}
+    key = 'links' if 'links' in g else 'edges'
+    g[key] = [e for e in g[key] if e.get('relation') != SAME]
+    new = [{'source': nid, 'target': node_of[t], 'relation': SAME, 'confidence': 'EXTRACTED',
+            'confidence_score': 1.0, 'source_file': nodes[nid].get('source_file'), 'weight': 1.0}
+           for nid, t in rep.items() if nid not in main and t in node_of]
+    g[key] += new
+    GRAPH.write_text(json.dumps(g, ensure_ascii=False), encoding='utf-8')
+    return len(new)
+
+
+def links(nodes, adj, edges, meta):
+    """Ticker pairs that are really related.
+
+    Every name variant of a held company ("Nvidia", "NVIDIA (partner)", "GOOG brief") counts as
+    that company. A–B is a link when A's research names B, or A and B share a concept (a product,
+    contract, risk). Two companies that merely both name a third holding are NOT linked.
+    """
+    hubs, rep, main, by_ticker = resolve(nodes, adj, edges, meta)
 
     def research(x):  # a holding's own research only: not code, the scorecard page, or verdict labels
         return owner(nodes[x]) in by_ticker and not nodes[x].get('label', '').startswith('Verdict')
@@ -580,6 +607,7 @@ def check(c):
 
 
 if __name__ == '__main__':
+    print(f'{link_graph()} company-name nodes linked to their ticker in graph.json')
     if '--logos' in sys.argv:
         fetch_logos()
     canvas, page = build()
