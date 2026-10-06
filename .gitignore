@@ -9,7 +9,12 @@ __pycache__/
 .env
 
 # Claude Code internal (ไม่ต้อง track ใน git)
-.claude/
+.claude/*
+!.claude/TASKS.md
+!.claude/tasks
+!.claude/journal
+!.claude/TASKS_ARCHIVE.md
+!.claude/TASKS_DEDUPE_LEDGER.jsonl
 .agents/
 skills-lock.json
 
@@ -24,3 +29,4 @@ graphify-out/
 
 # Earnings-call transcripts are third-party copyright — keep local
 sources/*/*-call.md
+.local/
