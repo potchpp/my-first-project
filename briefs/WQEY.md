@@ -1,82 +1,103 @@
 ---
-ticker: WKEY
-company: WISeKey International Holding Ltd.
-updated: 2026-09-28
+ticker: WQEY
+company: WISeQey Corp. (formerly WISeKey International Holding)
+updated: 2026-10-05
 type: stock-brief
 shared_driver: quantum
 ---
 
-# WKEY — WISeKey International Holding Ltd.
-**Date:** 2026-09-28 | *Refresh of the 2026-09-18 brief via /deep — full 4-agent pipeline + bull/bear debate round, first time for this ticker. Price $5.99 (yfinance, 2026-09-28)*
+# WQEY — WISeQey Corp. (formerly WISeKey)
+**Date:** 2026-10-05 | *Partial /deep update of the 2026-09-28 brief. Primary sources replace the web numbers for the holdings and H1 2026. Ticker changes from **WKEY to WQEY** on 2026-10-05 (each WKEY ADS = 1/2 WQEY share). The brief, monitor, ledger and scorecard moved from WKEY to WQEY on 2026-10-06; past entries keep their history under WQEY.*
 
-> ⚠️ **Data limitation:** WISeKey เป็น Swiss 20-F filer (foreign private issuer) — วันนี้ automated filing fetch ล้มเหลว และ `sources/WKEY/` มีแค่ transcript-placeholder ว่างเปล่า (ไม่ link) **ทุกตัวเลขในบรีฟนี้มาจาก web search เท่านั้น ไม่มี filing verify — ถือเป็น UNVERIFIED ทั้งหมด** ทั้ง fundamentals และ earnings agent ทำงานจาก web โดยตรงตามที่ระบุไว้
+**Source docs:** [[sources/WQEY/h1-2026-results]] · [[sources/WQEY/sealsq-20f-fy2025-ownership]] · [[sources/WQEY/saiq-424b3-ownership]] · [[sources/WQEY/wiseqey-merger-424b3-terms]]
+
+> **The old verdict is broken.** The 2026-09-28 brief called it "Still underrated" by treating WISeKey's 52% voting stake in SEALSQ as economic ownership. SEALSQ's own 20-F shows WISeKey holds only **2.69% of the ordinary shares** (2026-03-27; 3.13% at 2025-12-31). Class F shares get 5x the dividends and assets of an ordinary share, so economic interest is **≈5.9%** *(item 5-6)*. The scorecard recorded 6.8% on the 2025-12-31 share count; ≈5.9% uses the 2026-03-27 count. That crosses the brief's own falsifier (<25%) and kill condition #1, and the number was public before that brief was written. *(sealsq-20f-fy2025-ownership.md item 1-6; scorecard 2026-10-05)*
+
+*Verdict changed 2026-10-05: Still underrated → Deserved (provisional), because the falsifier broke. Economic ownership of SEALSQ is ≈5.9%, not 52%, so the stake is worth ~$32M, not ~$279M (6.0M ordinary × LAES $2.37 = $14.2M + 1.5M Class F × 5 × $2.37 = $17.8M; LAES price Yahoo 2026-10-05). The new sum of parts rests on SAIQ instead, which can't be priced reliably until the lock-up ends.*
 
 ---
 
 ## Company Snapshot
 
-WISeKey (สวิส, กำลังจะย้าย domicile ไป British Virgin Islands ต้นตุลาคม 2026 และเปลี่ยนชื่อเป็น WISeQey Corp) ทำ cybersecurity/digital identity (mPKI) เป็นธุรกิจแกน แล้วถือหุ้นใหญ่ (52% voting) ใน SEALSQ (Nasdaq: LAES) ที่ทำ post-quantum semiconductor และ quantum computing รวมถึง WISeSat (satellite IoT/quantum key distribution) และ SEALCOIN (blockchain บนดาวเทียม) — พูดง่ายๆ คือ holdco ขนาดเล็กที่ market cap ตัวเองเล็กกว่ามูลค่าหุ้นที่ถือใน subsidiary ที่ listed แยกต่างหาก *(fundamentals agent; valuation agent)*
+WISeQey (BVI) is the parent that took over from WISeKey (Switzerland) on 2026-10-01. It moved domicile by merger, and its ordinary shares start trading as **WQEY** on Nasdaq and SIX on 2026-10-05. Each old ADS becomes 1/2 a WQEY share, so 1 WQEY = 2 old WKEY *(wiseqey-merger-424b3-terms.md item 1)*. The core business is digital identity/PKI. The parent holds:
+- **SEALSQ (LAES):** post-quantum chips. 51.33% of the votes but only 2.69% of the ordinary shares (2026-03-27), economic interest ≈5.9%, via Class F shares that carry votes far beyond their economics *(sealsq-20f-fy2025-ownership.md item 1, 4-6)*.
+- **WISeSat.Space (SAIQ):** satellite IoT. The SPAC merger with Columbus Acquisition closed 2026-10-01 and SAIQ trades from 2026-10-02 (company release 2026-10-02, web). The parent holds 23,269,044 of 29,772,989 shares (~78%) in the prospectus's 100%-redemption column *(saiq-424b3-ownership.md item 1)*. That column matches Yahoo's SAIQ share count of 29.77M (2026-10-05), so it is likely the case that closed (inference). The parent may also distribute up to 10% of the exchange shares to its own shareholders (item 2); a 2026-10-05 web search found no announcement (web).
+
+The parent keeps the same control pattern: BVI Class B shares carry 10x the votes of ordinary shares with 1/10 of the dividend rights. It remains a foreign private issuer reporting in US GAAP *(wiseqey-merger-424b3-terms.md item 2-3)*.
 
 ## Fundamentals Signal
-*Source: fundamentals agent — web only, no 10-K/20-F, all UNVERIFIED*
+*Source: h1-2026-results.md (consolidated; the release does not split revenue by unit).*
 
-- **Revenue durability: ผสม** — mPKI เป็น recurring (SaaS/certificate renewal); IoT/SEALSQ chip เป็น per-transaction ต้อง re-win ทุกรอบ; WISeSat ยังไม่มีรายได้ที่เป็นชิ้นเป็นอัน pipeline $200-225M ยังไม่ book เป็นรายได้จริง
-- **Margin trend: แย่ลง แม้ revenue โต** — FY2025 operating margin -247% (ขาดทุน $47.7M บนรายได้ $19.3M), gross margin 47.9% Revenue โตเร่ง: FY2025 +62% YoY → H1 2026 +115% YoY ($11.4M) แต่ net loss H1 2026 กว้างขึ้นเป็น $27.8M — burn เร็วขึ้นตามที่โต ไม่ใช่ operating leverage ที่ดีขึ้น
-- **Capital allocation: raise ต่อเนื่อง แล้วเอาไปลงทุน stake ภายนอกบางส่วน** — equity raise FY2025 ~$465M gross + อีก $125M มี.ค. 2026, shares outstanding +20.11% YoY จาก dilution เงินสด $429M (ธ.ค. 2025) → $495M (มิ.ย. 2026) หนี้ $0 แต่ $60M ถูกใช้ไปกับ external stake (WeCan, IC'ALPS, Quantix Edge, Quobly) ไม่ใช่ core operation
+- **Revenue is growing fast, but on a consolidated basis.** H1 2026 revenue is ~$11.4M (+116% from $5.3M). No file splits out the parent's own mPKI revenue, so the core business's growth is untested.
+- **Gross margin is better, losses are bigger.** Gross margin ~48% (35% a year earlier), but operating loss is $40.9M (from $27.3M) and net loss $36.4M (from $22.3M). The ratios are improving (the bull's point), but the loss grew by more dollars than revenue did (+$13.6M vs +$6.1M).
+- **Most of the loss and the cash belong to minority holders.** Of the $36.4M net loss, $27.1M goes to non-controlling interests and $9.3M to the parent. Consolidated cash and restricted cash total ~$495M, of which SEALSQ holds ~$482M, so parent cash outside SEALSQ is roughly ~$13M *(inference by subtraction across different bases: SEALSQ ~$482M is from Yahoo, 2026-09-28, period not stated; parent-only cash is not disclosed)*.
+- **Capital allocation keeps control on top.** Every subsidiary is structured to give the parent votes without proportional economics (SEALSQ Class F, SAIQ Class F, WQEY Class B). New SEALSQ shares dilute the parent's economics but not its votes *(sealsq-20f-fy2025-ownership.md item 4)*.
 
-## Latest Earnings — H1 2026 (reported July 2026)
-*Source: earnings agent — web only, no transcript, all UNVERIFIED*
+## Latest Earnings — H1 2026 (reported 2026-09-30)
+*Source: h1-2026-results.md*
 
-- Revenue **$11.4M (+115% YoY)**; net loss widened to **$27.8M**; cash $495M, debt $0 (มิ.ย. 2026) — *cash นี้เป็นตัวเลข consolidated ส่วนใหญ่อยู่ใน SEALSQ เอง (yfinance 2026-09-28: LAES cash ~$482M, WKEY consolidated ~$439M) จึงนับรวมอยู่ในมูลค่า stake 52% แล้ว ไม่ใช่เงินสดของ WISeKey holdco*
-- Guidance ปี 2026 คงเดิม +50-100% YoY (implied $27-36M) — ช่วงกว้างมาก แม้ loss กว้างขึ้น
-- SEALSQ (LAES): เตรียมเปิดตัว Quantum Vertical Stack Q3 2026, pipeline $225M ถึงปี 2029 (ยังไม่ book), ดีล GlobalFoundries (secure semiconductor co-development) และ Quobly $5M (spin-qubit, cloud access ปลายปี 2026, เป้า 1M qubits ปี 2032 — ไกลมาก) รายได้ commercial ตัวจริงจาก QS7001/QVault TPM ยังรอถึง "late 2026"
-- WISeSat: ดาวเทียมดวงที่ 21 ปล่อยแล้ว มี.ค. 2026 (SpaceX), เป้า ~100 ดวงปี 2029 (ปัจจุบันมีแค่ 21)
-- SEALCOIN: raise เพิ่ม $4M (มิ.ย. 2026) สำหรับ quantum-resistant signing บนดาวเทียม — use case ยังเก็งกำไร
+- Revenue ~$11.4M (+116%), gross profit $5.5M (+192%), operating loss $40.9M, net loss $36.4M (parent $9.3M / NCI $27.1M).
+- Cash and restricted cash ~$495M (cash $489.0M + restricted $6.3M), long-term bonds/mortgages $0.7M ("minimal debt").
+- FY2026 guidance kept at revenue +50-100% vs FY2025. SEALSQ pipeline "exceeds $225 million through 2029" (not yet booked).
+- *Correction:* the previous brief said H1 was reported "July 2026" with a net loss of $27.8M (web). The release is dated 2026-09-30 and the net loss is $36.4M.
 
 ## Bull / Bear
 
 **Bull** *(bull_researcher)*
-- **Cornered resource + counter-positioning ใน post-quantum silicon ที่มี war chest หนุน:** $495M cash, หนี้ $0 เทียบ equity market cap ~$71M — runway เต็มถึง commercial inflection ที่ management บอกไว้ปลายปี 2026 ไม่ใช่ going-concern bet Revenue เร่งจริง 62%→115% YoY และ guidance ถูกคงไว้แม้ loss กว้างขึ้น *(fundamentals, earnings)*
-  - *Integrator note (2026-09-28):* จุดนี้นับเงินสดซ้ำ — cash ส่วนใหญ่เป็นของ SEALSQ ซึ่งอยู่ในมูลค่า stake แล้ว เงินสดระดับ holdco จริงยังไม่รู้ (UNVERIFIED) จึงทำให้ bull point นี้อ่อนกว่าที่เขียน
-- **mPKI (switching-cost business) เป็นฐานที่ไม่ได้พัง คอยหนุน bet เก็งกำไร:** recurring renewal revenue ไม่ได้ decay ไปพร้อมกับการเก็งกำไรใน quantum/satellite *(fundamentals)*
-- **Sum-of-parts gap อาจสะท้อน control ไม่ใช่ error:** WKEY ถือ 52% voting และ consolidate financials ของ SEALSQ โดยตรง ไม่ต้องรอตลาด re-rate LAES ก็ได้ economics ผ่านการ consolidate — แต่ยอมรับว่านี่คือจุดเปราะที่สุดของ thesis *(valuation)*
+- **Sum of parts didn't disappear, it moved to SAIQ.** At SAIQ's 2026-10-02 close ($1.85, Yahoo), the 78% stake is worth ~$43M. With SEALSQ's corrected ~$32M, the listed stakes total ~$75M against a market cap of ~$70-82M (WKEY $69.7M at $6.09 on 2026-10-02, Yahoo; ~$82M estimated for WQEY on 2026-10-05). The core is priced at roughly $0, not −$208M. *(saiq-424b3-ownership.md; sealsq-20f-fy2025-ownership.md)*
+- **Scale economies in the ratios.** Revenue grew $6.1M, gross profit $3.6M (~59% incremental margin), and operating margin went from about −516% to −358% (H1 2025 → H1 2026). That's a probe that hasn't yet become a power. *(h1-2026-results.md)*
+- **Dilution exposure is bounded.** SEALSQ's capital raises can only dilute a stake worth ~$32M. The open-ended dilution risk is left at WQEY's own share count and SAIQ's funding needs.
+- *The bull's own weakest point:* the SAIQ value is the whole case, and it can't be sold yet.
 
 **Bear** *(bear_researcher)*
-- **ไม่มี 7 Powers ใดๆ ในธุรกิจ chip/satellite** — per-transaction revenue ต้อง re-win ทุกรอบ, ดีล GlobalFoundries เองก็บอกว่า WKEY ไม่มี scale/fab ของตัวเอง ต้องพึ่งคนอื่น pipeline $200-225M ยังไม่ book และ commercial revenue ยังไกลถึง "late 2026" *(fundamentals, earnings)*
-- **Margin แย่ลงจริง ไม่ใช่แค่ mix**: operating margin -247% และ H1 2026 net loss ยิ่งกว้างขึ้นแม้ revenue โต — guidance range 50-100% กว้างขนาดนี้คือสัญญาณว่า management เองก็ไม่มั่นใจ trajectory *(fundamentals, earnings)*
-- **Cash pile คือภาพลวงจาก dilution ต่อเนื่อง ไม่ใช่ความแข็งแกร่ง**: shares +20.11% YoY, ราวเงินที่ raise มา $60M ถูกส่งออกไปเป็น external stake แทนที่จะเข้า core operation — นี่คือ kill-trigger ที่ดังที่สุดสำหรับ investor ที่ sensitive กับ dilution *(fundamentals, earnings)*
-- **Sum-of-parts + governance ส่งสัญญาณเดียวกันว่าตลาดไม่เชื่อโครงสร้าง**: 52% ของ LAES ≈ $279M เทียบ WKEY market cap ~$71M ทั้งหมด — ส่วนที่เหลือ (core PKI + WISeSat + liabilities) โดน price ติดลบ ~$208M ผสมกับ redomicile ไป BVI (low-disclosure) ก่อนเปลี่ยนชื่อ และ history ของ governance scrutiny ที่ WISeKey เคยมีมาก่อน *(valuation, sentiment)*
+- **Voting without economics is the design, not an accident.** It repeats at three levels: SEALSQ (≈5.9% economics, 51.33% votes), SAIQ (Class F) and WQEY itself (Class B, 10x votes for 1/10 dividends). Ordinary holders are the last tier. *(sealsq-20f-fy2025-ownership.md; wiseqey-merger-424b3-terms.md)*
+- **Today's price is float, not value.** SAIQ closed $1.85 on its first day (2026-10-02) and traded at $6.62 on 2026-10-05 (12:20 ET, Yahoo), turning over 53.7M shares against ~29.77M outstanding, while the only block the excerpt shows as unrestricted is ~857,143 shares from the public rights (~3%; the free-float figure is an inference). The PIPE's 938,086 shares are locked until 60 days after their resale registration; half come free earlier only if the 10-day VWAP beats the PIPE price ($10.66) *(saiq-424b3-ownership.md item 1, 5)*. WQEY swung $12.55-$19.785 by 12:15 ET on its first day (Yahoo).
+- **Parent cash is thin and undisclosed.** There's roughly ~$13M outside SEALSQ (inference) against a parent loss of $9.3M for the half year. The next money comes from issuing WQEY shares or from a SAIQ stake that is still locked.
+- **SAIQ may be a funding need, not an asset.** The share count matches the 100%-redemption case, which means no trust cash came in, only the $10M PIPE *(inference from saiq-424b3-ownership.md item 1, footnote 2)*.
 
 ## Valuation
+*Source: valuation agent, 2026-10-05. Lens: holdco sum of parts on economic ownership, not votes.*
 
-*Lens: Sum-of-parts (holdco NAV) — WKEY ขาดทุนระดับ parent (net loss CHF 38.2M FY2025) สินทรัพย์หลักคือ stake ใน SEALSQ ที่ listed แยก จึงไม่ใช้ P/E หรือ FCF (valuation agent)*
+WQEY ~$14.26 (Yahoo, 2026-10-05 12:15 ET); market cap ~$82M *(estimate: no WQEY share count on Yahoo yet. Scaled from WKEY's $69.7M at $6.09 (Yahoo, 2026-10-02) × 14.26/12.18, excluding Class B/F claims)*. SEALSQ stake at LAES $2.37 (Yahoo, 2026-10-05) and ≈5.9% economic ≈ $32M.
 
-WKEY market cap ~$71M ราคา ~$5.99-6.25 WKEY ถือ 52% voting ของ SEALSQ (LAES, market cap ~$537.5M) → 52% ≈ $279M นั่นคือตลาด price stake นี้อย่างเดียวเป็น ~4 เท่าของ market cap ทั้งหมดของ WKEY ซึ่งแปลว่า core PKI business + WISeSat + liabilities ถูก price เป็น **ติดลบ ~$208M** ในเลขคณิตของตลาด Revenue growth 62-66% ที่เห็นคือ trend ที่พิสูจน์แล้วต่อเนื่อง ไม่ใช่สมมติฐานเร่งใหม่ — ส่วนต่างราคาจึงมาจากโครงสร้าง (holdco discount หรือ economic ownership ที่ต่ำกว่า voting stake) ไม่ใช่จากธุรกิจดำเนินงาน
+| SAIQ mark | 78% stake | + SEALSQ (~$32M) + cash outside SEALSQ (~$13M) | Implied core (mPKI + parent costs) |
+|---|---|---|---|
+| $1.85 (2026-10-02 close) | $43M | $88M | ~−$6M |
+| $6.62 (2026-10-05) | $154M | $199M | ~−$117M |
+| $10 (SPAC reference) | $233M | $278M | ~−$196M |
 
-**Verdict: Still underrated**
+**The defensible mark is $1.85, and it is a ceiling on realisable value, not fair value.** The parent's block is 27x the only unrestricted block in the excerpt (857,143 public-rights shares, 3%; inference). 11,956,922 of the 23.27M are Class F, which can't be transferred *(item 6)*. It is locked until the earliest of: (a) 6 months (~2027-04-01); (b) SAIQ closing above $12.50 for any 20 trading days within a 30-day trading period, and not before day 60; or (c) a liquidation, merger, share exchange or similar transaction with an unaffiliated third party that gives all SAIQ holders the right to exchange their shares for cash or securities *(saiq-424b3-ownership.md item 3-4)*. $6.62 is a price set by a very thin float.
 
-**Falsifying number:** ถ้า 20-F หรือ 6-K ฉบับถัดไป (FY2026 annual report, คาดว่าราว Q1-Q2 2027) เปิดเผยว่า **economic (cash-flow) ownership ของ WKEY ใน SEALSQ ต่ำกว่า 25%** (เทียบกับ 52% voting-control ที่ใช้ในเลขนี้) จะพิสูจน์ว่า sum-of-parts NAV ที่ WKEY ได้จริงเล็กกว่าที่คำนวณไว้มาก ทำให้ verdict "Still underrated" เป็นเท็จ
+**Verdict: Deserved (provisional).** On the defensible mark the core is priced at about zero. The market isn't asking for more than continuation; it can't be judged in full until SAIQ trades on a real float and the parent discloses its own cash.
+
+**Falsifying number:** SAIQ's average close over the 20 trading days after the lock-up ends **below $1.59** (the price at which stakes plus cash just cover a ~$82M market cap: ($82M − $45M) / 23.27M shares). Most likely test ~end of April 2027 (6-month lock-up + 20 trading days); earlier only if prong (b) or (c) triggers. If WQEY's market cap moves, the bar becomes (market cap − $45M) / 23.27M.
+
+**Price event 2026-10-05 (why it "rose"):**
+- **The quote looks up mainly because of the 2:1 conversion.** WQEY ~$14 against WKEY's $6.09 is an exchange, not a gain. Per old ADS, $14.26/2 = $7.13, +17% vs WKEY's Friday close of $6.09 (Yahoo, 2026-10-02). It opened at $19.01 (+56% equivalent) and swung $12.55-$19.785 (Yahoo).
+- **The real move follows SAIQ** (+258% from Friday's $1.85 to $6.62 at 12:20 ET, Yahoo; unrestricted block ~3%), not business news. No new numbers came out after the H1 release on 2026-09-30.
 
 ## Variant Perception
 
-- *Thesis metric:* **economic (cash-flow) ownership % ของ WKEY ใน SEALSQ** เทียบกับ 52% voting figure — ถ้าตัวเลขจริงต่ำกว่านี้มาก thesis ทั้งก้อนพัง เพราะ sum-of-parts วางอยู่บนสมมติฐานว่า WKEY จับ economics ของ stake นี้ได้เกือบเต็ม
-- *Where we differ from consensus:* consensus (7 analysts, 83% Buy, target เฉลี่ย $10.50 ขึ้นจาก $4-4.50) มองว่า quantum+space narrative คือของจริงแล้ว เราเห็นต่างตรงที่ยังไม่มีหลักฐานว่า WKEY ในฐานะ holdco จับ economics ของ SEALSQ ได้เต็มที่ตามสัดส่วน voting — evidence ที่จะพิสูจน์ฝั่งเราคือตัวเลข economic ownership ใน 20-F ถัดไป ไม่ใช่แค่ headline revenue growth ของ SEALSQ
+- *Thesis metric:* **the realisable value of the SAIQ stake** after the lock-up (SAIQ price on a real float × 23.27M shares) against WQEY's market cap. Second: parent-only cash, if it's ever disclosed.
+- *Where we differ from consensus:* the "quantum + space" story makes SEALSQ and SAIQ headlines look like WQEY's value. We see that the parent owns only ~6% of SEALSQ's economics, and that SAIQ's price comes from a ~3% unrestricted block (inference). Much of the price swing that follows those headlines isn't value that flows to ordinary WQEY holders. The evidence that would prove us right is SAIQ's price after the lock-up, ~April 2027.
 
 ## Kill Conditions
 
-*Loosened 2026-09-28: เดิมมีแค่ "cash burn เร่งขึ้นจนต้อง raise ทุนใหม่แบบ dilutive" และ "quantum/satellite ไม่ commercialize ภายใน 1-2 ปี" — บรีฟนี้แทนที่ด้วยเงื่อนไขที่ผูกกับตัวเลขและวันที่ชัดเจนกว่า (economic ownership, redomicile disclosure, QS7001 slip date) ไม่ใช่การผ่อนเพื่อเลี่ยง trigger เดิม เพราะเงื่อนไขเดิมยังไม่ถูกแตะ — เป็นการทำให้ actionable มากขึ้นตาม evidence จาก bear round*
+- ~~**Economic (cash-flow) ownership of SEALSQ below 25%**~~ — **FIRED 2026-10-05** (≈5.9% economic, 2.69% of ordinary at 2026-03-27, SEALSQ 20-F FY2025). The thesis that WKEY was cheap because of its SEALSQ stake broke. What's left is a new, untested thesis built on SAIQ; it isn't the old thesis surviving. `[bounded ~SEALSQ stake]`
+- **SAIQ has to raise new equity within 12 months at a price below $1.59**, or it trades below $1.59 after the lock-up. The main asset of the sum of parts loses value. `[bounded ~50% of the SOTP]`
+- **WQEY dilutes 20%+ in a year without the parent's loss narrowing.** It's the same dilution pattern as SEALSQ, with parent cash of roughly ~$13M (inference). `[open-ended]`
+- **Value moves away from ordinary holders.** Examples: SAIQ/SEALSQ shares transferred or distributed in ways that favour Class B/F holders, or the parent stops disclosing parent-only figures or loses FPI reporting. `[open-ended]`
 
-- **Economic (cash-flow) ownership ของ WKEY ใน SEALSQ ต่ำกว่า 25%** เมื่อเปิดเผยใน 20-F/6-K ถัดไป (~Q1-Q2 2027) — sum-of-parts thesis พังทั้งก้อนเพราะ WKEY ไม่ได้ capture upside ที่คิดไว้ `[bounded ~ค่า SEALSQ stake ที่หายไป]`
-- **Raise ทุนรอบใหม่ในอัตราเดียวกับ 2025-2026 (dilution +20%+ YoY) โดยไม่มี operating loss แคบลง** — dilution ceiling ไม่ชัดเจนคือความเสี่ยงที่ดังที่สุดของ investor ที่ sensitive เรื่อง dilution `[open-ended]`
-- **QS7001/QVault TPM ไม่แปลงเป็น booked commercial revenue ภายในต้นปี 2027** (หลังเลื่อนจาก "late 2026") — counter-positioning bet ตายและกลายเป็นเรื่อง cash-burn ล้วนๆ `[bounded ~ค่า SEALSQ commercial pipeline $225M]`
-- **BVI redomiciliation (ต.ค. 2026) ลด disclosure quality หรือจุด governance scrutiny ใหม่** — WISeKey มี pattern ของ governance concern มาก่อน ไม่ใช่ครั้งแรก `[open-ended]`
+*Reworded 2026-10-05: kill condition "BVI redomiciliation cuts disclosure or brings governance scrutiny". The redomiciliation is done and the company still reports as an FPI in US GAAP (wiseqey-merger-424b3-terms.md), so the condition was reworded to "value moves away from ordinary holders". That is where the dual-class risk actually sits.*
+*Reworded 2026-10-05: the dilution condition now applies to WQEY's own share count, not SEALSQ's. The parent's SEALSQ stake is only ~$32M, so SEALSQ raises can no longer do 50% damage; the parent's own issuance can.*
+*Loosened 2026-10-05: kill condition "QS7001/QVault not booked by early 2027" moves to Bear, because the parent's economic exposure to SEALSQ is only ≈5.9% (~$32M). Even if all of SEALSQ's value were lost, that is ~39-46% of WQEY's market cap ($70-82M), below the 50% threshold.*
 
 ## What to Ask
 
-1. **Economic (ไม่ใช่ voting) ownership ของ WKEY ใน SEALSQ คือกี่ %?** — ถ้าตอบไม่ได้ชัด แปลว่ายังไม่เข้าใจว่า sum-of-parts value จริงๆ ไหลกลับมาที่ WKEY เท่าไหร่
-2. **$60M ที่ deploy ไปใน external stake (WeCan, IC'ALPS, Quantix Edge, Quobly) ให้ผลตอบแทนอะไรกลับมาที่วัดได้บ้าง?** เทียบกับถ้าเอาเงินก้อนนี้ลงใน core mPKI/IoT operation
-3. **ทำไม redomicile ไป BVI ตอนนี้** และมันเปลี่ยน disclosure requirement หรือ governance oversight อย่างไรเทียบกับตอนเป็น Swiss filer — เกี่ยวกับ [[IONQ]] และ [[RGTI]] ที่เป็น post-quantum play เหมือนกันแต่ domicile ใน US ที่ disclosure เข้มกว่า
+1. **What is the parent-only cash and burn?** How many months of runway, without selling SEALSQ or SAIQ shares? If this can't be answered, it's still not clear who pays the parent's $9.3M half-year loss.
+2. **How does SAIQ fund its plan for up to 100 satellites through 2033 (h1-2026-results.md) without trust cash?** Each SAIQ capital raise below $1.59 is the main falsifier crossing.
+3. **Do SAIQ's Class F shares have economic rights equal to ordinary shares?** The 78% depends on this. Who holds WQEY's Class B/F, and how much of the economics do they get?
 
 ---
 
-*ไม่ใช่คำแนะนำการลงทุน — research summary จาก web search เท่านั้น (ไม่มี 10-K/20-F local) และ agent analysis*
+*Not investment advice. Research summary from SEC filings (SEALSQ 20-F, SAIQ and WISeQey 424B3), the company's H1 2026 release and agent analysis.*

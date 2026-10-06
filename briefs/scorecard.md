@@ -1,15 +1,17 @@
 # Verdict scorecard
-*Generated 2026-10-02 by `scripts/scorecard.py`.*
+*Generated 2026-10-06 by `scripts/scorecard.py`.*
 
 ## Falsifier results
 
 | Verdict | Resolved | Held | Broken | Held rate |
 |---|---|---|---|---|
 | Ahead of itself | 1 | 0 | 1 | 0% |
+| Still underrated | 1 | 0 | 1 | 0% |
 
 | Ticker | Verdict | Metric | Result | Line | Outcome |
 |---|---|---|---|---|---|
 | MU | Ahead of itself | Fiscal Q4 2026 revenue vs consensus (proves verdict wrong if above) | 54.23$B | above 51.2$B | **broken** |
+| WQEY | Still underrated | Economic (cash-flow) ownership of SEALSQ | 6.8% | below 25% | **broken** |
 
 ## Results due (deadline passed, nothing recorded)
 

@@ -1,5 +1,5 @@
 ---
-ticker: WKEY
+ticker: WQEY
 source_type: earnings_call_transcript
 quarter: PLACEHOLDER — paste transcript below
 source_url: (add URL after pasting)

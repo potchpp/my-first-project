@@ -341,8 +341,8 @@
       "breaks": "above",
       "threshold": 0,
       "unit": "%",
-      "current": -4,
-      "current_label": "FY2026 actual",
+      "current": -4.4,
+      "current_label": "FY2026 actual (FY2025 was +1.0%)",
       "deadline": "2027-01-31",
       "note": "needs two consecutive positive quarters (Q1 and Q2 FY27)"
     },
@@ -511,19 +511,44 @@
     },
     "kills": []
   },
-  "WKEY": {
+  "WQEY": {
     "falsifier": {
       "type": "number",
-      "metric": "Economic (cash-flow) ownership of SEALSQ",
+      "metric": "SAIQ average close, 20 trading days after the lock-up ends",
       "breaks": "below",
-      "threshold": 25,
-      "unit": "%",
-      "current": null,
-      "current_label": "52% voting stake; economic share not disclosed",
-      "deadline": "2027-06-30",
+      "threshold": 1.59,
+      "unit": "$",
+      "current": 6.62,
+      "current_label": "$6.62 on 2026-10-05 (~3% free float, lock-up still on)",
+      "deadline": "2027-04-30",
       "judged": "at deadline"
     },
-    "kills": []
+    "kills": [
+      {
+        "match": "Economic (cash-flow) ownership of SEALSQ below 25%",
+        "status": "triggered",
+        "checked": "2026-10-06",
+        "note": "≈5.9% economic at 2026-03-27 (2.69% of ordinary + Class F at 5x dividend rights), SEALSQ 20-F FY2025; the old SOTP thesis broke"
+      },
+      {
+        "match": "SAIQ has to raise new equity within 12 months",
+        "status": "watch",
+        "checked": "2026-10-06",
+        "note": "100%-redemption column matches: no trust cash, only the $10M PIPE; bar $1.59"
+      },
+      {
+        "match": "WQEY dilutes 20%+ in a year",
+        "status": "watch",
+        "checked": "2026-10-06",
+        "note": "parent cash ~$13M (inference); parent H1 2026 loss $9.3M"
+      },
+      {
+        "match": "Value moves away from ordinary holders",
+        "status": "intact",
+        "checked": "2026-10-06",
+        "note": "FPI reporting continues after the BVI move; dual-class Class B/F remains"
+      }
+    ]
   },
   "MMM": {
     "falsifier": {
@@ -687,6 +712,32 @@
       "current_label": "",
       "deadline": "2027-06-30",
       "note": "reaching 1,200 MTPA by Q2 2027 weakens Ahead of itself; Phase 1a target 600 MTPA Q4 2026"
+    },
+    "kills": []
+  },
+  "POWL": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2027 diluted EPS (split-adjusted)",
+      "breaks": "above",
+      "threshold": 8.0,
+      "unit": "$",
+      "current": 4.95,
+      "current_label": "FY2025 $4.95 split-adjusted; FY2026 consensus ~$5.47 (web)",
+      "deadline": "2027-11-30"
+    },
+    "kills": []
+  },
+  "LEU": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 total gross profit",
+      "breaks": "above",
+      "threshold": 200,
+      "unit": "$M",
+      "current": 112.1,
+      "current_label": "TTM $112.1M at Q2 2026",
+      "deadline": "2027-02-28"
     },
     "kills": []
   }

@@ -1,15 +1,15 @@
 ---
 ticker: TEAM
 company: Atlassian
-updated: 2026-09-28
+updated: 2026-10-05
 type: stock-brief
 shared_driver: enterprise-software
 ---
 
 # TEAM — Atlassian Corporation
-**Date:** 2026-09-18 | **Sources:** sources/TEAM/10-k-fy2026.md + web research (sentiment agent) | *No earnings transcript available*
+**Date:** 2026-09-18, partial refresh 2026-10-05 | **Sources:** sources/TEAM/10-k-fy2026.md + sources/TEAM/q4-2026-call.md + web research (sentiment agent)
 
-**Source docs:** [[sources/TEAM/10-k-fy2026]]
+**Source docs:** [[sources/TEAM/10-k-fy2026]] · [[sources/TEAM/q4-2026-call]]
 
 ---
 
@@ -28,16 +28,18 @@ Atlassian ทำ team collaboration platform — Jira, Confluence, Jira Service 
 
 **Margin trend — กำลังฟื้น แต่ยังไม่ profitable:** Gross margin 83%→85% (GAAP) GAAP operating income **เพิ่งเป็นบวกครั้งแรก** $10.4M (จาก -$130.4M ปีก่อน) แต่ net loss ยังคงอยู่ $(53.8)M (ดีขึ้นจาก $(256.7)M) driven โดย SBC $1.6B (~24% ของรายได้) + restructuring ~$285M
 
-**Capital allocation — reinvest หนัก, buyback แค่ offset dilution:** R&D 50% ของรายได้ ($3.27B, +22%) — เน้น AI/Rovo/cloud infra Buyback $1.8B ในปีนี้ — แต่ diluted share count แทบไม่ลด (260.8M vs 261.8M) เพราะแค่ offset SBC ไม่ใช่ real capital return M&A cash outflow เพิ่ม ~$1.2B YoY Free cash flow **ลดลงเล็กน้อย** ($1.32B จาก $1.42B)
+**Capital allocation — reinvest หนัก, buyback แค่ offset dilution:** R&D 50% ของรายได้ ($3.27B, +22%) — เน้น AI/Rovo/cloud infra Buyback $1.8B ในปีนี้ — แต่ diluted share count แทบไม่ลด (GAAP weighted diluted 260.2M vs 261.8M, 10-K line 1138) เพราะแค่ offset SBC ไม่ใช่ real capital return M&A cash outflow เพิ่ม ~$1.2B YoY Free cash flow **ลดลงเล็กน้อย** ($1.32B จาก $1.42B)
 
 ---
 
 ## Latest Earnings
-*Source: sentiment agent — no transcript in sources/TEAM/*
+*Source: sources/TEAM/q4-2026-call.md (Q4 FY2026 call) + sentiment agent (web) for the price reaction and Rovo stats*
 
-Q4 FY2026 (ส.ค. 2026): Revenue $1.77B (+28%) beat estimate, non-GAAP EPS $1.87 (GAAP FY2026: −$0.21/sh, 10-K) beat Cloud +31%, ARR $6.61B (+23%), **RPO +44% เป็น $4.82B** (bookings โตเร็วกว่า revenue) หุ้นพุ่ง ~31% วันประกาศ FY2027 guidance implied ~13% growth
+Q4 FY2026 (ไตรมาสถึง 30 มิ.ย., รายงาน ส.ค. 2026): Revenue $1.8B (+28%, call line 114) beat estimate (web, sentiment agent, Aug 2026), non-GAAP EPS $1.87 (Q4, line 46; GAAP FY2026: −$0.21/sh, 10-K) beat (web, sentiment agent, Aug 2026) Cloud +31%, Subscription ARR $6.6B (+23%, line 14), **RPO +44% เป็น $4.8B** (RPO โตเร็วกว่า revenue — มาจากสัญญาที่ยาวขึ้น, line 16) NRR >120% (line 30) หุ้นพุ่ง ~31% วันประกาศ FY2027 guidance: Cloud +25.5%, Data Center −17%, subscription ARR ~+18% (lines 34-40) → total revenue ~+13% *(derived: weighting the segment guides by FY2026 revenue, assuming Marketplace and other (~5% of revenue) grows about as in FY2026)* Q1 FY27 revenue guide $1,705-1,715M (line 34)
 
-Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เดือน, 80% ของ Fortune 500 ใช้ Rovo migrated customer (DC→Cloud) ใช้จ่ายมากขึ้น 1.75x หลัง 3 ปี
+**SBC กำลังลด:** SBC เหลือ 22% ของ revenue ใน Q4 (จาก 25% ปีก่อน, line 50) GAAP operating margin guide Q1 FY27 6.5% และ FY27 4.5% (line 168) — นี่คือทางเดียวที่ verdict จะผิด: SBC ต้องลดเร็วกว่า FCF margin ที่ลด
+
+Rovo-assisted actions +50% QoQ, 80% ของ Fortune 500 ใช้ Rovo (call lines 24, 116) agentic automations ใน Service Collection โต >3 เท่าใน Q4 (call lines 52, 156) migrated customer (DC→Cloud) ใช้จ่ายมากขึ้น 1.75x หลัง 3 ปี *(web, sentiment agent — ไม่มีใน call/10-K)*
 
 ---
 
@@ -45,7 +47,7 @@ Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เ�
 
 **Bull**
 
-- **Switching costs กำลัง compound:** ลูกค้าที่ migrate DC→Cloud ใช้จ่ายเพิ่ม 1.75x หลัง 3 ปี — expansion ฝังอยู่ใน platform ไม่ใช่แค่ sales push
+- **Switching costs กำลัง compound:** ลูกค้าที่ migrate DC→Cloud ใช้จ่ายเพิ่ม 1.75x หลัง 3 ปี *(web, sentiment agent, Sep 2026 — ไม่มีใน sources)* — expansion ฝังอยู่ใน platform ไม่ใช่แค่ sales push
 - **Scale economies:** >350,000 ลูกค้า, 85% Fortune 500 ให้ทุน R&D $3.27B (50% ของรายได้) เข้า Rovo — reinvestment rate ที่คู่แข่งเล็กตามไม่ทัน
 - **Process power ที่วัดเป็นตัวเลขได้:** gross margin 83%→85%, GAAP operating income พลิกเป็นบวก, buyback $1.8B รักษา diluted share ไม่ให้เพิ่ม — RPO (+44%) โตเร็วกว่า revenue (+28%) แปลว่า bookings acceleration ยังนำหน้า P&L
 
@@ -66,10 +68,12 @@ Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เ�
 - **EV/Sales (trailing) ≈ 7.6x** (FY2026 revenue $6.57B)
 - FY2026 FCF $1.319B (**ลดลง 6.8% YoY**) = FCF margin 20%
 - **Rule of 40 = 42** ถ้าไม่นับ SBC → ผ่าน รองรับ premium multiple
-- **Rule of 40 = 9** ถ้านับ SBC → ตกอย่างแรง เพราะ FCF − SBC = **−$0.28B (−4%)**
+- **Rule of 40 = 9** ถ้านับ SBC → ตกอย่างแรง เพราะ FCF − SBC = **−$0.29B (−4.4%)** (FY2026: $1,319M − $1,605M, 10-K lines 1088, 1150)
 - FY2027 guidance: total revenue **+13%** (ชะลอจาก 22-27%) โดย Cloud guided ~25.5% แต่ Data Center guided **−17%** จากการ sunset
 
-**ประเด็นชี้ขาดคือ SBC** ($1.6B ≈ 24% ของรายได้ = 122% ของ FCF ที่รายงาน) ราคาปัจจุบันตั้งอยู่บนสมมติฐานว่า SBC ไม่ใช่ต้นทุนจริงตลอดไป — ซึ่ง Atlassian **ไม่เคยทำ FCF เป็นบวกหลังหัก SBC เลยสักปี**
+**ประเด็นชี้ขาดคือ SBC** ($1.6B ≈ 24% ของรายได้ = 122% ของ FCF ที่รายงาน) ราคาปัจจุบันตั้งอยู่บนสมมติฐานว่า SBC ไม่ใช่ต้นทุนจริงตลอดไป — FCF หลังหัก SBC เป็นบวกเพียงเล็กน้อยใน FY2025 (+$53M, +1.0%) แล้วกลับติดลบใน FY2026 (−$286M, −4.4%) *(10-K lines 1088, 1150)* ทิศทางแย่ลง ไม่ใช่ดีขึ้น
+
+*Corrected 2026-10-06: brief เดิมเขียนว่า Atlassian "ไม่เคยทำ FCF เป็นบวกหลังหัก SBC เลยสักปี" — ผิด FY2025 เป็นบวก +1.0% (fact gate จับได้) verdict ไม่ได้ตั้งบน "ไม่เคย" แต่ตั้งบนราคาที่ต้องการให้ SBC ลดลงมาก และ FY2026 เดินผิดทาง จึงยังเป็น Ahead of itself*
 
 **Verdict: Ahead of itself** — multiple ต้องการให้มองข้าม SBC ถาวร ในจังหวะที่ revenue รวมกำลังชะลอ
 
@@ -80,8 +84,12 @@ Rovo-assisted actions +50% QoQ, agentic automations 3 เท่าใน 6 เ�
 
 **Refresh 2026-09-28 @ ~$179 (Yahoo):** market cap ~$45.3B → EV/Sales ~6.9x (จาก 7.6x) ราคาลง ~9% โดยไม่มีข้อมูลพื้นฐานใหม่ — SBC math ไม่เปลี่ยน **Verdict ยังเป็น Ahead of itself** falsifying number เดิม การทดสอบถัดไปคือ Q1 FY2027 (~ต.ค. 2026)
 
+**Refresh 2026-10-05 @ $196.02 (Yahoo):** market cap ~$49.6B (253.1M shares outstanding, Yahoo) → EV/Sales ~7.5x — กลับมาที่ระดับเดียวกับวันที่ทำ valuation (2026-09-22 @ $196.78) ราคา +9.8% จาก close 2026-09-28 (Yahoo) และ +129% ใน 3 เดือน (52-week $56.0-$200.0) โดย**ไม่มีข้อมูลพื้นฐานใหม่** — มีแค่ Baird ขึ้นเป้า $245 (2026-09-28, web) **Verdict ยังเป็น Ahead of itself** falsifying number เดิม การทดสอบถัดไปคือ Q1 FY2027 ประกาศ ~2026-10-29/30 (Yahoo calendar)
+
+*ข้อสังเกตเรื่อง falsifier (ยังไม่เปลี่ยน):* ถ้า FCF ของ Atlassian มี seasonality (Q1 ก.ค.-ก.ย. อาจต่ำกว่า Q2/Q4 ที่ยอดขายกระจุก, 10-K line 196 — *FCF seasonality unverified, ต้องเช็กกับ 10-Q*) — การทดสอบ "สองไตรมาสติด" จึงอาจผ่านยากกว่าที่ควร ทางที่ยุติธรรมกว่าคือ FCF − SBC แบบ trailing 12 เดือน ถ้าจะเปลี่ยนต้องเขียน `*Reworded ...*` พร้อมเหตุผล
+
 ## Variant Perception
-- *Thesis metric:* FCF หลังหัก SBC เป็น % ของ revenue (ยังไม่เคยเป็นบวก) — ตัวรอง: Cloud NRR (>120%, q4-2026-call.md line ~46) และ paid-seat growth
+- *Thesis metric:* FCF หลังหัก SBC เป็น % ของ revenue (FY2025 +1.0%, FY2026 −4.4%) — ตัวรอง: NRR (NRR >120%, company-wide, q4-2026-call.md lines 30, 132) และ paid-seat growth
 - *Where we differ from consensus:* nothing — we hold the consensus view ข้อมูล seat ล่าสุดยังไม่เห็น AI seat compression แต่ fault line จริงคือ SBC/FCF และ analyst target กว้าง $108-480 สะท้อนว่า consensus เองก็แตก
 
 ## Kill Conditions

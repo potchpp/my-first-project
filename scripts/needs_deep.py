@@ -39,7 +39,7 @@ NEWS_QUERY = {
     'GMAB': 'intitle:Genmab', 'GOOG': '(intitle:Alphabet OR intitle:Google)', 'META': '(intitle:Meta OR intitle:Zuckerberg)',
     'MU': 'intitle:Micron', 'PLTR': 'intitle:Palantir', 'PTON': 'intitle:Peloton', 'RGTI': 'intitle:Rigetti',
     'RKLB': 'intitle:"Rocket Lab"', 'SNOW': 'intitle:Snowflake (stock OR data OR AI)', 'SPCX': 'intitle:SpaceX',
-    'TCOM': 'intitle:"Trip.com"', 'TSM': 'intitle:TSMC', 'WKEY': 'intitle:WISeKey',
+    'TCOM': 'intitle:"Trip.com"', 'TSM': 'intitle:TSMC', 'WQEY': 'intitle:WISeQey OR intitle:WISeKey',
 }
 
 
