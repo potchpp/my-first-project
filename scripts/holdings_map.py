@@ -82,6 +82,26 @@ def hid(s):
 
 
 SAME = 'same_company_as'  # graph.json edges link_graph() writes: every name of a held company -> its ticker node
+# Edges checked by hand (2026-10-06 trace of graphify's surprising/ambiguous links). A graphify re-extract
+# brings the originals back, so link_graph() re-applies these on every build. '@T' = ticker T's own node.
+# relation None = drop the edge; otherwise replace it (either direction) with this one.
+PEERS = ROOT / 'briefs' / 'peers.json'  # shared competitors and risks across holdings (see its _about)
+CORRECTIONS = [
+    ('sources_adbe_10_k_fy2025_firefly', 'briefs_team_rovo', 'shares_risk', 0.95,
+     'both are usage-credit AI layers on a subscription base; ADBE and TEAM share the kill condition "AI pricing fails to stick"'),
+    ('plans_mwr_scorecard_performance_not_exit_trigger', 'briefs_scorecard_falsifier', 'semantically_similar_to', 0.85,
+     'both say exits come from a broken thesis, never from underperformance alone'),
+    ('sources_amd_10_k_fy2025_customer_concentration_risk', 'briefs_amd_amd', 'risk_of', 1.0,
+     'few customers, 30-day cancellable orders (AMD 10-K)'),
+    ('sources_nvda_q2_2027_call_openai', 'sources_orcl_q1_2027_call_google', None, 0, 'different roles, not peers'),
+    ('sources_gev_10_k_fy2025_china_competition_risk', 'sources_gev_10_k_fy2025_vestas', 'shares_risk', 0.85,
+     'Vestas is another wind competitor facing the same Chinese makers (Goldwind, Envision)'),
+    ('briefs_hnge_hnge', 'sources_nbis_q2_2026_call_sword_health', 'competitor_of', 1.0,
+     'digital MSK care; named as a competitor in the HNGE and OMDA 10-Ks'),
+    ('sources_asml_q2_2026_call_tsmc', 'sources_avgo_q3_2026_call_nvidia', None, 0, 'replaced by @TSM supplier_of edges'),
+    ('sources_ko_q1_2026_call_coca_cola', 'sources_ko_q1_2026_call_dutch_bros', None, 0, "an analyst's passing example"),
+    *(('@TSM', f'@{t}', 'supplier_of', 1.0, 'TSMC manufactures its chips (briefs/TSM.md)') for t in ('NVDA', 'AAPL', 'AMD', 'AVGO')),
+]
 
 
 def load():
@@ -176,8 +196,71 @@ def link_graph():
             'confidence_score': 1.0, 'source_file': nodes[nid].get('source_file'), 'weight': 1.0}
            for nid, t in rep.items() if nid not in main and t in node_of]
     g[key] += new
+    fixed, missing = correct(g[key], set(nodes), node_of)
+    peer_links(g, key, node_of)
     GRAPH.write_text(json.dumps(g, ensure_ascii=False), encoding='utf-8')
-    return len(new)
+    if missing:
+        print(f'graph corrections skipped (node ids changed after a re-extract): {missing}', file=sys.stderr)
+    return len(new), fixed
+
+
+def peer_links(g, key, node_of):
+    """Add briefs/peers.json to the graph: competitor_of edges (a holding to an outside rival node, or two holdings)
+    and shares_risk edges to one hub node per shared risk. Rebuilt on every run."""
+    g['nodes'] = [n for n in g['nodes'] if not n.get('peers')]
+    g[key] = [e for e in g[key] if not e.get('peers')]
+    if not PEERS.exists():
+        return
+    doc = json.loads(PEERS.read_text(encoding='utf-8'))
+
+    def hub(kind, name):
+        nid = f'peers_{kind}_' + re.sub(r'[^a-z0-9]+', '_', name.lower()).strip('_')
+        if not any(n['id'] == nid for n in g['nodes']):
+            g['nodes'].append({'id': nid, 'label': name, 'file_type': 'concept', 'source_file': 'briefs/peers.json', 'peers': True})
+        return nid
+
+    def edge(a, b, rel, src):
+        g[key].append({'source': a, 'target': b, 'relation': rel, 'confidence': 'EXTRACTED', 'confidence_score': 1.0,
+                       'source_file': src, 'weight': 1.0, 'peers': True})
+    for rival, by in doc.get('competitors', {}).items():
+        other = node_of.get(rival) or hub('competitor', rival)
+        for t, src in by.items():
+            if t in node_of and node_of[t] != other:
+                edge(node_of[t], other, 'competitor_of', src)
+    for r in doc.get('risks', []):
+        rid = hub('risk', r['risk'])
+        for t in r['tickers']:
+            if t in node_of:
+                edge(node_of[t], rid, 'shares_risk', f'briefs/{t}.md')
+
+
+def peer_chips(meta):
+    """Map chips: rivals that compete with 2+ holdings (or a holding that competes with others), and shared risks."""
+    if not PEERS.exists():
+        return [], []
+    doc = json.loads(PEERS.read_text(encoding='utf-8'))
+    rivals = [{'n': r, 't': {t: [f'competes with {r}' + (f' ({src})' if src else '')] for t, src in by.items() if t in meta}}
+              for r, by in doc.get('competitors', {}).items()]
+    risks = [{'n': r['risk'], 't': {t: [ph or r['risk']] for t, ph in r['tickers'].items() if t in meta}}
+             for r in doc.get('risks', [])]
+    return [r for r in rivals if len(r['t']) >= 2], [r for r in risks if len(r['t']) >= 2]
+
+
+def correct(edges, ids, node_of):
+    """Apply CORRECTIONS to the edge list in place. Returns (applied, [missing endpoints])."""
+    edges[:] = [e for e in edges if not e.get('corrected')]
+    applied, missing = 0, []
+    for a, b, rel, score, note in CORRECTIONS:
+        a, b = (node_of.get(x[1:], x) if x.startswith('@') else x for x in (a, b))
+        if a not in ids or b not in ids:
+            missing.append(f'{a}->{b}')
+            continue
+        edges[:] = [e for e in edges if {e['source'], e['target']} != {a, b} or e.get('relation') == SAME]
+        if rel:
+            edges.append({'source': a, 'target': b, 'relation': rel, 'confidence': 'EXTRACTED' if score == 1.0 else 'INFERRED',
+                          'confidence_score': score, 'note': note, 'corrected': True, 'weight': 1.0})
+        applied += 1
+    return applied, missing
 
 
 def links(nodes, adj, edges, meta):
@@ -235,6 +318,9 @@ def build():
         text = (ROOT / 'briefs' / f'{t}.md').read_text(encoding='utf-8')
         for o in set(re.findall(r'\[\[([A-Z.]+)\]\]', text)) & set(meta) - {t}:
             pairs[tuple(sorted((t, o)))].append(f'{o} named in {t} research')
+    for a, b, rel, _, note in CORRECTIONS:  # hand-checked ticker-to-ticker links count as direct
+        if rel and a[0] == b[0] == '@' and {a[1:], b[1:]} <= set(meta):
+            pairs[tuple(sorted((a[1:], b[1:])))] += ['direct', note]
     partners = defaultdict(set)
     for a, b in pairs:
         partners[a].add(b)
@@ -607,7 +693,7 @@ def check(c):
 
 
 if __name__ == '__main__':
-    print(f'{link_graph()} company-name nodes linked to their ticker in graph.json')
+    print('{} company-name nodes linked to their ticker, {} edge corrections applied in graph.json'.format(*link_graph()))
     if '--logos' in sys.argv:
         fetch_logos()
     canvas, page = build()
@@ -616,6 +702,7 @@ if __name__ == '__main__':
     page['ranges'] = price_ranges([n['t'] for n in page['nodes']], fetch='--prices' in sys.argv)
     page['monitor'] = monitor([n['t'] for n in page['nodes']], page['briefs'], date.today())
     page['parties'] = parties(load()[0], brief_meta(), page['briefs'])
+    page['rivals'], page['risks'] = peer_chips(brief_meta())
     check(canvas)
     OUT.write_text(json.dumps(canvas, indent=1, ensure_ascii=False), encoding='utf-8')
     assert 'portfolio' not in page, 'the published page must never carry portfolio data'

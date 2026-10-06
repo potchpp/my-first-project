@@ -89,6 +89,39 @@ class ResolveTests(unittest.TestCase):
         self.assertEqual(set(main), {'briefs_nvda_nvda', 'briefs_mu_mu'})
 
 
+class CorrectionTests(unittest.TestCase):
+    def test_corrections_replace_drop_and_survive_a_rerun(self):
+        saved = hm.CORRECTIONS
+        hm.CORRECTIONS = [('a', 'b', 'competitor_of', 1.0, 'n'), ('c', 'd', None, 0, 'drop'), ('@X', '@Y', 'supplier_of', 1.0, 'n'),
+                          ('gone', 'b', 'risk_of', 1.0, 'n')]
+        try:
+            edges = [{'source': 'b', 'target': 'a', 'relation': 'conceptually_related_to'},
+                     {'source': 'c', 'target': 'd', 'relation': 'conceptually_related_to'}]
+            ids, node_of = {'a', 'b', 'c', 'd', 'x', 'y'}, {'X': 'x', 'Y': 'y'}
+            first = hm.correct(edges, ids, node_of)
+            self.assertEqual(hm.correct(edges, ids, node_of), first)  # idempotent
+            self.assertEqual(first, (3, ['gone->b']))
+            self.assertEqual(sorted((e['source'], e['target'], e['relation']) for e in edges),
+                             [('a', 'b', 'competitor_of'), ('x', 'y', 'supplier_of')])
+        finally:
+            hm.CORRECTIONS = saved
+
+
+class PeerTests(unittest.TestCase):
+    def test_chips_keep_shared_entries_only(self):
+        with tempfile.TemporaryDirectory() as d:
+            saved, hm.PEERS = hm.PEERS, Path(d) / 'peers.json'
+            hm.PEERS.write_text('{"competitors": {"Samsung": {"MU": "f:1", "SNDK": ""}, "Lone": {"MU": ""}},'
+                                ' "risks": [{"risk": "Taiwan", "tickers": {"TSM": "war", "AAPL": "", "ZZZ": "x"}}]}')
+            try:
+                rivals, risks = hm.peer_chips({'MU': {}, 'SNDK': {}, 'TSM': {}, 'AAPL': {}})
+            finally:
+                hm.PEERS = saved
+        self.assertEqual([r['n'] for r in rivals], ['Samsung'])  # one-holding rivals are dropped
+        self.assertEqual(rivals[0]['t']['MU'], ['competes with Samsung (f:1)'])
+        self.assertEqual(risks[0]['t'], {'TSM': ['war'], 'AAPL': ['Taiwan']})  # unbriefed ticker ignored
+
+
 class SummaryTests(unittest.TestCase):
     def test_new_format_reads_every_section_and_strips_markup(self):
         s = hm.summary(NEW_FORMAT)

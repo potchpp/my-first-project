@@ -1,4 +1,4 @@
-<title>Holdings Map</title>
+<title>Holdings Connect</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;700&family=Caveat:wght@600&display=swap">
 <style>
 :root{
@@ -275,6 +275,8 @@ table.tr .num{text-align:right}
     <section class="drivers" id="drivers" hidden></section>
     <section class="chain" id="chain" hidden></section>
     <section class="parties" id="parties" hidden><p class="lab">Shared counterparties</p><div class="chips"></div><p class="statnote" style="margin:0">Outside companies named in the research of several holdings. One event there reaches all of them. Tap one to see who.</p></section>
+    <section class="parties" id="rivals" hidden><p class="lab">Shared competitors</p><div class="chips"></div><p class="statnote" style="margin:0">A company several holdings compete with, or a holding that competes with others. A win there is a loss for all of them. Tap one to see who.</p></section>
+    <section class="parties" id="risks" hidden><p class="lab">Shared risks</p><div class="chips"></div><p class="statnote" style="margin:0">One risk named in several holdings' research. When it hits, they move together. Tap one to see who.</p></section>
     <section class="book" id="book" hidden></section>
   </div></details>
   <section class="iso-wrap">
@@ -312,7 +314,7 @@ const PF=DATA.portfolio||null,HELD=PF?PF.held:{};
 const isHeld=t=>!PF||t in HELD;
 // what-if: multiplier per held ticker (0.5 = trim half). Recalculates exposure only; nothing is saved or traded.
 let WIF={},DRV=null,PER="g2",CUR=null,DB=null,SAMPLE=null,JR={},CTL=null;
-const US=PF?(PF.us??1):1,F=t=>WIF[t]??1,PARTIES=DATA.parties||[];
+const US=PF?(PF.us??1):1,F=t=>WIF[t]??1,PARTIES=DATA.parties||[],ALLP=[...PARTIES.map(p=>({...p,kind:"party"})),...(DATA.rivals||[]).map(p=>({...p,kind:"rival",kill:[]})),...(DATA.risks||[]).map(p=>({...p,kind:"risk",kill:[]}))];
 function exposure(){const ex={};for(const[t,h]of Object.entries(HELD)){const n=byT[t];if(n)ex[n.g]=(ex[n.g]||0)+h.w*F(t)*US*100}return Object.entries(ex).sort((a,b)=>b[1]-a[1])}
 const BASE=Object.fromEntries(exposure());
 // returns: 5 days (price data), 1 year (your money-weighted APR, held 1y+ only), since you bought (vs your cost)
@@ -380,7 +382,7 @@ function finding(t){const m=MON[t]||{},f=m.falsifier,k=m.kills||[],h=HELD[t],n=b
   if(f&&f.state==="close")return F("warn","near","Near its falsifier",fev(f)+(f.room!=null?` · ${Math.round(f.room*100)}% room`:""),`Check ${t}'s report${f.deadline?" on "+f.deadline:""} against the line`,`Check ${t}'s report against its falsifier`,f.deadline);
   if(unusual(t))return F("warn","move","Unusual 5-day move",`${pct(RNG[t].r5)} in 5 days, ${Math.abs(RNG[t].z5).toFixed(1)}× its usual weekly move`,`Check the news: real catalyst or drift? /deep ${t} if it touches the thesis`,`Find out what moved ${t}`);
   const ad=ADDS[t];
-  if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return F("warn","adds","Adding hasn't worked",`${ad[1]} of ${ad[0]} adds beat the S&P over the next 3 months · ${ad[2]>=0?"+":"−"}${Math.abs(ad[2]).toFixed(2)}% of book`,`/deep ${t} before any further add`,`No more adds to ${t} until /deep shows the evidence improved`);
+  if(h&&ad&&ad[0]>=ADDMIN&&ad[1]/ad[0]<ADDHIT)return F("warn","adds","Adding hasn't worked",`${ad[1]} of ${ad[0]} past adds beat the S&P in the 3 months after each · ${ad[2]>=0?"+":"−"}${Math.abs(ad[2]).toFixed(2)}% of book`,`/deep ${t} before any further add`,`No more adds to ${t} until /deep shows the evidence improved`);
   x=kOf(k,"review");
   if(x)return F("","review","Kill conditions need review",`Last checked ${esc(x.checked||"never")}, over 120 days ago`,`/deep ${t}`,`Refresh ${t}'s brief: kill conditions not checked in 120 days`);
   if(f&&f.days!=null&&f.days>=0&&f.days<=21)return F("","soon",`Falsifier report in ${f.days} days`,fev(f),`Check ${t}'s report on ${f.deadline} against the line`,`Check ${t}'s report against its falsifier`,f.deadline);
@@ -536,7 +538,7 @@ function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)retu
     <b class="big num ${cls(s2.gap_pp)}">${s2.gap_pp==null?"—":(s2.gap_pp>=0?"+":"−")+Math.abs(s2.gap_pp).toFixed(1)} <span>pts a year</span></b>
     <p class="hint">Your money ${yr(s2.mwr)}/yr vs the same deposits and sales put into the S&amp;P 500 ${yr(s2.shadow_mwr)}/yr${since}</p></div>
     <div class="minis">${mini("1 year · early warning",S["1y"],"Shorter than your holding period")}${mini("Since you started",S.inception,esc((S.inception||{}).start||""))}
-    ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>beat the S&amp;P over the next 3 months, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
+    ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>past adds beat the S&amp;P in the 3 months after each, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
     <div class="mini"><span>Money timing · 2 years</span><b class="num ${cls(s2.timing_pp)}">${ptsy(s2.timing_pp)}</b><small>Your money vs the picks alone (${yr(s2.twr_ann)}/yr). Negative mostly means most of your money arrived recently, not that trades were mistimed.</small></div></div></div>
   <div class="acols">${col("Added money vs the index",up)}${col("Cost money vs the index",dn)}</div>
   <details class="how"><summary>How this is calculated</summary><p><b>Your money</b>: the money-weighted return (XIRR) of every deposit and sale in the window, start value included. <b>Same money in the S&amp;P</b>: those same dated cash flows put into the S&amp;P 500 total-return index instead. <b>Gap</b>: the difference, in points a year. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Money timing</b>: money-weighted minus time-weighted return; for this book it mostly reflects when money arrived. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
@@ -577,24 +579,24 @@ if(PF&&PF.moves){const B=PF.bench||{},col=(title,m,k)=>{if(!m||!m.by.length)retu
     return `<div><h3>${title}<b class="num">${pct(m.book/100)}</b></h3>${vs}<p class="note flat" style="margin:4px 0 12px">Percentage points of your stock book, biggest movers</p>${rows.map(([t,v])=>`<div class="crow"><b>${t}</b><span class="bar"><i style="${v>=0?`left:50%;width:${v/mx*50}%;background:var(--deserved)`:`right:50%;width:${-v/mx*50}%;background:var(--ahead)`}"></i></span><span class="num">${v>=0?"+":""}${v.toFixed(2)}</span></div>`).join("")}</div>`};
   const el=document.getElementById("book");el.hidden=false;
   el.innerHTML=`<p class="lab">What moved your book · against the S&amp;P 500 (total return), your benchmark</p><div class="cols">${col("Last day",PF.moves.r1,"r1")}${col("Last 5 days",PF.moves.r5,"r5")}</div>`}
-if(PARTIES.length){const el=document.getElementById("parties");el.hidden=false;
-  el.querySelector(".chips").innerHTML=PARTIES.map((p,i)=>`<button data-p="${i}" aria-pressed="false"><b>${esc(p.n)}</b>${Object.keys(p.t).length} holdings${p.kill.length?` <span class="st bad">in ${p.kill.length} kill conditions</span>`:""}</button>`).join("");
+for(const [id,kind] of [["parties","party"],["rivals","rival"],["risks","risk"]]){const el=document.getElementById(id),its=ALLP.map((p,i)=>[p,i]).filter(([p])=>p.kind===kind);if(!its.length)continue;el.hidden=false;
+  el.querySelector(".chips").innerHTML=its.map(([p,i])=>`<button data-p="${i}" aria-pressed="false"><b>${esc(p.n)}</b>${Object.keys(p.t).length} holdings${p.kill.length?` <span class="st bad">in ${p.kill.length} kill conditions</span>`:""}</button>`).join("");
   el.onclick=e=>{const b=e.target.closest("button[data-p]");if(b){selectParty(+b.dataset.p);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}}}
 document.getElementById("iso").onclick=e=>{const b=e.target.closest("button");if(b)select(b.dataset.t)};
 
 const side=document.getElementById("side");
 const hubs=[...DATA.nodes].sort((a,b)=>b.k-a.k).slice(0,6);
 function row(t,sub){const n=byT[t];return `<li><button data-t="${t}"><b><i class="dot" style="background:${VC[n.v]}"></i> ${t}</b><small>${sub}</small></button></li>`}
-function pressParty(i){document.querySelectorAll("#parties button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.p===i)))}
-function selectParty(i){const p=PARTIES[i],set=new Set(Object.keys(p.t));CUR=null;pressParty(i);
+function pressParty(i){document.querySelectorAll(".parties button[data-p]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.p===i)))}
+function selectParty(i){const p=ALLP[i],KIND={party:["Named in the research of","A shared counterparty is a hidden driver: these holdings can sit under different driver tags and still move on the same news."],rival:["Competes with","A shared competitor: share it wins comes out of these holdings together, so they are less diversified than their driver tags suggest."],risk:["A risk shared by","A shared risk: one event moves all of these at once, even across different driver tags."]}[p.kind],set=new Set(Object.keys(p.t));CUR=null;pressParty(i);
   svg.node().classList.add("dim");E.classed("on",d=>set.has(d.source.t)&&set.has(d.target.t));N.classed("on",d=>set.has(d.t));
   const mine=PF?Object.keys(p.t).filter(t=>HELD[t]):[],tot=mine.reduce((s,t)=>s+HELD[t].w*F(t)*US*100,0);
-  side.innerHTML=`<div class="hd"><span class="logo mono" aria-hidden="true">${esc(p.n.slice(0,2))}</span><div><h2 tabindex="-1">${esc(p.n)}</h2><small>Named in the research of ${set.size} holdings</small></div></div>
+  side.innerHTML=`<div class="hd"><span class="logo mono" aria-hidden="true">${esc(p.n.slice(0,2))}</span><div><h2 tabindex="-1">${esc(p.n)}</h2><small>${KIND[0]} ${set.size} holdings</small></div></div>
   ${PF?`<div class="meta"><span class="pill num">${mine.length} held</span><span class="pill num">${tot.toFixed(1)}% of total assets</span></div>`:""}
   ${p.kill.length?`<div class="fals"><b>Named in kill conditions</b>${p.kill.join(", ")}. One bad event at ${esc(p.n)} could trip all of these at once.</div>`:""}
   <p class="lab">Where it shows up</p><ul>${Object.entries(p.t).map(([t,l])=>row(t,esc(l.join("; "))+(PF?(HELD[t]?` · <span class="num">${(HELD[t].w*F(t)*100).toFixed(1)}%</span> of book`:" · watch list"):""))).join("")}</ul>
   ${askBox("party")}
-  <p class="note">A shared counterparty is a hidden driver: these holdings can sit under different driver tags and still move on the same news.</p>
+  <p class="note">${KIND[1]}</p>
   <button id="clr" class="clr">Show biggest hubs</button>`;
   document.getElementById("clr").onclick=()=>select(null);
   wireAsk(()=>partyCtx(p));side.querySelector("h2").focus({preventScroll:true});}
@@ -682,7 +684,7 @@ function select(t,focus){
 side.onclick=e=>{const b=e.target.closest("li button");if(b)select(b.dataset.t,e.detail===0)};
 select("NVDA");
 // "More" names what it holds; remembers open/closed per viewer (browser storage, a convenience only)
-{const m=document.getElementById("more"),names={drivers:"driver exposure",chain:"capex chain",parties:"shared counterparties",book:"daily moves"};
+{const m=document.getElementById("more"),names={drivers:"driver exposure",chain:"capex chain",parties:"shared counterparties",rivals:"shared competitors",risks:"shared risks",book:"daily moves"};
   const shown=[...m.querySelectorAll(".more-body>section")].filter(x=>!x.hidden).map(x=>names[x.id]);
   if(shown.length){m.hidden=false;document.getElementById("moresum").textContent="More: "+shown.join(" · ");
     try{m.open=localStorage.getItem("more-open")==="1"}catch(e){}
