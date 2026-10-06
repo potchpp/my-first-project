@@ -12,7 +12,13 @@ sources/AXTI/
 sources/CRDO/
 sources/SMR/
 sources/IRDM/
-sources/OMDA/
+sources/ETN/
+sources/FLNC/
+sources/TLN/
 
 # Local-only map page with your allocation (built from portfolio/) — never ingest
 graphify-out/holdings-map-private.html
+
+# Generated map page and its template: UI code and data copies, not research
+index.html
+scripts/holdings_map.html
