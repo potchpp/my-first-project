@@ -120,6 +120,13 @@ button.drv:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
 .big{display:block;font-size:var(--fs-2xl);font-weight:300;line-height:1.1;letter-spacing:-.02em;margin:8px 0 4px}
 .big span{font-size:var(--fs-md);font-weight:400;color:var(--muted)}
 .minis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.split{width:100%;border-collapse:collapse;font-size:var(--fs-sm);margin-top:20px}
+@media (max-width:760px){.split th small,.split td small{display:block;margin-left:0}}
+.split caption{text-align:left;font-size:var(--fs-xs);color:var(--muted);margin-bottom:4px}
+.split th,.split td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+.split th[scope=row]{text-align:left;font-weight:500}.split th small,.split td small{display:inline;margin-left:6px;font-weight:400;font-size:var(--fs-xs);color:var(--muted)}
+.split thead th{font-size:var(--fs-xs);color:var(--muted);font-weight:500}
+.split tr.tot th,.split tr.tot td{border-bottom:0;font-weight:600}
 .mini{background:var(--hover);border-radius:var(--r-tile);padding:12px 12px;display:grid;gap:4px;font-size:var(--fs-sm)}
 .mini b{font-size:var(--fs-lg);font-weight:500}
 .mini small{color:var(--muted);font-size:var(--fs-xs)}
@@ -572,6 +579,15 @@ function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)retu
   const A=PF.attr||[],up=A.filter(a=>a[1]>0).slice(0,5),dn=A.filter(a=>a[1]<0).slice(-5).reverse(),mx=Math.max(...A.map(a=>Math.abs(a[1])),.01);
   const nm=a=>a[0]==="small"?`${a[3]} small positions`:a[0]+(a[2]?" (sold)":"");
   const col=(h,rows)=>`<div><p class="lab" style="margin-bottom:8px">${h}</p>${rows.map(a=>`<div class="arow"><b>${esc(nm(a))}</b><span class="bar"><i style="width:${Math.abs(a[1])/mx*100}%;background:${a[1]>=0?"var(--deserved)":"var(--ahead)"}"></i></span><span class="num ${cls(a[1])}">${a[1]>=0?"+":"−"}${Math.abs(a[1]).toFixed(2)}%</span></div>`).join("")||`<p class="hint">None</p>`}</div>`;
+  const pp=x=>x==null?"—":(x>=0?"+":"−")+Math.abs(x).toFixed(1);
+  const split=w=>{if(w.twr_ann==null||w.bench_ann==null||w.mwr==null||w.shadow_mwr==null)return "";
+    const pick=(w.twr_ann-w.bench_ann)*100,spT=(w.shadow_mwr-w.bench_ann)*100,myT=(w.mwr-w.twr_ann)*100,tim=myT-spT;
+    const row=(l,sub,y,s,g,tag,c="")=>`<tr${c}><th scope="row">${l}<small>${sub}</small></th><td class="num">${y}</td><td class="num">${s}</td><td class="num ${cls(g)}">${pp(g)} <small>${tag}</small></td></tr>`;
+    return `<table class="split"><caption>Where the gap comes from · 2 years, per year</caption><thead><tr><th></th><th scope="col">You</th><th scope="col">S&amp;P 500</th><th scope="col">Difference</th></tr></thead><tbody>`
+      +row("Your picks","time-weighted: one fixed sum, deposits ignored",yr(w.twr_ann),yr(w.bench_ann),pick,"stock picking")
+      +row("Timing of the money","money-weighted minus time-weighted",pp(myT)+" pts",pp(spT)+" pts",tim,"timing")
+      +row("Your money","money-weighted (XIRR): real deposits and dates",yr(w.mwr),yr(w.shadow_mwr),w.gap_pp,"the score",' class="tot"')
+      +`</tbody></table><p class="hint" style="margin-top:4px">Stock picking + timing = the score (rounding aside). Picking is yours to improve; timing mostly follows when your income arrived.</p>`};
   const since=rv&&rv.gap!=null?` · ${s2.gap_pp>=rv.gap?"up":"down"} ${Math.abs(s2.gap_pp-rv.gap).toFixed(1)} pts since ${esc(rv.date)}`:" · change since your last review appears after about 4 months";
   el.innerHTML=`<div class="sc-head"><div><p class="lab">Beating the S&amp;P 500 with your money? · rolling 2 years</p>
     <b class="big num ${cls(s2.gap_pp)}">${s2.gap_pp==null?"—":(s2.gap_pp>=0?"+":"−")+Math.abs(s2.gap_pp).toFixed(1)} <span>pts a year</span></b>
@@ -579,9 +595,14 @@ function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)retu
     <div class="minis">${mini("1 year · early warning",S["1y"],"Shorter than your holding period")}${mini("Since you started",S.inception,esc((S.inception||{}).start||""))}
     ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>past adds beat the S&amp;P in the 3 months after each, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
 </div></div>
+  ${split(s2)}
   <div id="rules"></div>
   <div class="acols">${col("Added money vs the index",up)}${col("Cost money vs the index",dn)}</div>
-  <details class="how"><summary>How this is calculated</summary><p><b>Your money</b>: the money-weighted return (XIRR) of every deposit and sale in the window, start value included. <b>Same money in the S&amp;P</b>: those same dated cash flows put into the S&amp;P 500 total-return index instead. <b>Gap</b>: the difference, in points a year. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Money timing</b> (2 years: ${ptsy(s2.timing_pp)}; the picks alone made ${yr(s2.twr_ann)}/yr): your money's return minus the return of the picks alone, as if one fixed sum had followed your mix the whole time. Negative mostly means most of your money arrived after the strong months, not that trades were mistimed; it is context, not an action. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
+  <details class="how"><summary>How this is calculated · ROI, TWR, MWR and XIRR in plain words</summary><p><b>ROI (simple return)</b>: profit ÷ money put in. Easy, but it ignores time and when the money went in: $10 doubled over 5 years and $10 doubled in 1 month both show +100%.</p>
+<p><b>TWR (time-weighted return)</b>: how the investments themselves did, as if one fixed sum had stayed in the whole time. Deposits and withdrawals are taken out, so it judges the picks, not the timing of your cash. Fund managers report it because they don't choose when clients add money. Here it is "Your picks".</p>
+<p><b>MWR (money-weighted return)</b>: what your actual dollars earned, with each deposit counting only from the day it arrived. Big amounts weigh more than small ones. It is your real experience as an investor. Here it is "Your money".</p>
+<p><b>XIRR</b>: the standard way to calculate an MWR when money goes in and out on irregular dates (the same function as in Excel). Your money's return is the XIRR of every deposit, sale and today's value.</p>
+<p><b>The comparison</b>: each one is set against the S&amp;P 500 the same way. Your picks vs the S&amp;P's own time-weighted return gives <b>stock picking</b>. Your money vs the same dated deposits and sales put into the S&amp;P 500 total-return index (its XIRR) gives <b>the score</b>, the big number. The gap between money-weighted and time-weighted is <b>timing</b>, for you and for the S&amp;P; your timing minus the S&amp;P's timing is the timing row. Stock picking + timing = the score. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
   <p class="note flat">Each holding's extra money over putting the same cash into the S&amp;P 500, as % of your book, last 2 years. Sold names count; positions under 0.5% of assets are grouped. Evidence for your review, never a signal to trade on its own: exits stay on kill conditions.</p>`}
 function goTo(t){select(t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 function changes(){return Object.entries(WIF).filter(([,f])=>f!==1)}
