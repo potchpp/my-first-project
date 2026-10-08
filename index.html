@@ -550,8 +550,8 @@ if(PF){
   if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
 }
 drawQueue();wireQueue();
-const RULE_LAG=0.5;  // a holding that cost more than this % of the book vs the S&P over 2 years needs a fresh look
-function drawRules(){const el=document.getElementById("rules"),S=PF&&PF.score||{},s2=S["2y"],s1=S["1y"],AB=PF&&PF.adds_book;if(!el||!s2)return;
+function drawRules(){const RULE_LAG=0.5;  // a holding costing more than this % of the book vs the S&P over 2 years needs a fresh look
+  const el=document.getElementById("rules"),S=PF&&PF.score||{},s2=S["2y"],s1=S["1y"],AB=PF&&PF.adds_book;if(!el||!s2)return;
   const lag=(PF.attr||[]).filter(a=>a[0]!=="small"&&!a[2]&&a[1]<=-RULE_LAG).map(a=>a[0]);
   const weak=Object.entries(ADDS).filter(([t,a])=>a[0]>=ADDMIN&&a[1]/a[0]<ADDHIT).map(([t])=>t);
   const R=[
