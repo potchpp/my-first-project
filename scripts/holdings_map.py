@@ -621,7 +621,8 @@ def portfolio_view(page, portfolio, policy, moves=None):
     rates = rates + ('roi_thb', 'roi_usd', 'fx_move', 'twr', 'bench')  # baht ROI ("Yahoo check") and the 1-month picks view
     score = {k: {f: r1(w.get(f), 4) for f in rates} | {f: r1(w.get(f), 2) for f in ('gap_pp', 'timing_pp')}
                 | {'start': w.get('start')} for k, w in win.items() if w and k in ('1m', '6m', '2y', '1y', 'inception')}
-    return {'as_of': portfolio.get('as_of', ''), 'cap': policy.get('driver_cap_pct_total'), 'us': us_share, 'held': held,
+    return {'as_of': portfolio.get('as_of', ''), 'cap': policy.get('driver_cap_pct_total'),
+            'chain_budget': policy.get('ai_chain_budget_pct_total'), 'us': us_share, 'held': held,
             'no_brief': sorted(no_brief), 'drivers': sorted(([g, round(v, 2)] for g, v in exposure.items()), key=lambda d: -d[1]),
             'moves': {p: contributions({t: h['w'] for t, h in held.items()}, moves, p) for p in ('r1', 'r5')},
             'chains': {name: chain_exposure(roles, held, us_share) for name, roles in CHAINS.items()},

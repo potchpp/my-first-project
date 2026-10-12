@@ -21,6 +21,7 @@ model: sonnet
 effort: M
 do: Update portfolio/policy.json so the AI-capex chain uses the chain budget decided on 2026-10-05 instead of the old per-driver cap, and make the map and trading desk read it.
 done-when: holdings_map.py and the trading-desk skill show the AI chain against the new budget, and tests pass.
+update 2026-10-12: Brief correction (from portfolio/decisions.md 2026-10-05): the council did NOT replace the 10% tag cap; it stays until the tier rule is settled. The chain budget is an additional limit on the whole hyperscaler chain.
 
 ## k8fex [todo] Add TSMC as supplier in the NVDA, AMD and AVGO briefs
 created: 2026-10-06

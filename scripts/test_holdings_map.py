@@ -165,6 +165,11 @@ class PortfolioViewTests(unittest.TestCase):
         v = hm.portfolio_view(self.PAGE, self.PORTFOLIO, {'us_stock_share_of_total': 0.5, 'driver_cap_pct_total': 10})
         self.assertEqual(v['drivers'], [['ai-capex', 12.5], ['diversified-us', 5.0]])  # (0.2+0.05)*0.5*100
         self.assertEqual(v['cap'], 10)
+        self.assertIsNone(v['chain_budget'])  # no budget in the policy: the chain panel falls back to the driver cap
+
+    def test_chain_budget_is_passed_alongside_the_driver_cap(self):
+        v = hm.portfolio_view(self.PAGE, self.PORTFOLIO, {'driver_cap_pct_total': 10, 'ai_chain_budget_pct_total': 20})
+        self.assertEqual((v['cap'], v['chain_budget']), (10, 20))
 
     def test_dotted_symbol_matches_brief_and_unbriefed_holdings_are_listed(self):
         v = hm.portfolio_view(self.PAGE, self.PORTFOLIO, {})

@@ -415,6 +415,10 @@ function bookFindings(){if(!PF)return[];const out=[],cap=PF.cap||10,S=PF.score||
   for(const[g,v]of exposure())if(v>=cap){const ts=Object.keys(HELD).filter(t=>byT[t]&&byT[t].g===g);
     out.push(B("warn","cap:"+g,`${cap1(th(g))} is over its cap`,`${v.toFixed(1)}% of total assets vs your ${cap}% cap · ${ts.length} holdings: ${ts.join(", ")}`,
       `/council "${cap1(th(g))} is ${v.toFixed(1)}% of assets vs a ${cap}% cap: which holding gives way, judged by thesis and valuation?"`,`Council on the ${th(g)} cap`))}
+  const ch=(PF.chains||{})["hyperscaler-capex"],bud=PF.chain_budget;
+  if(ch&&bud&&ch.demand>=bud*.9)out.push(B(ch.demand>=bud?"bad":"warn","budget:ai-chain",`The AI chain is ${ch.demand>=bud?"over":"near"} its budget`,
+    `${ch.demand.toFixed(1)}% of total assets across the whole hyperscaler chain vs your ${bud}% budget (decided 2026-10-05)`,
+    `/council "The AI chain is ${ch.demand.toFixed(1)}% of assets vs a ${bud}% budget: which holding gives way, judged by thesis and valuation?"`,"Council on the AI chain budget"));
   const y=S["1y"],z=S["2y"]||{};
   if(y&&y.gap_pp!=null&&y.gap_pp<0)out.push(B("","rule","Behind the S&P over the last year",`1 year ${ptsy(y.gap_pp)} · 2 years ${ptsy(z.gap_pp)} · your money vs the same money in the S&P`,
     "Write your index-core rule now: what must the 2-year gap show at the next review, and what happens if it doesn't?","Write the index-core rule before the next review"));
@@ -641,13 +645,13 @@ function drvText(g){const held=Object.keys(HELD).filter(t=>byT[t]&&byT[t].g===g)
 function showDriver(g){DRV=g;document.querySelectorAll("#drivers button.drv").forEach(b=>b.setAttribute("aria-expanded",String(b.dataset.g===g)));
   const n=document.getElementById("drvnote");if(n)n.innerHTML=g?drvText(g):HINT;}
 function drawChain(){const ch=(PF.chains||{})["hyperscaler-capex"];if(!ch)return;const el=document.getElementById("chain");el.hidden=false;
-  const cap=PF.cap||10,lvl=v=>v>=cap?"var(--ahead)":v>=cap*.8?"var(--warn)":"var(--ink)";
+  const cap=PF.cap||10,bud=PF.chain_budget,lim=bud||cap,lvl=v=>v>=lim?"var(--ahead)":v>=lim*.9?"var(--warn)":"var(--ink)";
   const roles=ch.roles.map(x=>({...x,pct:x.held.reduce((s,[t,w])=>s+w*F(t),0)*US}));
   const demand=roles.reduce((s,x)=>s+x.pct,0),cut=roles.filter(x=>x.key!=="spender").reduce((s,x)=>s+x.pct,0);
   const tickers=ch.roles.flatMap(x=>[...x.held.map(h=>h[0]),...x.watch]);
   const next=tickers.map(t=>[t,(MON[t]||{}).falsifier]).filter(([,f])=>f&&f.days!=null&&f.days>=0).sort((a,b)=>a[1].days-b[1].days)[0];
   el.innerHTML=`<p class="lab">Hyperscaler capex chain · one economic bet across four driver tags${changes().length?" · with your what-if":""}</p>
-  <div class="modes"><div class="mode"><span>If AI demand disappoints, the whole chain loses</span><b class="num" style="color:${lvl(demand)}">${demand.toFixed(1)}% of assets</b><span class="note flat">Your cap for one driver is ${cap}%</span></div>
+  <div class="modes"><div class="mode"><span>If AI demand disappoints, the whole chain loses</span><b class="num" style="color:${lvl(demand)}">${demand.toFixed(1)}% of assets</b><span class="note flat">${bud?`Your AI chain budget is ${bud}% of assets (decided 2026-10-05); each driver tag keeps its ${cap}% cap`:`Your cap for one driver is ${cap}%`}</span></div>
   <div class="mode"><span>If hyperscalers cut capex for discipline, spenders gain and the rest lose</span><b class="num" style="color:${lvl(cut)}">${cut.toFixed(1)}% at risk</b><span class="note flat">${roles[0].pct.toFixed(1)}% in spenders partly offsets it</span></div>
   ${next?`<div class="mode"><span>Next report that tests the chain</span><b>${next[0]} · ${next[1].days} days</b><span class="note flat">${esc(next[1].metric)}: now ${next[1].current??"?"}${esc(next[1].unit||"")}, line ${next[1].breaks||""} ${next[1].threshold??""}${esc(next[1].unit||"")}</span></div>`:""}</div>
   <div class="roles">${roles.map(x=>`<div class="role"><div>${esc(x.name)}<small>${esc(x.hit)}</small></div><div class="tk">${x.held.map(([t,w])=>`<button data-t="${t}">${t} ${(w*F(t)).toFixed(1)}%</button>`).join("")}${x.watch.map(t=>`<button class="w" data-t="${t}" title="Watch list, not held">${t}</button>`).join("")}</div><span class="num">${x.pct.toFixed(1)}%</span></div>`).join("")}</div>
