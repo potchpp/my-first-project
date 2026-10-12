@@ -1,7 +1,7 @@
 ---
 ticker: AMD
 company: Advanced Micro Devices
-updated: 2026-09-26
+updated: 2026-10-13
 type: stock-brief
 shared_driver: ai-capex
 ---
@@ -41,6 +41,7 @@ AMD ออกแบบ chip แบบ fabless (ผลิตที่ [[TSM]]) �
 - **Backlog เป็น option ของลูกค้า ไม่ใช่ข้อผูกพันของ AMD:** ไม่มีสัญญาระยะยาว ยกเลิกได้ใน 30 วัน (10-K l.534, 622) — ตัวเลข "2027 มากกว่า 2 เท่า" ทั้งหมดตั้งอยู่บนความสัมพันธ์ที่ไม่ผูกมัด — **bear point ที่ไม่มี bull counter**
 - **ราคาแซงเป้านักวิเคราะห์แล้ว:** ราคา $630 เหนือ average PT $616.51, หุ้นขึ้น ~170% YTD, market cap ใกล้ $1T *(sentiment agent)*
 - **OpenAI warrant ผูกกับราคาหุ้น $600:** ความสัมพันธ์ที่ต้องให้หุ้นขึ้นก่อนถึงจะสมบูรณ์เป็นเหตุผลวนกลับ *(sentiment agent)*
+- **ทุก CPU/GPU ที่ 7nm หรือเล็กกว่ามาจาก [[TSM]] รายเดียว:** 10-K เขียนเองว่าถ้า TSMC ผลิต wafer ไม่พอ อาจกระทบธุรกิจอย่างมีนัยสำคัญ *(10-k-fy2025.md:562, 564, 594)* — และน่าจะต้องแย่ง capacity ขั้นสูงที่ TSMC กับ [[NVDA]] *(inference: NVDA ก็ผลิตที่ TSMC, 10-k-fy2026.md:148; AMD 10-K ไม่ได้ระบุ)* ความเสียหายประเมินขนาดไม่ได้ `[open-ended]` จึงอยู่ใน Bear ไม่ใช่ kill condition
 
 ## Valuation
 

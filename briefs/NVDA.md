@@ -1,7 +1,7 @@
 ---
 ticker: NVDA
 company: NVIDIA
-updated: 2026-09-26
+updated: 2026-10-13
 type: stock-brief
 shared_driver: ai-capex
 ---
@@ -41,6 +41,7 @@ NVIDIA ขาย "AI factory" ครบ stack — GPU, CPU (Grace/Vera), NVLink/
 - **Vendor-financed demand:** $500B financing partnership (Apollo/BlackRock/KKR), $17.5B private stakes, $3.5B guarantees — NVIDIA ช่วยให้ลูกค้ามีเงินซื้อ NVIDIA; ถ้าเครดิตตึง order ที่ยกเลิกได้จะหายก่อน *(fundamentals l.638, 682, 686; earnings agent)* — **bear point ที่ไม่มี bull counter**
 - **ลูกค้ารายใหญ่ = คู่แข่ง:** hyperscaler ASIC ขยับจาก 20.9% → 27.8% ของตลาด AI chip (TPU, Trainium, Maia, MTIA) — เจ้าของ 36% ของรายได้คือคนเดียวกับที่ทำ chip มาแทน *(sentiment agent)*
 - **ไม่มี cushion:** valuation ต้องการ GM 72-73% ซึ่งเท่ากับจุดที่ guide ว่าจะ bottom พอดี *(valuation agent)*
+- **ความเสี่ยงกระจุกตัวที่ foundry และ Asia:** wafer ผลิตที่ [[TSM]] (และ Samsung) และ package ด้วย CoWoS — supply chain ส่วนใหญ่ยังกระจุกใน Asia แม้กำลังขยายผู้ผลิตไป US และ Latin America *(10-k-fy2026.md:148)* 10-K ระบุเองว่า foundry ที่ให้ capacity ไม่พอคือความเสี่ยงต่อธุรกิจ *(l.474)* และ supplier บางส่วนอยู่ในพื้นที่เสี่ยงภัยพิบัติใน Asia *(l.574)* ความเสียหายประเมินขนาดไม่ได้ `[open-ended]` จึงอยู่ใน Bear ไม่ใช่ kill condition
 
 ## Valuation
 

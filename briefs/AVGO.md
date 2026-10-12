@@ -1,7 +1,7 @@
 ---
 ticker: AVGO
 company: Broadcom
-updated: 2026-09-26
+updated: 2026-10-13
 type: stock-brief
 shared_driver: ai-capex
 ---
@@ -49,6 +49,7 @@ Broadcom ทำรายได้จากสองธุรกิจ: Semicondu
 - **หนี้ไม่ได้หายไป แค่ย้ายออกนอกงบดุล** — debt ~$67B (UNVERIFIED) ยังอยู่ในงบ Broadcom แม้จ่ายคืน $5.6B+$1.5B ปีนี้ ขณะที่ XPV $35B financing เป็น contingent liability ที่ valuation agent เองก็ชี้ว่าไม่อยู่ในงบ Broadcom — credit risk ของ AI buildout ถูกเก็บไว้ที่อื่น ถ้า counterparty สะดุด (เช่น lab ที่ยังขาดทุน) ความเสี่ยงย้อนกลับมาได้
 - **Non-AI semiconductor แบนสนิท** — $4.2B, +5% YoY เท่านั้น, flat QoQ — ธุรกิจ semiconductor เดิมไม่โตเลย ทั้ง thesis พึ่ง AI customer กลุ่มเดิมกลุ่มเดียว
 - **Bear point ที่ไม่มี bull counter**: อัตราการโตกำลังชะลอตัวตามตัวเลขที่บริษัทเองให้ — +221% (Q3 จริง) → +186% (FY26 guide) → ~100% (FY27/28 outlook) นี่คือ fact จากบริษัทเอง ไม่ใช่ bear คาดเดา รวมกับ concentration แล้ว คือฐานที่แคบลงและอัตราโตที่ช้าลง ไม่ใช่ demand ที่ขยายวงกว้างอย่างที่ bull เล่า
+- **~95% ของ wafer ที่ contract manufacturer ผลิตให้ในปี FY2025 มาจาก [[TSM]]:** Broadcom บอกเองว่า wafer ของตนเป็นสัดส่วนสำคัญของ capacity TSMC แต่ TSMC ผลิตให้คู่แข่งด้วยและอาจเลือก prioritize รายอื่น *(10-k-fy2025.md:442; การ outsource front-end wafer l.170)* ความเสียหายประเมินขนาดไม่ได้ `[open-ended]` จึงอยู่ใน Bear ไม่ใช่ kill condition
 
 ## Valuation
 
