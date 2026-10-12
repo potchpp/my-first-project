@@ -249,7 +249,9 @@ class ComputeTests(unittest.TestCase):
         w = r["windows"]["inception"]
         self.assertEqual(w["start"], self.cal[0].isoformat())
         self.assertEqual(set(w), {"start", "end", "apr", "bench", "alpha_pp", "twr", "beat",
-                                  "mwr", "shadow_mwr", "gap_pp", "twr_ann", "timing_pp", "excess_usd"})
+                                  "mwr", "shadow_mwr", "gap_pp", "twr_ann", "timing_pp", "excess_usd",
+                                  "bench_ann", "md_ann", "shadow_md_ann", "roi_ann", "shadow_roi_ann",
+                                  "years", "net_flow_usd", "shadow_end_usd", "roi_usd"})
         self.assertAlmostEqual(w["alpha_pp"], (w["apr"] - w["bench"]) * 100)
         self.assertEqual(w["beat"], w["apr"] > w["bench"])
 
@@ -319,6 +321,30 @@ class MoneyWeightedTests(unittest.TestCase):
         w = r["windows"]["inception"]
         self.assertAlmostEqual(w["gap_pp"], 0.0, places=6)
         self.assertAlmostEqual(w["excess_usd"], 0.0, places=6)
+        for mine, sp in (("roi_ann", "shadow_roi_ann"), ("md_ann", "shadow_md_ann"), ("twr_ann", "bench_ann")):
+            self.assertAlmostEqual(w[mine], w[sp], places=6, msg=mine)   # tracking the index ties on every measure
+
+    def test_roi_in_baht_adds_the_currency_move(self):
+        cal = days(60)
+        n = len(cal)
+        prices = {perf.BENCH: series(cal, [100.0] * n), "AAA": series(cal, [10.0] * n),
+                  perf.FX: series(cal, [30.0] * (n - 1) + [33.0])}          # flat in dollars; the dollar ends +10%
+        w = perf.compute([Trade("AAA", cal[1], 10, 10, 0)], prices, cal[-1])["windows"]["inception"]
+        self.assertAlmostEqual(w["roi_thb"], 0.10, places=6)
+        self.assertAlmostEqual(w["roi_usd"], 0.0, places=6)                 # flat in dollars
+        self.assertAlmostEqual(w["fx_move"], 0.10, places=6)
+        self.assertNotIn("roi_thb", perf.compute([Trade("AAA", cal[1], 10, 10, 0)],
+                                                 {k: v for k, v in prices.items() if k != perf.FX}, cal[-1])["windows"]["inception"])
+
+    def test_modified_dietz_mwr_differs_from_xirr(self):
+        # 100 at the start, 100 added mid-year, 230 at the end; the index is flat
+        d = [date(2024, 1, 1), date(2024, 7, 1), date(2024, 12, 31)]
+        m = perf.money_weighted([100.0, 200.0, 230.0], {1: 100.0}, d, {x: 100.0 for x in d}, 0, 2)
+        self.assertAlmostEqual(m["md_ann"], 0.20, places=2)    # 30 profit / ~150 average money in
+        self.assertAlmostEqual(m["mwr"], 0.203, places=2)      # XIRR compounds: 100(1+r) + 100(1+r)^0.5 = 230
+        self.assertGreater(abs(m["mwr"] - m["md_ann"]), 0.002)
+        self.assertAlmostEqual(m["shadow_md_ann"], 0.0, places=6)
+        self.assertAlmostEqual(m["bench_ann"], 0.0, places=6)
 
     def test_buying_before_a_rise_has_positive_trade_around_value(self):
         cal = days(300)

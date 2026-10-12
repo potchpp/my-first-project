@@ -591,11 +591,14 @@ def portfolio_view(page, portfolio, policy, moves=None):
     moves = moves or {}
     driver_of = {n['t']: n['g'] for n in page['nodes']}
     us_share = policy.get('us_stock_share_of_total', 1)
-    held, no_brief, exposure, attr = {}, [], defaultdict(float), []
+    held, no_brief, exposure, attr, lag1 = {}, [], defaultdict(float), [], []
     drv_ex, drv_val = defaultdict(float), defaultdict(float)
     for p in portfolio['positions']:
         t = p['symbol'].replace('.', '').replace('-', '')  # BRK.B / BRK-B -> BRKB, the brief's name
         two = (p.get('windows') or {}).get('2y') or {}
+        one = (p.get('windows') or {}).get('1y') or {}
+        if one.get('excess_pct_book') is not None:
+            lag1.append([t, round(one['excess_pct_book'], 2)])
         if two.get('excess_pct_book') is not None:  # sold names count too: they explain part of the gap
             attr.append([t, round(two['excess_pct_book'], 2), abs(p.get('qty', 1)) < 1e-9])
             if t in driver_of:
@@ -614,14 +617,17 @@ def portfolio_view(page, portfolio, policy, moves=None):
     small = [a for a in attr if not a[2] and held.get(a[0], {}).get('w', 0) * us_share * 100 < SMALL_PCT]
     attr = [a for a in attr if a not in small] + ([['small', round(sum(a[1] for a in small), 2), False, len(small)]] if small else [])
     win = portfolio.get('windows') or {}
-    score = {k: {f: r1(w.get(f), 4 if f in ('mwr', 'shadow_mwr', 'twr_ann') else 2) for f in ('mwr', 'shadow_mwr', 'gap_pp', 'twr_ann', 'timing_pp')}
-                | {'start': w.get('start')} for k, w in win.items() if w and k in ('2y', '1y', 'inception')}
+    rates = ('roi_ann', 'shadow_roi_ann', 'twr_ann', 'bench_ann', 'md_ann', 'shadow_md_ann', 'mwr', 'shadow_mwr')
+    rates = rates + ('roi_thb', 'roi_usd', 'fx_move', 'twr', 'bench')  # baht ROI ("Yahoo check") and the 1-month picks view
+    score = {k: {f: r1(w.get(f), 4) for f in rates} | {f: r1(w.get(f), 2) for f in ('gap_pp', 'timing_pp')}
+                | {'start': w.get('start')} for k, w in win.items() if w and k in ('1m', '6m', '2y', '1y', 'inception')}
     return {'as_of': portfolio.get('as_of', ''), 'cap': policy.get('driver_cap_pct_total'), 'us': us_share, 'held': held,
             'no_brief': sorted(no_brief), 'drivers': sorted(([g, round(v, 2)] for g, v in exposure.items()), key=lambda d: -d[1]),
             'moves': {p: contributions({t: h['w'] for t, h in held.items()}, moves, p) for p in ('r1', 'r5')},
             'chains': {name: chain_exposure(roles, held, us_share) for name, roles in CHAINS.items()},
             'score': score, 'review': review_point(portfolio.get('as_of')),
             'attr': sorted(attr, key=lambda a: -a[1]),
+            'lag1': sorted((a for a in lag1 if a[1] < 0), key=lambda a: a[1])[:5],
             'drv2': {g: round(drv_ex[g] / drv_val[g] * 100, 2) for g in drv_ex if drv_val[g] > 0}}
 
 

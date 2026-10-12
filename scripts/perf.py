@@ -25,7 +25,8 @@ DEFAULT_TRANSACTIONS = PORTFOLIO_DIR / "My Asset Portfolio - Export - Yahoo Fina
 CACHE_DIR = PORTFOLIO_DIR / "cache"
 BENCH = "^SP500TR"
 KPI_HISTORY = PORTFOLIO_DIR / "kpi-history.jsonl"  # one row per day: the gap per window, for 'change since last review'
-WINDOWS = {"inception": None, "6m": 6, "1y": 12, "2y": 24, "5y": 60}
+WINDOWS = {"inception": None, "1m": 1, "6m": 6, "1y": 12, "2y": 24, "5y": 60}
+FX = "THB=X"  # baht per US dollar: the "Yahoo check" restates ROI in baht, as Yahoo Finance shows the portfolio
 
 Prices = Dict[str, Dict[date, float]]
 
@@ -252,10 +253,20 @@ def money_weighted(vals: List[float], flows: Dict[int, float], days: List[date],
     mwr, shadow = xirr(cfs), xirr(cfs[:-1] + [(days[e], shadow_end)])
     years = (days[e] - (cfs[0][0])).days / 365.25
     t = twr(vals, flows, s, e)
-    twr_ann = (1 + t) ** (1 / years) - 1 if t is not None and years > 0 and t > -1 else None
+    per_year = lambda r: (1 + r) ** (1 / years) - 1 if r is not None and years > 0 and r > -1 else None
+    twr_ann = per_year(t)
+    # Modified Dietz: profit over the average money invested, each flow weighted by the share of the window it was in
+    # (simple weighting, one period). A different calculation from XIRR, which solves for a compounding rate.
+    span = (days[e] - days[s]).days
+    net = sum(f for _, f in moves)
+    avg_in = vals[s] + sum(f * (days[e] - days[i]).days / span for i, f in moves) if span > 0 else 0.0
+    md = lambda end: (end - vals[s] - net) / avg_in if avg_in > 1e-9 else None
     return {"mwr": mwr, "shadow_mwr": shadow,
             "gap_pp": (mwr - shadow) * 100 if mwr is not None and shadow is not None else None,
             "twr_ann": twr_ann, "timing_pp": (mwr - twr_ann) * 100 if mwr is not None and twr_ann is not None else None,
+            "bench_ann": per_year(bench[days[e]] / bench[cfs[0][0]] - 1),  # same span as the XIRR and TWR years
+            "md_ann": per_year(md(vals[e])), "shadow_md_ann": per_year(md(shadow_end)),
+            "years": years, "net_flow_usd": net, "shadow_end_usd": shadow_end,
             "excess_usd": vals[e] - shadow_end}
 
 
@@ -321,6 +332,21 @@ def compute(trades: List[Trade], prices: Prices, as_of: date, excluded=()) -> di
             "twr": twr(total, flows, s, e), "beat": a["apr"] > br,
             **(money_weighted(total, flows, days, bench, s, e) or {}),
         }
+        w = result["windows"][name]
+        if w.get("shadow_end_usd") is not None:  # ROI: profit / money put in, no dates; the S&P on the same money
+            yrs = w["years"]
+            roi_sp = (w["shadow_end_usd"] - total[s] - w["net_flow_usd"]) / a["capital"]
+            w["roi_ann"] = (1 + a["apr"]) ** (1 / yrs) - 1 if yrs > 0 and a["apr"] > -1 else None
+            w["shadow_roi_ann"] = (1 + roi_sp) ** (1 / yrs) - 1 if yrs > 0 and roi_sp > -1 else None
+        base_usd = total[s] + sum(flows.get(i, 0.0) for i in range(s + 1, e + 1))  # Yahoo's formula, in dollars
+        w["roi_usd"] = (total[e] - base_usd) / base_usd if base_usd > 1e-9 else None
+        if FX in prices:  # ROI in baht: every value and cash flow at that day's rate, gain / (start value + net money in)
+            x = lambda i: last_close(prices[FX], days[i])
+            moves = [(i, flows[i]) for i in range(s + 1, e + 1) if abs(flows.get(i, 0.0)) > 1e-9]
+            if x(s) and x(e) and all(x(i) for i, _ in moves):
+                base = total[s] * x(s) + sum(f * x(i) for i, f in moves)
+                w["roi_thb"] = (total[e] * x(e) - base) / base if base > 1e-9 else None
+                w["fx_move"] = x(e) / x(s) - 1
 
     for sym in sorted({t.symbol for t in trades}):
         sym_trades = [t for t in trades if t.symbol == sym]
@@ -517,7 +543,7 @@ def main(argv=None) -> int:
             print("error: yfinance not installed. Run: python3 -m pip install yfinance", file=sys.stderr)
             return 1
 
-    ysyms = sorted({yahoo_symbol(t.symbol) for t in trades}) + [BENCH]
+    ysyms = sorted({yahoo_symbol(t.symbol) for t in trades}) + [BENCH, FX]
     prices = get_prices(ysyms, trades[0].date - timedelta(days=7), args.as_of, fetch=not args.no_fetch)
     if BENCH not in prices:
         print(f"error: no price data for {BENCH}; cannot compute the benchmark", file=sys.stderr)

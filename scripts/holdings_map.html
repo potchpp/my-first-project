@@ -116,9 +116,26 @@ button.drv:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
 .big{display:block;font-size:var(--fs-2xl);font-weight:300;line-height:1.1;letter-spacing:-.02em;margin:8px 0 4px}
 .big span{font-size:var(--fs-md);font-weight:400;color:var(--muted)}
 .minis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.split{width:100%;border-collapse:collapse;font-size:var(--fs-sm);margin-top:20px}
+@media (max-width:760px){.split th small,.split td small{display:block;margin-left:0}}
+.split caption{text-align:left;font-size:var(--fs-xs);color:var(--muted);margin-bottom:4px}
+.split th,.split td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+.split th[scope=row]{text-align:left;font-weight:500}.split th small,.split td small{display:inline;margin-left:6px;font-weight:400;font-size:var(--fs-xs);color:var(--muted)}
+.split td .yv{display:block;font-size:var(--fs-xs);color:var(--muted);font-weight:400;white-space:nowrap}
+.split td b{font-weight:600}
+.ycheck{margin:8px 0 0;max-width:none;line-height:1.6}
+.ins{display:grid;gap:8px;margin-bottom:16px}
+.irow{display:grid;grid-template-columns:76px minmax(0,1fr);gap:4px 12px;align-items:start;padding:10px 12px;border-radius:var(--r-tile);background:var(--bg);font-size:var(--fs-sm)}
+.irow p{margin:4px 0 0;line-height:1.5}.irow .iact{font-size:var(--fs-xs);color:var(--ink)}.irow .btn{padding:4px 12px;font-size:var(--fs-xs);margin-left:4px}
+.split thead th{font-size:var(--fs-xs);color:var(--muted);font-weight:500}
+.split tr.tot th,.split tr.tot td{border-bottom:0;font-weight:600}
 .mini{background:var(--hover);border-radius:var(--r-tile);padding:12px 12px;display:grid;gap:4px;font-size:var(--fs-sm)}
 .mini b{font-size:var(--fs-lg);font-weight:500}
 .mini small{color:var(--muted);font-size:var(--fs-xs)}
+.rules{display:grid;gap:8px;margin-bottom:16px}
+.rrow{display:grid;grid-template-columns:76px minmax(140px,1fr) minmax(90px,auto) 96px minmax(0,2.4fr);gap:8px 12px;align-items:center;font-size:var(--fs-sm);padding:8px 12px;border-radius:var(--r-tile);background:var(--bg)}
+.rrow .ract{font-size:var(--fs-xs);color:var(--ink)}.rrow .btn{padding:4px 12px;font-size:var(--fs-xs);margin-left:4px}
+@media (max-width:760px){.rrow{grid-template-columns:76px 1fr auto}.rrow .ract{grid-column:1/-1}.rrow>.state{display:none}}
 .acols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 32px}
 .arow{display:grid;grid-template-columns:minmax(90px,150px) 1fr 64px;gap:12px;align-items:center;font-size:var(--fs-sm);padding:4px 0}
 .arow .bar{height:8px;border-radius:var(--r-chip);background:var(--hover);position:relative}
@@ -215,6 +232,13 @@ ul.pts li::marker{color:var(--edge)}
 .more>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 /* review queue: finding · evidence · next step, one row per stock; your actions: the open to-do list from the journal */
 .queue,.actions{display:grid;gap:4px;background:var(--panel);border-radius:var(--r-panel);padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
+#attn .qwrap>.per{margin:0 0 12px}
+.qwrap>summary{list-style:none;cursor:pointer;display:flex;align-items:center;min-height:32px}
+.qwrap>summary::-webkit-details-marker{display:none}
+.qwrap>summary::before{content:"▸";color:var(--muted);margin-right:8px}.qwrap[open]>summary::before{content:"▾"}
+.qwrap>summary .lab{margin:0}.qwrap>summary b{font-weight:600}
+.qwrap>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.qhint{margin:4px 0 12px}
 .qhead{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
 .qrow{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,320px);gap:16px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
 @media (max-width:760px){.qrow{grid-template-columns:1fr;gap:8px}}
@@ -420,12 +444,19 @@ const HOW_Q=`<details class="how"><summary>How findings are chosen</summary><p>O
 const ARCHIVE_DAYS=120;
 const archived=f=>{const c=srcCheck(f);return !!(c&&c.done&&(!c.doneOn||inDays(c.doneOn)>-ARCHIVE_DAYS))};
 const keepOpen=(el,sel)=>!!(el.querySelector(sel)||{}).open;
+let QOPEN=(()=>{try{return !!localStorage.getItem("qopen")}catch(e){return false}})();
+let QF=(()=>{try{return localStorage.getItem("qf")??"bad"}catch(e){return "bad"}})();
 function drawQueue(){const el=document.getElementById("attn");
   const all=[...bookFindings(),...DATA.nodes.map(n=>finding(n.t)).filter(Boolean)].sort((a,b)=>SEV[a.sev]-SEV[b.sev]||sz(b.t)-sz(a.t));
   const live=all.filter(f=>!archived(f)),done=all.filter(archived),wasOpen=keepOpen(el,"details.arch");
   FIND=Object.fromEntries(all.map(f=>[f.key,f]));el.hidden=!all.length;
-  el.innerHTML=`<div class="qhead"><p class="lab">Review queue · ${live.length} finding${live.length===1?"":"s"}</p><span class="hint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</span></div>`+(live.length?live.map(qrow).join(""):`<p class="hint">Nothing needs a look right now.</p>`)
-  +(done.length?`<details class="how arch"${wasOpen?" open":""}><summary>Done · ${done.length} · each comes back after ${ARCHIVE_DAYS} days if it's still true, or when you reopen its action</summary>${done.map(qrow).join("")}</details>`:"")+HOW_Q}
+  const n=s=>live.filter(f=>SEV[f.sev]<=SEV[s]).length,lv=QF==="bad"&&!n("bad")?"warn":QF,shown=live.filter(f=>SEV[f.sev]<=SEV[lv]),hid=live.length-shown.length;
+  const tg=live.length?`<div class="per" role="group" aria-label="Show findings">Show ${[["bad","Act now"],["warn","+ Look"],["","All"]].map(([s,l])=>`<button data-qf="${s}" aria-pressed="${lv===s}">${l} · ${n(s)}</button>`).join("")}</div>`:"";
+  const qo=el.querySelector("details.qwrap")?keepOpen(el,"details.qwrap"):QOPEN,urgent=n("bad");
+  el.innerHTML=`<details class="qwrap"${qo?" open":""}><summary><span class="lab">Review queue · ${live.length} finding${live.length===1?"":"s"}${urgent?` · <b class="dn">${urgent} act now</b>`:""}</span></summary>`
+  +`<p class="hint qhint">${DB?"Add a next step to your actions; it saves to your private journal.":PF?"Open this page on claude.ai to save next steps as actions.":"Copy a next step to run it in Claude Code."}</p>`+tg+(live.length?shown.map(qrow).join("")+(hid?`<p class="hint">${hid} more below this level · use Show above to see them</p>`:""):`<p class="hint">Nothing needs a look right now.</p>`)
+  +(done.length?`<details class="how arch"${wasOpen?" open":""}><summary>Done · ${done.length} · each comes back after ${ARCHIVE_DAYS} days if it's still true, or when you reopen its action</summary>${done.map(qrow).join("")}</details>`:"")+HOW_Q+`</details>`;
+  el.querySelector("details.qwrap").ontoggle=e=>{if(e.target!==e.currentTarget)return;QOPEN=e.target.open;try{localStorage.setItem("qopen",QOPEN?"1":"")}catch(x){}}}
 const aRow=(c,id)=>`<div class="arow2"><input type="checkbox" id="${id}" data-doc="${esc(c.t)}" data-c="${esc(c.id)}"${c.done?" checked":""}><label for="${id}">${esc(c.text)}</label>${c.t==="BOOK"?`<span class="state">Whole book</span>`:`<button class="qtk" data-t="${esc(c.t)}">${esc(c.t)}</button>`}<span class="num ${!c.done&&c.due&&inDays(c.due)<0?"dn":"state"}">${c.done?"done "+esc(c.doneOn||""):c.due?(inDays(c.due)<0?"overdue · ":"due ")+esc(c.due):""}</span></div>`;
 function drawActions(){const el=document.getElementById("actions");if(!DB){el.hidden=true;return}
   const mine=Object.entries(JR).flatMap(([t,j])=>(j.checks||[]).map(c=>({...c,t}))),wasOpen=keepOpen(el,"details.arch");
@@ -440,6 +471,7 @@ async function copyText(btn,text){try{await navigator.clipboard.writeText(text);
   setTimeout(()=>{btn.textContent="Copy"},2000)}
 function wireQueue(){const q=document.getElementById("attn"),a=document.getElementById("actions");
   q.onclick=async e=>{const b=e.target.closest("button");if(!b)return;
+    if(b.dataset.qf!==undefined){QF=b.dataset.qf;try{localStorage.setItem("qf",QF)}catch(e){}drawQueue();return}
     if(b.dataset.copy){copyText(b,FIND[b.dataset.copy].step);return}
     if(b.dataset.add){const f=FIND[b.dataset.add],d=q.querySelector(`input[data-due="${CSS.escape(f.key)}"]`),body=jclone(f.t);
       body.checks.push({id:Date.now().toString(36),text:f.act,due:d&&d.value||plusDays(14),done:false,d:today,src:f.key});
@@ -514,7 +546,7 @@ if(PF){
   document.querySelector(".legend .plain").textContent="Solid = held, sized by weight · dashed ring = not held";
   const top=PF.drivers[0]||["none",0];
   document.getElementById("stats").innerHTML=[[Object.keys(HELD).length,"held"],[DATA.nodes.filter(n=>!HELD[n.t]).length,"watch list"],[top[1].toFixed(1)+"%",th(top[0])+" of assets"],[esc(PF.as_of),"portfolio as of"]].map(([v,l])=>`<div class="stat"><b${l==="portfolio as of"?' class="date"':""}>${v}</b><span>${l}</span></div>`).join("");
-  drawScore();drawDrivers();drawChain();
+  drawScore();drawRules();drawDrivers();drawChain();
   {const el=document.getElementById("drivers");let pinned=null;
   el.onclick=e=>{if(e.target.id==="wifreset"){WIF={};drawDrivers();drawChain();if(CUR)select(CUR);return}
     const pb=e.target.closest("button[data-per]");if(pb){PER=pb.dataset.per;DRV=pinned;drawDrivers();return}
@@ -527,21 +559,67 @@ if(PF){
   if(PF.no_brief.length){const nb=document.getElementById("nobrief");nb.hidden=false;nb.textContent="Held without a brief: "+PF.no_brief.join(", ");}
 }
 drawQueue();wireQueue();
-function drawScore(){const S=PF.score||{},s2=S["2y"],AB=PF.adds_book;if(!s2)return;const el=document.getElementById("score");el.hidden=false;
+function gp(a,b){return a==null||b==null?null:(a-b)*100}  // a rate gap in points (declared, so usable before this line runs)
+function ppts(x){return x==null?"—":(x>=0?"+":"−")+Math.abs(x).toFixed(1)}
+function drawRules(){  // insights from ROI, TWR, MWR and XIRR that end in an action
+  const el=document.getElementById("rules"),S=PF&&PF.score||{},s1=S["1y"],s2=S["2y"],si=S.inception,AB=PF&&PF.adds_book;if(!el||!s2)return;
+  const pick=w=>w&&gp(w.twr_ann,w.bench_ann),tim=w=>w&&w.mwr!=null&&w.twr_ann!=null&&w.shadow_mwr!=null&&w.bench_ann!=null?((w.mwr-w.twr_ann)-(w.shadow_mwr-w.bench_ann))*100:null;
+  const lag=(PF.lag1||[]).slice(0,3),weak=Object.entries(ADDS).filter(([,a])=>a[0]>=ADDMIN&&a[1]/a[0]<ADDHIT).map(([t])=>t);
+  const hit=AB&&AB[0]?AB[1]/AB[0]:null,p1=pick(s1),p2=pick(s2),pI=pick(si),t1=tim(s1),t2=tim(s2),tI=tim(si);
+  const R=[
+    {k:"ins:picks",ok:p1==null||p1>=0,h:"Your picks · TWR vs the S&P 500",
+     txt:`Your stocks beat the S&P by ${ppts(p2)} pts/yr over 2 years and ${ppts(pI)} since you started, ${p1!=null&&p1<0?"but trail it":"and lead it"} by ${p1==null?"—":Math.abs(p1).toFixed(1)} pts this year.`,
+     act:lag.length?`/council on this year's biggest drags: ${lag.map(a=>`${a[0]} (${ppts(a[1])}% of book)`).join(", ")}`:"Keep the picking discipline; re-check at the next review"},
+    {k:"ins:timing",ok:hit==null||hit>=.5,h:"Timing · XIRR minus TWR, yours vs the S&P's",
+     txt:`When your money arrived cost ${ppts(t2)} pts/yr over 2 years and ${ppts(tI)} since you started (most money came after your best months); this year ${ppts(t1)}. The part you control is adds: ${hit==null?"no adds judged yet":`${Math.round(hit*100)}% of your adds (${AB[1]} of ${AB[0]}) beat the S&P in the 3 months after`}.`,
+     act:weak.length?`No more adds to ${weak.join(", ")} until /deep shows the evidence improved`:"Keep checking each add against the S&P"},
+    {k:"ins:score",ok:s2.gap_pp>=0&&(!s1||s1.gap_pp>=0),h:"The score · your XIRR vs the same money's XIRR in the S&P 500",
+     txt:`With your actual money you are ${ppts(s2.gap_pp)} pts/yr over 2 years and ${ppts(si&&si.gap_pp)} since you started, but ${ppts(s1&&s1.gap_pp)} this year. The 2-year lead is thin; another year like the last one turns it negative.`,
+     act:`Re-check the 1-year gap on ${plusDays(30)}; if it is still below 0, run /council on the whole book`,due:30},
+    {k:"ins:read",info:true,h:"Reading check · ROI and MWR against XIRR",
+     txt:`ROI says ${s2.roi_ann==null?"—":pct(s2.roi_ann)}/yr over 2 years because it counts late deposits as if they were in from the start, so it understates what your money really did (XIRR ${pct(s2.mwr)}). MWR, profit on your average money invested, gives ${s2.md_ann==null?"—":pct(s2.md_ann)} and the same verdict against the S&P (${ppts(gp(s2.md_ann,s2.shadow_md_ann))} vs XIRR's ${ppts(s2.gap_pp)}).`,
+     act:"Judge the goal with XIRR (the big number), not a broker's ROI"}
+  ];
+  const has=k=>((JR.BOOK||{}).checks||[]).some(c=>c.src===k&&!c.done),off=R.filter(r=>!r.info&&!r.ok).length;
+  el.innerHTML=`<p class="lab" style="margin:20px 0 8px">What it means · ${off} to act on</p><div class="ins">`+R.map(r=>`<div class="irow"><span class="st ${r.info?"":r.ok?"":"bad"}">${r.info?"Note":r.ok?"On track":"Act"}</span><div><b>${esc(r.h)}</b><p>${esc(r.txt)}</p>`
+    +`<p class="iact">→ ${esc(r.act)}${!r.info&&!r.ok&&DB?(has(r.k)?` <span class="state">· in Your actions</span>`:` <button class="btn alt" data-rule="${r.k}">Add to my actions</button>`):""}</p></div></div>`).join("")+`</div>`;
+  el.onclick=async e=>{const b=e.target.closest("button[data-rule]");if(!b)return;const r=R.find(x=>x.k===b.dataset.rule),body=jclone("BOOK");
+    body.checks.push({id:Date.now().toString(36),text:r.act,due:plusDays(r.due||14),done:false,d:today,src:r.k});
+    b.disabled=true;b.textContent="Saving…";if(!await saveJournal("BOOK",body)){b.disabled=false;b.textContent="Couldn't save · try again"}}}
+function drawScore(){const S=PF.score||{},s2=S["2y"];if(!s2)return;const el=document.getElementById("score");el.hidden=false;
   const yr=x=>x==null?"—":pct(x),rv=PF.review,cls=x=>x==null?"":x>=0?"up":"dn";
-  const mini=(l,w,note)=>w?`<div class="mini"><span>${l}</span><b class="num ${cls(w.gap_pp)}">${ptsy(w.gap_pp)}</b><small>${note}</small></div>`:"";
   const A=PF.attr||[],up=A.filter(a=>a[1]>0).slice(0,5),dn=A.filter(a=>a[1]<0).slice(-5).reverse(),mx=Math.max(...A.map(a=>Math.abs(a[1])),.01);
   const nm=a=>a[0]==="small"?`${a[3]} small positions`:a[0]+(a[2]?" (sold)":"");
   const col=(h,rows)=>`<div><p class="lab" style="margin-bottom:8px">${h}</p>${rows.map(a=>`<div class="arow"><b>${esc(nm(a))}</b><span class="bar"><i style="width:${Math.abs(a[1])/mx*100}%;background:${a[1]>=0?"var(--deserved)":"var(--ahead)"}"></i></span><span class="num ${cls(a[1])}">${a[1]>=0?"+":"−"}${Math.abs(a[1]).toFixed(2)}%</span></div>`).join("")||`<p class="hint">None</p>`}</div>`;
+  const m1=S["1m"];
+  const W=[["This year",S["1y"]],["2 years",s2],[`Since start${S.inception&&S.inception.start?" · "+esc(S.inception.start.slice(0,7)):""}`,S.inception]];
+  const tile=([l,w])=>w?`<div class="mini"><span>${l}</span><b class="num ${cls(w.gap_pp)}">${ptsy(w.gap_pp)}</b><small>you ${yr(w.mwr)}/yr · S&amp;P ${yr(w.shadow_mwr)}/yr</small></div>`:"";
+  const cell=(a,b)=>{const g=gp(a,b);return `<td class="num"><b class="${cls(g)}">${ppts(g)}</b><span class="yv">${yr(a)} vs ${yr(b)}</span></td>`};
+  const timC=w=>{if(!w||w.mwr==null||w.twr_ann==null||w.shadow_mwr==null||w.bench_ann==null)return `<td class="num">—</td>`;const me=(w.mwr-w.twr_ann)*100,sp=(w.shadow_mwr-w.bench_ann)*100;
+    return `<td class="num"><b class="${cls(me-sp)}">${ppts(me-sp)}</b><span class="yv">${ppts(me)} vs ${ppts(sp)}</span></td>`};
+  const row=(m,what,a,b,c="")=>`<tr${c}><th scope="row">${m}<small>${what}</small></th>${W.map(([,w])=>w?cell(w[a],w[b]):`<td class="num">—</td>`).join("")}</tr>`;
+  const yahoo=()=>{const Y=[["1M",m1],["6M",S["6m"]],["1Y",S["1y"]],["All time",S.inception]].filter(([,w])=>w&&w.roi_thb!=null);if(!Y.length)return "";
+    return `<p class="hint ycheck"><b>Yahoo check</b> · Yahoo Finance should show about <b>USD</b> ${Y.map(([l,w])=>`${l} ${w.roi_usd==null?"—":pct(w.roi_usd)}`).join(" · ")} · <b>THB</b> ${Y.map(([l,w])=>`${l} ${pct(w.roi_thb)}`).join(" · ")} (gain ÷ money in; USD is the one to judge performance by, THB adds the currency; the dollar against the baht: ${Y.map(([l,w])=>`${l} ${w.fx_move>=0?"+":""}${(w.fx_move*100).toFixed(1)}%`).join(", ")}, so a rising dollar lifts your baht return). Within about 1 point is a match; much further off usually means a trade is missing from the trade file. Yahoo's orange S&amp;P line is a lump sum in dollars from the window's first day, so it is fair only for short windows like 5D and 1M.</p>`};
   const since=rv&&rv.gap!=null?` · ${s2.gap_pp>=rv.gap?"up":"down"} ${Math.abs(s2.gap_pp-rv.gap).toFixed(1)} pts since ${esc(rv.date)}`:" · change since your last review appears after about 4 months";
-  el.innerHTML=`<div class="sc-head"><div><p class="lab">Beating the S&amp;P 500 with your money? · rolling 2 years</p>
+  el.innerHTML=`<div class="sc-head"><div><p class="lab">Beating the S&amp;P 500 with your money? · XIRR, rolling 2 years</p>
     <b class="big num ${cls(s2.gap_pp)}">${s2.gap_pp==null?"—":(s2.gap_pp>=0?"+":"−")+Math.abs(s2.gap_pp).toFixed(1)} <span>pts a year</span></b>
     <p class="hint">Your money ${yr(s2.mwr)}/yr vs the same deposits and sales put into the S&amp;P 500 ${yr(s2.shadow_mwr)}/yr${since}</p></div>
-    <div class="minis">${mini("1 year · early warning",S["1y"],"Shorter than your holding period")}${mini("Since you started",S.inception,esc((S.inception||{}).start||""))}
-    ${AB&&AB[0]?`<div class="mini"><span>Your adds · 2 years</span><b class="num ${AB[1]/AB[0]>=.5?"up":"dn"}">${AB[1]} of ${AB[0]}</b><small>past adds beat the S&amp;P in the 3 months after each, ${AB[2]>=0?"+":"−"}${Math.abs(AB[2]).toFixed(1)}% of book in all</small></div>`:""}
-    <div class="mini"><span>Money timing · 2 years</span><b class="num ${cls(s2.timing_pp)}">${ptsy(s2.timing_pp)}</b><small>Your money vs the picks alone (${yr(s2.twr_ann)}/yr). Negative mostly means most of your money arrived recently, not that trades were mistimed.</small></div></div></div>
+    <div class="minis">${W.map(tile).join("")}${m1&&m1.twr!=null&&m1.bench!=null?`<div class="mini"><span>Last month · picks</span><b class="num ${cls(gp(m1.twr,m1.bench))}">${ppts(gp(m1.twr,m1.bench))} pts</b><small>your stocks ${yr(m1.twr)} vs S&amp;P ${yr(m1.bench)} (TWR, not per year): the fair version of Yahoo's 1M view</small></div>`:""}</div></div>
+  <div class="tw"><table class="split"><caption>Four ways to measure, per year · gap in points, you vs the S&amp;P 500 on the same money</caption><thead><tr><th></th>${W.map(([l])=>`<th scope="col">${l}</th>`).join("")}</tr></thead><tbody>
+    ${row("ROI","profit ÷ money put in, no dates: what a broker shows","roi_ann","shadow_roi_ann")}
+    ${row("TWR","your stock picks: one fixed sum, deposits ignored","twr_ann","bench_ann")}
+    ${row("MWR","profit on your average money invested (Modified Dietz)","md_ann","shadow_md_ann")}
+    ${row("XIRR","your money's compounding rate on exact dates: the score","mwr","shadow_mwr",' class="tot"')}
+    <tr><th scope="row">Timing<small>XIRR minus TWR: yours vs the S&amp;P's</small></th>${W.map(([,w])=>timC(w)).join("")}</tr>
+  </tbody></table></div>
+  ${yahoo()}
+  <div id="rules"></div>
   <div class="acols">${col("Added money vs the index",up)}${col("Cost money vs the index",dn)}</div>
-  <details class="how"><summary>How this is calculated</summary><p><b>Your money</b>: the money-weighted return (XIRR) of every deposit and sale in the window, start value included. <b>Same money in the S&amp;P</b>: those same dated cash flows put into the S&amp;P 500 total-return index instead. <b>Gap</b>: the difference, in points a year. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Money timing</b>: money-weighted minus time-weighted return; for this book it mostly reflects when money arrived. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
+  <details class="how"><summary>How this is calculated · ROI, TWR, MWR and XIRR in plain words</summary><p><b>ROI (simple return)</b>: profit ÷ money put in. Easy, but it ignores time and when the money went in: $10 doubled over 5 years and $10 doubled in 1 month both show +100%.</p>
+<p><b>TWR (time-weighted return)</b>: how the investments themselves did, as if one fixed sum had stayed in the whole time. Deposits and withdrawals are taken out, so it judges the picks, not the timing of your cash. Fund managers report it because they don't choose when clients add money. Here it is "Your picks".</p>
+<p><b>MWR (money-weighted return, Modified Dietz)</b>: profit ÷ the average money you had invested, where each deposit counts for the share of the period it was in (a deposit halfway through counts half). Big amounts weigh more than small ones. Simple weighting, no compounding: it answers "what did my average invested money earn?"</p>
+<p><b>XIRR</b>: the one yearly compound rate that turns every dated deposit and sale into today's value (Excel's XIRR). Also money-weighted, but it compounds: money in for 3 years grows on its growth, which MWR's simple weighting ignores. So the two differ, most over long windows with lumpy deposits. XIRR is the score.</p>
+<p><b>The comparison</b>: each one is set against the S&amp;P 500 the same way. Your picks vs the S&amp;P's own time-weighted return gives <b>stock picking</b>. Each of ROI, MWR and XIRR is also worked out for the S&amp;P 500 total-return index on the same dated deposits and sales. Your XIRR minus the S&amp;P's XIRR is <b>the score</b>, the big number. The gap between money-weighted and time-weighted is <b>timing</b>, for you and for the S&amp;P; your timing minus the S&amp;P's timing is the timing row. Stock picking + timing = the score. <b>Your adds</b>: each add's stock return over the next 63 trading days minus the S&amp;P's over the same days; "beat" means positive; % of book = trade amount × that difference ÷ today's book. <b>Added / cost money</b>: each holding's end value minus what its own cash flows would be worth in the S&amp;P. Sources: scripts/perf.py, scripts/trade_audit.py; every trade is listed in portfolio/trade-audit.md and under each holding.</p></details>
   <p class="note flat">Each holding's extra money over putting the same cash into the S&amp;P 500, as % of your book, last 2 years. Sold names count; positions under 0.5% of assets are grouped. Evidence for your review, never a signal to trade on its own: exits stay on kill conditions.</p>`}
 function goTo(t){select(t);document.getElementById("side").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 function changes(){return Object.entries(WIF).filter(([,f])=>f!==1)}
@@ -693,7 +771,7 @@ select("NVDA");
 if(window.claude?.use)(async()=>{
   const [db,sample]=await Promise.all([claude.use("db").catch(()=>null),claude.use("sample").catch(()=>null)]);
   DB=db;SAMPLE=sample;
-  if(DB)DB.collection("journal").onSnapshot(q=>{JR={};q.docs.forEach(d=>{JR[d.id]=d.data()});drawQueue();drawActions();if(CUR)drawJournal(CUR)},()=>{});
+  if(DB)DB.collection("journal").onSnapshot(q=>{JR={};q.docs.forEach(d=>{JR[d.id]=d.data()});drawQueue();drawActions();drawRules();if(CUR)drawJournal(CUR)},()=>{});
   if(DB){drawQueue();drawActions()}
   if(DB||SAMPLE){if(CUR)select(CUR);}})();
 </script>
