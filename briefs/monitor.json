@@ -828,5 +828,44 @@
       "deadline": "2027-10-31"
     },
     "kills": []
+  },
+  "V": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 non-GAAP diluted EPS",
+      "breaks": "below",
+      "threshold": 12.62,
+      "unit": "$",
+      "current": 11.47,
+      "current_label": "FY2025 $11.47; bar = +10% growth; FQ2 +20%, FQ3 +11% (web)",
+      "deadline": "2026-10-31"
+    },
+    "kills": []
+  },
+  "MA": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q4 FY2026 adjusted diluted EPS growth, currency-neutral",
+      "breaks": "below",
+      "threshold": 12,
+      "unit": "%",
+      "current": 19,
+      "current_label": "Q2 2026 +19% cc",
+      "deadline": "2027-02-15"
+    },
+    "kills": []
+  },
+  "SPGI": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2026 adjusted diluted EPS ex-Mobility",
+      "breaks": "below",
+      "threshold": 17.5,
+      "unit": "$",
+      "current": 17.625,
+      "current_label": "guide $17.50-17.75 midpoint (web, unverified)",
+      "deadline": "2027-02-28"
+    },
+    "kills": []
   }
 }
