@@ -72,7 +72,7 @@ CHAINS = {'hyperscaler-capex': [
     ('builder', 'Rent out AI capacity', 'Contracts shrink, and these carry debt',
      ['IREN', 'NBIS', 'SPCX']),
     ('second', 'Power, steel, chips for data centers', 'Orders slow as builds slow',
-     ['GEV', 'INTC', 'NUE']),
+     ['GEV', 'ETN', 'INTC', 'NUE']),
 ]}
 VERDICT_COLOR = {'Ahead of itself': '1', 'Deserved': '4', 'Still underrated': '5'}
 
