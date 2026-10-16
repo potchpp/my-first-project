@@ -774,5 +774,33 @@
         "note": "not found on lists (web, unverified)"
       }
     ]
+  },
+  "ETN": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q4 2026 adjusted EPS",
+      "breaks": "below",
+      "threshold": 3.9,
+      "unit": "$",
+      "current": null,
+      "current_label": "guide implies ~$4.03 (FY $13.40-13.60 less H1 $5.96, Q3 guide $3.46-3.56)",
+      "deadline": "2027-02-28",
+      "judged": "at deadline",
+      "note": "secondary: Electrical Americas book-to-bill < 1.0 in any 2027 quarter"
+    },
+    "kills": [
+      {
+        "match": "Electrical Americas book-to-bill ต่ำกว่า 1.0",
+        "status": "intact",
+        "checked": "2026-10-16",
+        "note": "Q2 2026 rolling-12m book-to-bill 1.3, orders +41% (call l.30)"
+      },
+      {
+        "match": "Data center organic growth ต่ำกว่าการเติบโตของตลาด",
+        "status": "intact",
+        "checked": "2026-10-16",
+        "note": "Q2 2026 +65% vs market +23% (call l.34)"
+      }
+    ]
   }
 }
