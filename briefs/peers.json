@@ -1,5 +1,5 @@
 {
- "_about": "Competitors and risks shared across holdings, from 10-K competition sections and brief Bear/Kill sections (Haiku agents, 2026-10-06). Read by scripts/holdings_map.py for graph.json links and the map. No portfolio data. Every entry cites a line that names it; checked by scripts/check_peers.py (2026-10-13).",
+ "_about": "Competitors and risks shared across holdings, from 10-K competition sections and brief Bear/Kill sections (Haiku agents, 2026-10-06). Read by scripts/holdings_map.py for graph.json links and the map. No portfolio data. Every entry cites a line that names it; checked by scripts/check_peers.py (2026-10-13). Consumer competitors added 2026-10-16 (k07gn).",
  "competitors": {
   "MSFT": {
    "IONQ": "sources/IONQ/10-k-fy2025.md:859",
@@ -29,7 +29,8 @@
    "SNOW": "sources/SNOW/10-k-fy2026.md:286",
    "GOOG": "briefs/AMZN.md:79",
    "NVDA": "sources/NVDA/10-k-fy2026.md:166",
-   "MSFT": "briefs/AMZN.md:79"
+   "MSFT": "briefs/AMZN.md:79",
+   "NFLX": "sources/NFLX/10-k-fy2025.md:230"
   },
   "INTC": {
    "IONQ": "sources/IONQ/10-k-fy2025.md:859",
@@ -45,7 +46,8 @@
    "MU": "sources/MU/10-k-fy2025.md:156",
    "NVDA": "sources/NVDA/10-k-fy2026.md:170",
    "SNDK": "sources/SNDK/10-k-fy2026.md:54",
-   "TSM": "sources/TSM/q2-2026-call.md:164"
+   "TSM": "sources/TSM/q2-2026-call.md:164",
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405"
   },
   "AVGO": {
    "AMD": "sources/AMD/10-k-fy2025.md:244",
@@ -127,6 +129,54 @@
   },
   "TSM": {
    "INTC": "sources/INTC/10-k-fy2025.md:359"
+  },
+  "Oura": {
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405"
+  },
+  "Whoop": {
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405"
+  },
+  "Huawei": {
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405"
+  },
+  "Coros": {
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405"
+  },
+  "PepsiCo": {
+   "KO": "sources/KO/10-k-fy2025.md:176"
+  },
+  "Keurig Dr Pepper": {
+   "KO": "sources/KO/10-k-fy2025.md:176"
+  },
+  "Nestlé": {
+   "KO": "sources/KO/10-k-fy2025.md:176"
+  },
+  "Danone": {
+   "KO": "sources/KO/10-k-fy2025.md:176"
+  },
+  "Red Bull": {
+   "KO": "sources/KO/10-k-fy2025.md:176"
+  },
+  "Paramount": {
+   "NFLX": "briefs/NFLX.md:88"
+  },
+  "Meituan": {
+   "TCOM": "briefs/TCOM.md:64"
+  },
+  "Teladoc": {
+   "OMDA": "sources/OMDA/10-k-fy2025.md:156"
+  },
+  "Virta Health": {
+   "OMDA": "sources/OMDA/10-k-fy2025.md:156"
+  },
+  "DarioHealth": {
+   "OMDA": "sources/OMDA/10-k-fy2025.md:156"
+  },
+  "Vori Health": {
+   "HNGE": "sources/HNGE/10-k-fy2025.md:474"
+  },
+  "OMDA": {
+   "HNGE": "sources/HNGE/10-k-fy2025.md:474"
   }
  },
  "risks": [
