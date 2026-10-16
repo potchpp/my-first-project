@@ -22,3 +22,10 @@ graphify-out/holdings-map-private.html
 # Generated map page and its template: UI code and data copies, not research
 index.html
 scripts/holdings_map.html
+
+# Task board (workflow notes, not research)
+.claude/TASKS.md
+.claude/tasks/
+
+# Call transcripts are git-ignored (third-party text) but belong in the local graph
+!sources/*/*-call.md

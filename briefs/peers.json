@@ -1,68 +1,55 @@
 {
- "_about": "Competitors and risks shared across holdings, from 10-K competition sections and brief Bear/Kill sections (Haiku agents, 2026-10-06). Read by scripts/holdings_map.py for graph.json links and the map. No portfolio data.",
+ "_about": "Competitors and risks shared across holdings, from 10-K competition sections and brief Bear/Kill sections (Haiku agents, 2026-10-06). Read by scripts/holdings_map.py for graph.json links and the map. No portfolio data. Every entry cites a line that names it; checked by scripts/check_peers.py (2026-10-13).",
  "competitors": {
   "MSFT": {
    "IONQ": "sources/IONQ/10-k-fy2025.md:859",
    "RGTI": "sources/RGTI/10-k-fy2025.md:496",
-   "IREN": "briefs/IREN.md:18",
    "NBIS": "briefs/NBIS.md:19",
-   "AAPL": "briefs/AAPL.md",
-   "ADBE": "briefs/ADBE.md:18",
    "NOW": "sources/NOW/10-k-fy2025.md:407",
    "SNOW": "sources/SNOW/10-k-fy2026.md:286",
-   "TEAM": "sources/TEAM/10-k-fy2026.md:204",
-   "GOOG": "sources/GOOG/10-k-fy2025.md:125",
+   "TEAM": "briefs/TEAM.md:58",
    "NVDA": "sources/NVDA/10-k-fy2026.md:166",
    "ORCL": "sources/ORCL/10-k-fy2026.md:579",
-   "AMZN": "briefs/AMZN.md:43"
+   "AMZN": "briefs/AMZN.md:79"
   },
   "GOOG": {
    "IONQ": "sources/IONQ/10-k-fy2025.md:859",
    "RGTI": "sources/RGTI/10-k-fy2025.md:496",
-   "AAPL": "briefs/AAPL.md",
-   "GRMN": "briefs/GRMN.md",
-   "NFLX": "briefs/NFLX.md",
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405",
+   "NFLX": "briefs/NFLX.md:64",
    "ADBE": "briefs/ADBE.md:18",
-   "META": "sources/META/10-k-fy2025.md:358",
    "NVDA": "sources/NVDA/10-k-fy2026.md:166",
    "ORCL": "sources/ORCL/10-k-fy2026.md:579",
-   "SPCX": "briefs/SPCX.md:27",
-   "AMZN": "briefs/AMZN.md:43"
+   "AMZN": "briefs/AMZN.md:79"
   },
   "AMZN": {
    "IONQ": "sources/IONQ/10-k-fy2025.md:859",
    "RGTI": "sources/RGTI/10-k-fy2025.md:496",
-   "IREN": "briefs/IREN.md:18",
    "NBIS": "briefs/NBIS.md:19",
-   "NFLX": "briefs/NFLX.md",
    "SNOW": "sources/SNOW/10-k-fy2026.md:286",
-   "GOOG": "sources/GOOG/10-k-fy2025.md:125",
+   "GOOG": "briefs/AMZN.md:79",
    "NVDA": "sources/NVDA/10-k-fy2026.md:166",
-   "MSFT": "sources/MSFT/10-k-fy2026.md:183"
+   "MSFT": "briefs/AMZN.md:79"
   },
   "INTC": {
    "IONQ": "sources/IONQ/10-k-fy2025.md:859",
    "AMD": "sources/AMD/10-k-fy2025.md:230",
-   "AVGO": "briefs/AVGO.md:47",
    "NVDA": "sources/NVDA/10-k-fy2026.md:164",
    "ORCL": "sources/ORCL/10-k-fy2026.md:579",
-   "TSM": "briefs/TSM.md:17"
+   "TSM": "sources/TSM/q2-2026-call.md:324"
   },
   "AAPL": {
-   "GRMN": "briefs/GRMN.md",
-   "PTON": "briefs/PTON.md",
-   "GOOG": "briefs/GOOG.md:36",
-   "META": "sources/META/10-k-fy2025.md:358"
+   "GRMN": "sources/GRMN/10-k-fy2025.md:405"
   },
   "Samsung": {
    "MU": "sources/MU/10-k-fy2025.md:156",
    "NVDA": "sources/NVDA/10-k-fy2026.md:170",
    "SNDK": "sources/SNDK/10-k-fy2026.md:54",
-   "TSM": "briefs/TSM.md:17"
+   "TSM": "sources/TSM/q2-2026-call.md:164"
   },
   "AVGO": {
    "AMD": "sources/AMD/10-k-fy2025.md:244",
-   "INTC": "sources/INTC/10-k-fy2025.md:156",
+   "INTC": "sources/INTC/10-k-fy2025.md:343",
    "NVDA": "sources/NVDA/10-k-fy2026.md:170"
   },
   "IBM": {
@@ -71,75 +58,48 @@
    "ORCL": "sources/ORCL/10-k-fy2026.md:579"
   },
   "OpenAI": {
-   "ADBE": "briefs/ADBE.md:18,52",
-   "NOW": "sources/NOW/10-k-fy2025.md:409",
-   "GOOG": "sources/GOOG/10-k-fy2025.md:245"
+   "ADBE": "briefs/ADBE.md:18",
+   "NOW": "briefs/NOW.md:46"
   },
   "Qualcomm": {
    "AMD": "sources/AMD/10-k-fy2025.md:244",
-   "INTC": "sources/INTC/10-k-fy2025.md:156",
+   "INTC": "sources/INTC/10-k-fy2025.md:1440",
    "NVDA": "sources/NVDA/10-k-fy2026.md:170"
   },
   "AMD": {
    "INTC": "briefs/INTC.md:89",
    "NVDA": "sources/NVDA/10-k-fy2026.md:164"
   },
-  "CoreWeave": {
-   "IREN": "briefs/IREN.md:18",
-   "NBIS": "briefs/NBIS.md:19"
-  },
   "GRMN": {
-   "AAPL": "briefs/AAPL.md",
-   "PTON": "briefs/PTON.md"
+   "AAPL": "sources/GRMN/10-k-fy2025.md:405"
   },
   "J&J": {
-   "ABBV": "briefs/ABBV.md:37-39",
-   "GMAB": "briefs/GMAB.md:49"
+   "GMAB": "sources/GMAB/q2-2026-call.md:274"
   },
   "Lambda": {
-   "IREN": "briefs/IREN.md:18",
    "NBIS": "briefs/NBIS.md:19"
-  },
-  "PTON": {
-   "AAPL": "briefs/AAPL.md",
-   "GRMN": "briefs/GRMN.md"
-  },
-  "Regeneron": {
-   "ABBV": "briefs/ABBV.md:37-39",
-   "CUE": "briefs/CUE.md:45-46"
-  },
-  "Roche": {
-   "LLY": "sources/LLY/10-k-fy2025.md:158",
-   "GMAB": "briefs/GMAB.md:49"
   },
   "SK Hynix": {
    "MU": "sources/MU/10-k-fy2025.md:156",
    "SNDK": "sources/SNDK/10-k-fy2026.md:54"
   },
   "SPCX": {
-   "RKLB": "sources/RKLB/10-k-fy2025.md:244",
-   "TSLA": "briefs/TSLA.md"
+   "RKLB": "sources/RKLB/10-k-fy2025.md:246"
   },
   "Salesforce": {
-   "ADBE": "briefs/ADBE.md:49",
+   "ADBE": "briefs/ADBE.md:78",
    "NOW": "sources/NOW/10-k-fy2025.md:407"
   },
   "Sword Health": {
-   "HNGE": "briefs/HNGE.md:60-61",
-   "OMDA": "briefs/OMDA.md:18"
+   "HNGE": "sources/HNGE/10-k-fy2025.md:162",
+   "OMDA": "sources/OMDA/10-k-fy2025.md:156"
   },
   "Yangtze Memory Technologies": {
    "MU": "sources/MU/10-k-fy2025.md:156",
    "SNDK": "sources/SNDK/10-k-fy2026.md:54"
   },
   "HNGE": {
-   "OMDA": "briefs/OMDA.md:18"
-  },
-  "LLY": {
-   "ABBV": "briefs/ABBV.md:37-39"
-  },
-  "META": {
-   "GOOG": "sources/GOOG/10-k-fy2025.md:125"
+   "OMDA": "sources/OMDA/10-k-fy2025.md:156"
   },
   "MU": {
    "SNDK": "sources/SNDK/10-k-fy2026.md:54"
@@ -166,7 +126,7 @@
    "NVDA": "sources/NVDA/10-k-fy2026.md:170"
   },
   "TSM": {
-   "INTC": "briefs/INTC.md:16"
+   "INTC": "sources/INTC/10-k-fy2025.md:359"
   }
  },
  "risks": [
@@ -177,8 +137,14 @@
     "AVGO": "Concentration on 6 hyperscaler customers",
     "IREN": "Extreme concentration on Microsoft anchor",
     "LITE": "Top 4 customers represent 58.9% revenue",
-    "NBIS": "Customer concentration on Microsoft/Meta",
-    "TSM": "Top 5 customers = 58% revenue; customer concentration risk"
+    "NBIS": "Customer concentration on Microsoft/Meta"
+   },
+   "cite": {
+    "GEV": "briefs/GEV.md:41",
+    "AVGO": "briefs/AVGO.md:47",
+    "IREN": "briefs/IREN.md:56",
+    "LITE": "briefs/LITE.md:25",
+    "NBIS": "briefs/NBIS.md:37"
    }
   },
   {
@@ -189,6 +155,13 @@
     "IREN": "Dilution from 42% share increase in one year",
     "LITE": "Converts dilution ~15% from $1.4B overhang",
     "RGTI": "ATM/warrant dilution continues unabated"
+   },
+   "cite": {
+    "TEAM": "briefs/TEAM.md:56",
+    "RKLB": "briefs/RKLB.md:67",
+    "IREN": "briefs/IREN.md:58",
+    "LITE": "briefs/LITE.md:59",
+    "RGTI": "briefs/RGTI.md:51"
    }
   },
   {
@@ -198,6 +171,12 @@
     "NUE": "China circumvents tariff via transshipment",
     "USAR": "China rare earth pricing policy undercuts US",
     "MU": "China YMTC government subsidization expanding"
+   },
+   "cite": {
+    "GEV": "briefs/GEV.md:68",
+    "NUE": "briefs/NUE.md:75",
+    "USAR": "briefs/USAR.md:69",
+    "MU": "sources/MU/10-k-fy2025.md:158"
    }
   },
   {
@@ -207,6 +186,12 @@
     "IONQ": "Public cloud providers favor own quantum",
     "RGTI": "Cloud providers embed competing technologies",
     "NVDA": "Top 2 customers (36%) developing competing ASIC chips"
+   },
+   "cite": {
+    "AVGO": "briefs/AVGO.md:79",
+    "IONQ": "sources/IONQ/10-k-fy2025.md:850",
+    "RGTI": "sources/RGTI/10-k-fy2025.md:570",
+    "NVDA": "briefs/NVDA.md:42"
    }
   },
   {
@@ -216,6 +201,12 @@
     "RKLB": "Government contract funding cuts",
     "RDW": "Backlog cancelled from government shutdown",
     "PLTR": "Government contracts terminable for convenience"
+   },
+   "cite": {
+    "LEU": "sources/LEU/10-k-fy2025.md:168",
+    "RKLB": "briefs/RKLB.md:89",
+    "RDW": "briefs/RDW.md:58",
+    "PLTR": "briefs/PLTR.md:75"
    }
   },
   {
@@ -225,6 +216,12 @@
     "META": "AI capex $130-145B annually with no revenue timeline",
     "MSFT": "Capex ~$175B = 53% of FY2026 revenue; unsustainable FCF impact",
     "ORCL": "Cloud margin dilution from $90-95B annual capex buildout"
+   },
+   "cite": {
+    "GOOG": "briefs/GOOG.md:40",
+    "META": "briefs/META.md:54",
+    "MSFT": "briefs/MSFT.md:43",
+    "ORCL": "briefs/ORCL.md:60"
    }
   },
   {
@@ -233,30 +230,44 @@
     "AAPL": "Conflict or tariff/export control cutting Taiwan/TSM supply",
     "GRMN": "Taiwan manufacturing stoppage from geopolitical tension",
     "TSM": "Taiwan geopolitical escalation (blockade/military); capacity >90% concentrated"
+   },
+   "cite": {
+    "AAPL": "sources/AAPL/10-k-fy2025.md:155-157",
+    "GRMN": "sources/GRMN/10-k-fy2025.md:603",
+    "TSM": "briefs/TSM.md:64"
    }
   },
   {
    "risk": "Patent cliff revenue loss",
    "tickers": {
-    "LLY": "Biosimilar entry after patent cliff 2027",
     "ABBV": "Rinvoq generic entry after 2037 patent cliff",
     "GMAB": "Darzalex US patent cliff 2029"
+   },
+   "cite": {
+    "ABBV": "briefs/ABBV.md:65",
+    "GMAB": "briefs/GMAB.md:22"
    }
   },
   {
    "risk": "Biosimilar and generic entry",
    "tickers": {
-    "LLY": "Biosimilar entry after patent cliff 2027",
-    "ABBV": "Humira biosimilar-driven revenue cliff",
-    "GMAB": "Faspro biosimilar adoption <70-80% retention"
+    "LLY": "Generic/biosimilar entry once exclusivity ends (US data protection 2027, compound patent 2036)",
+    "ABBV": "Humira biosimilar-driven revenue cliff"
+   },
+   "cite": {
+    "LLY": "sources/LLY/10-k-fy2025.md:166",
+    "ABBV": "sources/ABBV/10-k-fy2025.md:213"
    }
   },
   {
    "risk": "Medicare price negotiation pressure",
    "tickers": {
     "LLY": "GLP-1 price compression from Medicare/payer negotiation",
-    "ABBV": "IRA Medicare drug price negotiation on Skyrizi/Rinvoq",
-    "GMAB": "ASP compression from payer negotiation"
+    "ABBV": "IRA Medicare drug price negotiation on Skyrizi/Rinvoq"
+   },
+   "cite": {
+    "LLY": "briefs/LLY.md:59",
+    "ABBV": "briefs/ABBV.md:45"
    }
   },
   {
@@ -265,6 +276,11 @@
     "ORCL": "OpenAI concentration (45% RPO) with uncertain profitability",
     "MSFT": "OpenAI ~$15.65B/quarter revenue; $250B commitment to single customer",
     "AMZN": "Backlog $496B concentration in OpenAI/Anthropic (still unprofitable)"
+   },
+   "cite": {
+    "ORCL": "briefs/ORCL.md:62",
+    "MSFT": "briefs/MSFT.md:42",
+    "AMZN": "briefs/AMZN.md:43"
    }
   },
   {
@@ -272,6 +288,10 @@
    "tickers": {
     "IONQ": "Google/IBM announces quantum breakthrough",
     "RGTI": "Google/IBM achieves quantum breakthrough"
+   },
+   "cite": {
+    "IONQ": "briefs/IONQ.md:71",
+    "RGTI": "briefs/RGTI.md:77"
    }
   },
   {
@@ -279,6 +299,10 @@
    "tickers": {
     "MU": "CAC ban exposure and geopolitical tariff shock",
     "ASML": "MATCH Act may extend export controls"
+   },
+   "cite": {
+    "MU": "briefs/MU.md:72",
+    "ASML": "briefs/ASML.md:91"
    }
   }
  ]

@@ -2578,5 +2578,1037 @@
   "kind": "other",
   "ticker": null,
   "private": false
+ },
+ {
+  "label": "$600B U.S. manufacturing commitment (Arizona, Houston)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "16-centrifuge HALEU demo cascade",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "2.4B record backlog",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "2025 product net sales $4.2B (vs $2.2B 2024)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "2026 readouts: four registrational readouts (Myositis, ITP, ALKIVIA etc.)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "4.5B backlog through 2040",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "400M data center power-island order",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "62-year dividend growth",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "800-volt and DC data center designs",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AANEM/MGFA data 6-K",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AI and care team efficiency (Omada Spark, Meal Map)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AI capex shared driver",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AI factory full stack",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AI/data-center demand shifting semiconductor supply",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ALKIVIA myositis Phase 3",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ALKIVIA topline 6-K",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ALKIVIA topline slides",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AMD brief",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ARGX brief",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ARGX-115 (ABBV-151, anti-GARP)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AVGO brief",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "AbbVie",
+  "kind": "company",
+  "ticker": "ABBV",
+  "private": false
+ },
+ {
+  "label": "Advanced-node supply constraints (SoC availability)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Agomab (ARGX-114)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Agricultural commodity pressure (juice, coffee)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Aluminum tariff and packaging cost risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "App Store link-out court ruling (U.S., Supreme Court appeal pending)",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Apple Upgrade leasing program (with Klarna)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Auto OEM warranty accrual charge (legacy programs)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "BMW domain controller program",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Behind-the-meter generation",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Blaze equine wellness system",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Bottler refranchising",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Broadcom custom silicon agreement (>$30B)",
+  "kind": "agreement",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Broker business",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CEO transition Duffy to Shao 2027",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CEO transition: Tim Cook to John Ternus",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CIDP",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "CMS",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "CUDA software moat",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Capacity expansion: leases and greenfield option",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Centrifuge manufacturing program (Oak Ridge, Piketon)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Centrus Energy",
+  "kind": "company",
+  "ticker": "LEU",
+  "private": false
+ },
+ {
+  "label": "Cholesterol care track",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Coca-Cola Company",
+  "kind": "company",
+  "ticker": "KO",
+  "private": false
+ },
+ {
+  "label": "Cold drink equipment deployment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Commercial LEU enrichment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Commodity inflation (copper, aluminum, steel)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Competitors: AstraZeneca, AbbVie, Amgen, Biogen, GSK, Roche, J&J, Novartis",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Cost to serve decline",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Covered lives (25M eligible)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Craft labor tightness risk 2027-28",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Critical supplier contracts (75% finalized)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Currency headwind 2025",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Custom AI accelerator (XPU/ASIC)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Customer prepayments, nondilutive funding",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Defense spending opportunity",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Diabetes and hypertension programs",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Digital customer platforms",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Doug Boessen (CFO)",
+  "kind": "person",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "EPC partners",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "EPYC server CPU",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "EU regulatory hurdle delaying Siri AI on iPhone/iPad",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Early programs ARGX-213/124/109/121/118/125",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Electric utility market",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Empasiprubart (anti-C2)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Employers dropping GLP-1 coverage risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Enrollment seasonality, H2 growth moderation",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "FB102 (anti-CD122)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "FB102 celiac Phase 2 6-K",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "FUJIFILM Diosynth Biotechnologies",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "FY2027 budget lacks HALEU cascade funding",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "FcRn target",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Fenix 8 Pro (micro LED)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Foreign exchange headwind (sequential)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Forte Biosciences acquisition",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Forte acquisition 6-K",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Fuze Tea",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GLP-1 Flex Care",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GLP-1 care track and prescribing program",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "GLP-1 drug consumption risk",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Garmin Q3 2025 Earnings Call Transcript",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Generalized myasthenia gravis (gMG)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Global minimum tax raising tax rate",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "H1 2026 XBRL financial report",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "H1 2026 earnings press release",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "H1 2026 half-year financial report",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "HALEU",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "HCSC (Blue Cross Blue Shield plans)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Halozyme (ENHANZE)",
+  "kind": "company",
+  "ticker": "HALO",
+  "private": false
+ },
+ {
+  "label": "Helios rack-scale system",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "ITP (Japan, VYVDURA)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Immunology Innovation Program (IIP)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Instinct MI350/MI450 AI accelerator",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Jacintoport 335k sq ft expansion",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Jubilant group (India bottling partner)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "King's College London wearables health study",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "LEO Pharma (ARGX-112)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "LNG liquefaction orders and market",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Light rail traction power",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Lilly Employer Connect",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Local franchise system, localized supply chain",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Lonza",
+  "kind": "company",
+  "ticker": "LONN.SW",
+  "private": false
+ },
+ {
+  "label": "M&A pipeline with rich valuations",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "MMN",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Mac (Q3 FY2026 revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Marketing transformation and generative AI ads",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Maza (30th billion-dollar brand)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Memory (DRAM) cost inflation — \"100-year flood\"",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Micro LED display technology",
+  "kind": "technology",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Morgan Stanley — 20,000 iPhone 17 enterprise deployment",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Multicondition cardiometabolic suite",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Myositis (Phase 3)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "NNSA national security sole-source",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "NRC regulatory changes",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "NVDA brief",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "National retailer customer",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Oklo (HALEU LOI, up to 5 Aurora powerhouses)",
+  "kind": "company",
+  "ticker": "OKLO",
+  "private": false
+ },
+ {
+  "label": "Omada Health",
+  "kind": "company",
+  "ticker": "OMDA",
+  "private": false
+ },
+ {
+  "label": "OncoVerity (cusatuzumab)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Outdoor segment guidance cut (difficult comps vs Fenix 8 launch)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Palantir (cost and lead-time partnership)",
+  "kind": "company",
+  "ticker": "PLTR",
+  "private": false
+ },
+ {
+  "label": "Petrochemical market (fertilizer order, revenue down 49%)",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Pinellas County Schools — 25,000 students to MacBook Neo",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Pipeline-in-a-product strategy",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Powell Industries",
+  "kind": "company",
+  "ticker": "POWL",
+  "private": false
+ },
+ {
+  "label": "Price/mix and inflationary pricing",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Q2 2026 results slides",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Remsdaq acquisition and automation boxes",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Revenue growth management, affordability and premiumization",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Risk: IRA Medicare price negotiation / US pricing",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Risk: VYVGART single-product revenue concentration",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Risk: clinical trial and safety setbacks cross-indication",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Risk: four US customers ~78% of product net sales",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Risk: intense gMG/CIDP FcRn and autoimmune competition",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Risk: reliance on contract manufacturers (Lonza, Fujifilm)",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Russian enriched uranium import ban",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "SMA",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "SWU pricing and cost",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Seronegative gMG (sBLA, PDUFA May 10 2026)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Services (Q3 FY2026 revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Siri AI",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Softer Canadian market",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Switchgear R&D and third-party ratings",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "TEPCO Kashiwazaki restart",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Technical Solutions segment",
+  "kind": "segment",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Tensegrity Pharma (TSP-101)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Teri Seck (Director of Investor Relations)",
+  "kind": "person",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Three national PBMs (CVS, Optum Rx, other)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "Trademark Coca-Cola",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "UNITY Sjogren's Phase 3 (discontinued)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "UNITY discontinuation 6-K",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "US Department of Energy 900M task order",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "US and distributor concentration",
+  "kind": "risk",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "US tax legislation change (R&D cost capitalization)",
+  "kind": "regulation",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "VMware infrastructure software",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "VYVGART (efgartigimod)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "VYVGART / VYVGART SC (efgartigimod)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Vision 2030",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Walmart modern soda shelves",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Warner Brothers Pictures (Fanta Halloween partner)",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "X-energy HALEU offtake",
+  "kind": "company",
+  "ticker": null,
+  "private": true
+ },
+ {
+  "label": "ZT Systems acquisition",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "Zai Lab",
+  "kind": "company",
+  "ticker": "ZLAB",
+  "private": false
+ },
+ {
+  "label": "adimanebart (ARGX-119, MuSK agonist)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "argenx SE",
+  "kind": "company",
+  "ticker": "ARGX",
+  "private": false
+ },
+ {
+  "label": "efgartigimod",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "empasiprubart (C2 inhibitor)",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "fairlife premium dairy",
+  "kind": "product",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "iPad (Q3 FY2026 revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "iPad/Mac price increases",
+  "kind": "other",
+  "ticker": null,
+  "private": false
+ },
+ {
+  "label": "iPhone (Q3 FY2026 revenue)",
+  "kind": "other",
+  "ticker": null,
+  "private": false
  }
 ]

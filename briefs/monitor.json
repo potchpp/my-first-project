@@ -740,5 +740,39 @@
       "deadline": "2027-02-28"
     },
     "kills": []
+  },
+  "ARGX": {
+    "falsifier": {
+      "type": "number",
+      "metric": "FY2027 product net sales",
+      "breaks": "below",
+      "threshold": 7500,
+      "unit": "$M",
+      "current": null,
+      "current_label": "Q2 2026 $1,516M (~$6.1B annualised)",
+      "deadline": "2028-02-29",
+      "judged": "at deadline",
+      "note": "early warning: Q4 2026 product net sales < $1,750M"
+    },
+    "kills": [
+      {
+        "match": "Safety signal ใหม่หรือ label ถูกจำกัด",
+        "status": "intact",
+        "checked": "2026-10-14",
+        "note": "UNITY stop 2026-10-08: no new safety signals"
+      },
+      {
+        "match": "US VYVGART product net sales ลดลง QoQ สองไตรมาสติดกัน",
+        "status": "intact",
+        "checked": "2026-10-14",
+        "note": "Q2 2026 US +15% QoQ (slides l.39); next read Q3 on 2026-10-22"
+      },
+      {
+        "match": "Vyvgart ถูกเลือกเข้า Medicare price negotiation",
+        "status": "intact",
+        "checked": "2026-10-14",
+        "note": "not found on lists (web, unverified)"
+      }
+    ]
   }
 }
