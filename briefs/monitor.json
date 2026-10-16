@@ -802,5 +802,31 @@
         "note": "Q2 2026 +65% vs market +23% (call l.34)"
       }
     ]
+  },
+  "HOOD": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q4 2026 total net revenues",
+      "breaks": "below",
+      "threshold": 1310,
+      "unit": "$M",
+      "current": 1310,
+      "current_label": "Q2 2026 $1.31B (+32% YoY)",
+      "deadline": "2027-02-28"
+    },
+    "kills": []
+  },
+  "SDIV": {
+    "falsifier": {
+      "type": "number",
+      "metric": "1-year NAV total return (issuer fact sheet, as of 2027-09-30)",
+      "breaks": "above",
+      "threshold": 13.8,
+      "unit": "%",
+      "current": 7.51,
+      "current_label": "7.51% 1y at 2026-09-30; bar = S&P 500 5y annualized",
+      "deadline": "2027-10-31"
+    },
+    "kills": []
   }
 }
