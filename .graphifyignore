@@ -28,3 +28,5 @@ scripts/holdings_map.html
 
 # Call transcripts are git-ignored (third-party text) but belong in the local graph
 !sources/*/*-call.md
+sources/COIN/
+sources/COHR/

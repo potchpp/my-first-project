@@ -867,5 +867,25 @@
       "deadline": "2027-02-28"
     },
     "kills": []
+  },
+  "COF": {
+    "falsifier": {
+      "type": "number",
+      "metric": "Q4 2026 adjusted diluted EPS",
+      "breaks": "below",
+      "threshold": 4.75,
+      "unit": "$",
+      "current": 5.81,
+      "current_label": "Q2 2026 adj. $5.81 (~$5.0 ex $662M reserve release); bar ≈ $19/yr ≈ 17.6% ROTCE",
+      "deadline": "2027-01-31"
+    },
+    "kills": [
+      {
+        "match": "net charge-off rate above 5.0%",
+        "status": "intact",
+        "checked": "2026-10-17",
+        "note": "Aug 2026 domestic card NCO 4.16%, 30+ delinquency 3.57% (monthly 8-K, web)"
+      }
+    ]
   }
 }
